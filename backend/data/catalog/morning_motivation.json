@@ -1,0 +1,33 @@
+{
+  "category": "morning_motivation",
+  "label": "Morning Fuel",
+  "emoji": "🚀",
+  "tagline": "Rise up. Today is yours.",
+  "description": "Bright, forward-moving anthems for fresh starts. Uplifting major-key hooks, marching rhythms, optimistic valence.",
+  "mood_tags": ["motivation", "uplifting", "positive", "morning", "inspirational"],
+  "seed_queries": [
+    "motivational songs",
+    "morning motivational mix",
+    "uplifting positive songs",
+    "inspirational hindi songs",
+    "positive energy music",
+    "workout motivation mix"
+  ],
+  "tracks": [
+    { "title": "Hall of Fame", "artist": "The Script ft. will.i.am", "album": "#3", "language": "english", "year": "2012", "query": "hall of fame the script" },
+    { "title": "Unstoppable", "artist": "Sia", "album": "This Is Acting", "language": "english", "year": "2016", "query": "unstoppable sia" },
+    { "title": "Roar", "artist": "Katy Perry", "album": "Prism", "language": "english", "year": "2013", "query": "roar katy perry" },
+    { "title": "Firework", "artist": "Katy Perry", "album": "Teenage Dream", "language": "english", "year": "2010", "query": "firework katy perry" },
+    { "title": "Happy", "artist": "Pharrell Williams", "album": "G I R L", "language": "english", "year": "2013", "query": "happy pharrell williams" },
+    { "title": "Can't Stop the Feeling!", "artist": "Justin Timberlake", "album": "Trolls", "language": "english", "year": "2016", "query": "can't stop the feeling justin timberlake" },
+    { "title": "Best Day of My Life", "artist": "American Authors", "album": "Oh, What a Life", "language": "english", "year": "2013", "query": "best day of my life american authors" },
+    { "title": "On Top of the World", "artist": "Imagine Dragons", "album": "Night Visions", "language": "english", "year": "2012", "query": "on top of the world imagine dragons" },
+    { "title": "Beautiful Day", "artist": "U2", "album": "All That You Can't Leave Behind", "language": "english", "year": "2000", "query": "beautiful day u2" },
+    { "title": "Rise Up", "artist": "Andra Day", "album": "Cheers to the Fall", "language": "english", "year": "2015", "query": "rise up andra day" },
+    { "title": "Kar Har Maidaan Fateh", "artist": "Sukhwinder Singh", "album": "Sanju", "language": "hindi", "year": "2018", "query": "kar har maidaan fateh sanju" },
+    { "title": "Zinda", "artist": "Vishal Dadlani", "album": "Bhaag Milkha Bhaag", "language": "hindi", "year": "2013", "query": "zinda bhaag milkha bhaag" },
+    { "title": "Chak De! India", "artist": "Sukhwinder Singh", "album": "Chak De! India", "language": "hindi", "year": "2007", "query": "chak de india title song" },
+    { "title": "Ae Watan", "artist": "Arijit Singh", "album": "Raazi", "language": "hindi", "year": "2018", "query": "ae watan raazi arijit singh" },
+    { "title": "Dil Chahta Hai", "artist": "Shankar Mahadevan", "album": "Dil Chahta Hai", "language": "hindi", "year": "2001", "query": "dil chahta hai title song" }
+  ]
+}

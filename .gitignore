@@ -1,0 +1,25 @@
+# Node & Dependencies
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/_vite.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+backend/venv/
+venv/
+.env
+
+# Storage & Logs
+.freebuff/
+*.log
+backend/data/store/*.json
+backend/_chat_resp.json
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

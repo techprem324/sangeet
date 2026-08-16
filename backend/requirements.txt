@@ -1,0 +1,12 @@
+# Sargam — Context-Aware AI Music Chatbot
+# Python 3.10+  (tested on 3.13)
+
+Flask==3.0.3
+flask-cors==4.0.1
+requests==2.32.3
+pycryptodome==3.20.0      # DES-ECB decryption of JioSaavn stream URLs
+python-dotenv==1.0.1
+
+# --- Optional (uncomment when you have credentials / MongoDB) ---
+# spotipy==2.24.0          # Spotify "Brain" — only needed if you add SPOTIFY_CLIENT_ID
+# pymongo==4.8.0           # Database layer — falls back to JSON store when absent

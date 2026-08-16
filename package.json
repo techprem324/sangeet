@@ -1,0 +1,13 @@
+{
+  "name": "sangeet-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "concurrently -n \"BACKEND,FRONTEND\" -c \"blue,green\" \"python backend/app.py\" \"npm --prefix frontend run dev\"",
+    "backend": "python backend/app.py",
+    "frontend": "npm --prefix frontend run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "category": "angry",
+  "label": "Frustration Release",
+  "emoji": "🔥",
+  "tagline": "Turn the rage into a rhythm",
+  "description": "Loud, cathartic rock and metal for when you need to let it out. High energy, low sweetness, zero holding back.",
+  "mood_tags": ["angry", "rock", "metal", "punk", "cathartic"],
+  "seed_queries": [
+    "angry rock songs",
+    "metal rage playlist",
+    "hard rock hits",
+    "angry rap songs",
+    "nu metal classics",
+    "scream rock mix"
+  ],
+  "tracks": [
+    { "title": "Given Up", "artist": "Linkin Park", "album": "Minutes to Midnight", "language": "english", "year": "2007", "query": "given up linkin park" },
+    { "title": "Numb", "artist": "Linkin Park", "album": "Meteora", "language": "english", "year": "2003", "query": "numb linkin park" },
+    { "title": "In the End", "artist": "Linkin Park", "album": "Hybrid Theory", "language": "english", "year": "2000", "query": "in the end linkin park" },
+    { "title": "Faint", "artist": "Linkin Park", "album": "Meteora", "language": "english", "year": "2003", "query": "faint linkin park" },
+    { "title": "Chop Suey!", "artist": "System of a Down", "album": "Toxicity", "language": "english", "year": "2001", "query": "chop suey system of a down" },
+    { "title": "Toxicity", "artist": "System of a Down", "album": "Toxicity", "language": "english", "year": "2001", "query": "toxicity system of a down" },
+    { "title": "Break Stuff", "artist": "Limp Bizkit", "album": "Significant Other", "language": "english", "year": "1999", "query": "break stuff limp bizkit" },
+    { "title": "Du Hast", "artist": "Rammstein", "album": "Sehnsucht", "language": "german", "year": "1997", "query": "du hast rammstein" },
+    { "title": "Killing in the Name", "artist": "Rage Against the Machine", "album": "Rage Against the Machine", "language": "english", "year": "1992", "query": "killing in the name rage against the machine" },
+    { "title": "Enter Sandman", "artist": "Metallica", "album": "Metallica (The Black Album)", "language": "english", "year": "1991", "query": "enter sandman metallica" },
+    { "title": "Back in Black", "artist": "AC/DC", "album": "Back in Black", "language": "english", "year": "1980", "query": "back in black ac dc" },
+    { "title": "Uprising", "artist": "Muse", "album": "The Resistance", "language": "english", "year": "2009", "query": "uprising muse" },
+    { "title": "I'm So Sick", "artist": "Flyleaf", "album": "Flyleaf", "language": "english", "year": "2005", "query": "i'm so sick flyleaf" },
+    { "title": "Still Counting", "artist": "Volbeat", "album": "Guitar Gangsters & Cadillac Blood", "language": "english", "year": "2008", "query": "still counting volbeat" },
+    { "title": "Thunderstruck", "artist": "AC/DC", "album": "The Razors Edge", "language": "english", "year": "1990", "query": "thunderstruck ac dc" }
+  ]
+}

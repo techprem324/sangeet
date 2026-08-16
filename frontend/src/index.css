@@ -1,0 +1,127 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+  }
+  body {
+    @apply bg-ink text-cream font-body;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(224, 154, 78, 0.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, rgba(163, 177, 137, 0.05), transparent 60%);
+  }
+  ::selection {
+    background: rgba(224, 154, 78, 0.35);
+  }
+  /* subtle paper grain so it never feels flat-digital */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 60;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-surface/85 backdrop-blur-sm border border-edge-soft rounded-xl2 shadow-card;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-edge px-3 py-1.5 text-xs font-medium text-sand
+      transition-colors duration-150 hover:border-ember/50 hover:text-cream cursor-pointer select-none;
+  }
+  .chip-active {
+    @apply border-ember/60 bg-ember/10 text-cream;
+  }
+  .icon-btn {
+    @apply inline-flex items-center justify-center rounded-full text-sand transition-colors
+      hover:text-cream hover:bg-surface-2 active:scale-95;
+  }
+  .input-plain {
+    @apply w-full bg-transparent text-cream placeholder:text-sand-dim/70 outline-none;
+  }
+}
+
+/* ---------- scrollbars ---------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #3d3228 transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #3d3228;
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #4c3f33;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- range sliders (player seek/volume) ---------- */
+input[type='range'].warm-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--fill, #e09a4e) 0%, var(--fill, #e09a4e) var(--pct, 0%), #3d3228 var(--pct, 0%), #3d3228 100%);
+  outline: none;
+  cursor: pointer;
+}
+input[type='range'].warm-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f2e8d8;
+  border: 2px solid #e09a4e;
+  transition: transform 0.15s ease;
+}
+input[type='range'].warm-range::-webkit-slider-thumb:hover {
+  transform: scale(1.25);
+}
+input[type='range'].warm-range::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #f2e8d8;
+  border: 2px solid #e09a4e;
+}
+
+/* typing dots */
+.typing-dot {
+  @apply w-1.5 h-1.5 rounded-full bg-sand;
+  animation: blink 1.2s infinite both;
+}
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-3px); }
+}
+
+/* cover shimmer while a stream loads */
+.cover-loading {
+  background: linear-gradient(110deg, #2c231c 30%, #3a2f26 50%, #2c231c 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+/* message entrance */
+.msg-in {
+  animation: fade-up 0.35s ease-out both;
+}
+
+/* subtle eq bars on playing covers */
+.eq-bar {
+  @apply w-[3px] rounded-full bg-ember;
+}

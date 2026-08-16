@@ -1,0 +1,32 @@
+{
+  "category": "rain_night",
+  "label": "Rainy Night",
+  "emoji": "🌧️",
+  "tagline": "Rain on the window, music in the dark",
+  "description": "Soft, cinematic, slightly dark tracks for rain at 2am. Ambient textures, mellow vocals, and a slow, thoughtful tempo.",
+  "mood_tags": ["rain", "night", "ambient", "midnight", "calm"],
+  "seed_queries": [
+    "rain sounds relaxing",
+    "rainy night songs",
+    "midnight rain ambience",
+    "sad night songs",
+    "soft piano rain",
+    "late night lofi rain"
+  ],
+  "tracks": [
+    { "title": "Kun Faya Kun", "artist": "A.R. Rahman, Javed Ali & Mohit Chauhan", "album": "Rockstar", "language": "hindi", "year": "2011", "query": "kun faya kun rockstar" },
+    { "title": "Tum Ho", "artist": "Mohit Chauhan", "album": "Rockstar", "language": "hindi", "year": "2011", "query": "tum ho rockstar mohit chauhan" },
+    { "title": "Nadaan Parindey", "artist": "A.R. Rahman & Mohit Chauhan", "album": "Rockstar", "language": "hindi", "year": "2011", "query": "nadaan parindey rockstar" },
+    { "title": "O Re Piya", "artist": "Atif Aslam", "album": "Aaja Nachle", "language": "hindi", "year": "2007", "query": "o re piya atif aslam" },
+    { "title": "Tere Bina", "artist": "A.R. Rahman & Chinmayi", "album": "Guru", "language": "hindi", "year": "2007", "query": "tere bina guru rahman chinmayi" },
+    { "title": "Luka Chuppi", "artist": "Lata Mangeshkar & A.R. Rahman", "album": "Rang De Basanti", "language": "hindi", "year": "2006", "query": "luka chuppi rang de basanti" },
+    { "title": "Aaj Din Chadeya", "artist": "Rahat Fateh Ali Khan", "album": "Love Aaj Kal", "language": "hindi", "year": "2009", "query": "aaj din chadeya love aaj kal" },
+    { "title": "Saiyaara", "artist": "Mohit Chauhan", "album": "Ek Tha Tiger", "language": "hindi", "year": "2012", "query": "saiyaara ek tha tiger" },
+    { "title": "Maula Mere Maula", "artist": "Roop Kumar Rathod", "album": "Anwar", "language": "hindi", "year": "2007", "query": "maula mere maula anwar" },
+    { "title": "Phir Le Aya Dil", "artist": "Arijit Singh", "album": "Barfi!", "language": "hindi", "year": "2012", "query": "phir le aya dil barfi" },
+    { "title": "Purple Rain", "artist": "Prince", "album": "Purple Rain", "language": "english", "year": "1984", "query": "purple rain prince" },
+    { "title": "November Rain", "artist": "Guns N' Roses", "album": "Use Your Illusion I", "language": "english", "year": "1991", "query": "november rain guns n roses" },
+    { "title": "Hymn for the Weekend", "artist": "Coldplay", "album": "A Head Full of Dreams", "language": "english", "year": "2015", "query": "hymn for the weekend coldplay" },
+    { "title": "Rain Sounds for Deep Sleep", "artist": "Relaxing Rain Sounds", "album": "Nature Sounds", "language": "instrumental", "year": "2020", "query": "rain sounds for sleep relaxing" }
+  ]
+}

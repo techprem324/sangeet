@@ -1,0 +1,33 @@
+{
+  "category": "party",
+  "label": "Party Bangers",
+  "emoji": "🎉",
+  "tagline": "Turn it up. Tonight is the night.",
+  "description": "Dance-first, high-energy bangers for clubs, weddings and celebrations. Near-max danceability — the room will move.",
+  "mood_tags": ["party", "dance", "club", "celebration", "hindi-pop"],
+  "seed_queries": [
+    "party songs hindi",
+    "party bangers mix",
+    "bollywood dance hits",
+    "club dance songs",
+    "wedding party songs",
+    "edm party mix"
+  ],
+  "tracks": [
+    { "title": "Gallan Goodiyaan", "artist": "Farhan Akhtar & Sukhwinder Singh", "album": "Dil Dhadakne Do", "language": "hindi", "year": "2015", "query": "gallan goodiyaan dil dhadakne do" },
+    { "title": "London Thumakda", "artist": "Labh Janjua", "album": "Queen", "language": "hindi", "year": "2014", "query": "london thumakda queen" },
+    { "title": "Balam Pichkari", "artist": "Pritam & Vishal Dadlani", "album": "Yeh Jawaani Hai Deewani", "language": "hindi", "year": "2013", "query": "balam pichkari yeh jawaani hai deewani" },
+    { "title": "Subha Hone Na De", "artist": "Mika Singh", "album": "Desi Boyz", "language": "hindi", "year": "2011", "query": "subha hone na de desi boyz" },
+    { "title": "Kar Gayi Chull", "artist": "Badshah, Aastha Gill & Neha Kakkar", "album": "Kapoor & Sons", "language": "hindi", "year": "2016", "query": "kar gayi chull kapoor and sons" },
+    { "title": "Aankh Marey", "artist": "Neha Kakkar & Tanishk Bagchi", "album": "Simmba", "language": "hindi", "year": "2018", "query": "aankh marey simmba neha kakkar" },
+    { "title": "Dilbar", "artist": "Neha Kakkar & Dhvani Bhanushali", "album": "Satyameva Jayate", "language": "hindi", "year": "2018", "query": "dilbar satyameva jayate neha kakkar" },
+    { "title": "Morni Banke", "artist": "Guru Randhawa & Neha Kakkar", "album": "Badhaai Ho", "language": "hindi", "year": "2018", "query": "morni banke badhaai ho" },
+    { "title": "Chammak Challo", "artist": "Akon & Hamsika Iyer", "album": "Ra.One", "language": "hindi", "year": "2011", "query": "chammak challo ra one" },
+    { "title": "Uptown Funk", "artist": "Mark Ronson ft. Bruno Mars", "album": "Uptown Special", "language": "english", "year": "2014", "query": "uptown funk mark ronson bruno mars" },
+    { "title": "Blinding Lights", "artist": "The Weeknd", "album": "After Hours", "language": "english", "year": "2019", "query": "blinding lights the weeknd" },
+    { "title": "Levitating", "artist": "Dua Lipa", "album": "Future Nostalgia", "language": "english", "year": "2020", "query": "levitating dua lipa" },
+    { "title": "Danza Kuduro", "artist": "Don Omar ft. Lucenzo", "album": "Fast Five", "language": "spanish", "year": "2010", "query": "danza kuduro don omar" },
+    { "title": "I Gotta Feeling", "artist": "The Black Eyed Peas", "album": "The E.N.D.", "language": "english", "year": "2009", "query": "i gotta feeling black eyed peas" },
+    { "title": "Shape of You", "artist": "Ed Sheeran", "album": "÷ (Divide)", "language": "english", "year": "2017", "query": "shape of you ed sheeran" }
+  ]
+}
