@@ -146,8 +146,22 @@ export default function App() {
               />
             )}
             {view === 'search' && <SearchView onLyrics={openLyrics} />}
-            {view === 'playlists' && <PlaylistsView onLyrics={openLyrics} />}
-            {view === 'liked' && <LikedView onLyrics={openLyrics} refreshKey={likedRefresh} />}
+            {view === 'playlists' && (
+              <PlaylistsView
+                user={user}
+                onLyrics={openLyrics}
+                refreshKey={likedRefresh}
+                onOpenAuth={() => setShowAuthModal(true)}
+              />
+            )}
+            {view === 'liked' && (
+              <LikedView
+                user={user}
+                onLyrics={openLyrics}
+                refreshKey={likedRefresh}
+                onOpenAuth={() => setShowAuthModal(true)}
+              />
+            )}
           </div>
         </main>
       </div>

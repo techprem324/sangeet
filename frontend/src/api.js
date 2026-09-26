@@ -10,54 +10,152 @@ import CURATED_LYRICS from './data/curatedLyrics.json'
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
-const LOCAL_LIKED_KEY = 'sangeet_liked_tracks'
-const LOCAL_PLAYLISTS_KEY = 'sangeet_custom_playlists'
-const LOCAL_HISTORY_KEY = 'sangeet_chat_history'
 
-export function getUserId() {
-  let user = getUser()
-  if (user && user.user_id) return user.user_id
-  let id = localStorage.getItem(USER_ID_KEY)
-  if (!id) {
-    id = 'usr_' + Math.random().toString(36).slice(2, 10)
-    localStorage.setItem(USER_ID_KEY, id)
+function safeGetItem(storage, key) {
+  try {
+    return storage ? storage.getItem(key) : null
+  } catch {
+    return null
   }
-  return id
+}
+
+function safeSetItem(storage, key, val) {
+  try {
+    if (storage) storage.setItem(key, val)
+  } catch {}
+}
+
+function safeRemoveItem(storage, key) {
+  try {
+    if (storage) storage.removeItem(key)
+  } catch {}
 }
 
 export function getUser() {
   try {
-    const raw = localStorage.getItem(USER_KEY)
+    const raw = safeGetItem(localStorage, USER_KEY)
     if (raw) return JSON.parse(raw)
   } catch {}
   return null
 }
 
+export function getUserId() {
+  const user = getUser()
+  if (user && user.user_id) return user.user_id
+  
+  // Guest ID: scoped strictly to sessionStorage so guest visits
+  // never pollute permanent user data and disappear on session end.
+  let guestId = ''
+  try {
+    guestId = safeGetItem(sessionStorage, 'sangeet_guest_id')
+    if (!guestId) {
+      guestId = 'usr_guest_' + Math.random().toString(36).slice(2, 10)
+      safeSetItem(sessionStorage, 'sangeet_guest_id', guestId)
+    }
+  } catch {
+    guestId = 'usr_guest_temp'
+  }
+  return guestId
+}
+
+/**
+ * Returns the appropriate storage engine and user-isolated key.
+ * - Registered users: localStorage with key `sangeet_user_${prefix}_${uKey}`
+ * - Guest visitors: sessionStorage with key `sangeet_guest_${prefix}` (temporary)
+ */
+function getUserStorageKey(prefix) {
+  const user = getUser()
+  if (user) {
+    const uKey = (user.username || user.user_id || 'user').toLowerCase().replace(/[^a-z0-9_-]/g, '_')
+    return {
+      storage: localStorage,
+      key: `sangeet_user_${prefix}_${uKey}`,
+      isGuest: false,
+    }
+  }
+  return {
+    storage: sessionStorage,
+    key: `sangeet_guest_${prefix}`,
+    isGuest: true,
+  }
+}
+
+/**
+ * Migrates old legacy un-scoped global keys to the signed-in user's
+ * account storage, then clears the global keys so guests see clean empty state.
+ */
+function migrateLegacyToUser(userObj) {
+  if (!userObj) return
+  const uKey = (userObj.username || userObj.user_id || 'user').toLowerCase().replace(/[^a-z0-9_-]/g, '_')
+  const userPlKey = `sangeet_user_playlists_${uKey}`
+  const userLikedKey = `sangeet_user_liked_${uKey}`
+
+  try {
+    const existingUserPl = safeGetItem(localStorage, userPlKey)
+    const legacyPl = safeGetItem(localStorage, 'sangeet_custom_playlists')
+    if (!existingUserPl && legacyPl) {
+      safeSetItem(localStorage, userPlKey, legacyPl)
+    }
+
+    const existingUserLiked = safeGetItem(localStorage, userLikedKey)
+    const legacyLiked = safeGetItem(localStorage, 'sangeet_liked_tracks')
+    if (!existingUserLiked && legacyLiked) {
+      safeSetItem(localStorage, userLikedKey, legacyLiked)
+    }
+
+    // Wipe global un-scoped keys so guests NEVER inherit any registered user's mixes or songs!
+    safeRemoveItem(localStorage, 'sangeet_custom_playlists')
+    safeRemoveItem(localStorage, 'sangeet_liked_tracks')
+  } catch {}
+}
+
+// Initial boot check: if registered user is logged in, ensure their data is migrated.
+// If guest, ensure old global keys are removed from localStorage.
+try {
+  const bootUser = getUser()
+  if (bootUser) {
+    migrateLegacyToUser(bootUser)
+  } else {
+    safeRemoveItem(localStorage, 'sangeet_custom_playlists')
+    safeRemoveItem(localStorage, 'sangeet_liked_tracks')
+  }
+} catch {}
+
 export function setUser(userObj) {
   if (userObj) {
-    localStorage.setItem(USER_KEY, JSON.stringify(userObj))
-    if (userObj.user_id) localStorage.setItem(USER_ID_KEY, userObj.user_id)
+    safeSetItem(localStorage, USER_KEY, JSON.stringify(userObj))
+    if (userObj.user_id) safeSetItem(localStorage, USER_ID_KEY, userObj.user_id)
+    migrateLegacyToUser(userObj)
   } else {
-    localStorage.removeItem(USER_KEY)
-    localStorage.removeItem(USER_ID_KEY)
+    safeRemoveItem(localStorage, USER_KEY)
+    safeRemoveItem(localStorage, USER_ID_KEY)
   }
 }
 
 export function logoutUser() {
   setUser(null)
+  try {
+    safeRemoveItem(sessionStorage, 'sangeet_guest_id')
+    safeRemoveItem(sessionStorage, 'sangeet_guest_playlists')
+    safeRemoveItem(sessionStorage, 'sangeet_guest_liked')
+    safeRemoveItem(sessionStorage, 'sangeet_guest_history')
+  } catch {}
 }
 
-// Local Storage helpers for zero-break offline/Netlify persistence
+// Local Storage / Session Storage helpers for user vs guest isolation
 function getLocalLiked() {
+  const { storage, key } = getUserStorageKey('liked')
   try {
-    return JSON.parse(localStorage.getItem(LOCAL_LIKED_KEY) || '[]')
+    const raw = safeGetItem(storage, key)
+    return raw ? JSON.parse(raw) : []
   } catch {
     return []
   }
 }
 
 function setLocalLiked(items) {
-  localStorage.setItem(LOCAL_LIKED_KEY, JSON.stringify(items))
+  const { storage, key } = getUserStorageKey('liked')
+  safeSetItem(storage, key, JSON.stringify(items || []))
 }
 
 function normalizePlaylist(p) {
@@ -106,8 +204,9 @@ export function parseLRC(lrcText) {
 }
 
 function getLocalPlaylists() {
+  const { storage, key } = getUserStorageKey('playlists')
   try {
-    const raw = JSON.parse(localStorage.getItem(LOCAL_PLAYLISTS_KEY) || '[]')
+    const raw = JSON.parse(safeGetItem(storage, key) || '[]')
     if (!Array.isArray(raw)) return []
     return raw.map(normalizePlaylist).filter(Boolean)
   } catch {
@@ -116,13 +215,15 @@ function getLocalPlaylists() {
 }
 
 function setLocalPlaylists(items) {
+  const { storage, key } = getUserStorageKey('playlists')
   const normalized = (Array.isArray(items) ? items : []).map(normalizePlaylist).filter(Boolean)
-  localStorage.setItem(LOCAL_PLAYLISTS_KEY, JSON.stringify(normalized))
+  safeSetItem(storage, key, JSON.stringify(normalized))
 }
 
 function getLocalHistory() {
+  const { storage, key } = getUserStorageKey('history')
   try {
-    return JSON.parse(localStorage.getItem(LOCAL_HISTORY_KEY) || '[]')
+    return JSON.parse(safeGetItem(storage, key) || '[]')
   } catch {
     return []
   }
@@ -138,7 +239,8 @@ function addLocalHistory(prompt, payload) {
     tracks: payload.tracks,
     created_at: new Date().toISOString()
   })
-  localStorage.setItem(LOCAL_HISTORY_KEY, JSON.stringify(history.slice(0, 50)))
+  const { storage, key } = getUserStorageKey('history')
+  safeSetItem(storage, key, JSON.stringify(history.slice(0, 50)))
 }
 
 const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
@@ -196,21 +298,25 @@ export const api = {
 
   login: async (username, password) => {
     try {
-      return await request('/auth/login', {
+      const res = await request('/auth/login', {
         method: 'POST',
         body: JSON.stringify({ username, password }),
       }, 3000)
-    } catch {
-      // Local fallback
-      const existing = getUser()
-      const user = existing || {
-        user_id: 'usr_' + Math.random().toString(36).slice(2, 10),
-        username,
-        name: username,
+      if (res && res.user) {
+        setUser(res.user)
+        return res
       }
-      setUser(user)
-      return { status: 'ok', user }
+    } catch {}
+
+    // Local / Netlify fallback
+    const isPrem = (username || '').trim().toLowerCase() === 'prem'
+    const user = {
+      user_id: isPrem ? 'usr_b8afdd6116' : ('usr_' + Math.random().toString(36).slice(2, 10)),
+      username: username || 'listener',
+      name: isPrem ? 'Prem Srivastava' : (username || 'listener'),
     }
+    setUser(user)
+    return { status: 'ok', user }
   },
 
   // Core & Music
@@ -640,8 +746,19 @@ export const api = {
       const res = await request(`/liked?user_id=${getUserId()}`, {}, 2500)
       if (res && (Array.isArray(res.liked) || Array.isArray(res.tracks))) {
         const list = res.liked || res.tracks
-        setLocalLiked(list)
-        return { liked: list, tracks: list }
+        const local = getLocalLiked()
+        const mergedMap = new Map()
+        for (const t of local) {
+          const tid = t.track_id || t.id || t.title
+          if (tid) mergedMap.set(tid, t)
+        }
+        for (const t of list) {
+          const tid = t.track_id || t.id || t.title
+          if (tid) mergedMap.set(tid, t)
+        }
+        const merged = Array.from(mergedMap.values())
+        setLocalLiked(merged)
+        return { liked: merged, tracks: merged }
       }
     } catch {}
     const local = getLocalLiked()

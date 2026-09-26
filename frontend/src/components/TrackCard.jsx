@@ -33,12 +33,12 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
     api.liked()
       .then((data) => {
         if (!alive) return
-        const ids = new Set(data.liked.map((l) => l.track_id))
-        setLiked(ids.has(track.id || track.title))
+        const ids = new Set((data?.liked || []).map((l) => l.track_id || l.id || l.title))
+        setLiked(ids.has(track.id || track.title) || (track.track_id && ids.has(track.track_id)))
       })
       .catch(() => alive && setLiked(false))
     return () => { alive = false }
-  }, [track.id, track.title])
+  }, [track.id, track.title, track.track_id])
 
   // close the overflow menu on outside click / escape
   useEffect(() => {

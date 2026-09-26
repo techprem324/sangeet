@@ -143,7 +143,7 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
   )
 }
 
-export default function PlaylistsView({ onLyrics }) {
+export default function PlaylistsView({ user, onLyrics, refreshKey: parentRefresh, onOpenAuth }) {
   const [playlists, setPlaylists] = useState(null)
   const [open, setOpen] = useState(null)
   const [creating, setCreating] = useState(false)
@@ -151,7 +151,10 @@ export default function PlaylistsView({ onLyrics }) {
 
   const load = () => api.playlists().then((d) => setPlaylists(d.playlists)).catch(() => setPlaylists([]))
 
-  useEffect(() => { load() }, [refreshKey])
+  useEffect(() => {
+    setOpen(null)
+    load()
+  }, [refreshKey, parentRefresh, user])
 
   const openDetail = async (p) => {
     const plId = p._id || p.id
@@ -183,9 +186,14 @@ export default function PlaylistsView({ onLyrics }) {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h1 className="flex items-center gap-2.5 font-display text-2xl sm:text-3xl font-medium text-cream">
-              <PlaylistIcon size={22} className="text-ember" /> My playlists
+              <PlaylistIcon size={22} className="text-ember" />
+              {user ? `${user.name || user.username}’s playlists` : 'My playlists'}
             </h1>
-            <p className="mt-1 text-xs sm:text-sm text-sand-dim">Your own mixes — songs play exactly in the order you arranged them.</p>
+            <p className="mt-1 text-xs sm:text-sm text-sand-dim">
+              {user
+                ? 'Your permanent mixes — saved to your account and accessible anytime.'
+                : 'Your mixes for this session — sign in to save them permanently to your account.'}
+            </p>
           </div>
           <button
             onClick={() => setCreating(true)}
@@ -194,6 +202,25 @@ export default function PlaylistsView({ onLyrics }) {
             <PlusIcon size={14} /> New
           </button>
         </div>
+
+        {!user && (
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl2 border border-ember/30 bg-ember/[0.07] px-4 py-3 text-xs sm:text-sm text-sand-dim shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-ember/20 text-xs text-ember font-bold">👤</span>
+              <span>
+                <strong className="font-semibold text-cream">Guest Mode:</strong> Playlists created in this session are temporary and won’t be saved for future visits.
+              </span>
+            </div>
+            {onOpenAuth && (
+              <button
+                onClick={onOpenAuth}
+                className="shrink-0 rounded-full border border-ember/50 bg-ember px-3.5 py-1.5 text-xs font-semibold text-ink shadow-sm transition-all hover:brightness-110"
+              >
+                Sign in to save playlists
+              </button>
+            )}
+          </div>
+        )}
 
         {playlists === null ? (
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
