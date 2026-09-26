@@ -4,7 +4,13 @@
   "emoji": "⚡",
   "tagline": "Maximum intensity, zero excuses",
   "description": "High-energy phonk, EDM and hip-hop built for heavy sets. Near-max energy, driving beats, zero mid-song naps.",
-  "mood_tags": ["gym", "workout", "phonk", "edm", "high-energy"],
+  "mood_tags": [
+    "gym",
+    "workout",
+    "phonk",
+    "edm",
+    "high-energy"
+  ],
   "seed_queries": [
     "phonk workout mix",
     "gym workout songs",
@@ -14,20 +20,50 @@
     "hardstyle gym"
   ],
   "tracks": [
-    { "title": "Murder In My Mind", "artist": "Kordhell", "album": "Murder In My Mind", "language": "instrumental", "year": "2022", "query": "murder in my mind kordhell" },
-    { "title": "METAMORPHOSIS", "artist": "INTERWORLD", "album": "METAMORPHOSIS", "language": "instrumental", "year": "2021", "query": "metamorphosis interworld" },
-    { "title": "Till I Collapse", "artist": "Eminem", "album": "The Eminem Show", "language": "english", "year": "2002", "query": "till i collapse eminem" },
-    { "title": "Lose Yourself", "artist": "Eminem", "album": "8 Mile", "language": "english", "year": "2002", "query": "lose yourself eminem" },
-    { "title": "Stronger", "artist": "Kanye West", "album": "Graduation", "language": "english", "year": "2007", "query": "stronger kanye west" },
-    { "title": "Eye of the Tiger", "artist": "Survivor", "album": "Eye of the Tiger", "language": "english", "year": "1982", "query": "eye of the tiger survivor" },
-    { "title": "Believer", "artist": "Imagine Dragons", "album": "Evolve", "language": "english", "year": "2017", "query": "believer imagine dragons" },
-    { "title": "Natural", "artist": "Imagine Dragons", "album": "Origins", "language": "english", "year": "2018", "query": "natural imagine dragons" },
-    { "title": "Animals", "artist": "Martin Garrix", "album": "Animals", "language": "english", "year": "2013", "query": "animals martin garrix" },
-    { "title": "Turn Down for What", "artist": "DJ Snake & Lil Jon", "album": "Turn Down for What", "language": "english", "year": "2013", "query": "turn down for what dj snake lil jon" },
-    { "title": "Can't Hold Us", "artist": "Macklemore & Ryan Lewis", "album": "The Heist", "language": "english", "year": "2011", "query": "can't hold us macklemore" },
-    { "title": "Zinda", "artist": "Vishal Dadlani", "album": "Bhaag Milkha Bhaag", "language": "hindi", "year": "2013", "query": "zinda bhaag milkha bhaag vishal dadlani" },
-    { "title": "Kar Har Maidaan Fateh", "artist": "Sukhwinder Singh", "album": "Sanju", "language": "hindi", "year": "2018", "query": "kar har maidaan fateh sanju" },
-    { "title": "Khalnayak", "artist": "Divine", "album": "Khalnayak", "language": "hindi", "year": "2021", "query": "khalnayak divine rap" },
-    { "title": "Sandstorm", "artist": "Darude", "album": "Before the Storm", "language": "english", "year": "1999", "query": "sandstorm darude" }
+    {
+      "title": "Zinda",
+      "artist": "Shankar-Ehsaan-Loy, Siddharth Mahadevan",
+      "query": "Zinda Bhaag Milkha Bhaag"
+    },
+    {
+      "title": "Sultan",
+      "artist": "Vishal-Shekhar, Sukhwinder Singh",
+      "query": "Sultan Title Track"
+    },
+    {
+      "title": "Dangal",
+      "artist": "Daler Mehndi",
+      "query": "Dangal Title Track"
+    },
+    {
+      "title": "Kar Har Maidaan Fateh",
+      "artist": "Sukhwinder Singh, Shreya Ghoshal",
+      "query": "Kar Har Maidaan Fateh"
+    },
+    {
+      "title": "Brothers Anthem",
+      "artist": "Ajay-Atul, Vishal Dadlani",
+      "query": "Brothers Anthem"
+    },
+    {
+      "title": "Mahishasura Mardini - Droplex Remix",
+      "artist": "Shanti People, Droplex",
+      "query": "Mahishasura Mardini Droplex Remix"
+    },
+    {
+      "title": "Shiv Tandav Stotram",
+      "artist": "Shankar Mahadevan",
+      "query": "Shiv Tandav Stotram Shankar Mahadevan"
+    },
+    {
+      "title": "Aarambh",
+      "artist": "Piyush Mishra",
+      "query": "Aarambh Gulaal"
+    },
+    {
+      "title": "Hanuman Ji",
+      "artist": "Deepak Gogna, Krishiv",
+      "query": "Hanuman Ji Deepak Gogna"
+    }
   ]
 }

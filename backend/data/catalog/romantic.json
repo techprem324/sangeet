@@ -4,7 +4,13 @@
   "emoji": "🌹",
   "tagline": "For the one who makes your heart skip",
   "description": "Warm, tender, vocal-forward songs for date nights, anniversaries and slow dances. R&B soul mixed with Bollywood romance.",
-  "mood_tags": ["romance", "rnb", "soul", "date-night", "hindi-romance"],
+  "mood_tags": [
+    "romance",
+    "rnb",
+    "soul",
+    "date-night",
+    "hindi-romance"
+  ],
   "seed_queries": [
     "bollywood romantic songs",
     "romantic hindi love songs",
@@ -14,20 +20,55 @@
     "slow romantic hindi"
   ],
   "tracks": [
-    { "title": "Kesariya", "artist": "Arijit Singh", "album": "Brahmastra", "language": "hindi", "year": "2022", "query": "kesariya brahmastra arijit singh" },
-    { "title": "Raataan Lambiyan", "artist": "Jubin Nautiyal", "album": "Shershaah", "language": "hindi", "year": "2021", "query": "raataan lambiyan shershaah" },
-    { "title": "Shayad", "artist": "Arijit Singh", "album": "Love Aaj Kal", "language": "hindi", "year": "2020", "query": "shayad love aaj kal arijit singh" },
-    { "title": "Mann Bharrya 2.0", "artist": "B Praak", "album": "Shershaah", "language": "hindi", "year": "2021", "query": "mann bharrya 2.0 shershaah" },
-    { "title": "Tere Sang Yaara", "artist": "Atif Aslam", "album": "Rustom", "language": "hindi", "year": "2016", "query": "tere sang yaara atif aslam" },
-    { "title": "Jeena Jeena", "artist": "Atif Aslam", "album": "Badrinath Ki Dulhania", "language": "hindi", "year": "2017", "query": "jeena jeena atif aslam" },
-    { "title": "Humsafar", "artist": "Akhil Sachdeva", "album": "Badrinath Ki Dulhania", "language": "hindi", "year": "2017", "query": "humsafar akhil sachdeva" },
-    { "title": "Sanam Re", "artist": "Arijit Singh", "album": "Sanam Re", "language": "hindi", "year": "2016", "query": "sanam re arijit singh" },
-    { "title": "Dil Diyan Gallan", "artist": "Atif Aslam", "album": "Tiger Zinda Hai", "language": "hindi", "year": "2017", "query": "dil diyan gallan atif aslam" },
-    { "title": "Ranjha", "artist": "Jasleen Royal & B Praak", "album": "Shershaah", "language": "hindi", "year": "2021", "query": "ranjha shershaah jasleen royal" },
-    { "title": "Pehla Nasha", "artist": "Udit Narayan & Sadhana Sargam", "album": "Jo Jeeta Wohi Sikandar", "language": "hindi", "year": "1992", "query": "pehla nasha jo jeeta wohi sikandar" },
-    { "title": "Perfect", "artist": "Ed Sheeran", "album": "÷ (Divide)", "language": "english", "year": "2017", "query": "perfect ed sheeran" },
-    { "title": "All of Me", "artist": "John Legend", "album": "Love in the Future", "language": "english", "year": "2013", "query": "all of me john legend" },
-    { "title": "Just the Way You Are", "artist": "Bruno Mars", "album": "Doo-Wops & Hooligans", "language": "english", "year": "2010", "query": "just the way you are bruno mars" },
-    { "title": "Adore You", "artist": "Harry Styles", "album": "Fine Line", "language": "english", "year": "2019", "query": "adore you harry styles" }
+    {
+      "title": "Apna Bana Le",
+      "artist": "Sachin-Jigar, Arijit Singh",
+      "query": "Apna Bana Le Bhediya"
+    },
+    {
+      "title": "Gehra Hua",
+      "artist": "Shashwat Sachdev, Arijit Singh",
+      "query": "Gehra Hua Arijit Singh"
+    },
+    {
+      "title": "Tujhe Kitna Chahne Lage",
+      "artist": "Arijit Singh, Mithoon",
+      "query": "Tujhe Kitna Chahne Lage"
+    },
+    {
+      "title": "Tujhko",
+      "artist": "Pritam, Arijit Singh, Sunidhi Chauhan",
+      "query": "Tujhko Pritam"
+    },
+    {
+      "title": "Tera Mera Rishta (New Version)",
+      "artist": "Mithoon, Pritam, Mustafa Zahid",
+      "query": "Tera Mera Rishta New Version"
+    },
+    {
+      "title": "Ae Dil Hai Mushkil Title Track",
+      "artist": "Pritam, Arijit Singh",
+      "query": "Ae Dil Hai Mushkil Title Track"
+    },
+    {
+      "title": "Barsaat",
+      "artist": "Banjaare, Roni",
+      "query": "Barsaat Banjaare"
+    },
+    {
+      "title": "Vaaroon Forever",
+      "artist": "Anand Bhaskar, Romy, Shreya Ghoshal",
+      "query": "Vaaroon Forever"
+    },
+    {
+      "title": "Zaalima",
+      "artist": "Arijit Singh, Harshdeep Kaur",
+      "query": "Zaalima Raees"
+    },
+    {
+      "title": "Tainu Khabar Nahi",
+      "artist": "Sachin-Jigar, Arijit Singh",
+      "query": "Tainu Khabar Nahi Munjya"
+    }
   ]
 }

@@ -83,8 +83,10 @@ def _load_resolved_cache() -> None:
 def _save_resolved_cache() -> None:
     try:
         os.makedirs(STORE_DIR, exist_ok=True)
+        with _catalog_lock:
+            snapshot = dict(_resolved)
         with open(_RESOLVED_FILE, "w", encoding="utf-8") as f:
-            json.dump(_resolved, f, ensure_ascii=False, indent=1)
+            json.dump(snapshot, f, ensure_ascii=False, indent=1)
     except Exception as exc:
         log.warning("Could not persist resolved cache: %s", exc)
 
@@ -144,8 +146,72 @@ def _public_track(track: Dict) -> Dict:
 
 
 # ---------------------------------------------------------------------------
-# Public API
+# Public API & Strict Sequenced Playback
 # ---------------------------------------------------------------------------
+
+CATEGORY_ALIASES = {
+    "frustration_release": "angry",
+    "rainy_night": "rain_night",
+    "party_bangers": "party",
+    "morning_fuel": "morning_motivation",
+    "broken_heart": "heartbreak",
+    "gym_beast": "gym_power",
+    "nostalgic_hits": "nostalgic",
+    "love_vibes": "romantic",
+    "deep_focus": "focus_lofi",
+}
+
+
+def _resolve_category(category_key: str) -> Optional[Dict]:
+    catalog = _load_catalog()
+    if category_key in catalog:
+        return catalog[category_key]
+    alias = CATEGORY_ALIASES.get(category_key)
+    if alias and alias in catalog:
+        return catalog[alias]
+    clean = str(category_key).lower().replace("-", "_").replace(" ", "_")
+    if clean in catalog:
+        return catalog[clean]
+    if clean in CATEGORY_ALIASES and CATEGORY_ALIASES[clean] in catalog:
+        return catalog[CATEGORY_ALIASES[clean]]
+    return None
+
+
+def _extract_seed_search_queries(cat: Dict) -> List[str]:
+    """
+    Dynamically extracts artist names and query keywords from the hand-picked
+    seed tracks to serve as primary search parameters for JioSaavn.
+    """
+    import re
+    queries: List[str] = []
+    seen = set()
+    seed_tracks = cat.get("tracks", [])
+
+    # 1. Exact track queries and titles from seed tracks
+    for t in seed_tracks:
+        q = (t.get("query") or f"{t.get('title', '')} {t.get('artist', '')}").strip()
+        if q and q.lower() not in seen:
+            seen.add(q.lower())
+            queries.append(q)
+
+    # 2. Extracted artist names from seed tracks
+    for t in seed_tracks:
+        artist_raw = t.get("artist", "")
+        parts = re.split(r"[,&/]| feat\.? | ft\.? ", artist_raw, flags=re.IGNORECASE)
+        for part in parts:
+            part = part.strip()
+            if part and len(part) > 2 and part.lower() not in seen:
+                seen.add(part.lower())
+                queries.append(part)
+
+    # 3. Supplemental category seed_queries as fallback
+    for q in cat.get("seed_queries", []):
+        if q and q.lower() not in seen:
+            seen.add(q.lower())
+            queries.append(q)
+
+    return queries
+
 
 def categories() -> List[Dict]:
     """Summary list of all curated categories (for the playlist rail)."""
@@ -160,9 +226,13 @@ def categories() -> List[Dict]:
     return out
 
 
-def category_tracks(category_key: str, limit: int = 30, resolve: bool = True) -> List[Dict]:
-    """Tracks for one category, stream-hydrated."""
-    cat = _load_catalog().get(category_key)
+def category_tracks(category_key: str, limit: int = 50, resolve: bool = True) -> List[Dict]:
+    """
+    Primary Queue (The Seeds):
+    When a user enters a mood room, strictly load and queue the exact hand-picked
+    starter tracks directly from the respective backend/data/catalog/<mood>.json file first.
+    """
+    cat = _resolve_category(category_key)
     if not cat:
         return []
     tracks = cat.get("tracks", [])[:limit]
@@ -178,34 +248,49 @@ def search_songs(query: str, limit: int = 12) -> List[Dict]:
 
 def explore(category_key: str, count: int = 24) -> List[Dict]:
     """
-    Pull *fresh* real tracks for a category straight from live JioSaavn,
-    skipping ones already in the curated catalog.
-
-    Performance: candidate discovery runs WITHOUT stream resolution (the
-    slow part), then only the final picks get resolved in parallel.
+    Dynamic Queue Expansion (The Generation):
+    Dynamically extracts artist names and query keywords from the current JSON seed tracks
+    and uses them as the primary search parameters for the JioSaavn search.getResults pipeline.
+    Results are returned for seamless appending strictly after the hand-picked seed tracks.
     """
-    cat = _load_catalog().get(category_key)
+    cat = _resolve_category(category_key)
     if not cat:
         return []
-    known_queries = {t["query"].lower() for t in cat.get("tracks", []) if t.get("query")}
-    seen_ids = set()
+
+    seed_tracks = cat.get("tracks", [])
+    known_titles = {t.get("title", "").strip().lower() for t in seed_tracks if t.get("title")}
+    known_queries = {t.get("query", "").strip().lower() for t in seed_tracks if t.get("query")}
+    seen_ids = {t.get("id") for t in seed_tracks if t.get("id")}
     candidates: List[Dict] = []
 
-    for q in cat.get("seed_queries", [])[:6]:
-        for t in jiosaavn_service.search(q, limit=20, resolve=False):
-            if t["id"] in seen_ids:
+    # Dynamic extraction of artists and query keywords from current seed tracks
+    search_queries = _extract_seed_search_queries(cat)
+
+    for q in search_queries:
+        try:
+            results = jiosaavn_service.search(q, limit=20, resolve=False)
+        except Exception as exc:
+            log.warning("explore query failed: %s (%s)", q, exc)
+            continue
+
+        for t in results:
+            tid = t.get("id")
+            title_lower = t.get("title", "").strip().lower()
+            if tid and tid in seen_ids:
                 continue
-            if t["title"].lower() in known_queries:
+            if title_lower in known_titles or title_lower in known_queries:
                 continue
-            seen_ids.add(t["id"])
+            seen_ids.add(tid)
+            known_titles.add(title_lower)
             candidates.append(t)
             if len(candidates) >= count * 2:
                 break
+
         if len(candidates) >= count * 2:
             break
 
     fresh = hydrate_many(candidates[:count])
-    return [t for t in fresh if t.get("stream_url")]
+    return [_public_track(t) for t in fresh if t.get("stream_url")]
 
 
 def stats() -> Dict:

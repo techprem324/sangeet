@@ -4,7 +4,13 @@
   "emoji": "🌤️",
   "tagline": "Slow mornings, soft light, zero plans",
   "description": "Acoustic, indie and reggae warmth for slow mornings. Mid-valence brightness, gentle grooves, sunlight-through-curtains energy.",
-  "mood_tags": ["acoustic", "indie", "reggae", "jazz", "morning"],
+  "mood_tags": [
+    "acoustic",
+    "indie",
+    "reggae",
+    "jazz",
+    "morning"
+  ],
   "seed_queries": [
     "sunday morning chill mix",
     "acoustic songs",
@@ -14,19 +20,60 @@
     "mellow acoustic hindi"
   ],
   "tracks": [
-    { "title": "Kabira", "artist": "Arijit Singh & Rekha Bhardwaj", "album": "Yeh Jawaani Hai Deewani", "language": "hindi", "year": "2013", "query": "kabira yeh jawaani hai deewani" },
-    { "title": "Ilahi", "artist": "Arijit Singh & Mohit Chauhan", "album": "Yeh Jawaani Hai Deewani", "language": "hindi", "year": "2013", "query": "ilahi yeh jawaani hai deewani" },
-    { "title": "Tumse Hi", "artist": "Mohit Chauhan", "album": "Jab We Met", "language": "hindi", "year": "2007", "query": "tumse hi jab we met" },
-    { "title": "Kho Gaye Hum Kahan", "artist": "Jasleen Royal", "album": "Kho Gaye Hum Kahan", "language": "hindi", "year": "2023", "query": "kho gaye hum kahan jasleen royal" },
-    { "title": "Banjaara", "artist": "Mohammed Irfan", "album": "Ek Tha Tiger", "language": "hindi", "year": "2012", "query": "banjaara ek tha tiger" },
-    { "title": "Here Comes the Sun", "artist": "The Beatles", "album": "Abbey Road", "language": "english", "year": "1969", "query": "here comes the sun beatles" },
-    { "title": "Banana Pancakes", "artist": "Jack Johnson", "album": "In Between Dreams", "language": "english", "year": "2005", "query": "banana pancakes jack johnson" },
-    { "title": "Better Together", "artist": "Jack Johnson", "album": "In Between Dreams", "language": "english", "year": "2005", "query": "better together jack johnson" },
-    { "title": "Don't Know Why", "artist": "Norah Jones", "album": "Come Away with Me", "language": "english", "year": "2002", "query": "don't know why norah jones" },
-    { "title": "Three Little Birds", "artist": "Bob Marley & The Wailers", "album": "Exodus", "language": "english", "year": "1977", "query": "three little birds bob marley" },
-    { "title": "Island in the Sun", "artist": "Weezer", "album": "Weezer (Green Album)", "language": "english", "year": "2001", "query": "island in the sun weezer" },
-    { "title": "Sunrise", "artist": "Norah Jones", "album": "Feels Like Home", "language": "english", "year": "2004", "query": "sunrise norah jones" },
-    { "title": "Banjaara (Lo-Fi)", "artist": "Mohammed Irfan", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2021", "query": "banjaara lofi" },
-    { "title": "Tum Saath Ho (Acoustic)", "artist": "Arijit Singh", "album": "Tamasha Acoustic", "language": "hindi", "year": "2015", "query": "agar tum saath ho acoustic" }
+    {
+      "title": "Khaabon Ke Parinday",
+      "artist": "Alyssa Mendonsa, Mohit Chauhan",
+      "query": "Khaabon Ke Parinday"
+    },
+    {
+      "title": "Main Kya Karoon",
+      "artist": "Pritam, Nikhil Paul George",
+      "query": "Main Kya Karoon Barfi"
+    },
+    {
+      "title": "Hey Ya!",
+      "artist": "Clinton Cerejo, Shankar Mahadevan",
+      "query": "Hey Ya Karthik Calling Karthik"
+    },
+    {
+      "title": "Kabira (Encore)",
+      "artist": "Pritam, Harshdeep Kaur, Arijit Singh",
+      "query": "Kabira Encore"
+    },
+    {
+      "title": "Kuch To Hua Hai",
+      "artist": "Shankar-Ehsaan-Loy, Alka Yagnik, Shaan",
+      "query": "Kuch To Hua Hai Kal Ho Naa Ho"
+    },
+    {
+      "title": "Iktara",
+      "artist": "Amit Trivedi, Kavita Seth",
+      "query": "Iktara Wake Up Sid"
+    },
+    {
+      "title": "Matargashti",
+      "artist": "Mohit Chauhan",
+      "query": "Matargashti Tamasha"
+    },
+    {
+      "title": "Pani Da Rang (Male)",
+      "artist": "Ayushmann Khurrana",
+      "query": "Pani Da Rang Male"
+    },
+    {
+      "title": "Kabhi Kabhi Aditi",
+      "artist": "Rashid Ali",
+      "query": "Kabhi Kabhi Aditi Jaane Tu"
+    },
+    {
+      "title": "Aashiyan",
+      "artist": "Pritam, Shreya Ghoshal",
+      "query": "Aashiyan Barfi"
+    },
+    {
+      "title": "Yun Hi Chala Chal",
+      "artist": "Udit Narayan, Hariharan",
+      "query": "Yun Hi Chala Chal Swades"
+    }
   ]
 }

@@ -4,7 +4,13 @@
   "emoji": "☕",
   "tagline": "Warm beats for quiet concentration",
   "description": "Lo-fi, chillhop and instrumental tracks engineered for deep work. Steady rhythms, low danceability, no vocal distractions.",
-  "mood_tags": ["lofi", "study", "instrumental", "chillhop", "ambient"],
+  "mood_tags": [
+    "lofi",
+    "study",
+    "instrumental",
+    "chillhop",
+    "ambient"
+  ],
   "seed_queries": [
     "lofi study beats",
     "lofi hip hop chill mix",
@@ -14,19 +20,50 @@
     "instrumental focus music"
   ],
   "tracks": [
-    { "title": "Tum Hi Ho (Lo-Fi Remix)", "artist": "Arijit Singh", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2020", "query": "tum hi ho lofi remix" },
-    { "title": "Kesariya (Lo-Fi Mix)", "artist": "Arijit Singh", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2022", "query": "kesariya lofi mix" },
-    { "title": "Shayad (Lo-Fi Mix)", "artist": "Arijit Singh", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2020", "query": "shayad lofi mix" },
-    { "title": "Raataan Lambiyan (Lo-Fi Mix)", "artist": "Jubin Nautiyal", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2021", "query": "raataan lambiyan lofi mix" },
-    { "title": "Bekhayali (Lo-Fi Mix)", "artist": "Sachet Tandon", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2019", "query": "bekhayali lofi mix" },
-    { "title": "Tera Ban Jaunga (Lo-Fi)", "artist": "Akhil Sachdeva", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2019", "query": "tera ban jaunga lofi" },
-    { "title": "Channa Mereya (Lo-Fi)", "artist": "Arijit Singh", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2016", "query": "channa mereya lofi" },
-    { "title": "Ilahi (Lo-Fi Mix)", "artist": "Arijit Singh", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2013", "query": "ilahi lofi mix" },
-    { "title": "Main Rahoon Ya Na Rahoon (Lo-Fi)", "artist": "Armaan Malik", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2020", "query": "main rahoon ya na rahoon lofi" },
-    { "title": "Phir Se Ud Chala (Lo-Fi)", "artist": "Mohit Chauhan", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2020", "query": "phir se ud chala lofi" },
-    { "title": "Filhaal (Lo-Fi Mix)", "artist": "B Praak", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2020", "query": "filhaal lofi mix" },
-    { "title": "Tujhe Kitna Chahne Lage (Lo-Fi)", "artist": "Arijit Singh", "album": "Lo-Fi Hindi Mix", "language": "hindi", "year": "2020", "query": "tujhe kitna chahne lage lofi" },
-    { "title": "Snowfall", "artist": "Øneheart & Reidenshi", "album": "Snowfall", "language": "instrumental", "year": "2020", "query": "snowfall oneheart reidenshi" },
-    { "title": "Dreams", "artist": "NEFFEX", "album": "Dreams", "language": "instrumental", "year": "2018", "query": "dreams neffex" }
+    {
+      "title": "Tum Se Hi (Love In Lo-Fi Volume 1)",
+      "artist": "Mohit Chauhan, Dj Chetas",
+      "query": "Tum Se Hi Lofi Dj Chetas"
+    },
+    {
+      "title": "Subhanallah Lofi Mix",
+      "artist": "Pritam, Sreerama Chandra",
+      "query": "Subhanallah Lofi Mix"
+    },
+    {
+      "title": "Saibo - Lofi Flip",
+      "artist": "VIBIE, Sachin-Jigar, Shreya Ghoshal",
+      "query": "Saibo Lofi Flip"
+    },
+    {
+      "title": "Pee Loon Lofi Mix",
+      "artist": "Pritam, Mohit Chauhan",
+      "query": "Pee Loon Lofi Mix"
+    },
+    {
+      "title": "Mere Bina - Lofi Flip",
+      "artist": "KSW, Nikhil D'Souza, Pritam",
+      "query": "Mere Bina Lofi Flip"
+    },
+    {
+      "title": "In Dino - Lofi Flip",
+      "artist": "VIBIE, Soham, Pritam",
+      "query": "In Dino Lofi Flip"
+    },
+    {
+      "title": "Janam Janam - Lofi Flip",
+      "artist": "SPECRO, SKETCH, Arijit Singh",
+      "query": "Janam Janam Lofi Flip"
+    },
+    {
+      "title": "Bolna",
+      "artist": "Tanishk Bagchi, Arijit Singh, Asees Kaur",
+      "query": "Bolna Kapoor & Sons"
+    },
+    {
+      "title": "Tune Jo Na Kaha - LoFi Mix",
+      "artist": "Pritam, Mohit Chauhan",
+      "query": "Tune Jo Na Kaha LoFi Mix"
+    }
   ]
 }

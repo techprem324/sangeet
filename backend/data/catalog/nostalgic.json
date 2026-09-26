@@ -4,7 +4,13 @@
   "emoji": "🕰️",
   "tagline": "Old songs, old friends, old feelings",
   "description": "90s Bollywood gold and timeless classics that feel like old friends. Familiar melodies, warm mid-valence, memory made audible.",
-  "mood_tags": ["90s", "classics", "retro", "bollywood", "oldschool"],
+  "mood_tags": [
+    "90s",
+    "classics",
+    "retro",
+    "bollywood",
+    "oldschool"
+  ],
   "seed_queries": [
     "90s hindi songs",
     "bollywood 90s hits",
@@ -14,20 +20,60 @@
     "retro hindi songs"
   ],
   "tracks": [
-    { "title": "Kuch Kuch Hota Hai", "artist": "Udit Narayan & Alka Yagnik", "album": "Kuch Kuch Hota Hai", "language": "hindi", "year": "1998", "query": "kuch kuch hota hai title song" },
-    { "title": "Tujhe Dekha To", "artist": "Kumar Sanu & Lata Mangeshkar", "album": "Dilwale Dulhania Le Jayenge", "language": "hindi", "year": "1995", "query": "tujhe dekha to yeh jaana sanam" },
-    { "title": "Pehla Nasha", "artist": "Udit Narayan & Sadhana Sargam", "album": "Jo Jeeta Wohi Sikandar", "language": "hindi", "year": "1992", "query": "pehla nasha udit narayan" },
-    { "title": "Koi Mil Gaya", "artist": "Kishore Kumar", "album": "Kuch Kuch Hota Hai", "language": "hindi", "year": "1998", "query": "koi mil gaya kuch kuch hota hai" },
-    { "title": "Ladki Badi Anjani Hai", "artist": "Kumar Sanu & Alka Yagnik", "album": "Kuch Kuch Hota Hai", "language": "hindi", "year": "1998", "query": "ladki badi anjani hai" },
-    { "title": "Tum Paas Aaye", "artist": "Kumar Sanu & Kavita Krishnamurthy", "album": "Kuch Kuch Hota Hai", "language": "hindi", "year": "1998", "query": "tum paas aaye kuch kuch hota hai" },
-    { "title": "Chura Ke Dil Mera", "artist": "Kumar Sanu & Alka Yagnik", "album": "Main Khiladi Tu Anari", "language": "hindi", "year": "1994", "query": "chura ke dil mera main khiladi" },
-    { "title": "Tere Bina Zindagi Se", "artist": "Lata Mangeshkar & Kishore Kumar", "album": "Andhaa Yudh", "language": "hindi", "year": "1985", "query": "tere bina zindagi se koi" },
-    { "title": "Do Dil Mil Rahe Hain", "artist": "Kumar Sanu", "album": "Krodh", "language": "hindi", "year": "1992", "query": "do dil mil rahe hain kumar sanu" },
-    { "title": "Kal Ho Naa Ho", "artist": "Sonu Nigam", "album": "Kal Ho Naa Ho", "language": "hindi", "year": "2003", "query": "kal ho na ho sonu nigam" },
-    { "title": "Mitwa", "artist": "Shafqat Amanat Ali", "album": "Kabhi Alvida Naa Kehna", "language": "hindi", "year": "2006", "query": "mitwa kabhi alvida naa kehna" },
-    { "title": "September", "artist": "Earth, Wind & Fire", "album": "The Best of Earth, Wind & Fire", "language": "english", "year": "1978", "query": "september earth wind and fire" },
-    { "title": "Bohemian Rhapsody", "artist": "Queen", "album": "A Night at the Opera", "language": "english", "year": "1975", "query": "bohemian rhapsody queen" },
-    { "title": "Billie Jean", "artist": "Michael Jackson", "album": "Thriller", "language": "english", "year": "1982", "query": "billie jean michael jackson" },
-    { "title": "Dancing Queen", "artist": "ABBA", "album": "Arrival", "language": "english", "year": "1976", "query": "dancing queen abba" }
+    {
+      "title": "O Mere Dil Ke Chain",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "query": "O Mere Dil Ke Chain"
+    },
+    {
+      "title": "Pal Pal Dil Ke Paas",
+      "artist": "Kishore Kumar",
+      "query": "Pal Pal Dil Ke Paas Blackmail"
+    },
+    {
+      "title": "Yeh Sham Mastani",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "query": "Yeh Sham Mastani"
+    },
+    {
+      "title": "Kya Hua Tera Vada",
+      "artist": "Sushma Shrestha, Mohammed Rafi",
+      "query": "Kya Hua Tera Vada"
+    },
+    {
+      "title": "Likhe Jo Khat Tujhe",
+      "artist": "Mohammed Rafi",
+      "query": "Likhe Jo Khat Tujhe"
+    },
+    {
+      "title": "Unse Mili Nazar Ke Mere Hosh Ud Gai",
+      "artist": "Lata Mangeshkar",
+      "query": "Unse Mili Nazar Ke Mere Hosh Ud Gai"
+    },
+    {
+      "title": "Bahon Mein Chale Aao",
+      "artist": "Lata Mangeshkar, R.D. Burman",
+      "query": "Bahon Mein Chale Aao"
+    },
+    {
+      "title": "Intaha Ho Gai Intezar Ki",
+      "artist": "Kishore Kumar, Asha Bhosle",
+      "query": "Intaha Ho Gai Intezar Ki"
+    },
+    {
+      "title": "Saagar Jaisi Aankhonwali",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "query": "Saagar Jaisi Aankhonwali"
+    },
+    {
+      "title": "Hothon Se Chhu Lo Tum",
+      "artist": "Jagjit Singh",
+      "query": "Hothon Se Chhu Lo Tum Prem Geet"
+    },
+    {
+      "title": "Lag Ja Gale Se Phir",
+      "artist": "Lata Mangeshkar",
+      "query": "Lag Ja Gale Se Phir"
+    }
   ]
 }

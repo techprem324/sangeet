@@ -4,7 +4,13 @@
   "emoji": "💔",
   "tagline": "Let it hurt, then let it go",
   "description": "Slow, low-valence ballads for the nights you need to feel it all the way through. Acoustic textures, piano-led arrangements, minor keys.",
-  "mood_tags": ["sad", "melancholy", "acoustic", "piano", "breakup"],
+  "mood_tags": [
+    "sad",
+    "melancholy",
+    "acoustic",
+    "piano",
+    "breakup"
+  ],
   "seed_queries": [
     "sad hindi songs breakup",
     "sad bollywood songs",
@@ -14,20 +20,50 @@
     "breakup songs hindi"
   ],
   "tracks": [
-    { "title": "Channa Mereya", "artist": "Arijit Singh", "album": "Ae Dil Hai Mushkil", "language": "hindi", "year": "2016", "query": "channa mereya arijit singh" },
-    { "title": "Tum Hi Ho", "artist": "Arijit Singh", "album": "Aashiqui 2", "language": "hindi", "year": "2013", "query": "tum hi ho arijit singh aashiqui 2" },
-    { "title": "Agar Tum Saath Ho", "artist": "Arijit Singh & Alka Yagnik", "album": "Tamasha", "language": "hindi", "year": "2015", "query": "agar tum saath ho tamasha" },
-    { "title": "Bekhayali", "artist": "Sachet Tandon", "album": "Kabir Singh", "language": "hindi", "year": "2019", "query": "bekhayali kabir singh sachet tandon" },
-    { "title": "Tujhe Kitna Chahne Lage", "artist": "Arijit Singh", "album": "Kabir Singh", "language": "hindi", "year": "2019", "query": "tujhe kitna chahne lage kabir singh" },
-    { "title": "Kaise Hua", "artist": "Vishal Mishra", "album": "Kabir Singh", "language": "hindi", "year": "2019", "query": "kaise hua kabir singh" },
-    { "title": "Tera Yaar Hoon Main", "artist": "Arijit Singh", "album": "Sonu Ke Titu Ki Sweety", "language": "hindi", "year": "2018", "query": "tera yaar hoon main arijit singh" },
-    { "title": "Phir Bhi Tumko Chahunga", "artist": "Arijit Singh & Shashaa Tirupati", "album": "Half Girlfriend", "language": "hindi", "year": "2017", "query": "phir bhi tumko chahunga half girlfriend" },
-    { "title": "Hawayein", "artist": "Arijit Singh", "album": "Jab Harry Met Sejal", "language": "hindi", "year": "2017", "query": "hawayein jab harry met sejal" },
-    { "title": "Tujhe Yaad Na Meri Aayee", "artist": "Jubin Nautiyal", "album": "M.S. Dhoni: The Untold Story", "language": "hindi", "year": "2016", "query": "tujhe yaad na meri aayee jubin nautiyal" },
-    { "title": "Tere Bin", "artist": "Arijit Singh & Aditya Dev", "album": "Simmba", "language": "hindi", "year": "2018", "query": "tere bin simmba arijit singh" },
-    { "title": "Someone Like You", "artist": "Adele", "album": "21", "language": "english", "year": "2011", "query": "someone like you adele" },
-    { "title": "Fix You", "artist": "Coldplay", "album": "X&Y", "language": "english", "year": "2005", "query": "fix you coldplay" },
-    { "title": "When I Was Your Man", "artist": "Bruno Mars", "album": "Unorthodox Jukebox", "language": "english", "year": "2012", "query": "when i was your man bruno mars" },
-    { "title": "Jee Le Zaraa", "artist": "Vishal Dadlani", "album": "Talaash", "language": "hindi", "year": "2012", "query": "jee le zara talaash" }
+    {
+      "title": "Hamari Adhuri Kahani",
+      "artist": "Jeet Gannguli, Arijit Singh",
+      "query": "Hamari Adhuri Kahani Title Track"
+    },
+    {
+      "title": "Tera Mera Rishta (New Version)",
+      "artist": "Mithoon, Pritam, Mustafa Zahid",
+      "query": "Tera Mera Rishta Mustafa Zahid"
+    },
+    {
+      "title": "Ae Dil Hai Mushkil Title Track",
+      "artist": "Pritam, Arijit Singh",
+      "query": "Ae Dil Hai Mushkil Title Track"
+    },
+    {
+      "title": "Barsaat",
+      "artist": "Banjaare, Roni",
+      "query": "Barsaat Banjaare"
+    },
+    {
+      "title": "Agar Tum Saath Ho",
+      "artist": "Alka Yagnik, Arijit Singh",
+      "query": "Agar Tum Saath Ho"
+    },
+    {
+      "title": "Toh Phir Aao (New Version)",
+      "artist": "Mithoon, Pritam, Mustafa Zahid",
+      "query": "Toh Phir Aao Mustafa Zahid"
+    },
+    {
+      "title": "Tum Hi Ho",
+      "artist": "Arijit Singh, Mithoon",
+      "query": "Tum Hi Ho Arijit Singh"
+    },
+    {
+      "title": "Tujhko",
+      "artist": "Pritam, Arijit Singh, Sunidhi Chauhan",
+      "query": "Tujhko Cocktail 2"
+    },
+    {
+      "title": "Raanjhan",
+      "artist": "Sachet-Parampara",
+      "query": "Raanjhan Do Patti"
+    }
   ]
 }

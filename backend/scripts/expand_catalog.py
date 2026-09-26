@@ -47,12 +47,51 @@ def _norm_title(t: str) -> str:
     return " ".join(t.lower().split())
 
 
+def _extract_seed_search_queries(cat: dict) -> list[str]:
+    """
+    Dynamically extract artist names and query keywords from current JSON seed tracks.
+    """
+    import re
+    queries = []
+    seen = set()
+    seed_tracks = cat.get("tracks", [])
+
+    # 1. Exact track queries and titles from seed tracks
+    for t in seed_tracks:
+        q = (t.get("query") or f"{t.get('title', '')} {t.get('artist', '')}").strip()
+        if q and q.lower() not in seen:
+            seen.add(q.lower())
+            queries.append(q)
+
+    # 2. Extracted individual artist names from seed tracks
+    for t in seed_tracks:
+        artist_raw = t.get("artist", "")
+        parts = re.split(r"[,&/]| feat\.? | ft\.? ", artist_raw, flags=re.IGNORECASE)
+        for part in parts:
+            part = part.strip()
+            if part and len(part) > 2 and part.lower() not in seen:
+                seen.add(part.lower())
+                queries.append(part)
+
+    # 3. Supplemental category seed_queries as fallback
+    for q in cat.get("seed_queries", []):
+        if q and q.lower() not in seen:
+            seen.add(q.lower())
+            queries.append(q)
+
+    return queries
+
+
 def expand_category(path: str, target: int, dry_run: bool) -> int:
     cat = _load(path)
-    existing = {_norm_title(t["title"]) for t in cat.get("tracks", [])}
-    print(f"\n[{cat['label']}] current={len(existing)} target={target}")
+    seed_count = len(cat.get("tracks", []))
+    existing = {_norm_title(t["title"]) for t in cat.get("tracks", []) if t.get("title")}
+    print(f"\n[{cat['label']}] seeds={seed_count} current={len(existing)} target={target}")
 
-    for q in cat.get("seed_queries", []):
+    # Dynamically extract artists & query keywords from current seed tracks
+    search_queries = _extract_seed_search_queries(cat)
+
+    for q in search_queries:
         if len(existing) >= target:
             break
         try:
@@ -68,6 +107,7 @@ def expand_category(path: str, target: int, dry_run: bool) -> int:
             if not title or _norm_title(title) in existing:
                 continue
             existing.add(_norm_title(title))
+            # Appended strictly after seed tracks
             cat["tracks"].append({
                 "title": title,
                 "artist": r.get("artist", ""),
