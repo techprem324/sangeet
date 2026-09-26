@@ -3,6 +3,11 @@
   base = "frontend"
   publish = "dist"
   command = "npm run build"
+  SECRETS_SCAN_ENABLED = false
+
+[build.environment]
+  SECRETS_SCAN_ENABLED = "false"
+  SECRETS_SCAN_OMIT_KEYS = "VITE_API_URL"
 
 # SPA Fallback: route all non-file traffic to React index.html
 [[redirects]]
