@@ -134,10 +134,13 @@ def explore():
     """Live-expand a category with fresh JioSaavn tracks (the 500+ story)."""
     data = _json_body()
     category = str(data.get("category") or "")
-    count = min(int(data.get("count") or 24), 60)
+    count = min(int(data.get("count") or 12), 40)
+    offset = int(data.get("offset") or 0)
+    seen_ids = list(data.get("seen_ids") or [])
     if not category:
         return jsonify({"error": "category required"}), 400
-    return jsonify({"category": category, "tracks": catalog_service.explore(category, count=count)})
+    tracks = catalog_service.explore(category, count=count, offset=offset, seen_ids=seen_ids)
+    return jsonify({"category": category, "tracks": tracks, "offset": offset + len(tracks)})
 
 
 @app.get("/api/search")

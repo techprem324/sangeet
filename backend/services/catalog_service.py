@@ -177,10 +177,54 @@ def _resolve_category(category_key: str) -> Optional[Dict]:
     return None
 
 
+MOOD_EXPANSION_QUERIES = {
+    "angry": [
+        "hard rock hindi", "cathartic rock", "metal hindi", "intense motivational",
+        "rock rage", "high energy gym hindi", "dark trap phonk"
+    ],
+    "heartbreak": [
+        "sad hindi songs", "arijit singh sad", "breakup acoustic", "melancholy piano",
+        "dard bhare geet", "sad emotional hindi", "heartbreak acoustic ballads"
+    ],
+    "rain_night": [
+        "rainy night hindi", "late night acoustic", "midnight lo-fi hindi", "slow rain songs",
+        "soft monsoon hindi", "contemplative night ballads"
+    ],
+    "focus_lofi": [
+        "lofi hindi mix", "chill lo-fi beats", "peaceful instrumental hindi", "study lofi focus",
+        "lofi flip hindi", "acoustic relaxing guitar"
+    ],
+    "gym_power": [
+        "workout motivational hindi", "hardstyle phonk", "shiv tandav energy", "power gym edm",
+        "beast mode trap", "dangal sultan workout"
+    ],
+    "romantic": [
+        "romantic hindi songs", "arijit singh love", "bollywood romance 2024", "acoustic love duet",
+        "slow dance hindi", "heartfelt hindi melodies"
+    ],
+    "chill_sunday": [
+        "chill sunday hindi", "acoustic indie hindi", "peaceful morning tea", "relaxing bollywood",
+        "calm serene acoustic", "soothing breeze indie"
+    ],
+    "party": [
+        "party bangers hindi", "punjabi party hits", "club dance bollywood", "badshah diljit party",
+        "high bass wedding dance", "top dj hindi mix"
+    ],
+    "nostalgic": [
+        "kishore kumar golden hits", "rd burman classics", "90s bollywood melodies", "lata mangeshkar retro",
+        "mohammed rafi evergreen", "old romantic hindi"
+    ],
+    "morning_motivation": [
+        "morning fuel devotional", "hanuman chalisa positive", "shiv stotram morning", "uplifting morning hindi",
+        "peaceful bhajans lofi", "motivational anthems"
+    ],
+}
+
+
 def _extract_seed_search_queries(cat: Dict) -> List[str]:
     """
-    Dynamically extracts artist names and query keywords from the hand-picked
-    seed tracks to serve as primary search parameters for JioSaavn.
+    Dynamically extracts artist names, query keywords from seed tracks,
+    and Spotify genre expansions to power unlimited dynamic discovery.
     """
     import re
     queries: List[str] = []
@@ -204,8 +248,15 @@ def _extract_seed_search_queries(cat: Dict) -> List[str]:
                 seen.add(part.lower())
                 queries.append(part)
 
-    # 3. Supplemental category seed_queries as fallback
+    # 3. Supplemental category seed_queries
     for q in cat.get("seed_queries", []):
+        if q and q.lower() not in seen:
+            seen.add(q.lower())
+            queries.append(q)
+
+    # 4. Spotify acoustic & mood genre expansions
+    cat_key = cat.get("category", "")
+    for q in MOOD_EXPANSION_QUERIES.get(cat_key, []):
         if q and q.lower() not in seen:
             seen.add(q.lower())
             queries.append(q)
@@ -246,12 +297,11 @@ def search_songs(query: str, limit: int = 12) -> List[Dict]:
     return jiosaavn_service.search(query, limit=limit, resolve=True)
 
 
-def explore(category_key: str, count: int = 24) -> List[Dict]:
+def explore(category_key: str, count: int = 12, offset: int = 0, seen_ids: Optional[List[str]] = None) -> List[Dict]:
     """
     Dynamic Queue Expansion (The Generation):
-    Dynamically extracts artist names and query keywords from the current JSON seed tracks
-    and uses them as the primary search parameters for the JioSaavn search.getResults pipeline.
-    Results are returned for seamless appending strictly after the hand-picked seed tracks.
+    Supports INFINITE UNLIMITED EXPLORATION by rotating queries and paginating
+    through JioSaavn results based on offset and client queue state.
     """
     cat = _resolve_category(category_key)
     if not cat:
@@ -260,34 +310,51 @@ def explore(category_key: str, count: int = 24) -> List[Dict]:
     seed_tracks = cat.get("tracks", [])
     known_titles = {t.get("title", "").strip().lower() for t in seed_tracks if t.get("title")}
     known_queries = {t.get("query", "").strip().lower() for t in seed_tracks if t.get("query")}
-    seen_ids = {t.get("id") for t in seed_tracks if t.get("id")}
+    exclude_ids = {str(t.get("id")) for t in seed_tracks if t.get("id")}
+    if seen_ids:
+        for sid in seen_ids:
+            if sid:
+                exclude_ids.add(str(sid))
+                known_titles.add(str(sid).strip().lower())
+
+    search_queries = _extract_seed_search_queries(cat)
+    if not search_queries:
+        search_queries = [cat.get("label", "")]
+
     candidates: List[Dict] = []
 
-    # Dynamic extraction of artists and query keywords from current seed tracks
-    search_queries = _extract_seed_search_queries(cat)
+    # Calculate query rotation and starting page from offset
+    batch_index = offset // max(count, 1)
+    base_page = (batch_index // len(search_queries)) + 1
+    start_q_idx = batch_index % len(search_queries)
+    ordered_queries = search_queries[start_q_idx:] + search_queries[:start_q_idx]
 
-    for q in search_queries:
-        try:
-            results = jiosaavn_service.search(q, limit=12, resolve=True)
-        except Exception as exc:
-            log.warning("explore query failed: %s (%s)", q, exc)
-            continue
+    # Paginate across JioSaavn until count fresh tracks are found
+    for curr_page in range(base_page, base_page + 5):
+        for q in ordered_queries:
+            try:
+                results = jiosaavn_service.search(q, limit=max(count, 12), resolve=True, page=curr_page)
+            except Exception as exc:
+                log.warning("explore query failed: %s (page %d): %s", q, curr_page, exc)
+                continue
 
-        for t in results:
-            if not t.get("stream_url"):
-                continue
-            tid = t.get("id")
-            title_lower = t.get("title", "").strip().lower()
-            if tid and tid in seen_ids:
-                continue
-            if title_lower in known_titles or title_lower in known_queries:
-                continue
-            seen_ids.add(tid)
-            known_titles.add(title_lower)
-            candidates.append(_public_track(t))
+            for t in results:
+                if not t.get("stream_url"):
+                    continue
+                tid = str(t.get("id") or "")
+                title_lower = t.get("title", "").strip().lower()
+                if tid and tid in exclude_ids:
+                    continue
+                if title_lower in known_titles or title_lower in known_queries:
+                    continue
+                exclude_ids.add(tid)
+                known_titles.add(title_lower)
+                candidates.append(_public_track(t))
+                if len(candidates) >= count:
+                    break
+
             if len(candidates) >= count:
                 break
-
         if len(candidates) >= count:
             break
 

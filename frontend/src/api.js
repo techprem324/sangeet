@@ -224,13 +224,13 @@ export const api = {
     }
   },
 
-  explore: async (category, count = 12) => {
+  explore: async (category, count = 12, offset = 0, seenIds = []) => {
     try {
       const res = await request(
         '/explore',
         {
           method: 'POST',
-          body: JSON.stringify({ category, count }),
+          body: JSON.stringify({ category, count, offset, seen_ids: seenIds }),
         },
         25000
       )
@@ -241,11 +241,9 @@ export const api = {
 
     // Client-side fallback: deliver fresh tracks from other curated rooms
     const allTracks = Object.values(DEFAULT_CATALOGS).flat()
-    const currentCategoryTrackKeys = new Set(
-      (DEFAULT_CATALOGS[category] || []).map((t) => (t.id || t.title).toLowerCase())
-    )
+    const excludeSet = new Set((seenIds || []).map((s) => String(s).toLowerCase()))
     const freshFallback = allTracks
-      .filter((t) => !currentCategoryTrackKeys.has((t.id || t.title).toLowerCase()))
+      .filter((t) => !excludeSet.has((t.id || t.title).toLowerCase()))
       .slice(0, count)
 
     return {

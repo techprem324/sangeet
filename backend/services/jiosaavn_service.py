@@ -227,15 +227,21 @@ def _resolve_from_raw(item: dict) -> Optional[str]:
 # Public API
 # ---------------------------------------------------------------------------
 
-def search(query: str, limit: int = 10, resolve: bool = True) -> List[Dict]:
-    """Search JioSaavn by text. Returns normalized, stream-resolved tracks."""
+def search(query: str, limit: int = 10, resolve: bool = True, page: int = 1) -> List[Dict]:
+    """Search JioSaavn by text with pagination. Returns normalized, stream-resolved tracks."""
     q = query.strip()
-    data = _api("search.getResults", {"api_version": "4", "ctx": "web6dot0", "q": q})
+    data = _api("search.getResults", {
+        "api_version": "4",
+        "ctx": "web6dot0",
+        "q": q,
+        "p": str(page),
+        "n": str(max(limit, 20)),
+    })
     results = data.get("results", []) if data and isinstance(data, dict) else []
     tracks = [_norm_track(it, resolve=resolve) for it in results[:limit]]
     valid_tracks = [t for t in tracks if t.get("title") and (not resolve or t.get("stream_url"))]
 
-    if not valid_tracks and resolve:
+    if not valid_tracks and resolve and page == 1:
         # Fallback to autocomplete API + get_details
         ac = _api("autocomplete.get", {"query": q})
         if ac and isinstance(ac, dict):
