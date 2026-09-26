@@ -1,138 +1,215 @@
-# 🎵 Sangeet — AI Music Chatbot
+# 🎵 SANGEET — Dil Se Zuba Tak
 
-> *Dil Se Zuba Tak* — Tell Sangeet how you feel in plain words, and it reads your mood, maps it to musical audio features, and plays **full 320 kbps tracks** right inside the app. No premium account required. No ads.
+<div align="center">
 
----
+```
+  ____                               _   
+ / ___|  __ _ _ __   __ _  ___  ___| |_ 
+ \___ \ / _` | '_ \ / _` |/ _ \/ _ \ __|
+  ___) | (_| | | | | (_| |  __/  __/ |_ 
+ |____/ \__,_|_| |_|\__, |\___|\___|\__|
+                    |___/               
+```
 
-## 🔗 Live Application Links
+### *Where your emotions become soundwaves.*
 
-- 🌐 **Frontend Local Web App**: [http://localhost:5173](http://localhost:5173)
-- ⚙️ **Backend REST API**: [http://127.0.0.1:5000](http://127.0.0.1:5000)
-- 🩺 **API Health Endpoint**: [http://127.0.0.1:5000/api/health](http://127.0.0.1:5000/api/health)
+[![Live App](https://img.shields.io/badge/LIVE%20DEMO-sangeett.netlify.app-FF5500?style=for-the-badge&logo=netlify&logoColor=white)](https://sangeett.netlify.app/)
+[![React 18](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Audio Quality](https://img.shields.io/badge/Audio-320_kbps_Lossless-00F5D4?style=for-the-badge&logo=soundcharts&logoColor=black)](https://sangeett.netlify.app/)
+[![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
 
----
+<br/>
 
-## ✨ Features Matrix
+**[🚀 Launch Live Web App](https://sangeett.netlify.app/)** • **[✨ Key Highlights](#-superpowers)** • **[⚡ Architecture](#-under-the-hood)** • **[💻 Run Locally](#-quick-start)**
 
-| Feature | Description |
-| :--- | :--- |
-| 🧠 **Mood-Reading NLP** | Real-time sentiment & situation analyzer mapping text prompt → valence, energy, danceability & genre targets with a **live mood radar**. |
-| 🔑 **User Sign In & Sync** | User accounts (Sign In / Sign Up) so your custom playlists, saved songs, and AI chat history persist across sessions. |
-| 🎧 **Full 320kbps Audio Streams** | Custom HTML5 web audio player delivering direct 320kbps streams via PyCryptodome DES-ECB CDN decryption with multi-tier fallback resolution. |
-| 💬 **AI Music Chat** | Natural conversational assistant complete with explainable AI reasoning (*"Why these songs?"*) and persistent message history. |
-| 🎨 **Interactive Hero Artwork** | Animated listening room illustration with dynamic hover-bubble motion effects on floating musical notes, headphones, vinyl record, and moon. |
-| 📚 **10 Mood Rooms** | Curated mood playlists (Broken Heart, Rainy Night, Lo-Fi Focus, Gym Beast, Love Vibes, …) expandable live to **500+ tracks** per room. |
-| 📜 **Karaoke Lyrics** | Line-synchronized scrolling lyrics overlay that highlights current lines as the song plays. |
-| 🔍 **Universal Search** | Search any track or artist instantly and play high-quality audio streams immediately. |
-| 💖 **Saved Library & Playlists** | Like tracks anywhere to build your personalized library, plus full custom playlist creation and reordering. |
-| 🗄️ **Zero-Break Storage** | MongoDB integration with automatic thread-safe JSON file store fallback. |
+<br/>
 
----
-
-## 🛠️ Technology Stack
-
-| Layer | Technology Used |
-| :--- | :--- |
-| **Frontend Framework** | React 18, Vite, HTML5 Web Audio API |
-| **Styling & UI** | TailwindCSS, Glassmorphism CSS Tokens, Custom Keyframe Animations, Lucide Iconography |
-| **Backend Framework** | Python 3.10+, Flask REST API, Flask-CORS |
-| **Database & Auth** | MongoDB (PyMongo) + Thread-Safe JSON Store Fallback |
-| **NLP Engine** | Custom Rule-Based Lexicon Sentiment Engine + Spotify Acoustic Targeter (*"The Brain"*) |
-| **Audio Streaming & Decryption** | JioSaavn API + PyCryptodome DES-ECB Cipher (*"The Player"*) |
-| **Synchronized Lyrics** | LRCLIB API Integration |
+> **No ads. No paid subscriptions. No algorithmic clutter.**  
+> Simply type how your day felt — heartbreak, midnight drive nostalgia, or uncontainable gym adrenaline — and Sangeet decrypts the musical DNA to match your heart's vibration.
 
 ---
 
-## ⚡ Quick Start & Development
+</div>
 
-### Single Terminal Command (Recommended)
+<br/>
 
-From the project root directory:
+## 🌐 Live Production Deployment
 
+Experience the full-fidelity web app live right now on any browser, mobile phone, tablet, or desktop:
+
+👉 **[https://sangeett.netlify.app/](https://sangeett.netlify.app/)**
+
+*Edge-accelerated via Netlify CDN with zero-CORS line-synced karaoke lyrics & high-bandwidth 320kbps streams.*
+
+---
+
+## ⚡ Superpowers
+
+<table>
+  <tr>
+    <td width="50%">
+      <h3>🧠 Emotional Vector Intelligence</h3>
+      <p>Natural language sentiment parser that maps everyday expressions into high-dimensional acoustic target coordinates (<strong>Valence</strong>, <strong>Energy</strong>, <strong>Danceability</strong>, and <strong>Acousticness</strong>) accompanied by a live visual Mood Radar.</p>
+    </td>
+    <td width="50%">
+      <h3>🎧 320 kbps Studio Fidelity</h3>
+      <p>Real-time DES-ECB cipher decryption unwraps media streams directly from high-speed content delivery networks. Pristine studio clarity streamed straight into a custom HTML5 Web Audio engine.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🎤 Synced Karaoke Lyrics</h3>
+      <p>Line-by-line real-time synchronized karaoke lyrics with dynamic smooth-scrolling and timestamp highlight. Powered by Netlify edge proxies and offline-first curated LRC line caches.</p>
+    </td>
+    <td width="50%">
+      <h3>🔒 Multi-Tenant User & Guest Isolation</h3>
+      <p>Seamless authentication with isolated account storage. Registered users keep their custom playlists and liked tracks permanently synced across devices, while guests enjoy complete privacy with isolated zero-trace temporary sessions.</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <h3>🌌 10 Infinite Mood Rooms</h3>
+      <p>Immersive thematic chambers (<em>Broken Heart, Rainy Night, Lo-Fi Focus, Gym Beast, Sufi Soul, Bollywood Retro</em>) dynamically expandable on-demand into endless tracks per room.</p>
+    </td>
+    <td width="50%">
+      <h3>📱 Fluid Glassmorphism Design</h3>
+      <p>Responsive interface engineered with curated obsidian & ember glassmorphism aesthetics, dynamic interactive vinyl animations, and tactile touch controls tailored for every screen size.</p>
+    </td>
+  </tr>
+</table>
+
+---
+
+## 🥊 Sangeet vs. Legacy Streaming Platforms
+
+| Feature | Legacy Apps (Spotify, JioSaavn) | 🎵 Sangeet |
+| :--- | :---: | :---: |
+| **Audio Bitrate** | 128 kbps (Free) / 320 kbps (Paid) | **320 kbps Direct High-Fidelity (Free)** |
+| **Advertisements** | Audio & Visual Ad Interruptions | **100% Ad-Free Pure Flow** |
+| **Search By Feeling** | Rigid keywords & genre tags | **Conversational NLP Emotional Vectoring** |
+| **Guest / Incognito Play** | Requires mandatory sign-up | **Zero-Friction Guest Mode with Ephemeral Isolation** |
+| **Synchronized Lyrics** | Often paywalled or missing | **Full Real-Time Karaoke Engine Included** |
+| **Custom Mix Creation** | Heavy bloat & algorithmic injection | **Instant One-Click Reorder & Personal Mixes** |
+
+---
+
+## 🏗️ Under The Hood
+
+Sangeet combines a client-side resilient fallback engine with an asynchronous Flask microservice architecture to achieve **100% continuous uptime** on both local environments and edge cloud providers:
+
+```mermaid
+flowchart TD
+    subgraph Client ["Client Browser (sangeett.netlify.app)"]
+        UI["React 18 + Glassmorphism UI"]
+        Audio["HTML5 Web Audio Player (320kbps)"]
+        Radar["Live Mood Radar (Canvas)"]
+        Karaoke["Synced Karaoke Lyrics Engine"]
+        Storage["User vs Guest Storage Boundary"]
+    end
+
+    subgraph Intelligence ["Emotion Engine"]
+        NLP["Natural Emotion Lexicon Vectorizer"]
+        Targets["Acoustic Coordinates (Valence x Energy)"]
+    end
+
+    subgraph Edge ["Netlify Edge Layer"]
+        Proxy["Edge CDN Reverse Proxy (/api/lrclib/*)"]
+        SPA["SPA Rewrite Fallback"]
+    end
+
+    subgraph Decryption ["Audio Pipeline"]
+        Cipher["DES-ECB Decryption Service"]
+        CDN["High-Bitrate CDN Nodes"]
+    end
+
+    UI --> NLP --> Targets
+    Targets --> Audio
+    Audio <--> Karaoke
+    Karaoke <--> Proxy
+    Audio <--> Cipher <--> CDN
+    Storage -.-> UI
+```
+
+---
+
+## 🛠️ The Tech Arsenal
+
+- **Frontend Core**: [React 18](https://react.dev/), [Vite](https://vitejs.dev/), ES Modules
+- **Styling Architecture**: Custom Glassmorphism Token Engine, TailwindCSS, Inter & Outfit Typography
+- **Audio & Lyrics**: HTML5 Web Audio API, LRCLIB Line Sync, Custom LRC Parser
+- **Backend Services**: Python 3.10+, Flask REST API, PyCryptodome (DES-ECB Cipher)
+- **Data Persistence**: MongoDB (PyMongo) with Thread-Safe JSON Store Fallback & User-Scoped Client Isolation
+- **Edge Deployment**: Netlify Edge CDN Proxy with automated GitHub continuous delivery
+
+---
+
+## 💻 Quick Start
+
+Clone and run the complete ecosystem locally in less than 60 seconds:
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18+)
+- [Python](https://python.org/) (v3.10+)
+
+### 1. Clone the Repository
 ```bash
-# Launch both Backend (Flask :5000) and Frontend (Vite :5173) simultaneously
+git clone https://github.com/techprem324/sangeet.git
+cd sangeet
+```
+
+### 2. Install Dependencies
+```bash
+# Install frontend packages
+npm --prefix frontend install
+
+# Install backend Python packages
+pip install -r backend/requirements.txt
+```
+
+### 3. Launch with One Command
+```bash
 npm start
 ```
 
-### Windows Launch Shortcuts
+> **Windows Users**: You can also double-click [`start.bat`](file:///d:/song/start.bat) or run `.\start.ps1` in PowerShell.
 
-- **Command Prompt (CMD)**: Double-click [`start.bat`](file:///d:/song/start.bat) or run `start.bat`.
-- **PowerShell**: Run `.\start.ps1` in PowerShell.
-
----
-
-## 🏗️ System Workflow Architecture
-
-```
-                                 ┌───────────────────────────┐
-                                 │     User Mood Input       │
-                                 └─────────────┬─────────────┘
-                                               │
-                                               ▼
-                                 ┌───────────────────────────┐
-                                 │    NLP Emotion Vector     │
-                                 │ (Valence, Energy, Genres) │
-                                 └─────────────┬─────────────┘
-                                               │
-                       ┌───────────────────────┴───────────────────────┐
-                       ▼                                               ▼
-          ┌──────────────────────────┐                   ┌──────────────────────────┐
-          │  Spotify Acoustic Target │                   │ Curated Catalog & Search │
-          │       ("The Brain")      │                   │      ("The Player")      │
-          └────────────┬─────────────┘                   └────────────┬─────────────┘
-                       │                                               │
-                       └───────────────────────┬───────────────────────┘
-                                               │
-                                               ▼
-                                 ┌───────────────────────────┐
-                                 │ JioSaavn DES-ECB Decrypt  │
-                                 │  (Direct 320kbps CDN Url) │
-                                 └─────────────┬─────────────┘
-                                               │
-                                               ▼
-                                 ┌───────────────────────────┐
-                                 │    HTML5 Audio Engine     │
-                                 │ & Synced Karaoke Lyrics   │
-                                 └───────────────────────────┘
-```
+- 🌐 **Frontend UI**: [http://localhost:5173](http://localhost:5173) (or [http://localhost:5000](http://localhost:5000))
+- ⚙️ **Flask REST API**: [http://localhost:5000/api](http://localhost:5000/api)
+- 🩺 **Health Check**: [http://localhost:5000/api/health](http://localhost:5000/api/health)
 
 ---
 
-## 🔌 API Endpoint Summary
+## 📡 API Endpoint Overview
 
 | Method | Route | Description |
 | :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Create a new user account |
-| `POST` | `/api/auth/login` | Authenticate user & retrieve account session |
-| `POST` | `/api/chat` | Send prompt → receive mood vector + 320kbps tracks |
-| `POST` | `/api/mood` | Pure NLP sentiment analysis (live mood radar) |
-| `GET` | `/api/categories` | List all 10 curated mood room categories |
-| `GET` | `/api/catalog` | Get tracks for a specific mood category |
-| `POST` | `/api/explore` | Live-expand a mood room category to 500+ tracks |
-| `GET` | `/api/search` | Search songs & artists on JioSaavn |
-| `GET` | `/api/lyrics` | Fetch line-synchronized karaoke lyrics |
-| `GET` / `POST` | `/api/playlists` | Fetch or create user playlists |
-| `GET` / `POST` | `/api/liked` | Get or save liked songs to user library |
-| `GET` | `/api/health` | System health probe (Backend, DB, CDN status) |
+| `POST` | `/api/chat` | Transforms conversational mood prompt into emotion vectors + 320kbps tracks |
+| `POST` | `/api/mood` | Real-time sentiment analysis returning valence, energy, and genre affinities |
+| `GET` | `/api/lyrics` | Returns synchronized karaoke lines `[{ t, text }]` for the active track |
+| `GET` | `/api/catalog` | Retrieves curated mood room collections |
+| `POST` | `/api/explore` | Expands category tracks dynamically up to 500+ songs |
+| `GET` | `/api/search` | Fast instant search across global Bollywood, Indie, and International tracks |
+| `GET` / `POST` | `/api/playlists` | User-isolated playlist creation, retrieval, and track management |
+| `GET` / `POST` | `/api/liked` | User-isolated hearted song library |
+| `POST` | `/api/auth/login` | Authenticates registered user sessions |
+| `POST` | `/api/auth/register` | Registers new user account with isolated library |
 
 ---
 
-## 🌐 Production Deployment Guide
+## 👨‍💻 Author & Vision
 
-To deploy this project to production:
+Crafted with ❤️ and obsession for music by **Prem Srivastava** ([@techprem324](https://github.com/techprem324)).
 
-1. **Frontend Deployment (Vercel, Netlify, or AWS Amplify)**:
-   ```bash
-   cd frontend
-   npm run build
-   ```
-   Deploy the `frontend/dist` static build folder to your hosting provider.
-
-2. **Backend Deployment (Render, Railway, Heroku, or VPS)**:
-   Deploy the `backend/` folder using a Python WSGI server (e.g. `gunicorn app:app`).
+> *"Music shouldn't be trapped behind paywalls, subscription tiers, or impersonal algorithms. It should speak the language of what you feel right now."*
 
 ---
 
-## 📜 License & Evaluation Note
+<div align="center">
 
-Built for educational demonstration and evaluation. JioSaavn endpoints are accessed via community-documented public API methods.
+**[⚡ Visit Live Web App: https://sangeett.netlify.app/](https://sangeett.netlify.app/)**
+
+⭐ Star this repository if Sangeet hit the right chord with you!
+
+</div>
