@@ -74,14 +74,17 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
   const tracks = playlist.tracks || []
 
   const removeTrack = async (t) => {
-    await api.removePlaylistTrack(playlist._id, t._key)
+    const plId = playlist._id || playlist.id
+    const trackKey = t._key || t.id || t.track_id || t.title
+    await api.removePlaylistTrack(plId, trackKey)
     onChanged()
   }
 
   const del = async () => {
     if (!window.confirm(`Delete “${playlist.name}”? This can't be undone.`)) return
     setBusy(true)
-    await api.deletePlaylist(playlist._id)
+    const plId = playlist._id || playlist.id
+    await api.deletePlaylist(plId)
     onChanged()
     onBack()
   }
@@ -153,8 +156,9 @@ export default function PlaylistsView({ onLyrics }) {
   useEffect(() => { load() }, [refreshKey])
 
   const openDetail = async (p) => {
-    const d = await api.playlist(p._id)
-    setOpen(d.playlist)
+    const plId = p._id || p.id
+    const d = await api.playlist(plId)
+    setOpen(d?.playlist || p)
   }
 
   if (open) {
@@ -165,7 +169,10 @@ export default function PlaylistsView({ onLyrics }) {
             playlist={open}
             onBack={() => { setOpen(null); setRefreshKey((n) => n + 1) }}
             onLyrics={onLyrics}
-            onChanged={() => api.playlist(open._id).then((d) => setOpen(d.playlist))}
+            onChanged={() => {
+              const plId = open._id || open.id
+              api.playlist(plId).then((d) => setOpen(d?.playlist || open))
+            }}
           />
         </div>
       </div>
@@ -196,19 +203,23 @@ export default function PlaylistsView({ onLyrics }) {
           </div>
         ) : (
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-            {playlists.map((p) => (
-              <button
-                key={p._id}
-                onClick={() => openDetail(p)}
-                className="group rounded-xl2 border border-edge-soft bg-surface p-4 text-left transition-all hover:-translate-y-0.5 hover:border-ember/40 hover:shadow-card"
-              >
-                <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-ember/25 bg-ember/[0.08] text-2xl">
-                  {p.emoji}
-                </div>
-                <div className="mt-3 truncate text-sm font-semibold text-cream">{p.name}</div>
-                <div className="mt-0.5 text-xs text-sand-dim">{p.count} songs</div>
-              </button>
-            ))}
+            {playlists.map((p) => {
+              const plId = p._id || p.id
+              const count = p.count ?? p.tracks?.length ?? 0
+              return (
+                <button
+                  key={plId}
+                  onClick={() => openDetail(p)}
+                  className="group rounded-xl2 border border-edge-soft bg-surface p-4 text-left transition-all hover:-translate-y-0.5 hover:border-ember/40 hover:shadow-card"
+                >
+                  <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-ember/25 bg-ember/[0.08] text-2xl">
+                    {p.emoji || '🎵'}
+                  </div>
+                  <div className="mt-3 truncate text-sm font-semibold text-cream">{p.name}</div>
+                  <div className="mt-0.5 text-xs text-sand-dim">{count} songs</div>
+                </button>
+              )
+            })}
             <button
               onClick={() => setCreating(true)}
               className="flex min-h-[104px] items-center justify-center rounded-xl2 border border-dashed border-edge text-sand-dim transition-colors hover:border-ember/40 hover:text-ember"

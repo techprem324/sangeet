@@ -59,16 +59,42 @@ function setLocalLiked(items) {
   localStorage.setItem(LOCAL_LIKED_KEY, JSON.stringify(items))
 }
 
+function normalizePlaylist(p) {
+  if (!p || typeof p !== 'object') return null
+  const id = p._id || p.id || ('pl_' + Math.random().toString(36).slice(2, 9))
+  const tracks = (Array.isArray(p.tracks) ? p.tracks : []).map((t, idx) => {
+    const tid = t.id || t.track_id || t.title
+    const key = t._key || tid || `track_${idx}`
+    return {
+      ...t,
+      id: tid,
+      track_id: tid,
+      _key: key,
+    }
+  })
+  return {
+    ...p,
+    _id: id,
+    id: id,
+    tracks,
+    count: tracks.length,
+    user_id: p.user_id || getUserId(),
+  }
+}
+
 function getLocalPlaylists() {
   try {
-    return JSON.parse(localStorage.getItem(LOCAL_PLAYLISTS_KEY) || '[]')
+    const raw = JSON.parse(localStorage.getItem(LOCAL_PLAYLISTS_KEY) || '[]')
+    if (!Array.isArray(raw)) return []
+    return raw.map(normalizePlaylist).filter(Boolean)
   } catch {
     return []
   }
 }
 
 function setLocalPlaylists(items) {
-  localStorage.setItem(LOCAL_PLAYLISTS_KEY, JSON.stringify(items))
+  const normalized = (Array.isArray(items) ? items : []).map(normalizePlaylist).filter(Boolean)
+  localStorage.setItem(LOCAL_PLAYLISTS_KEY, JSON.stringify(normalized))
 }
 
 function getLocalHistory() {
@@ -332,21 +358,31 @@ export const api = {
     try {
       const res = await request(`/playlists?user_id=${getUserId()}`, {}, 2500)
       if (res && Array.isArray(res.playlists)) {
-        setLocalPlaylists(res.playlists)
-        return res
+        const normalized = res.playlists.map(normalizePlaylist).filter(Boolean)
+        const local = getLocalPlaylists()
+        const mergedMap = new Map()
+        for (const pl of local) mergedMap.set(pl._id, pl)
+        for (const pl of normalized) mergedMap.set(pl._id, pl)
+        const merged = Array.from(mergedMap.values())
+        setLocalPlaylists(merged)
+        return { playlists: merged }
       }
     } catch {}
     return { playlists: getLocalPlaylists() }
   },
 
   playlist: async (id) => {
+    if (!id) return { playlist: null }
     try {
       const res = await request(`/playlists/${id}?user_id=${getUserId()}`, {}, 2500)
-      if (res && res.playlist) return res
+      if (res && res.playlist) {
+        const normalized = normalizePlaylist(res.playlist)
+        return { playlist: normalized }
+      }
     } catch {}
 
     const playlists = getLocalPlaylists()
-    const found = playlists.find((p) => p.id === id)
+    const found = playlists.find((p) => p._id === id || p.id === id)
     return { playlist: found || null }
   },
 
@@ -356,23 +392,36 @@ export const api = {
         method: 'POST',
         body: JSON.stringify({ user_id: getUserId(), name, emoji }),
       }, 2500)
-      if (res && res.playlist) return res
+      if (res && res.playlist) {
+        const normalized = normalizePlaylist(res.playlist)
+        const playlists = getLocalPlaylists()
+        if (!playlists.some((p) => p._id === normalized._id || p.id === normalized.id)) {
+          playlists.unshift(normalized)
+          setLocalPlaylists(playlists)
+        }
+        return { status: 'ok', playlist: normalized }
+      }
     } catch {}
 
-    const playlists = getLocalPlaylists()
-    const newPl = {
-      id: 'pl_' + Date.now(),
-      name,
-      emoji,
+    const newId = 'pl_' + Date.now()
+    const newPl = normalizePlaylist({
+      _id: newId,
+      id: newId,
+      user_id: getUserId(),
+      name: (name || 'My Playlist').trim(),
+      emoji: emoji || '🎵',
       tracks: [],
+      count: 0,
       created_at: new Date().toISOString(),
-    }
-    playlists.push(newPl)
+    })
+    const playlists = getLocalPlaylists()
+    playlists.unshift(newPl)
     setLocalPlaylists(playlists)
     return { status: 'ok', playlist: newPl }
   },
 
   addPlaylistTrack: async (id, track) => {
+    if (!id || !track) return { status: 'error' }
     try {
       await request(`/playlists/${id}/tracks`, {
         method: 'POST',
@@ -381,16 +430,32 @@ export const api = {
     } catch {}
 
     const playlists = getLocalPlaylists()
-    const pl = playlists.find((p) => p.id === id)
+    const pl = playlists.find((p) => p._id === id || p.id === id)
     if (pl) {
       if (!Array.isArray(pl.tracks)) pl.tracks = []
-      pl.tracks.push(track)
+      const tid = track.id || track.track_id || track.title
+      const key = track._key || tid || `${track.title || ''}|${track.artist || ''}`
+      const trackPayload = {
+        ...track,
+        id: tid,
+        track_id: tid,
+        _key: key,
+      }
+      const already = pl.tracks.some(
+        (t) => (t._key && t._key === key) || (t.id && t.id === tid) || (t.title === track.title && t.artist === track.artist)
+      )
+      if (!already) {
+        pl.tracks.push(trackPayload)
+      }
+      pl.count = pl.tracks.length
       setLocalPlaylists(playlists)
+      return { status: 'ok', playlist: pl }
     }
     return { status: 'ok' }
   },
 
   removePlaylistTrack: async (id, trackKey) => {
+    if (!id) return { status: 'error' }
     try {
       await request(`/playlists/${id}/tracks/${encodeURIComponent(trackKey)}?user_id=${getUserId()}`, {
         method: 'DELETE',
@@ -398,20 +463,25 @@ export const api = {
     } catch {}
 
     const playlists = getLocalPlaylists()
-    const pl = playlists.find((p) => p.id === id)
+    const pl = playlists.find((p) => p._id === id || p.id === id)
     if (pl && Array.isArray(pl.tracks)) {
-      pl.tracks = pl.tracks.filter((t, idx) => (t.id || idx.toString()) !== trackKey)
+      pl.tracks = pl.tracks.filter((t, idx) => {
+        const k = t._key || t.id || t.track_id || idx.toString()
+        return k !== trackKey && t.title !== trackKey
+      })
+      pl.count = pl.tracks.length
       setLocalPlaylists(playlists)
     }
     return { status: 'ok' }
   },
 
   deletePlaylist: async (id) => {
+    if (!id) return { status: 'error' }
     try {
       await request(`/playlists/${id}?user_id=${getUserId()}`, { method: 'DELETE' }, 2500)
     } catch {}
 
-    const playlists = getLocalPlaylists().filter((p) => p.id !== id)
+    const playlists = getLocalPlaylists().filter((p) => p._id !== id && p.id !== id)
     setLocalPlaylists(playlists)
     return { status: 'ok' }
   },

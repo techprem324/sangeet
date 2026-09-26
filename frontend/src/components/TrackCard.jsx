@@ -79,7 +79,8 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
   }
 
   const addToPlaylist = async (pl) => {
-    await api.addPlaylistTrack(pl._id, track)
+    const plId = pl._id || pl.id
+    await api.addPlaylistTrack(plId, track)
     setPlAdded(pl.name)
     setTimeout(() => { setPlAdded(''); setMenuOpen(false) }, 900)
   }
@@ -88,7 +89,10 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
     const name = window.prompt('Name your new playlist:')
     if (!name) return
     const d = await api.createPlaylist(name)
-    await api.addPlaylistTrack(d.playlist._id, track)
+    const plId = d?.playlist?._id || d?.playlist?.id
+    if (plId) {
+      await api.addPlaylistTrack(plId, track)
+    }
     setPlAdded(name)
     setTimeout(() => { setPlAdded(''); setMenuOpen(false) }, 900)
   }
@@ -186,17 +190,21 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
                     <button onClick={openMenu} className="icon-btn h-5 w-5 text-sand-dim"><DotsIcon size={12} /></button>
                   </div>
                   <div className="max-h-44 space-y-0.5 overflow-y-auto">
-                    {playlists?.map((pl) => (
-                      <button
-                        key={pl._id}
-                        onClick={() => addToPlaylist(pl)}
-                        className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-xs text-sand transition-colors hover:bg-surface-2 hover:text-cream"
-                      >
-                        <span>{pl.emoji}</span>
-                        <span className="min-w-0 flex-1 truncate">{pl.name}</span>
-                        <span className="text-sand-dim">{pl.count}</span>
-                      </button>
-                    ))}
+                    {playlists?.map((pl) => {
+                      const plId = pl._id || pl.id
+                      const count = pl.count ?? pl.tracks?.length ?? 0
+                      return (
+                        <button
+                          key={plId}
+                          onClick={() => addToPlaylist(pl)}
+                          className="flex w-full items-center gap-2 rounded-lg px-2 py-1.5 text-left text-xs text-sand transition-colors hover:bg-surface-2 hover:text-cream"
+                        >
+                          <span>{pl.emoji || '🎵'}</span>
+                          <span className="min-w-0 flex-1 truncate">{pl.name}</span>
+                          <span className="text-sand-dim">{count}</span>
+                        </button>
+                      )
+                    })}
                   </div>
                   <button
                     onClick={quickCreate}
