@@ -7,7 +7,23 @@ export default function LikedView({ onLyrics, refreshKey }) {
   const [liked, setLiked] = useState(null)
 
   useEffect(() => {
-    api.liked().then((d) => setLiked(d.liked)).catch(() => setLiked([]))
+    let alive = true
+    api.liked()
+      .then((d) => {
+        if (!alive) return
+        const raw = (d && (d.liked || d.tracks)) || (Array.isArray(d) ? d : [])
+        const clean = Array.isArray(raw)
+          ? raw.map((item) => ({
+              ...item,
+              id: item.track_id || item.id || item.title,
+            }))
+          : []
+        setLiked(clean)
+      })
+      .catch(() => alive && setLiked([]))
+    return () => {
+      alive = false
+    }
   }, [refreshKey])
 
   return (
@@ -34,7 +50,7 @@ export default function LikedView({ onLyrics, refreshKey }) {
         ) : (
           <div className="mt-5 space-y-2">
             {liked.map((t, i) => (
-              <TrackCard key={t.track_id || i} track={t} onLyrics={onLyrics} queue={liked} />
+              <TrackCard key={t.track_id || t.id || i} track={t} onLyrics={onLyrics} queue={liked} />
             ))}
           </div>
         )}

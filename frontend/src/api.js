@@ -427,26 +427,34 @@ export const api = {
   liked: async () => {
     try {
       const res = await request(`/liked?user_id=${getUserId()}`, {}, 2500)
-      if (res && Array.isArray(res.tracks)) {
-        setLocalLiked(res.tracks)
-        return res
+      if (res && (Array.isArray(res.liked) || Array.isArray(res.tracks))) {
+        const list = res.liked || res.tracks
+        setLocalLiked(list)
+        return { liked: list, tracks: list }
       }
     } catch {}
-    return { tracks: getLocalLiked() }
+    const local = getLocalLiked()
+    return { liked: local, tracks: local }
   },
 
   like: async (track, moodTag = '') => {
+    const tid = track.id || track.track_id || track.title
+    const trackPayload = { ...track, id: tid, track_id: tid }
     try {
-      await request('/liked', {
-        method: 'POST',
-        body: JSON.stringify({ user_id: getUserId(), track, mood_tag: moodTag }),
-      }, 2500)
+      await request(
+        '/liked',
+        {
+          method: 'POST',
+          body: JSON.stringify({ user_id: getUserId(), track: trackPayload, mood_tag: moodTag }),
+        },
+        2500
+      )
     } catch {}
 
     const liked = getLocalLiked()
-    const exists = liked.some((t) => (t.id && t.id === track.id) || t.title === track.title)
+    const exists = liked.some((t) => (t.id && t.id === tid) || (t.track_id && t.track_id === tid) || t.title === track.title)
     if (!exists) {
-      liked.unshift({ ...track, mood_tag: moodTag, liked_at: new Date().toISOString() })
+      liked.unshift({ ...trackPayload, mood_tag: moodTag, liked_at: new Date().toISOString() })
       setLocalLiked(liked)
     }
     return { status: 'ok' }
@@ -457,7 +465,9 @@ export const api = {
       await request(`/liked/${encodeURIComponent(trackId)}?user_id=${getUserId()}`, { method: 'DELETE' }, 2500)
     } catch {}
 
-    const liked = getLocalLiked().filter((t) => t.id !== trackId && t.title !== trackId)
+    const liked = getLocalLiked().filter(
+      (t) => t.id !== trackId && t.track_id !== trackId && t.title !== trackId
+    )
     setLocalLiked(liked)
     return { status: 'ok' }
   },
