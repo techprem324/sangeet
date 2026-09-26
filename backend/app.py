@@ -294,33 +294,27 @@ def auth_login():
 # Production: serve the built frontend from the same server
 # ---------------------------------------------------------------------------
 
-_FRONTEND_DIST = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+_FRONTEND_DIST = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "frontend", "dist"))
 
 
-@app.get("/")
-def index():
-    if os.path.exists(os.path.join(_FRONTEND_DIST, "index.html")):
-        return app.send_static_file("index.html") if False else _serve_frontend()
+@app.route("/", defaults={"path": ""})
+@app.route("/<path:path>")
+def serve_frontend(path):
+    from flask import send_from_directory
+    if path.startswith("api/"):
+        return jsonify({"error": "Endpoint not found"}), 404
+    file_path = os.path.join(_FRONTEND_DIST, path)
+    if path != "" and os.path.exists(file_path):
+        return send_from_directory(_FRONTEND_DIST, path)
+    index_file = os.path.join(_FRONTEND_DIST, "index.html")
+    if os.path.exists(index_file):
+        return send_from_directory(_FRONTEND_DIST, "index.html")
     return jsonify({"app": "Sangeet API", "docs": "see README.md",
                     "health": "/api/health"})
 
 
-def _serve_frontend():
-    from flask import send_from_directory
-    return send_from_directory(_FRONTEND_DIST, "index.html")
-
-
-# Serve frontend build assets when present
-if os.path.isdir(_FRONTEND_DIST):
-    from flask import send_from_directory
-
-    @app.get("/assets/<path:path>")
-    def _assets(path):
-        return send_from_directory(os.path.join(_FRONTEND_DIST, "assets"), path)
-
-
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5000"))
-    host = os.getenv("HOST", "127.0.0.1")
+    host = os.getenv("HOST", "0.0.0.0")
     print(f"\n  Sangeet API listening on http://{host}:{port}\n")
-    app.run(host=host, port=port, debug=True, threaded=True)
+    app.run(host=host, port=port, debug=False, threaded=True)
