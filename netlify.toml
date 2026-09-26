@@ -9,6 +9,13 @@
   SECRETS_SCAN_ENABLED = "false"
   SECRETS_SCAN_OMIT_KEYS = "VITE_API_URL"
 
+# Proxy LRCLIB directly via Netlify CDN (guaranteed same-origin, zero CORS issues anywhere)
+[[redirects]]
+  from = "/api/lrclib/*"
+  to = "https://lrclib.net/api/:splat"
+  status = 200
+  force = true
+
 # SPA Fallback: route all non-file traffic to React index.html
 [[redirects]]
   from = "/*"

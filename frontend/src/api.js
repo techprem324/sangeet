@@ -6,6 +6,7 @@
 
 import { DEFAULT_CATEGORIES, DEFAULT_CATALOGS } from './data/defaultCatalog'
 import { clientAnalyzeMood, clientGenerateChat } from './data/sentimentAnalyzer'
+import CURATED_LYRICS from './data/curatedLyrics.json'
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
@@ -357,12 +358,31 @@ export const api = {
       .replace(/\(.*\)|\[.*\]/g, '')
       .trim()
 
-    // 1. If backend is available (local or proxy), try backend first
+    const titleKey = cleanTitle.toLowerCase()
+
+    // 1. Instant check in Curated Pre-bundled Synced Lyrics (0ms, 100% offline & Netlify guaranteed)
+    if (CURATED_LYRICS && CURATED_LYRICS[titleKey]) {
+      const entry = CURATED_LYRICS[titleKey]
+      const lines = parseLRC(entry.syncedLyrics || '')
+      const text = entry.plainLyrics || (lines.map((l) => l.text).join('\n'))
+      if (lines.length > 0 || text) {
+        return {
+          title: track.title,
+          artist: track.artist,
+          synced: lines.length > 0,
+          lines,
+          text,
+          found: true,
+        }
+      }
+    }
+
+    // 2. If backend is available (local or proxy), try backend
     try {
       const res = await request(
         `/lyrics?title=${encodeURIComponent(track.title || '')}&artist=${encodeURIComponent(track.artist || '')}&id=${encodeURIComponent(track.id || '')}`,
         {},
-        2500
+        2000
       )
       if (res && ((Array.isArray(res.lines) && res.lines.length > 0) || res.text || res.synced_lyrics)) {
         const lines = Array.isArray(res.lines) && res.lines.length > 0
@@ -380,82 +400,71 @@ export const api = {
       }
     } catch {}
 
-    // 2. Direct client fallback on Netlify / offline to LRCLIB API
-    try {
-      let items = []
-      // Strategy A: Search with track_name & artist_name
-      if (cleanTitle) {
-        const queryUrl = cleanArtist
-          ? `https://lrclib.net/api/search?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`
-          : `https://lrclib.net/api/search?track_name=${encodeURIComponent(cleanTitle)}`
-        const res = await fetch(queryUrl, {
-          headers: { 'User-Agent': 'SangeetMusicApp/1.0' }
-        })
-        if (res.ok) {
-          items = await res.json()
+    // 3. Direct client fetch (supports Netlify proxy /api/lrclib and direct https://lrclib.net)
+    const lrclibBases = ['/api/lrclib', 'https://lrclib.net/api']
+    for (const base of lrclibBases) {
+      try {
+        let items = []
+        // Query A: track_name + artist_name
+        if (cleanTitle) {
+          const qUrl = cleanArtist
+            ? `${base}/search?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`
+            : `${base}/search?track_name=${encodeURIComponent(cleanTitle)}`
+          const res = await fetch(qUrl)
+          if (res.ok) items = await res.json()
         }
-      }
 
-      // Strategy B: If no items, search just by track_name
-      if ((!Array.isArray(items) || items.length === 0) && cleanTitle) {
-        const res = await fetch(`https://lrclib.net/api/search?track_name=${encodeURIComponent(cleanTitle)}`, {
-          headers: { 'User-Agent': 'SangeetMusicApp/1.0' }
-        })
-        if (res.ok) {
-          items = await res.json()
+        // Query B: track_name only
+        if ((!Array.isArray(items) || items.length === 0) && cleanTitle) {
+          const res = await fetch(`${base}/search?track_name=${encodeURIComponent(cleanTitle)}`)
+          if (res.ok) items = await res.json()
         }
-      }
 
-      // Strategy C: If still no items, try full string query `q=`
-      if ((!Array.isArray(items) || items.length === 0) && cleanTitle) {
-        const fullQ = `${cleanTitle} ${cleanArtist}`.trim()
-        const res = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(fullQ)}`, {
-          headers: { 'User-Agent': 'SangeetMusicApp/1.0' }
-        })
-        if (res.ok) {
-          items = await res.json()
+        // Query C: full query `q=`
+        if ((!Array.isArray(items) || items.length === 0) && cleanTitle) {
+          const res = await fetch(`${base}/search?q=${encodeURIComponent(`${cleanTitle} ${cleanArtist}`.trim())}`)
+          if (res.ok) items = await res.json()
         }
-      }
 
-      if (Array.isArray(items) && items.length > 0) {
-        const best = items.find((it) => Boolean(it.syncedLyrics)) || items.find((it) => Boolean(it.plainLyrics)) || items[0]
-        if (best) {
-          const lrcRaw = best.syncedLyrics || ''
-          const lines = parseLRC(lrcRaw)
-          let plainText = best.plainLyrics || ''
+        if (Array.isArray(items) && items.length > 0) {
+          const best = items.find((it) => Boolean(it.syncedLyrics)) || items.find((it) => Boolean(it.plainLyrics)) || items[0]
+          if (best) {
+            const lrcRaw = best.syncedLyrics || ''
+            const lines = parseLRC(lrcRaw)
+            let plainText = best.plainLyrics || ''
 
-          if (!plainText && lines.length > 0) {
-            plainText = lines.map((l) => l.text).join('\n')
-          }
+            if (!plainText && lines.length > 0) {
+              plainText = lines.map((l) => l.text).join('\n')
+            }
 
-          // If we have plain lyrics but no synced lyrics, approximate timestamps across duration
-          if (lines.length === 0 && plainText && track.duration > 0) {
-            const split = plainText.split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
-            if (split.length > 0) {
-              const step = Math.max(2.5, track.duration / split.length)
-              for (let i = 0; i < split.length; i++) {
-                lines.push({ t: Math.round(i * step * 10) / 10, text: split[i] })
+            if (lines.length === 0 && plainText && track.duration > 0) {
+              const split = plainText.split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
+              if (split.length > 0) {
+                const step = Math.max(2.5, track.duration / split.length)
+                for (let i = 0; i < split.length; i++) {
+                  lines.push({ t: Math.round(i * step * 10) / 10, text: split[i] })
+                }
+              }
+            }
+
+            if (lines.length > 0 || plainText) {
+              return {
+                title: track.title,
+                artist: track.artist,
+                synced: lines.length > 0,
+                lines,
+                text: plainText,
+                found: true,
               }
             }
           }
-
-          if (lines.length > 0 || plainText) {
-            return {
-              title: track.title,
-              artist: track.artist,
-              synced: lines.length > 0,
-              lines,
-              text: plainText,
-              found: true,
-            }
-          }
         }
+      } catch (err) {
+        // try next base
       }
-    } catch (err) {
-      console.warn('Direct lyrics fetch failed:', err)
     }
 
-    // 3. Fallback to track.lyrics if attached to the catalog track
+    // 4. Fallback to track.lyrics if attached to the catalog track
     if (track.lyrics && typeof track.lyrics === 'string') {
       const split = track.lyrics.split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
       const lines = []
