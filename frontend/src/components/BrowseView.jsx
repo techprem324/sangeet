@@ -75,13 +75,13 @@ function PlaylistDetail({ cat, onBack, onLyrics }) {
         <ChevronIcon size={14} className="rotate-180" /> all moods
       </button>
 
-      <div className="mb-5 flex items-center gap-4">
-        <div className="flex h-20 w-20 items-center justify-center rounded-2xl text-4xl" style={{ background: main + '1a', border: `1px solid ${main}44` }}>
+      <div className="mb-5 flex flex-wrap items-center gap-3 sm:gap-4">
+        <div className="flex h-16 w-16 sm:h-20 sm:w-20 shrink-0 items-center justify-center rounded-2xl text-3xl sm:text-4xl" style={{ background: main + '1a', border: `1px solid ${main}44` }}>
           {cat.emoji}
         </div>
-        <div>
-          <h2 className="font-display text-3xl font-medium text-cream">{cat.label}</h2>
-          <p className="mt-1 max-w-lg text-sm text-sand-dim">{cat.description}</p>
+        <div className="min-w-0 flex-1">
+          <h2 className="font-display text-2xl sm:text-3xl font-medium text-cream">{cat.label}</h2>
+          <p className="mt-1 max-w-lg text-xs sm:text-sm text-sand-dim">{cat.description}</p>
         </div>
       </div>
 
@@ -142,18 +142,18 @@ export default function BrowseView({ onOpenCategory, selected, onLyrics }) {
   return (
     <div className="h-full overflow-y-auto pt-6">
       <div className="mx-auto max-w-4xl px-4 sm:px-8">
-        <h1 className="font-display text-3xl font-medium text-cream">Mood rooms</h1>
-        <p className="mt-1.5 max-w-lg text-sm text-sand-dim">
+        <h1 className="font-display text-2xl sm:text-3xl font-medium text-cream">Mood rooms</h1>
+        <p className="mt-1 max-w-lg text-xs sm:text-sm text-sand-dim">
           Ten curated moods, each with hand-picked starters — then expand any room to 500+ real tracks.
         </p>
         {cats === null ? (
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="h-44 rounded-xl2 cover-loading" />
+              <div key={i} className="h-40 sm:h-44 rounded-xl2 cover-loading" />
             ))}
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {cats.map((c) => (
               <CategoryCard key={c.category} cat={c} onOpen={onOpenCategory} />
             ))}

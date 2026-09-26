@@ -40,7 +40,7 @@ function Vinyl({ cover, playing }) {
 function QueuePanel({ queue, current, onClose }) {
   const audio = useAudio()
   return (
-    <div className="absolute bottom-full right-2 mb-3 w-80 rounded-xl2 border border-edge bg-coal p-3 shadow-soft">
+    <div className="absolute bottom-full right-2 mb-3 w-[calc(100vw-1rem)] sm:w-80 max-w-sm rounded-xl2 border border-edge bg-coal p-3 shadow-soft z-50">
       <div className="mb-2 flex items-center justify-between">
         <span className="text-xs font-semibold uppercase tracking-wide text-sand-dim">Up next · {queue.length}</span>
         <button onClick={onClose} className="icon-btn h-6 w-6"><XIcon size={14} /></button>
@@ -94,6 +94,22 @@ export default function MiniPlayer({ onLyrics }) {
 
   return (
     <div className="relative border-t border-edge-soft bg-coal/90 backdrop-blur">
+      {/* Mobile/Tablet top slim progress scrub bar */}
+      <div
+        className="relative h-1 w-full bg-edge-soft/60 cursor-pointer md:hidden group"
+        onClick={(e) => {
+          const rect = e.currentTarget.getBoundingClientRect()
+          const clickX = e.clientX - rect.left
+          const newPct = Math.max(0, Math.min(1, clickX / rect.width))
+          seek(newPct * (duration || 0))
+        }}
+      >
+        <div
+          className="h-full bg-gradient-to-r from-ember to-amber-300 transition-all duration-100"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+
       {error && (
         <div className="mx-4 mt-2 rounded-lg border border-terra/40 bg-terra/10 px-3 py-1.5 text-xs text-rose">
           {error} <button onClick={() => audio.setError(null)} className="underline">dismiss</button>
@@ -103,25 +119,25 @@ export default function MiniPlayer({ onLyrics }) {
         <QueuePanel queue={current.queue} current={current} onClose={() => setShowQueue(false)} />
       )}
 
-      <div className="flex items-center gap-3 px-3 py-2.5 sm:px-4">
+      <div className="flex items-center gap-2.5 px-3 py-2 sm:gap-3 sm:px-4 sm:py-2.5">
         <Vinyl cover={track.cover} playing={playing} />
 
         <div className="min-w-0 flex-1">
-          <div className="truncate text-sm font-semibold text-cream">{track.title}</div>
-          <div className="truncate text-xs text-sand-dim">{track.artist}</div>
+          <div className="truncate text-xs font-semibold text-cream sm:text-sm">{track.title}</div>
+          <div className="truncate text-[11px] text-sand-dim sm:text-xs">{track.artist}</div>
         </div>
 
         {/* controls — always visible */}
-        <div className="flex items-center gap-1">
-          <button onClick={prev} title="Previous" className="icon-btn h-9 w-9"><PrevIcon size={18} /></button>
+        <div className="flex items-center gap-0.5 sm:gap-1">
+          <button onClick={prev} title="Previous" className="icon-btn h-8 w-8 sm:h-9 sm:w-9"><PrevIcon size={16} /></button>
           <button
             onClick={toggle}
-            className="mx-1 flex h-10 w-10 items-center justify-center rounded-full bg-ember text-ink shadow-glow transition-transform hover:scale-105 active:scale-95"
+            className="mx-0.5 flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-ember text-ink shadow-glow transition-transform hover:scale-105 active:scale-95"
             aria-label={playing ? 'Pause' : 'Play'}
           >
-            {playing ? <PauseIcon size={18} /> : <PlayIcon size={18} />}
+            {playing ? <PauseIcon size={16} /> : <PlayIcon size={16} />}
           </button>
-          <button onClick={next} title="Next" className="icon-btn h-9 w-9"><NextIcon size={18} /></button>
+          <button onClick={next} title="Next" className="icon-btn h-8 w-8 sm:h-9 sm:w-9"><NextIcon size={16} /></button>
         </div>
 
         {/* seek */}

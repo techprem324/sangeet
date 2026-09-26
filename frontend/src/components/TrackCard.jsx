@@ -3,7 +3,7 @@ import { useAudio } from '../store/audio'
 import { api } from '../api'
 import {
   HeartIcon, HeartFilledIcon, LyricsIcon, MusicIcon, PlayIcon, PauseIcon,
-  QueueIcon, PlaylistIcon, PlusIcon, DotsIcon,
+  QueueIcon, PlaylistIcon, PlusIcon, DotsIcon, TrashIcon,
 } from './icons'
 
 function fmtTime(sec) {
@@ -14,7 +14,7 @@ function fmtTime(sec) {
 }
 
 // A song row used everywhere (chat replies, playlists, search, liked).
-export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPlaylist = true }) {
+export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPlaylist = true, onRemove }) {
   const audio = useAudio()
   const [liked, setLiked] = useState(null)
   const [busy, setBusy] = useState(false)
@@ -129,23 +129,33 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
         )}
       </div>
 
-      <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-semibold text-cream">{track.title}</div>
+      <div className="min-w-0 flex-1 cursor-pointer select-none" onClick={play} role="button" tabIndex={0}>
+        <div className="truncate text-sm font-semibold text-cream transition-colors group-hover:text-ember">{track.title}</div>
         <div className="truncate text-xs text-sand-dim">{track.artist}</div>
       </div>
 
       <button
         onClick={toggleLike}
         title={liked ? 'Remove from your songs' : 'Save to your songs'}
-        className={`icon-btn h-8 w-8 ${liked ? 'text-rose' : ''}`}
+        className={`icon-btn h-8 w-8 shrink-0 ${liked ? 'text-rose' : ''}`}
       >
         {liked ? <HeartFilledIcon size={16} /> : <HeartIcon size={16} />}
       </button>
 
-      {track.duration > 0 && <span className="hidden w-10 text-right text-xs tabular-nums text-sand-dim md:block">{fmtTime(track.duration)}</span>}
+      {onRemove && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onRemove() }}
+          title="Remove from playlist"
+          className="icon-btn h-8 w-8 shrink-0 text-sand-dim/60 hover:text-rose"
+        >
+          <TrashIcon size={14} />
+        </button>
+      )}
+
+      {track.duration > 0 && <span className="hidden w-10 text-right text-xs tabular-nums text-sand-dim md:block shrink-0">{fmtTime(track.duration)}</span>}
 
       {showPlaylist && track.stream_url && (
-        <div className="relative" ref={menuRef}>
+        <div className="relative shrink-0" ref={menuRef}>
           <button
             onClick={openMenu}
             aria-label="More actions"
@@ -156,7 +166,7 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
           </button>
 
           {menuOpen && (
-            <div className="absolute right-0 top-9 z-40 w-56 rounded-xl2 border border-edge bg-coal p-2 shadow-soft">
+            <div className="absolute right-0 top-9 z-40 w-52 max-w-[calc(100vw-2.5rem)] rounded-xl2 border border-edge bg-coal p-2 shadow-soft">
               {!plMode ? (
                 <>
                   <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-widest text-sand-dim">Actions</div>

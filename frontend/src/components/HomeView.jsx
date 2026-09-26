@@ -41,8 +41,8 @@ export default function HomeView({ onView, onSend, onPill, onOpenAuth, user }) {
 
   return (
     <div className="flex h-full flex-col overflow-y-auto pt-6">
-      {/* Top Header Row with Account Badge */}
-      <div className="flex items-center justify-end px-6 sm:px-12">
+      {/* Top Header Row with Account Badge (visible on desktop where mobile header is hidden) */}
+      <div className="hidden lg:flex items-center justify-end px-6 sm:px-12">
         <button
           onClick={onOpenAuth}
           className="flex items-center gap-2 rounded-full border border-edge bg-surface-2/70 px-3.5 py-1.5 text-xs font-medium text-cream transition-colors hover:border-ember/50 hover:bg-surface-2"
@@ -52,11 +52,11 @@ export default function HomeView({ onView, onSend, onPill, onOpenAuth, user }) {
         </button>
       </div>
 
-      <div className="mx-auto my-auto max-w-2xl text-center px-4 py-8 sm:px-8">
+      <div className="mx-auto my-auto max-w-2xl text-center px-4 py-6 sm:px-8">
         {/* Dynamic Animated Creative Hero Artwork */}
-        <HeroArt className="mx-auto mb-5 w-full max-w-md" />
+        <HeroArt className="mx-auto mb-4 w-full max-w-xs sm:max-w-md" />
 
-        <h1 className="font-display text-4xl font-medium leading-tight text-cream sm:text-5xl">
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl font-medium leading-tight text-cream">
           Tell me how you feel.
           <br />
           <span className="italic text-ember">Sangeet will find the song.</span>

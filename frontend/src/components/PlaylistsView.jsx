@@ -99,12 +99,12 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
         <ChevronIcon size={14} className="rotate-180" /> my playlists
       </button>
 
-      <div className="mb-5 flex items-center gap-4">
-        <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-ember/30 bg-ember/10 text-3xl">
+      <div className="mb-5 flex flex-wrap items-center gap-3 sm:gap-4">
+        <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl border border-ember/30 bg-ember/10 text-2xl sm:text-3xl">
           {playlist.emoji}
         </div>
         <div className="min-w-0 flex-1">
-          <h2 className="truncate font-display text-2xl font-medium text-cream">{playlist.name}</h2>
+          <h2 className="truncate font-display text-xl sm:text-2xl font-medium text-cream">{playlist.name}</h2>
           <p className="mt-0.5 text-xs text-sand-dim">{tracks.length} songs · plays in this exact order</p>
         </div>
         <div className="flex items-center gap-2">
@@ -129,14 +129,12 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
           {tracks.map((t, i) => (
             <div key={t._key || i} className="relative">
               <span className="absolute -left-6 top-1/2 z-10 hidden -translate-y-1/2 text-xs tabular-nums text-sand-dim sm:block">{i + 1}</span>
-              <TrackCard track={t} onLyrics={onLyrics} queue={tracks} />
-              <button
-                onClick={() => removeTrack(t)}
-                title="Remove from playlist"
-                className="icon-btn absolute right-12 top-1/2 h-7 w-7 -translate-y-1/2 text-sand-dim/60 hover:text-rose"
-              >
-                <XIcon size={13} />
-              </button>
+              <TrackCard
+                track={t}
+                onLyrics={onLyrics}
+                queue={tracks}
+                onRemove={() => removeTrack(t)}
+              />
             </div>
           ))}
         </div>
@@ -182,27 +180,27 @@ export default function PlaylistsView({ onLyrics }) {
   return (
     <div className="h-full overflow-y-auto px-4 py-6 sm:px-8">
       <div className="mx-auto max-w-4xl">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <h1 className="flex items-center gap-2.5 font-display text-3xl font-medium text-cream">
+            <h1 className="flex items-center gap-2.5 font-display text-2xl sm:text-3xl font-medium text-cream">
               <PlaylistIcon size={22} className="text-ember" /> My playlists
             </h1>
-            <p className="mt-1.5 text-sm text-sand-dim">Your own mixes — songs play exactly in the order you arranged them.</p>
+            <p className="mt-1 text-xs sm:text-sm text-sand-dim">Your own mixes — songs play exactly in the order you arranged them.</p>
           </div>
           <button
             onClick={() => setCreating(true)}
-            className="flex items-center gap-1.5 rounded-full border border-ember/40 bg-ember/10 px-4 py-2 text-sm font-medium text-ember transition-colors hover:bg-ember/20"
+            className="flex items-center gap-1.5 rounded-full border border-ember/40 bg-ember/10 px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-medium text-ember transition-colors hover:bg-ember/20"
           >
-            <PlusIcon size={15} /> New
+            <PlusIcon size={14} /> New
           </button>
         </div>
 
         {playlists === null ? (
-          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {Array.from({ length: 3 }).map((_, i) => <div key={i} className="h-32 rounded-xl2 cover-loading" />)}
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+            {Array.from({ length: 4 }).map((_, i) => <div key={i} className="h-28 sm:h-32 rounded-xl2 cover-loading" />)}
           </div>
         ) : (
-          <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
             {playlists.map((p) => {
               const plId = p._id || p.id
               const count = p.count ?? p.tracks?.length ?? 0
@@ -210,21 +208,21 @@ export default function PlaylistsView({ onLyrics }) {
                 <button
                   key={plId}
                   onClick={() => openDetail(p)}
-                  className="group rounded-xl2 border border-edge-soft bg-surface p-4 text-left transition-all hover:-translate-y-0.5 hover:border-ember/40 hover:shadow-card"
+                  className="group rounded-xl2 border border-edge-soft bg-surface p-3 sm:p-4 text-left transition-all hover:-translate-y-0.5 hover:border-ember/40 hover:shadow-card"
                 >
-                  <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-ember/25 bg-ember/[0.08] text-2xl">
+                  <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-xl border border-ember/25 bg-ember/[0.08] text-xl sm:text-2xl">
                     {p.emoji || '🎵'}
                   </div>
-                  <div className="mt-3 truncate text-sm font-semibold text-cream">{p.name}</div>
+                  <div className="mt-2.5 sm:mt-3 truncate text-sm font-semibold text-cream">{p.name}</div>
                   <div className="mt-0.5 text-xs text-sand-dim">{count} songs</div>
                 </button>
               )
             })}
             <button
               onClick={() => setCreating(true)}
-              className="flex min-h-[104px] items-center justify-center rounded-xl2 border border-dashed border-edge text-sand-dim transition-colors hover:border-ember/40 hover:text-ember"
+              className="flex min-h-[96px] sm:min-h-[104px] items-center justify-center rounded-xl2 border border-dashed border-edge text-sand-dim transition-colors hover:border-ember/40 hover:text-ember p-3 text-center"
             >
-              <span className="flex items-center gap-1.5 text-sm"><PlusIcon size={15} /> New playlist</span>
+              <span className="flex items-center gap-1.5 text-xs sm:text-sm"><PlusIcon size={15} /> New playlist</span>
             </button>
           </div>
         )}

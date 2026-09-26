@@ -46,6 +46,13 @@
   .input-plain {
     @apply w-full bg-transparent text-cream placeholder:text-sand-dim/70 outline-none;
   }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 /* ---------- scrollbars ---------- */
