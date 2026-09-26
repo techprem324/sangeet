@@ -224,21 +224,35 @@ export const api = {
     }
   },
 
-  explore: async (category, count = 24) => {
+  explore: async (category, count = 12) => {
     try {
-      const res = await request('/explore', {
-        method: 'POST',
-        body: JSON.stringify({ category, count }),
-      }, 4500)
-      if (res && Array.isArray(res.tracks)) return res
-    } catch {}
+      const res = await request(
+        '/explore',
+        {
+          method: 'POST',
+          body: JSON.stringify({ category, count }),
+        },
+        25000
+      )
+      if (res && Array.isArray(res.tracks) && res.tracks.length > 0) return res
+    } catch (err) {
+      console.warn('Backend explore request timed out or failed:', err)
+    }
 
-    const tracks = DEFAULT_CATALOGS[category] || []
+    // Client-side fallback: deliver fresh tracks from other curated rooms
+    const allTracks = Object.values(DEFAULT_CATALOGS).flat()
+    const currentCategoryTrackKeys = new Set(
+      (DEFAULT_CATALOGS[category] || []).map((t) => (t.id || t.title).toLowerCase())
+    )
+    const freshFallback = allTracks
+      .filter((t) => !currentCategoryTrackKeys.has((t.id || t.title).toLowerCase()))
+      .slice(0, count)
+
     return {
       category,
-      tracks,
-      total: tracks.length,
-      message: 'Viewing full curated mood room',
+      tracks: freshFallback,
+      total: freshFallback.length,
+      message: 'Expanded mood room tracks',
     }
   },
 

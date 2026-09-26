@@ -55,12 +55,14 @@ function PlaylistDetail({ cat, onBack, onLyrics }) {
     if (exploring) return
     setExploring(true)
     try {
-      const d = await api.explore(cat.category, 24)
-      setTracks((prev) => {
-        const seen = new Set((prev || []).map((t) => t.id || t.title))
-        const fresh = d.tracks.filter((t) => !seen.has(t.id || t.title))
-        return [...(prev || []), ...fresh]
-      })
+      const d = await api.explore(cat.category, 12)
+      if (d && Array.isArray(d.tracks) && d.tracks.length > 0) {
+        setTracks((prev) => {
+          const seen = new Set((prev || []).map((t) => (t.id || t.title).toLowerCase()))
+          const fresh = d.tracks.filter((t) => !seen.has((t.id || t.title).toLowerCase()))
+          return [...(prev || []), ...fresh]
+        })
+      }
     } catch { /* ignore */ }
     setExploring(false)
   }

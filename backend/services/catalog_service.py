@@ -268,12 +268,14 @@ def explore(category_key: str, count: int = 24) -> List[Dict]:
 
     for q in search_queries:
         try:
-            results = jiosaavn_service.search(q, limit=20, resolve=False)
+            results = jiosaavn_service.search(q, limit=12, resolve=True)
         except Exception as exc:
             log.warning("explore query failed: %s (%s)", q, exc)
             continue
 
         for t in results:
+            if not t.get("stream_url"):
+                continue
             tid = t.get("id")
             title_lower = t.get("title", "").strip().lower()
             if tid and tid in seen_ids:
@@ -282,15 +284,14 @@ def explore(category_key: str, count: int = 24) -> List[Dict]:
                 continue
             seen_ids.add(tid)
             known_titles.add(title_lower)
-            candidates.append(t)
-            if len(candidates) >= count * 2:
+            candidates.append(_public_track(t))
+            if len(candidates) >= count:
                 break
 
-        if len(candidates) >= count * 2:
+        if len(candidates) >= count:
             break
 
-    fresh = hydrate_many(candidates[:count])
-    return [_public_track(t) for t in fresh if t.get("stream_url")]
+    return candidates
 
 
 def stats() -> Dict:
