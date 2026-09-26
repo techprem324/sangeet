@@ -1,0 +1,11 @@
+# Netlify configuration for Sangeet
+[build]
+  base = "frontend"
+  publish = "dist"
+  command = "npm run build"
+
+# SPA Fallback: route all non-file traffic to React index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

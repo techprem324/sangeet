@@ -36,9 +36,12 @@ export function logoutUser() {
   setUser(null)
 }
 
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
+
 async function request(path, options = {}) {
   const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) }
-  const res = await fetch(`/api${path}`, { ...options, headers })
+  const url = API_BASE ? `${API_BASE}/api${path}` : `/api${path}`
+  const res = await fetch(url, { ...options, headers })
   if (!res.ok) {
     const body = await res.json().catch(() => ({}))
     throw new Error(body.error || `Request failed (${res.status})`)
