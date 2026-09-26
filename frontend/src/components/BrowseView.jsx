@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api'
 import { moodColor, MOOD_PILLS } from '../data/moods'
+import { DEFAULT_CATEGORIES } from '../data/defaultCatalog'
 import TrackCard from './TrackCard'
 import Footer from './Footer'
 import { ChevronIcon, MusicIcon, SparkIcon } from './icons'
@@ -112,10 +113,16 @@ function PlaylistDetail({ cat, onBack, onLyrics }) {
 }
 
 export default function BrowseView({ onOpenCategory, selected, onLyrics }) {
-  const [cats, setCats] = useState(null)
+  const [cats, setCats] = useState(DEFAULT_CATEGORIES)
 
   useEffect(() => {
-    api.categories().then((d) => setCats(d.categories)).catch(() => setCats([]))
+    api.categories()
+      .then((d) => {
+        if (d && Array.isArray(d.categories) && d.categories.length > 0) {
+          setCats(d.categories)
+        }
+      })
+      .catch(() => setCats(DEFAULT_CATEGORIES))
   }, [])
 
   if (selected) {
