@@ -82,6 +82,28 @@ function normalizePlaylist(p) {
   }
 }
 
+export function parseLRC(lrcText) {
+  if (!lrcText || typeof lrcText !== 'string') return []
+  const lines = []
+  const regex = /^\[(\d{1,3}):(\d{2})(?:[.:](\d{1,3}))?\](.*)$/
+  for (const raw of lrcText.split(/\r?\n/)) {
+    const trimmed = raw.trim()
+    const match = trimmed.match(regex)
+    if (!match) continue
+    const min = parseInt(match[1], 10)
+    const sec = parseInt(match[2], 10)
+    const fracStr = match[3] || '0'
+    const frac = parseFloat(`0.${fracStr}`)
+    const text = match[4].trim()
+    if (!text) continue
+    lines.push({
+      t: Math.round((min * 60 + sec + frac) * 100) / 100,
+      text,
+    })
+  }
+  return lines
+}
+
 function getLocalPlaylists() {
   try {
     const raw = JSON.parse(localStorage.getItem(LOCAL_PLAYLISTS_KEY) || '[]')
@@ -317,38 +339,148 @@ export const api = {
   },
 
   lyrics: async (track) => {
+    if (!track || (!track.title && !track.id)) {
+      return { synced: false, lines: [], text: '', found: false }
+    }
+
+    const cleanTitle = (track.title || '')
+      .replace(/\(From\s+.*?\)/gi, '')
+      .replace(/\(Original.*?\)/gi, '')
+      .replace(/\(Remix.*?\)/gi, '')
+      .replace(/\(.*\)|\[.*\]/g, '')
+      .replace(/[^\w\s\u0900-\u097F]/gi, ' ')
+      .trim()
+      .replace(/\s+/g, ' ')
+
+    const cleanArtist = (track.artist || '')
+      .split(/[,&/|]/)[0]
+      .replace(/\(.*\)|\[.*\]/g, '')
+      .trim()
+
+    // 1. If backend is available (local or proxy), try backend first
     try {
       const res = await request(
         `/lyrics?title=${encodeURIComponent(track.title || '')}&artist=${encodeURIComponent(track.artist || '')}&id=${encodeURIComponent(track.id || '')}`,
         {},
-        3500
+        2500
       )
-      if (res && (res.lyrics || res.synced_lyrics)) return res
-    } catch {}
-
-    // Direct client fallback to LRCLIB (open CORS-enabled synced lyrics API)
-    try {
-      const cleanTitle = (track.title || '').replace(/\(.*\)|\[.*\]/g, '').trim()
-      const cleanArtist = (track.artist || '').split(/[,&]/)[0].trim()
-      const lrcRes = await fetch(
-        `https://lrclib.net/api/get?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`
-      )
-      if (lrcRes.ok) {
-        const data = await lrcRes.json()
+      if (res && ((Array.isArray(res.lines) && res.lines.length > 0) || res.text || res.synced_lyrics)) {
+        const lines = Array.isArray(res.lines) && res.lines.length > 0
+          ? res.lines
+          : parseLRC(res.synced_lyrics || res.syncedLyrics || '')
+        const plainText = res.text || res.plain_lyrics || res.plainLyrics || ''
         return {
           title: track.title,
           artist: track.artist,
-          synced_lyrics: data.syncedLyrics || null,
-          plain_lyrics: data.plainLyrics || null,
-          found: Boolean(data.syncedLyrics || data.plainLyrics),
+          synced: lines.length > 0,
+          lines,
+          text: plainText,
+          found: lines.length > 0 || Boolean(plainText),
         }
       }
     } catch {}
 
+    // 2. Direct client fallback on Netlify / offline to LRCLIB API
+    try {
+      let items = []
+      // Strategy A: Search with track_name & artist_name
+      if (cleanTitle) {
+        const queryUrl = cleanArtist
+          ? `https://lrclib.net/api/search?track_name=${encodeURIComponent(cleanTitle)}&artist_name=${encodeURIComponent(cleanArtist)}`
+          : `https://lrclib.net/api/search?track_name=${encodeURIComponent(cleanTitle)}`
+        const res = await fetch(queryUrl, {
+          headers: { 'User-Agent': 'SangeetMusicApp/1.0' }
+        })
+        if (res.ok) {
+          items = await res.json()
+        }
+      }
+
+      // Strategy B: If no items, search just by track_name
+      if ((!Array.isArray(items) || items.length === 0) && cleanTitle) {
+        const res = await fetch(`https://lrclib.net/api/search?track_name=${encodeURIComponent(cleanTitle)}`, {
+          headers: { 'User-Agent': 'SangeetMusicApp/1.0' }
+        })
+        if (res.ok) {
+          items = await res.json()
+        }
+      }
+
+      // Strategy C: If still no items, try full string query `q=`
+      if ((!Array.isArray(items) || items.length === 0) && cleanTitle) {
+        const fullQ = `${cleanTitle} ${cleanArtist}`.trim()
+        const res = await fetch(`https://lrclib.net/api/search?q=${encodeURIComponent(fullQ)}`, {
+          headers: { 'User-Agent': 'SangeetMusicApp/1.0' }
+        })
+        if (res.ok) {
+          items = await res.json()
+        }
+      }
+
+      if (Array.isArray(items) && items.length > 0) {
+        const best = items.find((it) => Boolean(it.syncedLyrics)) || items.find((it) => Boolean(it.plainLyrics)) || items[0]
+        if (best) {
+          const lrcRaw = best.syncedLyrics || ''
+          const lines = parseLRC(lrcRaw)
+          let plainText = best.plainLyrics || ''
+
+          if (!plainText && lines.length > 0) {
+            plainText = lines.map((l) => l.text).join('\n')
+          }
+
+          // If we have plain lyrics but no synced lyrics, approximate timestamps across duration
+          if (lines.length === 0 && plainText && track.duration > 0) {
+            const split = plainText.split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
+            if (split.length > 0) {
+              const step = Math.max(2.5, track.duration / split.length)
+              for (let i = 0; i < split.length; i++) {
+                lines.push({ t: Math.round(i * step * 10) / 10, text: split[i] })
+              }
+            }
+          }
+
+          if (lines.length > 0 || plainText) {
+            return {
+              title: track.title,
+              artist: track.artist,
+              synced: lines.length > 0,
+              lines,
+              text: plainText,
+              found: true,
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.warn('Direct lyrics fetch failed:', err)
+    }
+
+    // 3. Fallback to track.lyrics if attached to the catalog track
+    if (track.lyrics && typeof track.lyrics === 'string') {
+      const split = track.lyrics.split(/\r?\n/).map((s) => s.trim()).filter(Boolean)
+      const lines = []
+      if (track.duration > 0 && split.length > 0) {
+        const step = Math.max(2.5, track.duration / split.length)
+        for (let i = 0; i < split.length; i++) {
+          lines.push({ t: Math.round(i * step * 10) / 10, text: split[i] })
+        }
+      }
+      return {
+        title: track.title,
+        artist: track.artist,
+        synced: lines.length > 0,
+        lines,
+        text: track.lyrics,
+        found: true,
+      }
+    }
+
     return {
       title: track.title,
       artist: track.artist,
-      lyrics: null,
+      synced: false,
+      lines: [],
+      text: '',
       found: false,
     }
   },

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { api } from '../api'
+import { api, parseLRC } from '../api'
 import { useAudio } from '../store/audio'
 import { XIcon, MusicIcon } from './icons'
 
@@ -26,8 +26,19 @@ export default function LyricsModal({ track, onClose }) {
     return () => { alive = false }
   }, [track?.id, track?.title])
 
-  const synced = data?.synced && (data?.lines?.length || 0) > 0
-  const lines = data?.lines || []
+  const lrcLines = useMemo(() => {
+    if (Array.isArray(data?.lines) && data.lines.length > 0) return data.lines
+    const raw = data?.synced_lyrics || data?.syncedLyrics || ''
+    if (raw) return parseLRC(raw)
+    return []
+  }, [data])
+
+  const lyricsText = useMemo(() => {
+    return data?.text || data?.plain_lyrics || data?.plainLyrics || data?.lyrics || ''
+  }, [data])
+
+  const synced = lrcLines.length > 0
+  const lines = lrcLines
 
   // current line index from playback progress
   const activeIdx = useMemo(() => {
@@ -89,8 +100,8 @@ export default function LyricsModal({ track, onClose }) {
                 )
               })}
             </div>
-          ) : data?.text ? (
-            <p className="whitespace-pre-line text-[15px] leading-7 text-sand">{data.text}</p>
+          ) : lyricsText ? (
+            <p className="whitespace-pre-line text-[15px] leading-7 text-sand">{lyricsText}</p>
           ) : (
             <div className="flex flex-col items-center gap-3 py-10 text-center">
               <MusicIcon size={28} className="text-sand-dim" />
