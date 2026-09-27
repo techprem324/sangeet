@@ -188,3 +188,38 @@ export const DotsIcon = (p) => (
     <circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none" />
   </svg>
 )
+
+export const HomeIcon = (p) => (
+  <svg {...base(p)}>
+    <path d="M3 10.5L12 3l9 7.5v9a1.5 1.5 0 0 1-1.5 1.5H4.5A1.5 1.5 0 0 1 3 19.5v-9z" />
+    <path d="M9 21v-7h6v7" />
+  </svg>
+)
+
+export const ChatIcon = (p) => (
+  <svg {...base(p)}>
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+  </svg>
+)
+
+export const CompassIcon = (p) => (
+  <svg {...base(p)}>
+    <circle cx="12" cy="12" r="10" />
+    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" fill="currentColor" fillOpacity="0.2" />
+  </svg>
+)
+
+export const LibraryIcon = (p) => (
+  <svg {...base(p)}>
+    <path d="m16 6 4 14" />
+    <path d="M12 6v14" />
+    <path d="M8 8v12" />
+    <path d="M4 4v16" />
+  </svg>
+)
+
+export const ChevronDownIcon = (p) => (
+  <svg {...base(p)}>
+    <path d="m6 9 6 6 6-6" />
+  </svg>
+)

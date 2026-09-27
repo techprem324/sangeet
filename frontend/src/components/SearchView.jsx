@@ -30,7 +30,7 @@ export default function SearchView({ onLyrics }) {
   }, [q])
 
   return (
-    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8">
+    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-6">
       <div className="mx-auto max-w-2xl">
         <h1 className="font-display text-3xl font-medium text-cream">Search anything</h1>
         <p className="mt-1.5 text-sm text-sand-dim">Any song, any artist — play it in 320 kbps instantly.</p>

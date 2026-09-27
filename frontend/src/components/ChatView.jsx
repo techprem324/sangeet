@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { api } from '../api'
+import { useAudio } from '../store/audio'
 import { MOOD_PILLS } from '../data/moods'
 import MessageBubble from './MessageBubble'
 import MoodRadar from './MoodRadar'
@@ -71,6 +72,8 @@ function LiveMoodPreview({ mood, visible }) {
 }
 
 export default function ChatView({ messages, busy, onSend, onLyrics, onPill }) {
+  const audio = useAudio()
+  const hasTrack = Boolean(audio?.current?.track)
   const [draft, setDraft] = useState('')
   const [liveMood, setLiveMood] = useState(null)
   const [showLive, setShowLive] = useState(false)
@@ -144,7 +147,7 @@ export default function ChatView({ messages, busy, onSend, onLyrics, onPill }) {
       </div>
 
       {/* composer */}
-      <div className="border-t border-edge-soft bg-coal/70 px-4 pb-3 pt-2 backdrop-blur sm:px-8">
+      <div className={`border-t border-edge-soft bg-coal/80 px-4 pb-3 pt-2 backdrop-blur sm:px-8 ${hasTrack ? 'mb-[118px]' : 'mb-[58px]'} lg:mb-0 transition-all duration-200`}>
         <LiveMoodPreview mood={liveMood} visible={showLive} />
         <div className="mx-auto flex max-w-2xl items-end gap-2">
           <div className="flex flex-1 items-center rounded-xl2 border border-edge bg-surface px-4 py-2.5 transition-colors focus-within:border-ember/50">

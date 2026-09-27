@@ -8,7 +8,9 @@ import BrowseView from './components/BrowseView'
 import SearchView from './components/SearchView'
 import PlaylistsView from './components/PlaylistsView'
 import LikedView from './components/LikedView'
+import LibraryView from './components/LibraryView'
 import MiniPlayer from './components/MiniPlayer'
+import BottomNav from './components/BottomNav'
 import LyricsModal from './components/LyricsModal'
 import AuthModal from './components/AuthModal'
 
@@ -76,8 +78,8 @@ export default function App() {
         />
 
         <main className="flex min-w-0 flex-1 flex-col bg-ink/40">
-          {/* mobile / tablet top nav (sidebar is hidden below lg) */}
-          <header className="border-b border-edge-soft bg-coal/85 backdrop-blur-md lg:hidden">
+          {/* Mobile top header: Logo on left, Profile avatar on right (clean & uncrowded) */}
+          <header className="border-b border-edge-soft bg-coal/85 backdrop-blur-md lg:hidden shrink-0">
             <div className="flex items-center justify-between px-3.5 py-2.5">
               <button
                 onClick={() => setView('home')}
@@ -91,6 +93,7 @@ export default function App() {
               <button
                 onClick={() => setShowAuthModal(true)}
                 className="flex items-center gap-1.5 rounded-full border border-edge/80 bg-surface px-2.5 py-1 text-xs font-medium text-cream shadow-sm hover:border-ember/40 hover:bg-surface-2 transition-colors"
+                aria-label="Account Settings"
               >
                 <span className="flex h-5 w-5 items-center justify-center rounded-full bg-ember/20 text-[10px] font-bold text-ember border border-ember/30">
                   {user ? (user.name || user.username || 'U')[0].toUpperCase() : '👤'}
@@ -100,22 +103,6 @@ export default function App() {
                 </span>
               </button>
             </div>
-
-            <nav className="flex items-center gap-1 overflow-x-auto px-3 pb-2 pt-0.5 no-scrollbar">
-              {VIEWS.map((v) => (
-                <button
-                  key={v.key}
-                  onClick={() => setView(v.key)}
-                  className={`shrink-0 rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
-                    view === v.key
-                      ? 'bg-ember/15 text-cream border border-ember/35 font-semibold'
-                      : 'text-sand-dim hover:text-cream border border-transparent hover:bg-surface-2'
-                  }`}
-                >
-                  {v.label}
-                </button>
-              ))}
-            </nav>
           </header>
 
           <div className="min-h-0 flex-1">
@@ -146,16 +133,50 @@ export default function App() {
               />
             )}
             {view === 'search' && <SearchView onLyrics={openLyrics} />}
+
+            {/* Desktop & Mobile Library Views */}
             {view === 'playlists' && (
-              <PlaylistsView
-                user={user}
-                onLyrics={openLyrics}
-                refreshKey={likedRefresh}
-                onOpenAuth={() => setShowAuthModal(true)}
-              />
+              <div className="h-full">
+                <div className="hidden lg:block h-full">
+                  <PlaylistsView
+                    user={user}
+                    onLyrics={openLyrics}
+                    refreshKey={likedRefresh}
+                    onOpenAuth={() => setShowAuthModal(true)}
+                  />
+                </div>
+                <div className="lg:hidden h-full">
+                  <LibraryView
+                    user={user}
+                    onLyrics={openLyrics}
+                    refreshKey={likedRefresh}
+                    onOpenAuth={() => setShowAuthModal(true)}
+                  />
+                </div>
+              </div>
             )}
             {view === 'liked' && (
-              <LikedView
+              <div className="h-full">
+                <div className="hidden lg:block h-full">
+                  <LikedView
+                    user={user}
+                    onLyrics={openLyrics}
+                    refreshKey={likedRefresh}
+                    onOpenAuth={() => setShowAuthModal(true)}
+                  />
+                </div>
+                <div className="lg:hidden h-full">
+                  <LibraryView
+                    user={user}
+                    onLyrics={openLyrics}
+                    refreshKey={likedRefresh}
+                    onOpenAuth={() => setShowAuthModal(true)}
+                  />
+                </div>
+              </div>
+            )}
+            {view === 'library' && (
+              <LibraryView
                 user={user}
                 onLyrics={openLyrics}
                 refreshKey={likedRefresh}
@@ -166,7 +187,11 @@ export default function App() {
         </main>
       </div>
 
+      {/* Global Audio Player (Desktop bottom dock + Mobile floating mini-player & expanded player) */}
       <MiniPlayer onLyrics={openLyrics} onLikedChange={() => setLikedRefresh((n) => n + 1)} />
+
+      {/* Spotify-Style Fixed Bottom Navigation Bar (Mobile / Tablet Only) */}
+      <BottomNav view={view} onView={setView} />
 
       {lyricsTrack && <LyricsModal track={lyricsTrack} onClose={() => setLyricsTrack(null)} />}
       {showAuthModal && (

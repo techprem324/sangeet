@@ -131,7 +131,7 @@ export default function BrowseView({ onOpenCategory, selected, onLyrics }) {
 
   if (selected) {
     return (
-      <div className="h-full overflow-y-auto px-4 py-6 sm:px-8">
+      <div className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-6">
         <div className="mx-auto max-w-2xl">
           <PlaylistDetail cat={selected} onBack={onOpenCategory} onLyrics={onLyrics} />
         </div>
@@ -140,7 +140,7 @@ export default function BrowseView({ onOpenCategory, selected, onLyrics }) {
   }
 
   return (
-    <div className="h-full overflow-y-auto pt-6">
+    <div className="h-full overflow-y-auto pt-6 pb-36 lg:pb-0">
       <div className="mx-auto max-w-4xl px-4 sm:px-8">
         <h1 className="font-display text-2xl sm:text-3xl font-medium text-cream">Mood rooms</h1>
         <p className="mt-1 max-w-lg text-xs sm:text-sm text-sand-dim">

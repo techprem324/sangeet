@@ -164,7 +164,7 @@ export default function PlaylistsView({ user, onLyrics, refreshKey: parentRefres
 
   if (open) {
     return (
-      <div className="h-full overflow-y-auto px-4 py-6 sm:px-8">
+      <div className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-6">
         <div className="mx-auto max-w-2xl">
           <PlaylistDetail
             playlist={open}
@@ -181,7 +181,7 @@ export default function PlaylistsView({ user, onLyrics, refreshKey: parentRefres
   }
 
   return (
-    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8">
+    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-6">
       <div className="mx-auto max-w-4xl">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>

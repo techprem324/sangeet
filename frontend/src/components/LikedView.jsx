@@ -27,7 +27,7 @@ export default function LikedView({ user, onLyrics, refreshKey, onOpenAuth }) {
   }, [refreshKey, user])
 
   return (
-    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8">
+    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-6">
       <div className="mx-auto max-w-2xl">
         <h1 className="flex items-center gap-3 font-display text-2xl sm:text-3xl font-medium text-cream">
           <HeartFilledIcon size={24} className="text-rose" />
