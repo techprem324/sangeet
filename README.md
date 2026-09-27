@@ -21,10 +21,6 @@
 [![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
 
 
-
-> **No ads. No paid subscriptions. No algorithmic clutter.**  
-> Simply type how your day felt — heartbreak, midnight drive nostalgia, or uncontainable gym adrenaline — and Sangeet decrypts the musical DNA to match your heart's vibration.
-
 ---
 
 </div>
