@@ -20,11 +20,7 @@
 [![Audio Quality](https://img.shields.io/badge/Audio-320_kbps_Lossless-00F5D4?style=for-the-badge&logo=soundcharts&logoColor=black)](https://sangeett.netlify.app/)
 [![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
 
-<br/>
 
-**[🚀 Launch Live Web App](https://sangeett.netlify.app/)** • **[✨ Key Highlights](#-superpowers)** • **[⚡ Architecture](#-under-the-hood)** • **[💻 Run Locally](#-quick-start)**
-
-<br/>
 
 > **No ads. No paid subscriptions. No algorithmic clutter.**  
 > Simply type how your day felt — heartbreak, midnight drive nostalgia, or uncontainable gym adrenaline — and Sangeet decrypts the musical DNA to match your heart's vibration.
