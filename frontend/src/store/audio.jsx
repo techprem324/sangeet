@@ -185,12 +185,52 @@ export function AudioProvider({ children }) {
           return
         }
 
+        // Automatic Bitrate Resiliency: if 320kbps fails on CDN, degrade to 160kbps, then 96kbps
+        if (/_320\.(mp4|m4a|mp3)/i.test(el.src)) {
+          el.src = el.src.replace(/_320\.(mp4|m4a|mp3)/i, '_160.$1')
+          el.play().catch(() => {})
+          return
+        }
+        if (/_160\.(mp4|m4a|mp3)/i.test(el.src)) {
+          el.src = el.src.replace(/_160\.(mp4|m4a|mp3)/i, '_96.$1')
+          el.play().catch(() => {})
+          return
+        }
+
         const st = stateRef.current
         const cur = st.current
         const q = cur?.queue || []
-        const nextIdx = (cur?.index ?? 0) + 1
+        const curIndex = cur?.index ?? 0
 
-        // Try next track in current queue
+        // 1. First attempt to rescue the current song with a verified stream from ALL_FALLBACK_TRACKS
+        if (cur?.track) {
+          const tTitle = (cur.track.title || '').trim().toLowerCase()
+          const matchedFallback = ALL_FALLBACK_TRACKS.find((t) => {
+            if (!t || !t.stream_url) return false
+            const candTitle = (t.title || '').trim().toLowerCase()
+            return (
+              (candTitle === tTitle || candTitle.includes(tTitle) || tTitle.includes(candTitle)) &&
+              !el.src.includes(t.stream_url)
+            )
+          })
+          if (matchedFallback && matchedFallback.stream_url) {
+            const rescuedTrack = {
+              ...cur.track,
+              stream_url: matchedFallback.stream_url,
+              cover: cur.track.cover || matchedFallback.cover,
+            }
+            if (q[curIndex]) {
+              q[curIndex] = rescuedTrack
+            }
+            setCurrent({ track: rescuedTrack, queue: q, index: curIndex })
+            el.src = rescuedTrack.stream_url
+            el.play().catch(() => {})
+            return
+          }
+        }
+
+        // 2. Try next track in current queue
+        const nextIdx = curIndex + 1
         for (let i = nextIdx; i < q.length; i++) {
           const cand = q[i]
           if (cand && cand.stream_url) {
@@ -202,7 +242,7 @@ export function AudioProvider({ children }) {
           }
         }
 
-        // If queue exhausted or no valid stream found, pick verified continuation track
+        // 3. If queue exhausted or no valid stream found, pick verified continuation track
         const moreTracks = findRelatedContinuation(cur?.track, q)
         const workingTrack = moreTracks.find((t) => t && t.stream_url)
         if (workingTrack) {

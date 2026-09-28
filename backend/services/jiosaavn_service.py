@@ -127,17 +127,17 @@ def _bump_bitrate(url: str, bitrate: int = MAX_BITRATE) -> str:
 
 
 def _stream_alive(url: str) -> bool:
-    """Check if CDN URL is reachable and serves audio."""
+    """Check if CDN URL is reachable and serves audio with byte-range validation."""
     if not url or not url.startswith("http"):
         return False
     try:
-        r = requests.head(url, timeout=6, allow_redirects=True,
-                          headers={"User-Agent": USER_AGENT, "Referer": API_BASE})
-        if r.status_code in (200, 206, 301, 302):
+        r = requests.get(url, timeout=5, stream=True,
+                         headers={"User-Agent": USER_AGENT, "Referer": API_BASE, "Range": "bytes=0-1024"})
+        if r.status_code in (200, 206):
             return True
         return False
     except Exception:
-        return True
+        return False
 
 
 # ---------------------------------------------------------------------------

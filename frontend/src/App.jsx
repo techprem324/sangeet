@@ -25,7 +25,15 @@ export default function App() {
   const [likedRefresh, setLikedRefresh] = useState(0)
   const [user, setUserState] = useState(getUser())
   const [showAuthModal, setShowAuthModal] = useState(false)
+  const [searchResetTrigger, setSearchResetTrigger] = useState(0)
   const busyRef = useRef(false)
+
+  const handleNavView = useCallback((nextView) => {
+    if (nextView === 'search') {
+      setSearchResetTrigger((n) => n + 1)
+    }
+    setView(nextView)
+  }, [])
 
   const sendChat = useCallback(async (text, moodHint = '') => {
     if (busyRef.current) return
@@ -71,7 +79,7 @@ export default function App() {
       <div className="flex min-h-0 flex-1">
         <Sidebar
           view={view}
-          onView={setView}
+          onView={handleNavView}
           onPill={handlePill}
           user={user}
           onOpenAuth={() => setShowAuthModal(true)}
@@ -132,7 +140,7 @@ export default function App() {
                 onLyrics={openLyrics}
               />
             )}
-            {view === 'search' && <SearchView onLyrics={openLyrics} />}
+            {view === 'search' && <SearchView onLyrics={openLyrics} resetTrigger={searchResetTrigger} />}
 
             {/* Desktop & Mobile Library Views */}
             {view === 'playlists' && (
@@ -191,7 +199,7 @@ export default function App() {
       <MiniPlayer onLyrics={openLyrics} onLikedChange={() => setLikedRefresh((n) => n + 1)} />
 
       {/* Spotify-Style Fixed Bottom Navigation Bar (Mobile / Tablet Only) */}
-      <BottomNav view={view} onView={setView} />
+      <BottomNav view={view} onView={handleNavView} />
 
       {lyricsTrack && <LyricsModal track={lyricsTrack} onClose={() => setLyricsTrack(null)} />}
       {showAuthModal && (

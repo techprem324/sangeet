@@ -46,7 +46,7 @@ function ArtistAvatar({ src, name, size = 'h-16 w-16', textClass = 'text-sm' }) 
   )
 }
 
-export default function SearchView({ onLyrics }) {
+export default function SearchView({ onLyrics, resetTrigger }) {
   const audio = useAudio()
   const [q, setQ] = useState('')
   const [results, setResults] = useState(null)
@@ -62,6 +62,27 @@ export default function SearchView({ onLyrics }) {
   const [toastMessage, setToastMessage] = useState('')
 
   const timer = useRef(null)
+  const containerRef = useRef(null)
+  const searchInputRef = useRef(null)
+
+  // When user clicks the "Search" navigation menu (in sidebar or mobile bottom nav),
+  // directly reset any active playlist/artist/genre view, scroll smoothly to the top of the search bar, and focus input.
+  useEffect(() => {
+    if (resetTrigger > 0) {
+      setActiveHub(null)
+      setQ('')
+      setResults(null)
+      setMatchedLyric(null)
+      if (containerRef.current) {
+        containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+      }
+      setTimeout(() => {
+        if (searchInputRef.current) {
+          searchInputRef.current.focus()
+        }
+      }, 100)
+    }
+  }, [resetTrigger])
 
   // 15+ instant predictions while typing
   const predictions = useMemo(() => {
@@ -144,6 +165,9 @@ export default function SearchView({ onLyrics }) {
   const handleSelectQuery = (queryText) => {
     setActiveHub(null)
     setQ(queryText)
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   const handleSelectArtist = (artist) => {
@@ -151,6 +175,9 @@ export default function SearchView({ onLyrics }) {
     setQ('')
     setResults(null)
     setMatchedLyric(null)
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   const handleSelectGenre = (genre) => {
@@ -158,6 +185,9 @@ export default function SearchView({ onLyrics }) {
     setQ('')
     setResults(null)
     setMatchedLyric(null)
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   const handleSelectPlaylist = (playlist) => {
@@ -165,16 +195,33 @@ export default function SearchView({ onLyrics }) {
     setQ('')
     setResults(null)
     setMatchedLyric(null)
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   const handleClear = () => {
     setQ('')
     setResults(null)
     setMatchedLyric(null)
+    if (searchInputRef.current) {
+      searchInputRef.current.focus()
+    }
   }
 
   const handleBackToSearch = () => {
     setActiveHub(null)
+    setQ('')
+    setResults(null)
+    setMatchedLyric(null)
+    if (containerRef.current) {
+      containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    setTimeout(() => {
+      if (searchInputRef.current) {
+        searchInputRef.current.focus()
+      }
+    }, 100)
   }
 
   // Quick play a full featured playlist directly from card
@@ -273,7 +320,7 @@ export default function SearchView({ onLyrics }) {
   }, [q])
 
   return (
-    <div className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-12">
+    <div ref={containerRef} className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-12">
       <div className="mx-auto max-w-5xl">
         {/* Floating Toast Notification */}
         {toastMessage && (
@@ -299,6 +346,7 @@ export default function SearchView({ onLyrics }) {
           <div className="flex items-center gap-3 rounded-2xl border border-edge bg-surface px-4 py-3.5 shadow-soft transition-all duration-200 focus-within:border-ember/70 focus-within:ring-2 focus-within:ring-ember/20 focus-within:bg-coal/95">
             <SearchIcon size={20} className="text-sand-dim shrink-0" />
             <input
+              ref={searchInputRef}
               value={q}
               onChange={(e) => {
                 if (activeHub) setActiveHub(null)
@@ -364,6 +412,27 @@ export default function SearchView({ onLyrics }) {
         {/* ============================================================= */}
         {activeHub ? (
           <div className="mt-6 space-y-6">
+            {/* Top Back Navigation Bar */}
+            <div className="flex items-center justify-between gap-3 pb-2 pt-0.5 border-b border-edge-soft/80">
+              <button
+                onClick={handleBackToSearch}
+                className="group inline-flex items-center gap-2 rounded-full border border-edge/80 bg-surface px-3.5 py-1.5 text-xs font-semibold text-cream shadow-sm hover:border-ember/60 hover:bg-surface-2 hover:text-ember active:scale-95 transition-all"
+                title="Return to Search & Discover all playlists"
+              >
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-surface-2 text-sand-dim group-hover:bg-ember/20 group-hover:text-ember transition-colors">
+                  ←
+                </span>
+                <span>Back to Search & All Playlists</span>
+              </button>
+
+              <span className="text-xs text-sand-dim hidden sm:inline">
+                Viewing:{' '}
+                <strong className="text-cream">
+                  {activeHub.data.name || activeHub.data.title || activeHub.data.label}
+                </strong>
+              </span>
+            </div>
+
             {/* Quick Switcher Carousel */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar border-b border-edge-soft/60">
               <span className="shrink-0 text-xs font-semibold text-sand-dim pr-1">
@@ -545,9 +614,11 @@ export default function SearchView({ onLyrics }) {
 
                     <button
                       onClick={handleBackToSearch}
-                      className="text-xs text-sand-dim hover:text-cream underline pl-2"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-edge/80 bg-surface/80 px-3.5 py-2 text-xs font-medium text-sand hover:border-ember/40 hover:bg-surface-2 hover:text-cream transition-all active:scale-95"
+                      title="Return to search bar & all playlists"
                     >
-                      ← Back to All Search
+                      <span>←</span>
+                      <span>Back to Search</span>
                     </button>
                   </div>
                 </div>
