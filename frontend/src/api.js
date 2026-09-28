@@ -283,7 +283,14 @@ async function request(path, options = {}, timeoutMs = 4000) {
 }
 
 // All tracks flattened for instant offline search & matching
-const ALL_CATALOG_TRACKS = Object.values(DEFAULT_CATALOGS).flat()
+const ALL_CATALOG_TRACKS = [
+  ...Object.values(DEFAULT_CATALOGS).flat(),
+  ...Object.values(ARTIST_DISCOGRAPHIES).flat(),
+  ...NEW_RELEASES_2025_2026,
+  ...FEATURED_PLAYLISTS.flatMap((p) => p.tracks || []),
+  ...POPULAR_GENRES.flatMap((g) => g.tracks || []),
+  ...FAMOUS_LYRICS_MAP.filter((m) => m.stream_url),
+]
 
 export const api = {
   // Auth
@@ -458,33 +465,43 @@ export const api = {
     const seen = new Set()
     const merged = []
 
-    // If lyrics match found, prioritize it at the top
-    for (const t of catalogMatches) {
-      if (t._score >= 900) {
-        const key = `${t.title}-${t.artist}`.toLowerCase()
-        if (!seen.has(key)) {
-          seen.add(key)
-          merged.push(t)
+    const addWithStream = (t) => {
+      if (!t) return
+      let cand = t
+      if (!cand.stream_url) {
+        const titleL = (cand.title || '').trim().toLowerCase()
+        const found = ALL_CATALOG_TRACKS.find((ct) => {
+          if (!ct || !ct.stream_url) return false
+          const ctl = (ct.title || '').trim().toLowerCase()
+          return ctl === titleL || ctl.includes(titleL) || titleL.includes(ctl)
+        })
+        if (found && found.stream_url) {
+          cand = { ...cand, stream_url: found.stream_url, cover: cand.cover || found.cover }
         }
       }
-    }
-
-    // Add backend live JioSaavn hits
-    for (const t of backendTracks) {
-      const key = `${t.title}-${t.artist}`.toLowerCase()
+      if (!cand.stream_url) return
+      const key = `${cand.title}-${cand.artist}`.toLowerCase()
       if (!seen.has(key)) {
         seen.add(key)
-        merged.push(t)
+        merged.push(cand)
       }
     }
 
-    // Add remaining smart catalog matches
+    // 1. If lyrics match found, prioritize it at the top
     for (const t of catalogMatches) {
-      const key = `${t.title}-${t.artist}`.toLowerCase()
-      if (!seen.has(key)) {
-        seen.add(key)
-        merged.push(t)
+      if (t._score >= 900) {
+        addWithStream(t)
       }
+    }
+
+    // 2. Add backend live JioSaavn hits
+    for (const t of backendTracks) {
+      addWithStream(t)
+    }
+
+    // 3. Add remaining smart catalog matches
+    for (const t of catalogMatches) {
+      addWithStream(t)
     }
 
     return {

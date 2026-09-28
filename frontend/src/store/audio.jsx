@@ -1,6 +1,12 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { DEFAULT_CATALOGS } from '../data/defaultCatalog'
-import { ARTIST_DISCOGRAPHIES } from '../data/searchEngine'
+import {
+  ARTIST_DISCOGRAPHIES,
+  FEATURED_PLAYLISTS,
+  POPULAR_GENRES,
+  NEW_RELEASES_2025_2026,
+  FAMOUS_LYRICS_MAP,
+} from '../data/searchEngine'
 import { api } from '../api'
 
 // One <audio> element for the whole app — like a real player. The queue,
@@ -20,7 +26,36 @@ const fallbackCover = (track) =>
 
 const trackKey = (t) => t?.id || `${t?.title || ''}|${t?.artist || ''}`
 
-const ALL_FALLBACK_TRACKS = Object.values(DEFAULT_CATALOGS).flat()
+const ALL_FALLBACK_TRACKS = [
+  ...Object.values(DEFAULT_CATALOGS).flat(),
+  ...Object.values(ARTIST_DISCOGRAPHIES).flat(),
+  ...NEW_RELEASES_2025_2026,
+  ...FEATURED_PLAYLISTS.flatMap((p) => p.tracks || []),
+  ...POPULAR_GENRES.flatMap((g) => g.tracks || []),
+  ...FAMOUS_LYRICS_MAP.filter((m) => m.stream_url),
+]
+
+function resolveTrackStream(track) {
+  if (!track) return null
+  if (track.stream_url) return track
+
+  const tTitle = (track.title || '').trim().toLowerCase()
+  const match = ALL_FALLBACK_TRACKS.find((t) => {
+    if (!t || !t.stream_url) return false
+    const candTitle = (t.title || '').trim().toLowerCase()
+    return candTitle === tTitle || candTitle.includes(tTitle) || tTitle.includes(candTitle)
+  })
+
+  if (match && match.stream_url) {
+    return {
+      ...track,
+      stream_url: match.stream_url,
+      cover: track.cover || match.cover,
+      duration: track.duration || match.duration || 240,
+    }
+  }
+  return track
+}
 
 /**
  * Finds continuation tracks related to current track to power Spotify-style
@@ -142,6 +177,14 @@ export function AudioProvider({ children }) {
         }
       })
       el.addEventListener('error', () => {
+        // Do not auto-skip if error was just a harmless abort from switching tracks
+        if (el.error && el.error.code === 1) { // MEDIA_ERR_ABORTED
+          return
+        }
+        if (!el.src || el.networkState === 0) {
+          return
+        }
+
         const st = stateRef.current
         const cur = st.current
         const q = cur?.queue || []
@@ -248,12 +291,17 @@ export function AudioProvider({ children }) {
       const el = ensureAudio()
       setError(null)
 
-      let activeTrack = track
+      let activeTrack = resolveTrackStream(track)
       if (!activeTrack.stream_url) {
         try {
           const searchRes = await api.search(`${activeTrack.title} ${activeTrack.artist || ''}`)
-          if (searchRes && searchRes.tracks && searchRes.tracks[0] && searchRes.tracks[0].stream_url) {
-            activeTrack = { ...activeTrack, stream_url: searchRes.tracks[0].stream_url }
+          const candidate = searchRes?.tracks?.find((t) => t && t.stream_url)
+          if (candidate && candidate.stream_url) {
+            activeTrack = {
+              ...activeTrack,
+              stream_url: candidate.stream_url,
+              cover: activeTrack.cover || candidate.cover,
+            }
           }
         } catch { /* ignore */ }
       }
@@ -264,7 +312,6 @@ export function AudioProvider({ children }) {
 
       if (activeTrack.stream_url && el.src !== activeTrack.stream_url) {
         el.src = activeTrack.stream_url
-        el.load()
       }
 
       if (activeTrack.stream_url) {
@@ -273,6 +320,8 @@ export function AudioProvider({ children }) {
           .catch((err) => {
             if (err.name === 'NotAllowedError') {
               setError('Playback paused by browser — tap play button.')
+            } else if (err.name === 'AbortError') {
+              // Benign: interrupted by another play/pause action
             } else {
               setError(null)
             }
