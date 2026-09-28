@@ -143,13 +143,23 @@ def explore():
     return jsonify({"category": category, "tracks": tracks, "offset": offset + len(tracks)})
 
 
+@app.get("/api/search/suggestions")
+def search_suggestions():
+    q = request.args.get("q", "").strip()
+    if not q:
+        return jsonify({"suggestions": []})
+    return jsonify({"suggestions": catalog_service.get_suggestions(q)})
+
+
 @app.get("/api/search")
 def search():
     """Search any song on JioSaavn and get a playable stream."""
     q = request.args.get("q", "").strip()
     if len(q) < 2:
         return jsonify({"tracks": []})
-    return jsonify({"tracks": catalog_service.search_songs(q, limit=12)})
+    tracks = catalog_service.search_songs(q, limit=16)
+    suggestions = catalog_service.get_suggestions(q) if len(q) >= 2 else []
+    return jsonify({"query": q, "tracks": tracks, "suggestions": suggestions})
 
 
 @app.get("/api/lyrics")

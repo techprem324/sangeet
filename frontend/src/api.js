@@ -7,6 +7,7 @@
 import { DEFAULT_CATEGORIES, DEFAULT_CATALOGS } from './data/defaultCatalog'
 import { clientAnalyzeMood, clientGenerateChat } from './data/sentimentAnalyzer'
 import CURATED_LYRICS from './data/curatedLyrics.json'
+import { smartSearchCatalog, FAMOUS_LYRICS_MAP, getSearchPredictions } from './data/searchEngine'
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
@@ -409,39 +410,78 @@ export const api = {
     }
   },
 
+  searchSuggestions: (q) => {
+    return getSearchPredictions(q)
+  },
+
   search: async (q) => {
+    const query = (q || '').trim()
+    if (!query) return { query, tracks: [] }
+
+    const queryLower = query.toLowerCase()
+    // Check if query matches a famous lyrics phrase
+    const lyricMatch = FAMOUS_LYRICS_MAP.find((m) =>
+      m.snippet.toLowerCase().includes(queryLower) ||
+      queryLower.includes(m.snippet.toLowerCase()) ||
+      m.fullPhrase.toLowerCase().includes(queryLower)
+    )
+
+    const effectiveQuery = lyricMatch ? lyricMatch.canonicalQuery : query
+
+    let backendTracks = []
     try {
-      const res = await request(`/search?q=${encodeURIComponent(q)}`, {}, 3500)
+      const res = await request(`/search?q=${encodeURIComponent(effectiveQuery)}`, {}, 3500)
       if (res && Array.isArray(res.tracks) && res.tracks.length > 0) {
-        return res
+        backendTracks = res.tracks
+      } else if (lyricMatch && effectiveQuery !== query) {
+        // Fallback to original query on backend
+        const fallbackRes = await request(`/search?q=${encodeURIComponent(query)}`, {}, 3000)
+        if (fallbackRes && Array.isArray(fallbackRes.tracks)) {
+          backendTracks = fallbackRes.tracks
+        }
       }
     } catch {}
 
-    // Offline / Standalone fuzzy catalog search
-    const query = (q || '').toLowerCase().trim()
-    if (!query) return { query, tracks: [] }
+    // Run client-side fuzzy, keyword & lyrics scoring engine
+    const catalogMatches = smartSearchCatalog(query, ALL_CATALOG_TRACKS)
 
-    const matches = ALL_CATALOG_TRACKS.filter(
-      (t) =>
-        (t.title && t.title.toLowerCase().includes(query)) ||
-        (t.artist && t.artist.toLowerCase().includes(query)) ||
-        (t.album && t.album.toLowerCase().includes(query))
-    )
-
-    // Deduplicate matches by title + artist
+    // Merge backend results with high-confidence catalog matches
     const seen = new Set()
-    const unique = []
-    for (const t of matches) {
+    const merged = []
+
+    // If lyrics match found, prioritize it at the top
+    for (const t of catalogMatches) {
+      if (t._score >= 900) {
+        const key = `${t.title}-${t.artist}`.toLowerCase()
+        if (!seen.has(key)) {
+          seen.add(key)
+          merged.push(t)
+        }
+      }
+    }
+
+    // Add backend live JioSaavn hits
+    for (const t of backendTracks) {
       const key = `${t.title}-${t.artist}`.toLowerCase()
       if (!seen.has(key)) {
         seen.add(key)
-        unique.push(t)
+        merged.push(t)
+      }
+    }
+
+    // Add remaining smart catalog matches
+    for (const t of catalogMatches) {
+      const key = `${t.title}-${t.artist}`.toLowerCase()
+      if (!seen.has(key)) {
+        seen.add(key)
+        merged.push(t)
       }
     }
 
     return {
       query,
-      tracks: unique.slice(0, 20),
+      tracks: merged.slice(0, 25),
+      matchedLyric: lyricMatch ? lyricMatch.snippet : null,
     }
   },
 

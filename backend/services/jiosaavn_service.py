@@ -227,9 +227,37 @@ def _resolve_from_raw(item: dict) -> Optional[str]:
 # Public API
 # ---------------------------------------------------------------------------
 
-def search(query: str, limit: int = 10, resolve: bool = True, page: int = 1) -> List[Dict]:
+def search(query: str, limit: int = 15, resolve: bool = True, page: int = 1) -> List[Dict]:
     """Search JioSaavn by text with pagination. Returns normalized, stream-resolved tracks."""
     q = query.strip()
+    if not q:
+        return []
+
+    valid_tracks = []
+    seen_ids = set()
+
+    # On first page, inspect autocomplete.get for instant exact/lyric match & topquery
+    if page == 1:
+        try:
+            ac = _api("autocomplete.get", {"query": q})
+            if ac and isinstance(ac, dict):
+                candidate_ids = []
+                top_items = ac.get("topquery", {}).get("data", [])
+                for it in top_items:
+                    if it.get("type") == "song" and it.get("id"):
+                        candidate_ids.append(it.get("id"))
+                for it in ac.get("songs", {}).get("data", []):
+                    if it.get("id") and it.get("id") not in candidate_ids:
+                        candidate_ids.append(it.get("id"))
+
+                for sid in candidate_ids[:3]:
+                    dt = get_details(sid, resolve=resolve)
+                    if dt and (not resolve or dt.get("stream_url")):
+                        valid_tracks.append(dt)
+                        seen_ids.add(str(dt.get("id")))
+        except Exception as exc:
+            log.warning("Autocomplete fetch in search failed: %s", exc)
+
     data = _api("search.getResults", {
         "api_version": "4",
         "ctx": "web6dot0",
@@ -238,21 +266,68 @@ def search(query: str, limit: int = 10, resolve: bool = True, page: int = 1) -> 
         "n": str(max(limit, 20)),
     })
     results = data.get("results", []) if data and isinstance(data, dict) else []
-    tracks = [_norm_track(it, resolve=resolve) for it in results[:limit]]
-    valid_tracks = [t for t in tracks if t.get("title") and (not resolve or t.get("stream_url"))]
+    for it in results:
+        it_id = str(it.get("id") or "")
+        if it_id and it_id in seen_ids:
+            continue
+        t = _norm_track(it, resolve=resolve)
+        if t.get("title") and (not resolve or t.get("stream_url")):
+            valid_tracks.append(t)
+            if it_id:
+                seen_ids.add(it_id)
+        if len(valid_tracks) >= limit:
+            break
 
-    if not valid_tracks and resolve and page == 1:
-        # Fallback to autocomplete API + get_details
-        ac = _api("autocomplete.get", {"query": q})
-        if ac and isinstance(ac, dict):
-            song_items = ac.get("songs", {}).get("data", [])
-            for item in song_items[:limit]:
-                sid = item.get("id")
-                if sid:
-                    dt = get_details(sid, resolve=True)
-                    if dt and dt.get("stream_url"):
-                        valid_tracks.append(dt)
+    # If results are still low and query doesn't already contain 'songs', try querying with 'songs'
+    if len(valid_tracks) < 4 and page == 1 and "song" not in q.lower():
+        more_data = _api("search.getResults", {
+            "api_version": "4",
+            "ctx": "web6dot0",
+            "q": f"{q} songs",
+            "p": "1",
+            "n": "15",
+        })
+        more_results = more_data.get("results", []) if more_data and isinstance(more_data, dict) else []
+        for it in more_results:
+            it_id = str(it.get("id") or "")
+            if it_id and it_id in seen_ids:
+                continue
+            t = _norm_track(it, resolve=resolve)
+            if t.get("title") and (not resolve or t.get("stream_url")):
+                valid_tracks.append(t)
+                if it_id:
+                    seen_ids.add(it_id)
+            if len(valid_tracks) >= limit:
+                break
+
     return valid_tracks
+
+
+def get_suggestions(query: str) -> List[Dict]:
+    """Returns instant suggestions and entities (songs, artists) for autocomplete."""
+    q = query.strip()
+    if not q:
+        return []
+    ac = _api("autocomplete.get", {"query": q})
+    if not ac or not isinstance(ac, dict):
+        return []
+    suggestions = []
+    seen = set()
+
+    for item in ac.get("artists", {}).get("data", [])[:3]:
+        name = item.get("title")
+        if name and name.lower() not in seen:
+            seen.add(name.lower())
+            suggestions.append({"text": name, "type": "artist", "badge": "Artist"})
+
+    for item in ac.get("songs", {}).get("data", [])[:5]:
+        title = item.get("title")
+        singers = item.get("more_info", {}).get("singers") or item.get("description", "")
+        if title and title.lower() not in seen:
+            seen.add(title.lower())
+            suggestions.append({"text": title, "type": "song", "subtitle": singers, "badge": "Song"})
+
+    return suggestions
 
 
 def get_details(song_id: str, resolve: bool = True) -> Optional[Dict]:

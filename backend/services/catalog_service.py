@@ -292,9 +292,63 @@ def category_tracks(category_key: str, limit: int = 50, resolve: bool = True) ->
     return [_public_track(t) for t in tracks]
 
 
-def search_songs(query: str, limit: int = 12) -> List[Dict]:
-    """Live JioSaavn search — powers the app-wide search box."""
-    return jiosaavn_service.search(query, limit=limit, resolve=True)
+def search_songs(query: str, limit: int = 15) -> List[Dict]:
+    """Live JioSaavn search + curated catalog matches — powers the app-wide search box."""
+    q = (query or "").strip().lower()
+    if not q:
+        return []
+
+    # 1. Check curated catalog for exact / high-confidence matches
+    catalog = _load_catalog()
+    catalog_hits = []
+    seen = set()
+
+    for cat_data in catalog.values():
+        for t in cat_data.get("tracks", []):
+            title = t.get("title", "").lower()
+            artist = t.get("artist", "").lower()
+            q_field = t.get("query", "").lower()
+            if q in title or q in artist or q in q_field or title in q:
+                key = (title, artist)
+                if key not in seen:
+                    seen.add(key)
+                    catalog_hits.append(t)
+                    if len(catalog_hits) >= 3:
+                        break
+        if len(catalog_hits) >= 3:
+            break
+
+    hydrated_catalog = hydrate_many(catalog_hits) if catalog_hits else []
+    public_catalog = [_public_track(t) for t in hydrated_catalog if t.get("stream_url")]
+
+    # 2. JioSaavn live search
+    saavn_hits = jiosaavn_service.search(query, limit=limit, resolve=True)
+
+    # 3. Merge & deduplicate
+    final_tracks = []
+    seen_ids = set()
+
+    for t in public_catalog:
+        tid = str(t.get("id") or t.get("title"))
+        seen_ids.add(tid)
+        seen_ids.add(f"{t.get('title')}-{t.get('artist')}".lower())
+        final_tracks.append(t)
+
+    for t in saavn_hits:
+        tid = str(t.get("id") or "")
+        key = f"{t.get('title')}-{t.get('artist')}".lower()
+        if tid not in seen_ids and key not in seen_ids:
+            seen_ids.add(tid)
+            seen_ids.add(key)
+            final_tracks.append(t)
+        if len(final_tracks) >= limit:
+            break
+
+    return final_tracks
+
+
+def get_suggestions(query: str) -> List[Dict]:
+    return jiosaavn_service.get_suggestions(query)
 
 
 def explore(category_key: str, count: int = 12, offset: int = 0, seen_ids: Optional[List[str]] = None) -> List[Dict]:
