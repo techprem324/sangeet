@@ -7,7 +7,16 @@
 import { DEFAULT_CATEGORIES, DEFAULT_CATALOGS } from './data/defaultCatalog'
 import { clientAnalyzeMood, clientGenerateChat } from './data/sentimentAnalyzer'
 import CURATED_LYRICS from './data/curatedLyrics.json'
-import { smartSearchCatalog, FAMOUS_LYRICS_MAP, getSearchPredictions, POPULAR_SINGERS, ARTIST_DISCOGRAPHIES } from './data/searchEngine'
+import {
+  smartSearchCatalog,
+  FAMOUS_LYRICS_MAP,
+  getSearchPredictions,
+  POPULAR_SINGERS,
+  ARTIST_DISCOGRAPHIES,
+  FEATURED_PLAYLISTS,
+  POPULAR_GENRES,
+  NEW_RELEASES_2025_2026,
+} from './data/searchEngine'
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
@@ -545,6 +554,270 @@ export const api = {
       artist,
       tracks: combined.slice(0, 40),
       total: combined.length,
+    }
+  },
+
+  getGenrePlaylist: async (genreId) => {
+    const genre =
+      POPULAR_GENRES.find((g) => g.id === genreId || g.label.toLowerCase() === (genreId || '').toLowerCase()) ||
+      POPULAR_GENRES[0]
+
+    const catKey =
+      {
+        romantic: 'romantic',
+        sad: 'heartbreak',
+        lofi: 'focus_lofi',
+        punjabi: 'party',
+        retro: 'nostalgic',
+        gym: 'gym_power',
+        indie: 'chill_sunday',
+        sufi: 'sufi',
+      }[genre.id] || 'romantic'
+
+    const catalogTracks = (DEFAULT_CATALOGS[catKey] || []).map((t) => ({
+      ...t,
+      genre_name: genre.label,
+      badge: 'Verified Master',
+    }))
+
+    // Handpicked discography matches for rich variety
+    let discHits = []
+    if (genre.id === 'romantic') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['shreya_ghoshal'] || []).slice(0, 5),
+        ...(ARTIST_DISCOGRAPHIES['atif_aslam'] || []).slice(0, 4),
+      ]
+    } else if (genre.id === 'sad') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['b_praak'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(4, 9),
+        ...(ARTIST_DISCOGRAPHIES['kk'] || []).slice(0, 4),
+        ...(ARTIST_DISCOGRAPHIES['atif_aslam'] || []).slice(3, 6),
+      ]
+    } else if (genre.id === 'lofi') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['anuv_jain'] || []).slice(0, 9),
+        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 4),
+      ]
+    } else if (genre.id === 'punjabi') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 6),
+      ]
+    } else if (genre.id === 'retro') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['kishore_kumar'] || []).slice(0, 10),
+        ...(ARTIST_DISCOGRAPHIES['sonu_nigam'] || []).slice(0, 6),
+      ]
+    } else if (genre.id === 'gym') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 5),
+        ...(ARTIST_DISCOGRAPHIES['mohit_chauhan'] || []).filter((t) => t.title.includes('Saadda') || t.title.includes('Rockstar')),
+      ]
+    } else if (genre.id === 'indie') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['anuv_jain'] || []).slice(0, 9),
+        ...(ARTIST_DISCOGRAPHIES['mohit_chauhan'] || []).slice(0, 5),
+      ]
+    } else if (genre.id === 'sufi') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['mohit_chauhan'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['b_praak'] || []).slice(8, 11),
+      ]
+    }
+
+    let liveTracks = []
+    try {
+      const res = await request(`/search?q=${encodeURIComponent(genre.query || genre.label)}`, {}, 3500)
+      if (res && Array.isArray(res.tracks)) {
+        liveTracks = res.tracks
+      }
+    } catch {}
+
+    const seen = new Set()
+    const combined = []
+
+    for (const t of [...catalogTracks, ...discHits, ...liveTracks]) {
+      if (!t || !t.stream_url) continue
+      const normTitle = (t.title || '').replace(/\(From.*?\)|\[.*?\]/gi, '').trim().toLowerCase()
+      const normArtist = (t.artist || '').split(/[,&]/)[0].trim().toLowerCase()
+      const key = `${normTitle}|${normArtist}`
+      if (!seen.has(key)) {
+        seen.add(key)
+        combined.push({
+          ...t,
+          genre_name: genre.label,
+        })
+      }
+    }
+
+    return {
+      genre,
+      tracks: combined.slice(0, 35),
+      total: combined.length,
+    }
+  },
+
+  getFeaturedPlaylist: async (playlistId) => {
+    const pl = FEATURED_PLAYLISTS.find((p) => p.id === playlistId) || FEATURED_PLAYLISTS[0]
+
+    let initialTracks = []
+    if (pl.id === 'trending_top_50') {
+      initialTracks = [
+        ...NEW_RELEASES_2025_2026,
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 5),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 4),
+        ...(ARTIST_DISCOGRAPHIES['anuv_jain'] || []).slice(0, 4),
+        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 4),
+      ]
+    } else if (pl.id === 'bollywood_romance_2025') {
+      initialTracks = [
+        ...(DEFAULT_CATALOGS['romantic'] || []),
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['shreya_ghoshal'] || []).slice(0, 5),
+        ...(ARTIST_DISCOGRAPHIES['atif_aslam'] || []).slice(0, 5),
+      ]
+    } else if (pl.id === 'punjabi_wave_trap') {
+      initialTracks = [
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []),
+        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []),
+        ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []),
+      ]
+    } else if (pl.id === 'late_night_lofi') {
+      initialTracks = [
+        ...(DEFAULT_CATALOGS['focus_lofi'] || []),
+        ...(ARTIST_DISCOGRAPHIES['anuv_jain'] || []),
+        ...(DEFAULT_CATALOGS['chill_sunday'] || []).slice(0, 6),
+      ]
+    } else if (pl.id === 'party_club_bangers') {
+      initialTracks = [
+        ...(DEFAULT_CATALOGS['party'] || []),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['b_praak'] || []).slice(0, 4),
+      ]
+    } else if (pl.id === 'retro_golden_classics') {
+      initialTracks = [
+        ...(DEFAULT_CATALOGS['nostalgic'] || []),
+        ...(ARTIST_DISCOGRAPHIES['kishore_kumar'] || []),
+        ...(ARTIST_DISCOGRAPHIES['sonu_nigam'] || []).slice(0, 5),
+      ]
+    } else if (pl.id === 'heartbreak_catharsis') {
+      initialTracks = [
+        ...(DEFAULT_CATALOGS['heartbreak'] || []),
+        ...(ARTIST_DISCOGRAPHIES['b_praak'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(4, 9),
+        ...(ARTIST_DISCOGRAPHIES['kk'] || []).slice(0, 5),
+      ]
+    }
+
+    const seen = new Set()
+    const combined = []
+    for (const t of initialTracks) {
+      if (!t || !t.stream_url) continue
+      const normTitle = (t.title || '').replace(/\(From.*?\)|\[.*?\]/gi, '').trim().toLowerCase()
+      const normArtist = (t.artist || '').split(/[,&]/)[0].trim().toLowerCase()
+      const key = `${normTitle}|${normArtist}`
+      if (!seen.has(key)) {
+        seen.add(key)
+        combined.push({
+          ...t,
+          playlist_name: pl.title,
+        })
+      }
+    }
+
+    return {
+      playlist: pl,
+      tracks: combined.slice(0, 35),
+      total: combined.length,
+    }
+  },
+
+  generateMoreTracks: async ({ type, id, name, seenIds = [] }) => {
+    const seenSet = new Set((seenIds || []).map((x) => String(x).toLowerCase().replace(/[^a-z0-9]/g, '')))
+    let freshTracks = []
+
+    // 1. Try querying backend for fresh related tracks
+    try {
+      let queryStr = name || ''
+      if (type === 'artist') {
+        const variants = ['hits songs', 'romantic acoustic', 'live album', 'greatest hits']
+        const pick = variants[Math.floor(Math.random() * variants.length)]
+        queryStr = `${name} ${pick}`
+      } else {
+        queryStr = `${name} 2025 songs`
+      }
+
+      const res = await request(`/search?q=${encodeURIComponent(queryStr)}`, {}, 3800)
+      if (res && Array.isArray(res.tracks)) {
+        for (const t of res.tracks) {
+          if (!t || !t.stream_url) continue
+          const k1 = (t.id || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+          const k2 = (t.title || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+          if (!seenSet.has(k1) && !seenSet.has(k2)) {
+            seenSet.add(k1)
+            seenSet.add(k2)
+            freshTracks.push({
+              ...t,
+              badge: 'Generated Fresh',
+            })
+          }
+        }
+      }
+    } catch {}
+
+    // 2. Client-side fallback from full catalog and discographies
+    if (freshTracks.length < 8) {
+      const allPool = [
+        ...ALL_CATALOG_TRACKS,
+        ...Object.values(ARTIST_DISCOGRAPHIES).flat(),
+        ...NEW_RELEASES_2025_2026,
+      ]
+
+      const nameLower = (name || '').toLowerCase()
+      const candidates = allPool.filter((t) => {
+        if (!t || !t.stream_url) return false
+        const k1 = (t.id || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+        const k2 = (t.title || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+        if (seenSet.has(k1) || seenSet.has(k2)) return false
+
+        const tArtist = (t.artist || '').toLowerCase()
+        const tTitle = (t.title || '').toLowerCase()
+        const tCat = (t.category || '').toLowerCase()
+        return tArtist.includes(nameLower) || nameLower.includes(tArtist.split(',')[0]) || tCat.includes(nameLower)
+      })
+
+      const fillPool =
+        candidates.length >= 6
+          ? candidates
+          : allPool.filter((t) => {
+              if (!t || !t.stream_url) return false
+              const k1 = (t.id || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+              const k2 = (t.title || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+              return !seenSet.has(k1) && !seenSet.has(k2)
+            })
+
+      for (const t of fillPool) {
+        const k1 = (t.id || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+        const k2 = (t.title || '').toLowerCase().replace(/[^a-z0-9]/g, '')
+        if (!seenSet.has(k1) && !seenSet.has(k2)) {
+          seenSet.add(k1)
+          seenSet.add(k2)
+          freshTracks.push({
+            ...t,
+            badge: 'Generated Fresh',
+          })
+          if (freshTracks.length >= 12) break
+        }
+      }
+    }
+
+    return {
+      tracks: freshTracks.slice(0, 12),
+      count: freshTracks.length,
     }
   },
 
