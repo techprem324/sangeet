@@ -147,16 +147,30 @@ export function AudioProvider({ children }) {
         const q = cur?.queue || []
         const nextIdx = (cur?.index ?? 0) + 1
 
-        if (nextIdx < q.length) {
-          const nextTrack = q[nextIdx]
-          if (nextTrack && nextTrack.stream_url) {
-            setCurrent({ track: nextTrack, queue: q, index: nextIdx })
-            el.src = nextTrack.stream_url
+        // Try next track in current queue
+        for (let i = nextIdx; i < q.length; i++) {
+          const cand = q[i]
+          if (cand && cand.stream_url) {
+            setCurrent({ track: cand, queue: q, index: i })
+            el.src = cand.stream_url
             el.play().catch(() => {})
             setError(`Auto-skipped “${cur?.track?.title || 'track'}” (stream unavailable). Playing next…`)
             return
           }
         }
+
+        // If queue exhausted or no valid stream found, pick verified continuation track
+        const moreTracks = findRelatedContinuation(cur?.track, q)
+        const workingTrack = moreTracks.find((t) => t && t.stream_url)
+        if (workingTrack) {
+          const newQ = [...q, workingTrack]
+          setCurrent({ track: workingTrack, queue: newQ, index: newQ.length - 1 })
+          el.src = workingTrack.stream_url
+          el.play().catch(() => {})
+          setError(`Auto-skipped “${cur?.track?.title || 'track'}”. Playing next…`)
+          return
+        }
+
         setError('This track could not be streamed right now.')
         setPlaying(false)
       })

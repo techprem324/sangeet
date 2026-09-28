@@ -474,6 +474,9 @@ export default function SearchView({ onLyrics }) {
                         <img
                           src={audio.fallbackCover(topTrack)}
                           alt={topTrack.title}
+                          onError={(e) => {
+                            e.currentTarget.src = audio.fallbackCover(null)
+                          }}
                           className="h-24 w-24 rounded-xl object-cover shadow-md shrink-0"
                         />
                         <div className="min-w-0 flex-1">
@@ -592,8 +595,11 @@ export default function SearchView({ onLyrics }) {
                     >
                       <div className="relative aspect-square w-full overflow-hidden rounded-xl bg-surface-2">
                         <img
-                          src={nr.cover}
+                          src={audio.fallbackCover(nr)}
                           alt={nr.title}
+                          onError={(e) => {
+                            e.currentTarget.src = audio.fallbackCover(null)
+                          }}
                           className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         />
                         <button

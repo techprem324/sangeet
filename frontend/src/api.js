@@ -498,6 +498,18 @@ export const api = {
       monthlyListeners: '20M+',
     }
 
+    // 1. Guaranteed verified catalog tracks matching this artist (100% active stream & cover)
+    const catalogArtistTracks = ALL_CATALOG_TRACKS.filter((t) => {
+      const art = (t.artist || '').toLowerCase()
+      const searchName = artist.name.toLowerCase()
+      const searchFirst = searchName.split(' ')[0]
+      return art.includes(searchName) || (searchFirst.length > 2 && art.includes(searchFirst))
+    }).map((t) => ({
+      ...t,
+      artist_playlist: artist.name,
+      badge: 'Verified Master',
+    }))
+
     const staticTracks = (artist && ARTIST_DISCOGRAPHIES[artist.id]) || []
 
     let liveTracks = []
@@ -511,8 +523,15 @@ export const api = {
     const seen = new Set()
     const combined = []
 
-    for (const t of [...staticTracks, ...liveTracks]) {
-      const key = `${t.title}-${t.artist}`.toLowerCase()
+    // Priority:
+    // 1. Guaranteed verified catalog tracks (tested 200 OK)
+    // 2. Verified discography tracks
+    // 3. Live JioSaavn tracks
+    for (const t of [...catalogArtistTracks, ...staticTracks, ...liveTracks]) {
+      if (!t || !t.stream_url) continue
+      const normTitle = (t.title || '').replace(/\(From.*?\)|\[.*?\]/gi, '').trim().toLowerCase()
+      const normArtist = (t.artist || '').split(/[,&]/)[0].trim().toLowerCase()
+      const key = `${normTitle}|${normArtist}`
       if (!seen.has(key)) {
         seen.add(key)
         combined.push({

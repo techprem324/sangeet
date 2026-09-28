@@ -242,12 +242,15 @@ def search(query: str, limit: int = 15, resolve: bool = True, page: int = 1) -> 
             ac = _api("autocomplete.get", {"query": q})
             if ac and isinstance(ac, dict):
                 candidate_ids = []
-                top_items = ac.get("topquery", {}).get("data", [])
+                top_dict = ac.get("topquery") if isinstance(ac.get("topquery"), dict) else {}
+                top_items = top_dict.get("data", []) if isinstance(top_dict.get("data"), list) else []
                 for it in top_items:
-                    if it.get("type") == "song" and it.get("id"):
+                    if isinstance(it, dict) and it.get("type") == "song" and it.get("id"):
                         candidate_ids.append(it.get("id"))
-                for it in ac.get("songs", {}).get("data", []):
-                    if it.get("id") and it.get("id") not in candidate_ids:
+                songs_dict = ac.get("songs") if isinstance(ac.get("songs"), dict) else {}
+                songs_items = songs_dict.get("data", []) if isinstance(songs_dict.get("data"), list) else []
+                for it in songs_items:
+                    if isinstance(it, dict) and it.get("id") and it.get("id") not in candidate_ids:
                         candidate_ids.append(it.get("id"))
 
                 for sid in candidate_ids[:3]:
@@ -314,15 +317,23 @@ def get_suggestions(query: str) -> List[Dict]:
     suggestions = []
     seen = set()
 
-    for item in ac.get("artists", {}).get("data", [])[:3]:
+    artists_raw = ac.get("artists")
+    artists_data = artists_raw.get("data", []) if isinstance(artists_raw, dict) else []
+    for item in (artists_data if isinstance(artists_data, list) else [])[:3]:
+        if not isinstance(item, dict):
+            continue
         name = item.get("title")
         if name and name.lower() not in seen:
             seen.add(name.lower())
             suggestions.append({"text": name, "type": "artist", "badge": "Artist"})
 
-    for item in ac.get("songs", {}).get("data", [])[:5]:
+    songs_raw = ac.get("songs")
+    songs_data = songs_raw.get("data", []) if isinstance(songs_raw, dict) else []
+    for item in (songs_data if isinstance(songs_data, list) else [])[:5]:
+        if not isinstance(item, dict):
+            continue
         title = item.get("title")
-        singers = item.get("more_info", {}).get("singers") or item.get("description", "")
+        singers = item.get("more_info", {}).get("singers") if isinstance(item.get("more_info"), dict) else item.get("description", "")
         if title and title.lower() not in seen:
             seen.add(title.lower())
             suggestions.append({"text": title, "type": "song", "subtitle": singers, "badge": "Song"})
@@ -340,8 +351,13 @@ def get_details(song_id: str, resolve: bool = True) -> Optional[Dict]:
     data = _api("song.getDetails", {"cc": "in", "pids": song_id})
     if not data or not isinstance(data, dict):
         return None
-    item = data.get(song_id) or next(iter(data.values()), None)
-    if not item:
+    item = data.get(song_id)
+    if not isinstance(item, dict):
+        for val in data.values():
+            if isinstance(val, dict):
+                item = val
+                break
+    if not isinstance(item, dict):
         return None
     track = {
         "id": song_id,

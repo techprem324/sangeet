@@ -12,14 +12,16 @@ function fmt(sec) {
   return `${Math.floor(sec / 60)}:${Math.floor(sec % 60).toString().padStart(2, '0')}`
 }
 
+const DEFAULT_COVER =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><rect width="160" height="160" fill="#2c231c"/><circle cx="80" cy="84" r="34" fill="none" stroke="#e09a4e" strokeWidth="6"/><circle cx="80" cy="84" r="13" fill="#e09a4e"/></svg>'
+  )
+
 // A little vinyl record: cover art as the label, grooves around it.
 // It rotates slowly while a song plays — the tiny "this is playing" joy.
 function Vinyl({ cover, playing }) {
-  const art = cover
-    ? cover
-    : 'data:image/svg+xml;utf8,' + encodeURIComponent(
-        '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160"><rect width="160" height="160" fill="#2c231c"/><circle cx="80" cy="84" r="34" fill="none" stroke="#e09a4e" strokeWidth="6"/><circle cx="80" cy="84" r="13" fill="#e09a4e"/></svg>'
-      )
+  const art = cover || DEFAULT_COVER
   return (
     <div className="relative h-12 w-12 shrink-0 select-none">
       <svg viewBox="0 0 48 48" className={`h-full w-full ${playing ? 'animate-spin-slow' : ''}`}>
@@ -30,7 +32,16 @@ function Vinyl({ cover, playing }) {
         <circle cx="24" cy="24" r="22" fill="none" stroke="#241d17" strokeWidth="1.5" />
       </svg>
       <div className="absolute inset-[5px] overflow-hidden rounded-full">
-        <img src={art} alt="" className="h-full w-full object-cover" />
+        <img
+          src={art}
+          alt=""
+          onError={(e) => {
+            if (e.currentTarget.src !== DEFAULT_COVER) {
+              e.currentTarget.src = DEFAULT_COVER
+            }
+          }}
+          className="h-full w-full object-cover"
+        />
       </div>
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="h-[7px] w-[7px] rounded-full bg-coal ring-1 ring-edge" />
@@ -248,7 +259,16 @@ export default function MiniPlayer({ onLyrics, onLikedChange }) {
                 tabIndex={0}
               >
                 <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-edge/50 bg-surface-3">
-                  <img src={cover} alt="" className="h-full w-full object-cover" />
+                  <img
+                    src={cover || DEFAULT_COVER}
+                    alt=""
+                    onError={(e) => {
+                      if (e.currentTarget.src !== DEFAULT_COVER) {
+                        e.currentTarget.src = DEFAULT_COVER
+                      }
+                    }}
+                    className="h-full w-full object-cover"
+                  />
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="truncate text-xs font-semibold text-cream">{track.title}</div>
@@ -327,7 +347,16 @@ export default function MiniPlayer({ onLyrics, onLikedChange }) {
             {/* Large Responsive Artwork */}
             <div className="flex-1 flex items-center justify-center py-4 min-h-[220px]">
               <div className="relative w-64 h-64 max-w-[70vw] max-h-[70vw] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-edge/60">
-                <img src={cover} alt="" className="h-full w-full object-cover" />
+                <img
+                  src={cover || DEFAULT_COVER}
+                  alt=""
+                  onError={(e) => {
+                    if (e.currentTarget.src !== DEFAULT_COVER) {
+                      e.currentTarget.src = DEFAULT_COVER
+                    }
+                  }}
+                  className="h-full w-full object-cover"
+                />
               </div>
             </div>
 

@@ -161,222 +161,1335 @@ export const POPULAR_SINGERS = [
  */
 export const NEW_RELEASES_2025_2026 = [
   {
-    id: 'nr_gehra_hua',
-    title: 'Gehra Hua',
-    artist: 'Shashwat Sachdev, Arijit Singh, Irshad Kamil',
-    album: 'Dhurandhar',
-    cover: 'https://c.saavncdn.com/475/Dhurandhar-Hindi-2025-20260203083204-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/450/49d4be2a507e155490479bb33320390f_320.mp4',
-    duration: 254,
-    badge: 'Trending #1',
-    category: 'romantic',
-    year: '2025',
+    "id": "nr_1",
+    "title": "Apna Bana Le",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Arijit Singh",
+    "album": "Best of 2025",
+    "cover": "https://c.saavncdn.com/960/Best-of-2025-Hindi-2025-20251231141050-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/960/db549ef7360e430ba9351369c39d7fd2_320.mp4",
+    "duration": 261,
+    "badge": "Trending #1",
+    "year": "2025"
   },
   {
-    id: 'nr_satranga',
-    title: 'Satranga',
-    artist: 'Arijit Singh, Shreyas Puranik, Siddharth-Garima',
-    album: 'Animal',
-    cover: 'https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20231124191036-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4',
-    duration: 271,
-    badge: 'Chartbuster',
-    category: 'romantic',
-    year: '2024',
+    "id": "nr_2",
+    "title": "Zaalima",
+    "artist": "Arijit Singh, Harshdeep Kaur",
+    "album": "Best of 2025",
+    "cover": "https://c.saavncdn.com/960/Best-of-2025-Hindi-2025-20251231141050-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/960/93fcdbb7bfd475fe2fbec55ad4fcae4b_320.mp4",
+    "duration": 299,
+    "badge": "Chartbuster",
+    "year": "2025"
   },
   {
-    id: 'nr_chaleya',
-    title: 'Chaleya',
-    artist: 'Arijit Singh, Shilpa Rao, Anirudh Ravichander',
-    album: 'Jawan',
-    cover: 'https://c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014339-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4',
-    duration: 200,
-    badge: 'Global Hit',
-    category: 'romantic',
-    year: '2024',
+    "id": "nr_3",
+    "title": "Gehra Hua (From &quot;Dhurandhar&quot;)",
+    "artist": "Arijit Singh, Armaan Khan",
+    "album": "Gehra Hua (From &quot;Dhurandhar&quot;)",
+    "cover": "https://c.saavncdn.com/450/Gehra-Hua-From-Dhurandhar-Hindi-2025-20251205154217-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/450/f467e05e2825cec2203546333e0d0550_320.mp4",
+    "duration": 362,
+    "badge": "Chartbuster",
+    "year": "2025"
   },
   {
-    id: 'nr_sajni',
-    title: 'Sajni',
-    artist: 'Arijit Singh, Ram Sampath, Prashant Pandey',
-    album: 'Laapataa Ladies',
-    cover: 'https://c.saavncdn.com/588/Laapataa-Ladies-Hindi-2024-20240212183515-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/588/75e53e4334a1b808940865c3bb9da531_320.mp4',
-    duration: 170,
-    badge: 'Popular',
-    category: 'romantic',
-    year: '2024',
+    "id": "nr_4",
+    "title": "Tainu Khabar Nahi",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Arijit Singh",
+    "album": "Best of 2025",
+    "cover": "https://c.saavncdn.com/960/Best-of-2025-Hindi-2025-20251231141050-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/960/c8edd07c5972a030b46112fdb055664c_320.mp4",
+    "duration": 188,
+    "badge": "Chartbuster",
+    "year": "2025"
   },
   {
-    id: 'nr_husn',
-    title: 'Husn',
-    artist: 'Anuv Jain',
-    album: 'Husn',
-    cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/436/fc09c250914838634127c5972f053dc7_320.mp4',
-    duration: 218,
-    badge: 'Indie Viral',
-    category: 'chill_sunday',
-    year: '2024',
+    "id": "nr_5",
+    "title": "Arz Kiya Hai | Coke Studio Bharat",
+    "artist": "Anuv Jain",
+    "album": "Arz Kiya Hai | Coke Studio Bharat",
+    "cover": "https://c.saavncdn.com/504/Arz-Kiya-Hai-Coke-Studio-Bharat-Hindi-2025-20250818054005-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/504/a70f9144a360aa064fadffa886e7c8b6_320.mp4",
+    "duration": 294,
+    "badge": "Chartbuster",
+    "year": "2025"
   },
   {
-    id: 'nr_with_you',
-    title: 'With You',
-    artist: 'AP Dhillon',
-    album: 'With You',
-    cover: 'https://c.saavncdn.com/472/With-You-Punjabi-2023-20230822145201-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/472/a1df3e8e19c3548972886a3782b683cf_320.mp4',
-    duration: 154,
-    badge: 'Punjabi Lo-Fi',
-    category: 'romantic',
-    year: '2024',
+    "id": "nr_6",
+    "title": "Barbaad",
+    "artist": "The Rish, Jubin Nautiyal",
+    "album": "Saiyaara",
+    "cover": "https://c.saavncdn.com/598/Saiyaara-Hindi-2025-20250703061754-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/598/9117397be2712fb843b268a7c16b941a_320.mp4",
+    "duration": 357,
+    "badge": "Chartbuster",
+    "year": "2025"
   },
   {
-    id: 'nr_heeriye',
-    title: 'Heeriye',
-    artist: 'Jasleen Royal, Arijit Singh',
-    album: 'Heeriye',
-    cover: 'https://c.saavncdn.com/022/Heeriye-feat-Arijit-Singh-Hindi-2023-20230724043046-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/022/c7625b139783f98c8c7f66a9d7211bf5_320.mp4',
-    duration: 194,
-    badge: 'Duet Hit',
-    category: 'romantic',
-    year: '2024',
+    "id": "nr_7",
+    "title": "Saiyaara",
+    "artist": "Tanishk Bagchi, Faheem Abdullah, Arslan Nizami, Irshad Kamil",
+    "album": "Saiyaara",
+    "cover": "https://c.saavncdn.com/598/Saiyaara-Hindi-2025-20250703061754-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/598/7323a0d8686f6c1b9c21f098c23a9557_320.mp4",
+    "duration": 370,
+    "badge": "Chartbuster",
+    "year": "2025"
   },
   {
-    id: 'nr_o_maahi',
-    title: 'O Maahi',
-    artist: 'Pritam, Arijit Singh, Irshad Kamil',
-    album: 'Dunki',
-    cover: 'https://c.saavncdn.com/161/Dunki-Hindi-2023-20231216113204-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/161/29d2f6277e928eeaa424ea45d9e5b98a_320.mp4',
-    duration: 233,
-    badge: 'Soulful',
-    category: 'romantic',
-    year: '2024',
-  },
-  {
-    id: 'nr_pehle_bhi_main',
-    title: 'Pehle Bhi Main',
-    artist: 'Vishal Mishra, Raj Shekhar',
-    album: 'Animal',
-    cover: 'https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20231124191036-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/092/9d2f44482eb55b252033c46e01a1e05a_320.mp4',
-    duration: 250,
-    badge: 'Atmospheric',
-    category: 'heartbreak',
-    year: '2024',
-  },
-  {
-    id: 'nr_ve_kamleya',
-    title: 'Ve Kamleya',
-    artist: 'Arijit Singh, Shreya Ghoshal, Pritam',
-    album: 'Rocky Aur Rani Kii Prem Kahaani',
-    cover: 'https://c.saavncdn.com/834/Rocky-Aur-Rani-Kii-Prem-Kahaani-Hindi-2023-20230731141006-500x500.jpg',
-    stream_url: 'https://aac.saavncdn.com/834/6fcfa60fa0d6a89c9225c5d0124f5c9e_320.mp4',
-    duration: 247,
-    badge: 'Masterpiece',
-    category: 'romantic',
-    year: '2024',
-  },
+    "id": "nr_8",
+    "title": "Vaaroon Trending Version",
+    "artist": "Ginny Diwan, Anand Bhaskar, Romy",
+    "album": "Vaaroon Trending Version",
+    "cover": "https://c.saavncdn.com/037/Vaaroon-Trending-Version-Hindi-2025-20250709213623-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/037/5c1b6f34a94c685bd67cb567bf688e6a_320.mp4",
+    "duration": 151,
+    "badge": "Chartbuster",
+    "year": "2025"
+  }
 ]
 
 /**
- * Dedicated Artist Playlists (25-30+ curated tracks per artist)
- * Guarantees that selecting an artist yields a complete, pure-artist playlist!
+ * Dedicated Artist Playlists (Verified 320 kbps & Active CDNs)
  */
 export const ARTIST_DISCOGRAPHIES = {
-  arijit_singh: [
-    { title: 'Gehra Hua', artist: 'Shashwat Sachdev, Arijit Singh', album: 'Dhurandhar', duration: 254, cover: 'https://c.saavncdn.com/475/Dhurandhar-Hindi-2025-20260203083204-500x500.jpg', stream_url: 'https://aac.saavncdn.com/450/49d4be2a507e155490479bb33320390f_320.mp4' },
-    { title: 'Tum Hi Ho', artist: 'Arijit Singh, Mithoon', album: 'Aashiqui 2', duration: 262, cover: 'https://c.saavncdn.com/430/Aashiqui-2-Hindi-2013-500x500.jpg', stream_url: 'https://aac.saavncdn.com/430/ddb5e39d424b9101b7a2d4b8e21a8dcf_320.mp4' },
-    { title: 'Kesariya', artist: 'Pritam, Arijit Singh, Amitabh Bhattacharya', album: 'Brahmastra', duration: 268, cover: 'https://c.saavncdn.com/832/Brahmastra-Hindi-2022-20221006170313-500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Apna Bana Le', artist: 'Arijit Singh, Sachin-Jigar', album: 'Bhediya', duration: 261, cover: 'https://c.saavncdn.com/829/Bhediya-Hindi-2023-20230713175817-500x500.jpg', stream_url: 'https://aac.saavncdn.com/829/c03d7c3453ea138541cb4e605d8f668d_320.mp4' },
-    { title: 'Satranga', artist: 'Arijit Singh, Shreyas Puranik', album: 'Animal', duration: 271, cover: 'https://c.saavncdn.com/092/ANIMAL-Hindi-2023-20231124191036-500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Channa Mereya', artist: 'Pritam, Arijit Singh', album: 'Ae Dil Hai Mushkil', duration: 289, cover: 'https://c.saavncdn.com/256/Ae-Dil-Hai-Mushkil-Hindi-2016-500x500.jpg', stream_url: 'https://aac.saavncdn.com/256/fa0627d3b371bb19fae3bf8e42cf89ff_320.mp4' },
-    { title: 'Phir Aur Kya Chahiye', artist: 'Arijit Singh, Sachin-Jigar', album: 'Zara Hatke Zara Bachke', duration: 266, cover: 'https://c.saavncdn.com/644/Zara-Hatke-Zara-Bachke-Hindi-2023-20230623120150-500x500.jpg', stream_url: 'https://aac.saavncdn.com/644/473b98c366ff52bbf7d1ec39cb9a89c9_320.mp4' },
-    { title: 'O Bedardeya', artist: 'Pritam, Arijit Singh', album: 'Tu Jhoothi Main Makkaar', duration: 313, cover: 'https://c.saavncdn.com/834/Tu-Jhoothi-Main-Makkaar-Hindi-2023-20230316165419-500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/b3d4f4e7c050fb3ce0df40614f1770e2_320.mp4' },
-    { title: 'Chaleya', artist: 'Arijit Singh, Shilpa Rao, Anirudh', album: 'Jawan', duration: 200, cover: 'https://c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014339-500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'Shayad', artist: 'Pritam, Arijit Singh', album: 'Love Aaj Kal', duration: 247, cover: 'https://c.saavncdn.com/255/Love-Aaj-Kal-Hindi-2020-20200214140417-500x500.jpg', stream_url: 'https://aac.saavncdn.com/255/0f65ee9885c344238e88e89456950ee0_320.mp4' },
-    { title: 'Hawayein', artist: 'Pritam, Arijit Singh', album: 'Jab Harry Met Sejal', duration: 290, cover: 'https://c.saavncdn.com/399/Jab-Harry-Met-Sejal-Hindi-2017-20170803-500x500.jpg', stream_url: 'https://aac.saavncdn.com/399/4a03426ceb24a737482ea466a9821a71_320.mp4' },
-    { title: 'Agar Tum Saath Ho', artist: 'Alka Yagnik, Arijit Singh, A.R. Rahman', album: 'Tamasha', duration: 341, cover: 'https://c.saavncdn.com/902/Tamasha-Hindi-2015-500x500.jpg', stream_url: 'https://aac.saavncdn.com/902/f69a94145c22501a30268593a8e99e2a_320.mp4' },
-    { title: 'Tere Hawaale', artist: 'Pritam, Arijit Singh, Shilpa Rao', album: 'Laal Singh Chaddha', duration: 346, cover: 'https://c.saavncdn.com/568/Laal-Singh-Chaddha-Hindi-2022-20220805174533-500x500.jpg', stream_url: 'https://aac.saavncdn.com/568/a258ca83d2eead60787a7018861cf42a_320.mp4' },
-    { title: 'Heeriye', artist: 'Jasleen Royal, Arijit Singh', album: 'Heeriye', duration: 194, cover: 'https://c.saavncdn.com/022/Heeriye-feat-Arijit-Singh-Hindi-2023-20230724043046-500x500.jpg', stream_url: 'https://aac.saavncdn.com/022/c7625b139783f98c8c7f66a9d7211bf5_320.mp4' },
-    { title: 'Sajni', artist: 'Arijit Singh, Ram Sampath', album: 'Laapataa Ladies', duration: 170, cover: 'https://c.saavncdn.com/588/Laapataa-Ladies-Hindi-2024-20240212183515-500x500.jpg', stream_url: 'https://aac.saavncdn.com/588/75e53e4334a1b808940865c3bb9da531_320.mp4' },
-    { title: 'O Maahi', artist: 'Pritam, Arijit Singh', album: 'Dunki', duration: 233, cover: 'https://c.saavncdn.com/161/Dunki-Hindi-2023-20231216113204-500x500.jpg', stream_url: 'https://aac.saavncdn.com/161/29d2f6277e928eeaa424ea45d9e5b98a_320.mp4' },
-    { title: 'Ve Kamleya', artist: 'Arijit Singh, Shreya Ghoshal, Pritam', album: 'Rocky Aur Rani Kii Prem Kahaani', duration: 247, cover: 'https://c.saavncdn.com/834/Rocky-Aur-Rani-Kii-Prem-Kahaani-Hindi-2023-20230731141006-500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/6fcfa60fa0d6a89c9225c5d0124f5c9e_320.mp4' },
-    { title: 'Gerua', artist: 'Pritam, Arijit Singh, Antara Mitra', album: 'Dilwale', duration: 345, cover: 'https://c.saavncdn.com/712/Dilwale-Hindi-2015-500x500.jpg', stream_url: 'https://aac.saavncdn.com/712/751d38276f76c24599a00762ce404ea5_320.mp4' },
-    { title: 'Mast Magan', artist: 'Shankar-Ehsaan-Loy, Arijit Singh, Chinmayi Sripada', album: '2 States', duration: 280, cover: 'https://c.saavncdn.com/492/2-States-Hindi-2014-500x500.jpg', stream_url: 'https://aac.saavncdn.com/492/d55f442f205c6d3bc01b44ec9fef39ff_320.mp4' },
-    { title: 'Sanam Re', artist: 'Mithoon, Arijit Singh', album: 'Sanam Re', duration: 308, cover: 'https://c.saavncdn.com/896/Sanam-Re-Hindi-2015-500x500.jpg', stream_url: 'https://aac.saavncdn.com/896/e4fae7587747e9285038c11bb3b15ad8_320.mp4' },
-    { title: 'Samjhawan', artist: 'Sharib-Toshi, Arijit Singh, Shreya Ghoshal', album: 'Humpty Sharma Ki Dulhania', duration: 269, cover: 'https://c.saavncdn.com/390/Humpty-Sharma-Ki-Dulhania-Hindi-2014-500x500.jpg', stream_url: 'https://aac.saavncdn.com/390/29e1ebad83f21136b80155b1a03f4cf2_320.mp4' },
-    { title: 'Zaalima', artist: 'Pritam, Arijit Singh, Harshdeep Kaur', album: 'Raees', duration: 299, cover: 'https://c.saavncdn.com/001/Raees-Hindi-2017-500x500.jpg', stream_url: 'https://aac.saavncdn.com/001/7e15bf9b93be9f63543662ae18e558fc_320.mp4' },
-    { title: 'Tera Yaar Hoon Main', artist: 'Rochak Kohli, Arijit Singh', album: 'Sonu Ke Titu Ki Sweety', duration: 264, cover: 'https://c.saavncdn.com/917/Sonu-Ke-Titu-Ki-Sweety-Hindi-2018-20180214-500x500.jpg', stream_url: 'https://aac.saavncdn.com/917/5a676c8c4cf7e77a28e93895e86d0663_320.mp4' },
-    { title: 'Khairiyat', artist: 'Pritam, Arijit Singh', album: 'Chhichhore', duration: 280, cover: 'https://c.saavncdn.com/965/Chhichhore-Hindi-2019-20190904104022-500x500.jpg', stream_url: 'https://aac.saavncdn.com/965/a6fb322a3c74900a688aebef58f1a17b_320.mp4' },
-    { title: 'Ilahi', artist: 'Pritam, Arijit Singh', album: 'Yeh Jawaani Hai Deewani', duration: 229, cover: 'https://c.saavncdn.com/023/Yeh-Jawaani-Hai-Deewani-Hindi-2013-500x500.jpg', stream_url: 'https://aac.saavncdn.com/023/91038b3fa73f60f64c636733221975e5_320.mp4' },
+  "arijit_singh": [
+    {
+      "id": "arijit_singh_1",
+      "title": "Apna Bana Le",
+      "artist": "Amitabh Bhattacharya, Sachin-Jigar, Arijit Singh",
+      "album": "Romantic Classics Hits",
+      "duration": 261,
+      "cover": "https://c.saavncdn.com/238/Romantic-Classics-Hits-Hindi-2026-20260529163838-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/238/5583fbab6328b12f467f01ee335e496d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_2",
+      "title": "Zaalima",
+      "artist": "Arijit Singh, Harshdeep Kaur",
+      "album": "Romantic Classics Hits",
+      "duration": 299,
+      "cover": "https://c.saavncdn.com/238/Romantic-Classics-Hits-Hindi-2026-20260529163838-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/238/4a6bad397e3277a422604a4e5db29327_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_3",
+      "title": "Muskurane (Romantic)",
+      "artist": "Jeet Gannguli, Arijit Singh, Rashmi-Virag",
+      "album": "Emraan Hashmi Sad Love Hits",
+      "duration": 334,
+      "cover": "https://c.saavncdn.com/732/Emraan-Hashmi-Sad-Love-Hits-Hindi-2026-20260604155755-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/732/1639e30ad182af5cabcd44f451abd5d1_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_4",
+      "title": "Romantic Mashup 2026 by DJ Star & DJ Alex Mumbai",
+      "artist": "Arijit Singh, Dj Star, Dj Alex Mumbai",
+      "album": "Romantic Mashup 2026 by DJ Star & DJ Alex Mumbai",
+      "duration": 267,
+      "cover": "https://c.saavncdn.com/237/Romantic-Mashup-2026-by-DJ-Star-DJ-Alex-Mumbai-Hindi-2026-20260213025005-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/237/cf8a4c9d9695cb7f383d4d79d400ee56_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_5",
+      "title": "Tum Hi Ho (From \"Aashiqui 2\")",
+      "artist": "Arijit Singh, Mithoon",
+      "album": "Best Of Arijit Singh - Collection Of Romantic Songs",
+      "duration": 261,
+      "cover": "https://c.saavncdn.com/840/Best-Of-Arijit-Singh-Collection-Of-Romantic-Songs-Hindi-2025-20251203161112-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/840/c9e70fb62d66fa6e14f6b7cdbc56cc05_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_6",
+      "title": "Pal Pal Dil Ke Paas- Title Track",
+      "artist": "Siddharth-Garima, Arijit Singh, Parampara Tandon, Sachet-Parampara",
+      "album": "Romantic Classics Hits",
+      "duration": 254,
+      "cover": "https://c.saavncdn.com/238/Romantic-Classics-Hits-Hindi-2026-20260529163838-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/238/0a5adedbe840b54c9ffc67bc1da9d019_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_7",
+      "title": "Tainu Khabar Nahi",
+      "artist": "Amitabh Bhattacharya, Sachin-Jigar, Arijit Singh",
+      "album": "Romantic Classics Hits",
+      "duration": 188,
+      "cover": "https://c.saavncdn.com/238/Romantic-Classics-Hits-Hindi-2026-20260529163838-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/238/83033b7ee4e73eefb77ef50b544d1481_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_8",
+      "title": "Gehra Hua (From &quot;Dhurandhar&quot;)",
+      "artist": "Arijit Singh, Armaan Khan",
+      "album": "Gehra Hua (From &quot;Dhurandhar&quot;)",
+      "duration": 362,
+      "cover": "https://c.saavncdn.com/450/Gehra-Hua-From-Dhurandhar-Hindi-2025-20251205154217-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/450/f467e05e2825cec2203546333e0d0550_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_9",
+      "title": "Mast Magan",
+      "artist": "Shankar-Ehsaan-Loy, Arijit Singh, Chinmayi Sripada",
+      "album": "2 States",
+      "duration": 280,
+      "cover": "https://c.saavncdn.com/930/2-States-2014-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/930/951f2d707e9ea617fce5e5d8338393ae_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_10",
+      "title": "Sanam Re (From \"Sanam Re\")",
+      "artist": "Mithoon, Arijit Singh",
+      "album": "World Music Day - Best Of Bollywood Hits",
+      "duration": 308,
+      "cover": "https://c.saavncdn.com/179/World-Music-Day-Best-Of-Bollywood-Hits-Hindi-2026-20260622111029-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/179/03c13437be11cba6e79791eed8a32949_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_11",
+      "title": "Samjhawan",
+      "artist": "Jawad Ahmad, Sharib Toshi, Arijit Singh, Shreya Ghoshal",
+      "album": "Humpty Sharma Ki Dulhania",
+      "duration": 269,
+      "cover": "https://c.saavncdn.com/540/Humpty-Sharma-Ki-Dulhania-Hindi-2014-20190618095042-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/540/f807aad8e5c60a87334231f72267c725_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "arijit_singh_12",
+      "title": "Hamari Adhuri Kahani (Title Track) [From &quot;Hamari Adhuri Kahani&quot;]",
+      "artist": "Rashmi-Virag, Jeet Gannguli, Arijit Singh",
+      "album": "Emraan Hashmi Sad Love Hits",
+      "duration": 398,
+      "cover": "https://c.saavncdn.com/732/Emraan-Hashmi-Sad-Love-Hits-Hindi-2026-20260604155755-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/732/dac6bf362c5b7021ad3589b4975b0e57_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  atif_aslam: [
-    { title: 'Woh Lamhe', artist: 'Atif Aslam, Mithoon', album: 'Zeher', duration: 321, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/023/391038b3fa73f60f64c636733221975e_320.mp4' },
-    { title: 'Aadat', artist: 'Atif Aslam, Jal', album: 'Kalyug', duration: 334, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Tere Sang Yaara', artist: 'Atif Aslam, Arko', album: 'Rustom', duration: 290, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/644/473b98c366ff52bbf7d1ec39cb9a89c9_320.mp4' },
-    { title: 'Dil Diyan Gallan', artist: 'Atif Aslam, Vishal-Shekhar', album: 'Tiger Zinda Hai', duration: 260, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'Jeene Laga Hoon', artist: 'Atif Aslam, Shreya Ghoshal, Sachin-Jigar', album: 'Ramaiya Vastavaiya', duration: 236, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Pehli Nazar Mein', artist: 'Atif Aslam, Pritam', album: 'Race', duration: 314, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/430/ddb5e39d424b9101b7a2d4b8e21a8dcf_320.mp4' },
-    { title: 'Tu Jaane Na', artist: 'Atif Aslam, Pritam', album: 'Ajab Prem Ki Ghazab Kahani', duration: 341, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/256/fa0627d3b371bb19fae3bf8e42cf89ff_320.mp4' },
-    { title: 'Tera Hone Laga Hoon', artist: 'Atif Aslam, Alisha Chinai, Pritam', album: 'Ajab Prem Ki Ghazab Kahani', duration: 299, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/829/c03d7c3453ea138541cb4e605d8f668d_320.mp4' },
-    { title: 'Kuch Is Tarah', artist: 'Atif Aslam', album: 'Doorie', duration: 313, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/b3d4f4e7c050fb3ce0df40614f1770e2_320.mp4' },
-    { title: 'Main Rang Sharbaton Ka', artist: 'Atif Aslam, Chinmayi, Pritam', album: 'Phata Poster Nikhla Hero', duration: 263, cover: 'https://c.saavncdn.com/artists/Atif_Aslam_500x500.jpg', stream_url: 'https://aac.saavncdn.com/450/49d4be2a507e155490479bb33320390f_320.mp4' },
+  "atif_aslam": [
+    {
+      "id": "atif_aslam_1",
+      "title": "O'Meri Laila",
+      "artist": "Atif Aslam, Jyotica Tangri",
+      "album": "Monsoon Bollywood Hits",
+      "duration": 281,
+      "cover": "https://c.saavncdn.com/169/Monsoon-Bollywood-Hits-Hindi-2023-20230616161232-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/169/164b572a0e2f8962d9012c644c246287_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_2",
+      "title": "atif aslam",
+      "artist": "Ambient Aura",
+      "album": "club ambition",
+      "duration": 161,
+      "cover": "https://c.saavncdn.com/953/club-ambition-Unknown-2024-20240628202752-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/953/9b1581a4c5948df2b42e16132e02ed51_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_3",
+      "title": "Atif Aslam Mashup 2",
+      "artist": "Alka Yagnik",
+      "album": "Atif Aslam Mashup 2",
+      "duration": 193,
+      "cover": "https://c.saavncdn.com/716/Atif-Aslam-Mashup-2-Hindi-2026-20260424160758-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/716/f985e3b73c823939adec7dfca1d487b4_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_4",
+      "title": "Atif Aslam Songs",
+      "artist": "Dreamy Dynamics",
+      "album": "Smells Like Teen Spirit Guitar",
+      "duration": 67,
+      "cover": "https://c.saavncdn.com/411/Smells-Like-Teen-Spirit-Guitar-Unknown-2024-20240808193301-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/411/e27b2829246e242ecb73554e5a1ecc72_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_5",
+      "title": "O Meri Laila - Atif Aslam & Jyotica Tangri Vocals Only",
+      "artist": "Jyotica Tangri",
+      "album": "O Meri Laila - Atif Aslam & Jyotica Tangri Vocals Only",
+      "duration": 270,
+      "cover": "https://c.saavncdn.com/465/O-Meri-Laila-Atif-Aslam-Jyotica-Tangri-Vocals-Only-Hindi-2026-20260804094326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/465/be2718149e51ca3e48662d4464b9f3cc_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_6",
+      "title": "Atif Aslam Mashup",
+      "artist": "Jasmeet Jamrai",
+      "album": "Atif Aslam Mashup",
+      "duration": 311,
+      "cover": "https://c.saavncdn.com/224/Atif-Aslam-Mashup-Hindi-2023-20240408232921-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/224/7f43190959134c8e30f5a705aaf333cd_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_7",
+      "title": "Tere Liye | Atif Aslam- Romantic Song",
+      "artist": "NITEVOID",
+      "album": "Tere Liye | Atif Aslam- Romantic Song",
+      "duration": 345,
+      "cover": "https://c.saavncdn.com/614/Tere-Liye-Atif-Aslam-Romantic-Song-Hindi-2026-20260910230454-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/614/7a8b318bea7e6a890a760dd0b7572086_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_8",
+      "title": "Non Stop Lofi Love Mash Up, Vol. 3",
+      "artist": "Hariharan, Swarnalatha, Kumar Sanu, Sapna Mukherjee, Lata Mangeshkar, Aamir Khan, Alka Yagnik, Arijit Singh, Atif Aslam, Shre...",
+      "album": "Non Stop Lofi Love Mash Up, Vol. 3",
+      "duration": 3346,
+      "cover": "https://c.saavncdn.com/180/Non-Stop-Lofi-Love-Mash-Up-Vol-3-Hindi-2024-20240408232244-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/180/e20127900b3a607514b8941abeefff3e_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "atif_aslam_9",
+      "title": "laundry room organization",
+      "artist": "Calming Cadence",
+      "album": "atif aslam songs",
+      "duration": 133,
+      "cover": "https://c.saavncdn.com/916/atif-aslam-songs-Unknown-2024-20240711114503-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/916/428b06431eebaee5eb1b3531e49fc2db_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  shreya_ghoshal: [
-    { title: 'Sunn Raha Hai (Female)', artist: 'Shreya Ghoshal, Ankit Tiwari', album: 'Aashiqui 2', duration: 314, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/430/ddb5e39d424b9101b7a2d4b8e21a8dcf_320.mp4' },
-    { title: 'Deewani Mastani', artist: 'Shreya Ghoshal, Sanjay Leela Bhansali', album: 'Bajirao Mastani', duration: 340, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'Ghoomar', artist: 'Shreya Ghoshal, Swaroop Khan', album: 'Padmaavat', duration: 282, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/6fcfa60fa0d6a89c9225c5d0124f5c9e_320.mp4' },
-    { title: 'Ve Kamleya', artist: 'Arijit Singh, Shreya Ghoshal, Pritam', album: 'Rocky Aur Rani Kii Prem Kahaani', duration: 247, cover: 'https://c.saavncdn.com/834/Rocky-Aur-Rani-Kii-Prem-Kahaani-Hindi-2023-20230731141006-500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/6fcfa60fa0d6a89c9225c5d0124f5c9e_320.mp4' },
-    { title: 'Teri Ore', artist: 'Pritam, Rahat Fateh Ali Khan, Shreya Ghoshal', album: 'Singh Is Kinng', duration: 339, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Barso Re', artist: 'A.R. Rahman, Shreya Ghoshal', album: 'Guru', duration: 329, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/902/f69a94145c22501a30268593a8e99e2a_320.mp4' },
-    { title: 'Agar Tum Mil Jao', artist: 'Shreya Ghoshal, Roop Kumar Rathod', album: 'Zeher', duration: 360, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Jaadu Hai Nasha Hai', artist: 'M.M. Keeravani, Shreya Ghoshal', album: 'Jism', duration: 328, cover: 'https://c.saavncdn.com/artists/Shreya_Ghoshal_500x500.jpg', stream_url: 'https://aac.saavncdn.com/644/473b98c366ff52bbf7d1ec39cb9a89c9_320.mp4' },
+  "shreya_ghoshal": [
+    {
+      "id": "shreya_ghoshal_1",
+      "title": "Vaaroon Forever (From “Mirzapur The Movie”)",
+      "artist": "Anand Bhaskar, Romy, Shreya Ghoshal, Ginny Diwan",
+      "album": "Vaaroon Forever (From “Mirzapur The Movie”)",
+      "duration": 252,
+      "cover": "https://c.saavncdn.com/381/Vaaroon-Forever-From-Mirzapur-The-Movie-Hindi-2026-20260817160523-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/381/02ffb399df66aec14cbebb1a0ced6fd5_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_2",
+      "title": "KALYANI (Remix)",
+      "artist": "ARJN, KDS, FIFTY4, Shreya Ghoshal",
+      "album": "KALYANI (Remix)",
+      "duration": 269,
+      "cover": "https://c.saavncdn.com/475/KALYANI-Remix-Malayalam-2026-20260622131127-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/475/5fc341ce2ad68492fce5ed0bf4655f8f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_3",
+      "title": "Samjhawan",
+      "artist": "Jawad Ahmad, Sharib Toshi, Arijit Singh, Shreya Ghoshal",
+      "album": "Humpty Sharma Ki Dulhania",
+      "duration": 269,
+      "cover": "https://c.saavncdn.com/540/Humpty-Sharma-Ki-Dulhania-Hindi-2014-20190618095042-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/540/f807aad8e5c60a87334231f72267c725_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_4",
+      "title": "Tum Kya Mile - Pritam' s Version (From \"Rocky Aur Rani Kii Prem Kahaani\")",
+      "artist": "Amitabh Bhattacharya, Pritam, Arijit Singh, Shreya Ghoshal",
+      "album": "Rocky Aur Rani Kii Prem Kahaani",
+      "duration": 192,
+      "cover": "https://c.saavncdn.com/001/Rocky-Aur-Rani-Kii-Prem-Kahaani-Hindi-2023-20250130073112-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/001/93fc1931668d22fb4093045472218dd1_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_5",
+      "title": "Jai Jai Ram (From \"Ramayana\")",
+      "artist": "A.R. Rahman, Shreya Ghoshal, Arijit Singh, Kumar Vishwas",
+      "album": "Jai Jai Ram (From \"Ramayana\")",
+      "duration": 320,
+      "cover": "https://c.saavncdn.com/816/Jai-Jai-Ram-From-Ramayana-Hindi-2026-20260914170135-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/816/0ba2085804650ab95b697b9948487553_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_6",
+      "title": "Teri Yaadon Mein (From \"The Killer\")",
+      "artist": "KK, Shreya Ghoshal, Sajid-Wajid, Jalees Sherwani",
+      "album": "Emraan Hashmi Hits",
+      "duration": 287,
+      "cover": "https://c.saavncdn.com/106/Emraan-Hashmi-Hits-Hindi-2026-20260905191028-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/106/a002772a4dc657bccce308a73272ec37_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_7",
+      "title": "Maheroo Maheroo",
+      "artist": "Shreya Ghoshal, Darshan Rathod",
+      "album": "Shreya Ghoshal Romantic Hits",
+      "duration": 274,
+      "cover": "https://c.saavncdn.com/198/Shreya-Ghoshal-Romantic-Hits-Hindi-2026-20260623182752-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/198/58edfab758f1897b909a5f2062031ee3_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_8",
+      "title": "Thodi Der",
+      "artist": "Kumaar, Shreya Ghoshal",
+      "album": "Shreya Ghoshal Romantic Hits",
+      "duration": 296,
+      "cover": "https://c.saavncdn.com/198/Shreya-Ghoshal-Romantic-Hits-Hindi-2026-20260623182752-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/198/073f40ca503477d4c362d663483c3f4d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_9",
+      "title": "Dhadak Title Track",
+      "artist": "Ajay Gogavale, Shreya Ghoshal",
+      "album": "Shreya Ghoshal Romantic Hits",
+      "duration": 243,
+      "cover": "https://c.saavncdn.com/198/Shreya-Ghoshal-Romantic-Hits-Hindi-2026-20260623182752-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/198/9770064eeba8377fcb77717859555a18_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_10",
+      "title": "Jugraafiya",
+      "artist": "Udit Narayan, Shreya Ghoshal",
+      "album": "Bollywood Top Romantic Hits",
+      "duration": 274,
+      "cover": "https://c.saavncdn.com/390/Bollywood-Top-Romantic-Hits-Hindi-2026-20260717151136-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/390/682054f0dbf5833ac2e262adbbeed60c_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_11",
+      "title": "Ghar More Pardesiya",
+      "artist": "Pritam, Shreya Ghoshal",
+      "album": "Shreya Ghoshal Romantic Hits",
+      "duration": 319,
+      "cover": "https://c.saavncdn.com/198/Shreya-Ghoshal-Romantic-Hits-Hindi-2026-20260623182752-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/198/3b6e08199956d15ecf47cc85fcf5ee1f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "shreya_ghoshal_12",
+      "title": "Tabaah Ho Gaye",
+      "artist": "Pritam, Shreya Ghoshal",
+      "album": "Shreya Ghoshal Romantic Hits",
+      "duration": 341,
+      "cover": "https://c.saavncdn.com/198/Shreya-Ghoshal-Romantic-Hits-Hindi-2026-20260623182752-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/198/a64a805d068108cbd90ab210f0b2e0ea_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  diljit_dosanjh: [
-    { title: 'Lover', artist: 'Diljit Dosanjh, Intense', album: 'MoonChild Era', duration: 184, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'G.O.A.T.', artist: 'Diljit Dosanjh', album: 'G.O.A.T.', duration: 223, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Born to Shine', artist: 'Diljit Dosanjh', album: 'G.O.A.T.', duration: 213, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/450/49d4be2a507e155490479bb33320390f_320.mp4' },
-    { title: 'Lemonade', artist: 'Diljit Dosanjh', album: 'Drive', duration: 184, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Do You Know', artist: 'Diljit Dosanjh, B Praak', album: 'Do You Know', duration: 225, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/644/473b98c366ff52bbf7d1ec39cb9a89c9_320.mp4' },
-    { title: '5 Taara', artist: 'Diljit Dosanjh, Jatinder Shah', album: '5 Taara', duration: 198, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/6fcfa60fa0d6a89c9225c5d0124f5c9e_320.mp4' },
-    { title: 'Naina', artist: 'Diljit Dosanjh, Badshah', album: 'Crew', duration: 180, cover: 'https://c.saavncdn.com/artists/Diljit_Dosanjh_500x500.jpg', stream_url: 'https://aac.saavncdn.com/472/a1df3e8e19c3548972886a3782b683cf_320.mp4' },
+  "diljit_dosanjh": [
+    {
+      "id": "diljit_dosanjh_1",
+      "title": "Hass Hass",
+      "artist": "Diljit Dosanjh, Sia, Greg Kurstin",
+      "album": "Hass Hass",
+      "duration": 153,
+      "cover": "https://c.saavncdn.com/245/Hass-Hass-English-2023-20231026170517-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/245/fd196de0f557e19e2e8d42150d34cf5b_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_2",
+      "title": "Born to Shine",
+      "artist": "Diljit Dosanjh",
+      "album": "G.O.A.T.",
+      "duration": 214,
+      "cover": "https://c.saavncdn.com/597/G-O-A-T-Punjabi-2020-20240708055140-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/597/f1efd650819d3f427bd10e8b9addcd40_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_3",
+      "title": "Water",
+      "artist": "Diljit Dosanjh, Mixsingh, Raj Ranjodh",
+      "album": "Water",
+      "duration": 197,
+      "cover": "https://c.saavncdn.com/925/Water-Punjabi-2025-20250214212740-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/925/4f117195f297e5e0d4796311940b53b4_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_4",
+      "title": "Raat Di Gedi",
+      "artist": "Diljit Dosanjh",
+      "album": "Raat Di Gedi",
+      "duration": 198,
+      "cover": "https://c.saavncdn.com/698/Raat-Di-Gedi-Punjabi-2018-20180323-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/698/727adb91e70e5a4ed2a268acdbf55172_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_5",
+      "title": "Ez-Ez Eclipsa Audio",
+      "artist": "Shashwat Sachdev, Diljit Dosanjh, Hanumankind",
+      "album": "Ez-Ez Eclipsa Audio",
+      "duration": 182,
+      "cover": "https://c.saavncdn.com/925/Ez-Ez-Eclipsa-Audio-Hindi-2026-20260708093725-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/925/9d4181b24f0082faaaea8f1671a80b13_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_6",
+      "title": "Ez-Ez (From \"Dhurandhar\")",
+      "artist": "Hanumankind, Shashwat Sachdev, Raj Ranjodh, Diljit Dosanjh",
+      "album": "Ez-Ez (From \"Dhurandhar\")",
+      "duration": 182,
+      "cover": "https://c.saavncdn.com/525/Ez-Ez-From-Dhurandhar-Hindi-2025-20251217164219-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/525/38f7db698549b844f0b008ebe4d1d3a2_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_7",
+      "title": "G.O.A.T.",
+      "artist": "Diljit Dosanjh",
+      "album": "G.O.A.T.",
+      "duration": 224,
+      "cover": "https://c.saavncdn.com/597/G-O-A-T-Punjabi-2020-20240708055140-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/597/ce842951d6cde3c4355046ca5e250809_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "diljit_dosanjh_8",
+      "title": "Lemonade",
+      "artist": "Diljit Dosanjh",
+      "album": "Drive Thru",
+      "duration": 167,
+      "cover": "https://c.saavncdn.com/467/Drive-Thru-Punjabi-2022-20240708054744-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/467/c1f149509d4ee7d20c0c4474090ab5f1_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  anuv_jain: [
-    { title: 'Husn', artist: 'Anuv Jain', album: 'Husn', duration: 218, cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg', stream_url: 'https://aac.saavncdn.com/436/fc09c250914838634127c5972f053dc7_320.mp4' },
-    { title: 'Baarishein', artist: 'Anuv Jain', album: 'Baarishein', duration: 207, cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'Gul', artist: 'Anuv Jain', album: 'Gul', duration: 217, cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Alag Aasmaan', artist: 'Anuv Jain', album: 'Alag Aasmaan', duration: 212, cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg', stream_url: 'https://aac.saavncdn.com/450/49d4be2a507e155490479bb33320390f_320.mp4' },
-    { title: 'Mishri', artist: 'Anuv Jain', album: 'Mishri', duration: 200, cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Jo Tum Mere Ho', artist: 'Anuv Jain', album: 'Jo Tum Mere Ho', duration: 245, cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg', stream_url: 'https://aac.saavncdn.com/436/fc09c250914838634127c5972f053dc7_320.mp4' },
+  "pritam": [
+    {
+      "id": "pritam_1",
+      "title": "Tera Mera Rishta -  New Version (From &quot;Awarapan 2&quot;)",
+      "artist": "Mithoon, Pritam, Sayeed Quadri, Saaj Bhatt, Subodhh Sharma",
+      "album": "Tera Mera Rishta - New Version (From &quot;Awarapan 2&quot;)",
+      "duration": 365,
+      "cover": "https://c.saavncdn.com/114/Tera-Mera-Rishta-New-Version-From-Awarapan-2-Hindi-2026-20260812173715-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/114/9109db7f112172c6c6246e929a818c1d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "pritam_2",
+      "title": "Tera Mera Rishta - New Version (From Awarapan 2)",
+      "artist": "Mithoon, Pritam, Sayeed Quadri, Saaj Bhatt, Subodhh Sharma",
+      "album": "Awarapan: The Complete Soundtrack",
+      "duration": 365,
+      "cover": "https://c.saavncdn.com/734/Awarapan-The-Complete-Soundtrack-Hindi-2026-20260908202653-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/734/41af6aa0785b084b5de0da757e003934_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "pritam_3",
+      "title": "Dil Ibaadat",
+      "artist": "Pritam, KK, Sayeed Quadri",
+      "album": "Tum Mile",
+      "duration": 329,
+      "cover": "https://c.saavncdn.com/316/Tum-Mile-Hindi-2009-20260120201221-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/316/7bc5895688704839a1686d3afb07bb7d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "pritam_4",
+      "title": "Labon Ko (From \"Bhool Bhulaiyaa\")",
+      "artist": "KK, Pritam, Sayeed Quadri",
+      "album": "Romantic Hits Of K.K.",
+      "duration": 341,
+      "cover": "https://c.saavncdn.com/857/Romantic-Hits-Of-K-K-Hindi-2025-20251202151020-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/857/c15c3a5ca3d2308ed3c9b5ad69683f44_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "pritam_5",
+      "title": "Tu Hi Haqeeqat",
+      "artist": "Pritam, Javed Ali, Irshan Ashraf, Shadab, Sayeed Quadri",
+      "album": "Javed Ali Best Hindi Hit Songs",
+      "duration": 304,
+      "cover": "https://c.saavncdn.com/576/Javed-Ali-Best-Hindi-Hit-Songs-Hindi-2026-20260622145613-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/576/cf7db3d3b52aa9b4675524121f47f94b_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  ap_dhillon: [
-    { title: 'With You', artist: 'AP Dhillon', album: 'With You', duration: 154, cover: 'https://c.saavncdn.com/472/With-You-Punjabi-2023-20230822145201-500x500.jpg', stream_url: 'https://aac.saavncdn.com/472/a1df3e8e19c3548972886a3782b683cf_320.mp4' },
-    { title: 'Brown Munde', artist: 'AP Dhillon, Gurinder Gill, Shinda Kahlon', album: 'Brown Munde', duration: 266, cover: 'https://c.saavncdn.com/472/With-You-Punjabi-2023-20230822145201-500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'Excuses', artist: 'AP Dhillon, Gurinder Gill', album: 'Hidden Gems', duration: 176, cover: 'https://c.saavncdn.com/472/With-You-Punjabi-2023-20230822145201-500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Insane', artist: 'AP Dhillon, Gurinder Gill, Shinda Kahlon', album: 'Insane', duration: 206, cover: 'https://c.saavncdn.com/472/With-You-Punjabi-2023-20230822145201-500x500.jpg', stream_url: 'https://aac.saavncdn.com/450/49d4be2a507e155490479bb33320390f_320.mp4' },
-    { title: 'Summer High', artist: 'AP Dhillon', album: 'Summer High', duration: 178, cover: 'https://c.saavncdn.com/472/With-You-Punjabi-2023-20230822145201-500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
+  "kishore_kumar": [
+    {
+      "id": "kishore_kumar_1",
+      "title": "Chalte Chalte (Part 1 / From &quot;Chalte Chalte&quot;)",
+      "artist": "Kishore Kumar",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 311,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/ecbe4fd0030854305101098bf2379ad6_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_2",
+      "title": "Dilbar Mere (From &quot;Satte Pe Satta&quot;)",
+      "artist": "Kishore Kumar, Anette, R.D. Burman",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 287,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/83b8e8f2bc51b9bc1faf3cd0bf13a87e_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_3",
+      "title": "Saagar Kinare (From &quot;Saagar&quot;)",
+      "artist": "Lata Mangeshkar, Kishore Kumar, R.D. Burman",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 258,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/643a6ef8e5d22e51d355b5eded416e5a_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_4",
+      "title": "Tere Jaisa Yaar Kahan (From \"Yaarana\")",
+      "artist": "Kishore Kumar",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 278,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/d2022877eaff97e7f96b46bf536e1093_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_5",
+      "title": "Tera Mujhse (From “Aa Gale Lag Jaa”)",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 338,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/ef66dac12b6f156c941c130dae1f52a7_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_6",
+      "title": "Koi Roko Na (From \"Priyatama\")",
+      "artist": "Kishore Kumar",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 286,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/2c3819d7d9bd32d820f7d5d6de26fd28_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_7",
+      "title": "Aise Na Mujhe (From \"Darling Darling\")",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 264,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/0fe3c0a859db9d30961ffaa6907f9ea0_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_8",
+      "title": "Jahan Teri Yeh Nazar Hai (From \"Kaalia\")",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 323,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/8e797c73184f368e82ed4bde22e1934f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_9",
+      "title": "Samne Ye Kaun Aya (From \"Jawani Diwani\")",
+      "artist": "Kishore Kumar, R.D. Burman",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 252,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/aa675fc0091403b130988ac4f14f5653_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_10",
+      "title": "Kya Khabar Kya Pata (From \"Saaheb\")",
+      "artist": "Kishore Kumar",
+      "album": "Kishore Kumar Evergreen Hits",
+      "duration": 383,
+      "cover": "https://c.saavncdn.com/946/Kishore-Kumar-Evergreen-Hits-Hindi-2023-20241004165326-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/946/e04823cf5ad03a58fc55d2c2c65a450e_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_11",
+      "title": "Aaj Ei Dintake (From &quot;Antarale&quot;)",
+      "artist": "Kishore Kumar",
+      "album": "Romantic Gems Of Bappi Lahiri",
+      "duration": 266,
+      "cover": "https://c.saavncdn.com/202/Romantic-Gems-Of-Bappi-Lahiri-Bengali-2018-20181011-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/202/112d19bf0dbf8b6691a19ae459fb79d8_sar_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kishore_kumar_12",
+      "title": "Se Jeno Aamar Pashe",
+      "artist": "Kishore Kumar",
+      "album": "Valentine Special Bengali Romantic Modern Songs",
+      "duration": 209,
+      "cover": "https://c.saavncdn.com/694/Valentine-Special-Bengali-Romantic-Modern-Songs-Bengali-2015-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/694/dfed307479505edb2ae516a79774b418_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  kk: [
-    { title: 'Yaaron', artist: 'KK, Leslie Lewis', album: 'Pal', duration: 282, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/430/ddb5e39d424b9101b7a2d4b8e21a8dcf_320.mp4' },
-    { title: 'Pal', artist: 'KK, Leslie Lewis', album: 'Pal', duration: 279, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/256/fa0627d3b371bb19fae3bf8e42cf89ff_320.mp4' },
-    { title: 'Zara Sa', artist: 'KK, Pritam', album: 'Jannat', duration: 303, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Aankhon Mein Teri', artist: 'KK, Vishal-Shekhar', album: 'Om Shanti Om', duration: 242, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'Tu Hi Meri Shab Hai', artist: 'KK, Pritam', album: 'Gangster', duration: 388, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Alvida', artist: 'KK, Pritam', album: 'Life in a Metro', duration: 340, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/834/6fcfa60fa0d6a89c9225c5d0124f5c9e_320.mp4' },
-    { title: 'Labon Ko', artist: 'KK, Pritam', album: 'Bhool Bhulaiyaa', duration: 343, cover: 'https://c.saavncdn.com/artists/KK_500x500.jpg', stream_url: 'https://aac.saavncdn.com/644/473b98c366ff52bbf7d1ec39cb9a89c9_320.mp4' },
+  "ap_dhillon": [
+    {
+      "id": "ap_dhillon_1",
+      "title": "Thodi Si Daaru",
+      "artist": "AP Dhillon, Shreya Ghoshal",
+      "album": "Thodi Si Daaru",
+      "duration": 180,
+      "cover": "https://c.saavncdn.com/587/Thodi-Si-Daaru-Punjabi-2025-20250717063530-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/587/855f5c3f77ae0c40ed7de3c955f8fdcc_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_2",
+      "title": "Excuses",
+      "artist": "AP Dhillon, Gurinder Gill, Intense",
+      "album": "Excuses",
+      "duration": 177,
+      "cover": "https://c.saavncdn.com/890/Excuses-English-2021-20210930112054-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/890/a18aabc4681dc6c334d5d29b67e84a0f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_3",
+      "title": "With You",
+      "artist": "AP Dhillon",
+      "album": "First of a Kind (From the Amazon Original Series)",
+      "duration": 154,
+      "cover": "https://c.saavncdn.com/671/First-of-a-Kind-From-the-Amazon-Original-Series-Punjabi-2023-20230904091351-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/671/50b256cc8e60dc8b0243f5e0767e8467_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_4",
+      "title": "STFU",
+      "artist": "AP Dhillon, Shinda Kahlon",
+      "album": "OKAY STFU",
+      "duration": 175,
+      "cover": "https://c.saavncdn.com/378/OKAY-STFU-Punjabi-2025-20250502063450-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/378/8cee3668b7d5ae40e5371e7568d7c7cd_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_5",
+      "title": "Aadat (Feat. AP Dhillon)",
+      "artist": "Yo Yo Honey Singh, AP Dhillon, Shinda Kahlon, JackBars",
+      "album": "51 GLORIOUS DAYS",
+      "duration": 220,
+      "cover": "https://c.saavncdn.com/167/51-GLORIOUS-DAYS-Hindi-2025-20251204181542-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/167/182f95ea58f961e3b4df0d6295810c1d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_6",
+      "title": "Old Money",
+      "artist": "AP Dhillon",
+      "album": "Old Money",
+      "duration": 127,
+      "cover": "https://c.saavncdn.com/939/Old-Money-Punjabi-2024-20240809063655-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/939/a749b617dec1c3c77e61b4a1083b2436_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_7",
+      "title": "Afsos",
+      "artist": "Anuv Jain, AP Dhillon, Satinderpal Singh",
+      "album": "Afsos",
+      "duration": 191,
+      "cover": "https://c.saavncdn.com/773/Afsos-Punjabi-2025-20250129053900-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/773/a05bddf58f9158b522b7d782c77612ba_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "ap_dhillon_8",
+      "title": "Thinking of You",
+      "artist": "AP Dhillon",
+      "album": "Thinking of You",
+      "duration": 180,
+      "cover": "https://c.saavncdn.com/699/Thinking-of-You-Punjabi-2026-20260206063613-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/699/929c446154d5336760ca9ef8a58408b3_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
-  kishore_kumar: [
-    { title: 'Pal Pal Dil Ke Paas', artist: 'Kishore Kumar, Kalyanji-Anandji', album: 'Blackmail', duration: 326, cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg', stream_url: 'https://aac.saavncdn.com/430/ddb5e39d424b9101b7a2d4b8e21a8dcf_320.mp4' },
-    { title: 'Mere Sapno Ki Rani', artist: 'Kishore Kumar, S.D. Burman', album: 'Aradhana', duration: 300, cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg', stream_url: 'https://aac.saavncdn.com/256/fa0627d3b371bb19fae3bf8e42cf89ff_320.mp4' },
-    { title: 'Roop Tera Mastana', artist: 'Kishore Kumar, S.D. Burman', album: 'Aradhana', duration: 225, cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg', stream_url: 'https://aac.saavncdn.com/832/d9c0ec9b8971f4ea8f2c310c1f516a24_320.mp4' },
-    { title: 'Yeh Shaam Mastani', artist: 'Kishore Kumar, R.D. Burman', album: 'Kati Patang', duration: 275, cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg', stream_url: 'https://aac.saavncdn.com/026/87ee96f7ff0d80e159bb840742f1cf5b_320.mp4' },
-    { title: 'O Saathi Re', artist: 'Kishore Kumar, Kalyanji-Anandji', album: 'Muqaddar Ka Sikandar', duration: 270, cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg', stream_url: 'https://aac.saavncdn.com/092/79eb00cf0440bf5eec643e200cfce542_320.mp4' },
-    { title: 'Zindagi Ek Safar Hai', artist: 'Kishore Kumar, Shankar-Jaikishan', album: 'Andaz', duration: 260, cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg', stream_url: 'https://aac.saavncdn.com/644/473b98c366ff52bbf7d1ec39cb9a89c9_320.mp4' },
+  "kk": [
+    {
+      "id": "kk_1",
+      "title": "Dil Ibaadat",
+      "artist": "Pritam, KK, Sayeed Quadri",
+      "album": "Tum Mile",
+      "duration": 329,
+      "cover": "https://c.saavncdn.com/316/Tum-Mile-Hindi-2009-20260120201221-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/316/7bc5895688704839a1686d3afb07bb7d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kk_2",
+      "title": "Labon Ko",
+      "artist": "Pritam, KK",
+      "album": "Bhool Bhulaiyaa",
+      "duration": 341,
+      "cover": "https://c.saavncdn.com/056/Bhool-Bhulaiyaa-Hindi-2007-20241223151003-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/056/15f4ea0f635f05ede93c4169d1ece6ac_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kk_3",
+      "title": "Zara Sa",
+      "artist": "Sayeed Quadri, Pritam, KK",
+      "album": "Jannat",
+      "duration": 302,
+      "cover": "https://c.saavncdn.com/801/Jannat-Hindi-2008-20190629135803-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/801/571617f7810fb699ed56bc8a7d9e40d9_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kk_4",
+      "title": "Haan Tu Hain",
+      "artist": "Pritam, KK, Sayeed Quadri",
+      "album": "Emraan Hashmi Sad Love Hits",
+      "duration": 324,
+      "cover": "https://c.saavncdn.com/732/Emraan-Hashmi-Sad-Love-Hits-Hindi-2026-20260604155755-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/732/c493c52307159b47df47045f8c4343cd_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "kk_5",
+      "title": "Kya Mujhe Pyar Hai",
+      "artist": "Pritam, KK",
+      "album": "Woh Lamhe",
+      "duration": 266,
+      "cover": "https://c.saavncdn.com/832/Woh-Lamhe-Hindi-2006-20241223151332-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/832/41670273e6110da4b44085d45981aa53_320.mp4",
+      "badge": "Studio 320kbps"
+    }
   ],
+  "sonu_nigam": [
+    {
+      "id": "sonu_nigam_1",
+      "title": "Main Agar Kahoon",
+      "artist": "Vishal &amp; Shekhar, Sonu Nigam, Shreya Ghoshal",
+      "album": "Om Shanti Om",
+      "duration": 308,
+      "cover": "https://c.saavncdn.com/179/Om-Shanti-Om-Hindi-2007-20241205141724-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/179/072d8e825c532778560b38b4042c8fc3_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sonu_nigam_2",
+      "title": "Chori Kiya Re Jiya",
+      "artist": "Sonu Nigam, Shreya Ghoshal",
+      "album": "Dabangg",
+      "duration": 286,
+      "cover": "https://c.saavncdn.com/765/Dabangg-Hindi-2010-20221211114032-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/765/367d390c0c3c272fabefc6da8a81b305_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sonu_nigam_3",
+      "title": "Aisa Deewana",
+      "artist": "Sonu Nigam, Alka Yagnik",
+      "album": "Dil Maange More",
+      "duration": 313,
+      "cover": "https://c.saavncdn.com/406/Dil-Maange-More-Hindi-2004-20221124142445-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/406/79e3c487d7b4656baa29bc0b983cc048_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sonu_nigam_4",
+      "title": "Pardesiya (From \"Param Sundari\")",
+      "artist": "Sonu Nigam, Krishnakali Saha, Amitabh Bhattacharya, Sachin-Jigar",
+      "album": "Param Sundari",
+      "duration": 232,
+      "cover": "https://c.saavncdn.com/029/Param-Sundari-Hindi-2025-20250825135103-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/029/48267da576cd70080f4a3f021404e186_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sonu_nigam_5",
+      "title": "Dil Dooba",
+      "artist": "Sonu Nigam, Shreya Ghoshal",
+      "album": "Khakee",
+      "duration": 230,
+      "cover": "https://c.saavncdn.com/817/Khakee-Hindi-2003-20221201092105-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/817/7338c49444ba9a09780de14b1dacff8a_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sonu_nigam_6",
+      "title": "Yeh Dil Deewana",
+      "artist": "Sonu Nigam, Hema Sardesai, Shankar Mahadevan",
+      "album": "Pardes",
+      "duration": 426,
+      "cover": "https://c.saavncdn.com/386/Pardes-Hindi-1997-20250711223347-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/386/a53b2ccf1b097919b44e5433d77e896d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sonu_nigam_7",
+      "title": "Soniyo",
+      "artist": "Raju Singh, Sonu Nigam, Shreya Ghoshal",
+      "album": "RAAZ - The Mystery Continues",
+      "duration": 329,
+      "cover": "https://c.saavncdn.com/542/RAAZ-The-Mystery-Continues-Hindi-2008-20190617160418-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/542/34e05537cc5017bfd6fdba3c6cfedf2d_320.mp4",
+      "badge": "Studio 320kbps"
+    }
+  ],
+  "anuv_jain": [
+    {
+      "id": "anuv_jain_1",
+      "title": "Arz Kiya Hai | Coke Studio Bharat",
+      "artist": "Anuv Jain",
+      "album": "Arz Kiya Hai | Coke Studio Bharat",
+      "duration": 294,
+      "cover": "https://c.saavncdn.com/504/Arz-Kiya-Hai-Coke-Studio-Bharat-Hindi-2025-20250818054005-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/504/a70f9144a360aa064fadffa886e7c8b6_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_2",
+      "title": "Jo Tum Mere Ho",
+      "artist": "Anuv Jain",
+      "album": "Jo Tum Mere Ho",
+      "duration": 252,
+      "cover": "https://c.saavncdn.com/401/Jo-Tum-Mere-Ho-Hindi-2024-20240731053953-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/401/1e4444c13f76ac543c19b01d7ea0423a_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_3",
+      "title": "Husn",
+      "artist": "Anuv Jain",
+      "album": "Husn",
+      "duration": 217,
+      "cover": "https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/436/13795b7aa2e87393366162b9e6a6fe88_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_4",
+      "title": "Afsos",
+      "artist": "Anuv Jain, AP Dhillon, Satinderpal Singh",
+      "album": "Afsos",
+      "duration": 191,
+      "cover": "https://c.saavncdn.com/773/Afsos-Punjabi-2025-20250129053900-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/773/a05bddf58f9158b522b7d782c77612ba_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_5",
+      "title": "Alag Aasmaan",
+      "artist": "Anuv Jain",
+      "album": "Alag Aasmaan",
+      "duration": 213,
+      "cover": "https://c.saavncdn.com/879/Alag-Aasmaan-Unknown-2020-20200716212927-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/879/72ded7665bbd5f8947f014de81e5fc1d_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_6",
+      "title": "Inaam",
+      "artist": "Anuv Jain",
+      "album": "Inaam",
+      "duration": 257,
+      "cover": "https://c.saavncdn.com/198/Inaam-Hindi-2025-20251210053823-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/198/0b3a459efb6c87cc55ef68a3528f6088_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_7",
+      "title": "Gul",
+      "artist": "Anuv Jain",
+      "album": "Gul",
+      "duration": 218,
+      "cover": "https://c.saavncdn.com/266/Gul-Hindi-2021-20210706151615-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/266/75a2c612178dea03a50e943310efa85f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_8",
+      "title": "Baarishein (Acoustic)",
+      "artist": "Anuv Jain",
+      "album": "Baarishein (Acoustic)",
+      "duration": 209,
+      "cover": "https://c.saavncdn.com/923/Baarishein-Acoustic-Hindi-2023-20230712053421-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/923/53300d41d4b1dc17a3951b6d67bac0cb_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "anuv_jain_9",
+      "title": "Arz Kiya Hai (Acoustic)",
+      "artist": "Veera",
+      "album": "Arz Kiya Hai",
+      "duration": 342,
+      "cover": "https://c.saavncdn.com/398/Arz-Kiya-Hai-Unknown-2026-20260727100735-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/398/413d68610ff71f8433c0f3e2eb9035fc_320.mp4",
+      "badge": "Studio 320kbps"
+    }
+  ],
+  "sidhu_moose_wala": [
+    {
+      "id": "sidhu_moose_wala_1",
+      "title": "Ghostface Killah",
+      "artist": "Sidhu Moose Wala, MXRCI",
+      "album": "Ghostface Killah",
+      "duration": 137,
+      "cover": "https://c.saavncdn.com/930/Ghostface-Killah-Punjabi-2026-20260921193403-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/930/25735de6056f5c5029cb79ea79c6e512_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_2",
+      "title": "Same Beef",
+      "artist": "Bohemia, Sidhu Moose Wala",
+      "album": "Same Beef",
+      "duration": 290,
+      "cover": "https://c.saavncdn.com/154/Same-Beef-Punjabi-2019-20190919071247-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/154/d8e13e5a519f8392580616d3931b8adb_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_3",
+      "title": "295",
+      "artist": "Sidhu Moose Wala",
+      "album": "Moosetape",
+      "duration": 270,
+      "cover": "https://c.saavncdn.com/609/Moosetape-Punjabi-2021-20260626155141-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/609/852628435c98083dfe217c1cfa731bb5_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_4",
+      "title": "0008",
+      "artist": "The Kidd, Sidhu Moose Wala, Jenny Johal",
+      "album": "Moose Print",
+      "duration": 132,
+      "cover": "https://c.saavncdn.com/785/Moose-Print-Punjabi-2025-20260626153146-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/785/f3a2893ad1dbe12d208c7b5dc134d919_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_5",
+      "title": "So High",
+      "artist": "Sidhu Moose Wala",
+      "album": "So High",
+      "duration": 233,
+      "cover": "https://c.saavncdn.com/544/So-High-Punjabi-2017-20220811172517-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/544/fa128b5b00df068d78bc50bf19bf137f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_6",
+      "title": "East Side Flow",
+      "artist": "Sidhu Moose Wala",
+      "album": "East Side Flow",
+      "duration": 224,
+      "cover": "https://c.saavncdn.com/599/East-Side-Flow-Punjabi-2019-20190317052003-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/599/90947a11238d8886a891d10e672d53e1_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_7",
+      "title": "Levels",
+      "artist": "Sidhu Moose Wala, Sunny Malton",
+      "album": "Levels",
+      "duration": 228,
+      "cover": "https://c.saavncdn.com/220/Levels-Punjabi-2022-20260626154343-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/220/2386e255fd1a5235aad25d92ca7dc82c_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_8",
+      "title": "Devil",
+      "artist": "Sidhu Moose Wala",
+      "album": "Pbx 1",
+      "duration": 247,
+      "cover": "https://c.saavncdn.com/588/Pbx-1-Punjabi-2018-20181018-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/588/87ef653fa7baffee19f1f1c0c4733ab6_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_9",
+      "title": "Barota",
+      "artist": "Sidhu Moose Wala, The Kidd",
+      "album": "Barota",
+      "duration": 243,
+      "cover": "https://c.saavncdn.com/625/Barota-Punjabi-2025-20260626143211-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/625/d54029654a10587ebb1cffe24758df2b_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "sidhu_moose_wala_10",
+      "title": "Eyes on Me",
+      "artist": "Sidhu Moose Wala, The Kidd",
+      "album": "Eyes on Me",
+      "duration": 154,
+      "cover": "https://c.saavncdn.com/505/Eyes-on-Me-Punjabi-2026-20260626143324-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/505/a45b5363405c22ca876c1d538afcca6d_320.mp4",
+      "badge": "Studio 320kbps"
+    }
+  ],
+  "b_praak": [
+    {
+      "id": "b_praak_1",
+      "title": "Garmi Non Stop Dance Mix(Remix By Kedrock,Sd Style)",
+      "artist": "Parampara Tandon, Vishal, Shekhar, KK, Shaan, Tulsi Kumar, Mika Singh, Meet Bros, Jubin Nautiyal, Dhvani Bhanushali, Nitin Mukesh, Guru Randhawa, Arijit Singh, Armaan Malik, B Praak, Mehul Vyas, Adarsh Shinde, Yo Yo Honey Singh, Romy, Bombay Rockers, Neha Kakkar, Tanishk Bagchi, A.R. Rahman, Pritam, Amaal Mallik, Sachet-Parampara, Tony Kakkar, Mithoon, Lijo George, Dj Chetas, Badshah, Vishal &amp; Shekhar, Laxmikant - Pyarelal, Viju Shah, Sachin-Jigar, Vee",
+      "album": "Garmi Non Stop Dance Mix",
+      "duration": 3600,
+      "cover": "https://c.saavncdn.com/500/Garmi-Non-Stop-Dance-Mix-Hindi-2020-20201228161048-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/500/f386a5c0dcb2f43494b25e1ff45da594_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_2",
+      "title": "Bala Bala Non Stop Remix(Remix By Kedrock,Sd Style)",
+      "artist": "Badshah, Sachin-Jigar, Sohail Sen, Guru Randhawa, Dj Money Willz, Arya Acharya, Arijit Singh, Vishal &amp; Shekhar, Sandesh Shandilya, Goldboy, Mithoon, Dj Chetas, Pitbull, Jasbir Jassi, Shreya Ghoshal, Tulsi Kumar, Dj Blackout, B Praak, Gurmeet Singh, Dhvani Bhanushali, Tanishk Bagchi, Lijo George, Manj Musik, Neha Kakkar, Preet Hundal, Nikhil D'souza, Abhijit Vaghani, Vishal Dadlani, Neeti Mohan, Sachet Tandon, Sachet-Parampara, Sanjay Leela Bhansali",
+      "album": "Bala Bala Non Stop Remix",
+      "duration": 3052,
+      "cover": "https://c.saavncdn.com/595/Bala-Bala-Non-Stop-Remix-Hindi-2020-20200129134001-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/595/b3e624c50ca2cedb891c276b0e9dfdb5_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_3",
+      "title": "Bollywood Non Stop Dandiya-2020(Remix By Kedrock,Sd Style)",
+      "artist": "Arijit Singh, Asees Kaur, B Praak, Badshah, Darshan Raval, Dhvani Bhanushali, Guru Randhawa, Jubin Nautiyal, Kamaal Khan, Mika Singh, Millind Gaba, Neeti Mohan, Neha Kakkar, Nikhita Gandhi, Palak Muchhal, Sachet Tandon, Sukhwinder Singh, Tanishk Bagchi, Tulsi Kumar, Yo Yo Honey Singh, Amaal Mallik, Gaurav Chatterji, Jasbir Jassi, Lijo George-Dj Chetas, Meet Bros, Mehul Vyas, Raaj Aashoo, Rochak Kohli, Sachet-Parampara, Sachin-Jigar, Sajid-Wajid, Shyam Bhateja, Sunny Vik, The Fusion Project, Ved Sharma, Vishal &amp; Shekhar",
+      "album": "Bollywood Non Stop Dandiya-2020",
+      "duration": 2919,
+      "cover": "https://c.saavncdn.com/495/Bollywood-Non-Stop-Dandiya-2020-Hindi-2020-20201017191001-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/495/f8813dabe337a4a1beda803dfaddd2d3_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_4",
+      "title": "Filhall",
+      "artist": "B Praak",
+      "album": "Sad Songs",
+      "duration": 255,
+      "cover": "https://c.saavncdn.com/193/Sad-Songs-Hindi-2020-20250124193408-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/193/f675d2940761cd2fecb77d74afbc4427_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_5",
+      "title": "Filhaal2 Mohabbat",
+      "artist": "B Praak",
+      "album": "Top 10 Sad Songs - Hindi",
+      "duration": 300,
+      "cover": "https://c.saavncdn.com/237/Top-10-Sad-Songs-Hindi-Hindi-2021-20250124193408-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/237/3351e854e8e6dc82c4362a3a1fbde361_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_6",
+      "title": "Kuch Bhi Ho Jaye",
+      "artist": "B Praak",
+      "album": "Sad Songs",
+      "duration": 274,
+      "cover": "https://c.saavncdn.com/193/Sad-Songs-Hindi-2020-20250124193408-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/193/f62a19fa4176c491da2ffea8aca611c2_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_7",
+      "title": "Soch Lofi Mix(Remix By Kedrock,Sd Style)",
+      "artist": "Harrdy Sandhu, B Praak",
+      "album": "Soch Lofi Mix",
+      "duration": 208,
+      "cover": "https://c.saavncdn.com/124/Soch-Lofi-Mix-Punjabi-2023-20230112201002-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/124/b86aa4826c3f780082274d4b8a4484f0_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_8",
+      "title": "Besharam Bewaffa (From \"Jaani Ve\")",
+      "artist": "B Praak",
+      "album": "Dil Se Galti - Hindi Sad Songs",
+      "duration": 271,
+      "cover": "https://c.saavncdn.com/528/Dil-Se-Galti-Hindi-Sad-Songs-Hindi-2021-20210925071001-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/528/fabede49bdb5de42bd617ea4dff52e95_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_9",
+      "title": "The Mega Party Mix(Remix By Kedrock,Sd Style)",
+      "artist": "Pitbull, Diljit Dosanjh, Neeraj Shridhar, Shilpa Rao, Sachet Tandon, Arijit Singh, Charan, Yo Yo Honey Singh, B Praak, R.D. Burman, Romy, Tanishk Bagchi, Guru Randhawa, Raj Ranjodh, Benny Dayal, Vishal & Shekhar, Mellow D, Pritam, Sachin-Jigar, Mitraz",
+      "album": "The Mega Party Mix",
+      "duration": 2362,
+      "cover": "https://c.saavncdn.com/268/The-Mega-Party-Mix-Hindi-2024-20241226111003-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/268/5f97ebc682f0e0b57af1353cabd7240f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_10",
+      "title": "Mahakaal",
+      "artist": "B Praak, Jaani",
+      "album": "Mahakaal",
+      "duration": 284,
+      "cover": "https://c.saavncdn.com/978/Mahakaal-Hindi-2025-20250215053510-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/978/25195473f5de75ff30ef492b133c1c81_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_11",
+      "title": "Kya Baat Ay",
+      "artist": "Harrdy Sandhu, Jaani",
+      "album": "Kya Baat Ay",
+      "duration": 181,
+      "cover": "https://c.saavncdn.com/706/Kya-Baat-Ay-Punjabi-2018-20180921123124-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/706/69cb3455870c4a907e44e2492318b12c_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "b_praak_12",
+      "title": "Backbone",
+      "artist": "Harrdy Sandhu, Jaani",
+      "album": "Backbone",
+      "duration": 175,
+      "cover": "https://c.saavncdn.com/828/Backbone-Punjabi-2017-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/828/ee25a607181de97439eb411a68019869_320.mp4",
+      "badge": "Studio 320kbps"
+    }
+  ],
+  "mohit_chauhan": [
+    {
+      "id": "mohit_chauhan_1",
+      "title": "Tum Se Hi",
+      "artist": "Pritam, Mohit Chauhan",
+      "album": "Jab We Met",
+      "duration": 321,
+      "cover": "https://c.saavncdn.com/223/Jab-We-Met-Hindi-2007-20231016162009-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/223/7eddc0f9b56f110ae39a145752fabb34_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_2",
+      "title": "Chikiri Chikiri (From &quot;Peddi&quot;) - Telugu",
+      "artist": "Mohit Chauhan",
+      "album": "Chikiri Chikiri (From &quot;Peddi&quot;) - Telugu",
+      "duration": 273,
+      "cover": "https://c.saavncdn.com/735/Chikiri-Chikiri-From-Peddi-Telugu-Telugu-2025-20251107191120-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/735/afffe241f71836496fd3ebd720b06822_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_3",
+      "title": "Chikiri Chikiri (From &quot;Peddi&quot;)",
+      "artist": "Balaji, A.R. Rahman, Mohit Chauhan",
+      "album": "World Music Day - Top 10 Telugu Superhits",
+      "duration": 273,
+      "cover": "https://c.saavncdn.com/063/World-Music-Day-Top-10-Telugu-Superhits-Telugu-2026-20260619191140-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/063/96148548d2eca0745bae970df3884b4e_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_4",
+      "title": "Rang Lageya",
+      "artist": "Mohit Chauhan, Rochak Kohli",
+      "album": "Rang Lageya",
+      "duration": 227,
+      "cover": "https://c.saavncdn.com/861/Rang-Lageya-Hindi-2021-20210315162921-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/861/5eeb61506d78189000c55c0337db4c15_sar_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_5",
+      "title": "Tune Jo Na Kaha",
+      "artist": "Pritam, Mohit Chauhan, Sandeep Shrivastava",
+      "album": "New York",
+      "duration": 309,
+      "cover": "https://c.saavncdn.com/978/New-York-Hindi-2009-20190329182537-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/978/c0cd117c13a98276c0b770b38289e97f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_6",
+      "title": "Tum Ho",
+      "artist": "Suzanne D'Mello, Mohit Chauhan",
+      "album": "Rockstar",
+      "duration": 318,
+      "cover": "https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/274/fd6e420a5742d1a3cdcd13c833d0489f_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_7",
+      "title": "Kun Faaya Kun",
+      "artist": "Javed Ali, Mohit Chauhan, A.R. Rahman",
+      "album": "Rockstar",
+      "duration": 473,
+      "cover": "https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/274/aee250c500588f117ae5343688e12b42_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_8",
+      "title": "Kun Faya Kun (From &quot;Rockstar&quot;)",
+      "artist": "Irshad Kamil, A.R. Rahman, Javed Ali, Mohit Chauhan",
+      "album": "World Music Day - Best Of Bollywood Hits",
+      "duration": 469,
+      "cover": "https://c.saavncdn.com/179/World-Music-Day-Best-Of-Bollywood-Hits-Hindi-2026-20260622111029-150x150.jpg",
+      "stream_url": "https://aac.saavncdn.com/179/53fd6b97b1616b941b115f840e8b1e42_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_9",
+      "title": "Phir Se Ud Chala",
+      "artist": "Mohit Chauhan",
+      "album": "Rockstar",
+      "duration": 271,
+      "cover": "https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/274/c7fa8d1999f3b3d3dc5881beb1e8c31b_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_10",
+      "title": "Nadaan Parindey",
+      "artist": "A.R. Rahman, Mohit Chauhan",
+      "album": "Rockstar",
+      "duration": 386,
+      "cover": "https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/274/ed2193d56b29e06f96ad428cf6ffeae0_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_11",
+      "title": "Saadda Haq (Featuring Orianthi Panagaris On Guitars)",
+      "artist": "A.R. Rahman, Clinton Cerejo, Mohit Chauhan",
+      "album": "Rockstar",
+      "duration": 365,
+      "cover": "https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/274/ec39b6b040265fdf0c97080bad3b9e86_320.mp4",
+      "badge": "Studio 320kbps"
+    },
+    {
+      "id": "mohit_chauhan_12",
+      "title": "Jo Bhi Main",
+      "artist": "A.R. Rahman, Mohit Chauhan",
+      "album": "Rockstar",
+      "duration": 275,
+      "cover": "https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/274/a0c47c2ade58e93115e1774c9199e33b_320.mp4",
+      "badge": "Studio 320kbps"
+    }
+  ]
 }
 
 export const POPULAR_GENRES = [

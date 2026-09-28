@@ -23,6 +23,7 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
   const [playlists, setPlaylists] = useState(null)
   const [plAdded, setPlAdded] = useState('')
   const menuRef = useRef(null)
+  const [imgFailed, setImgFailed] = useState(false)
 
   const isCurrent = audio.current?.track && (audio.current.track.id || audio.current.track.title) === (track.id || track.title)
   const isPlaying = isCurrent && audio.playing
@@ -108,10 +109,16 @@ export default function TrackCard({ track, moodTag = '', onLyrics, queue, showPl
       }`}
     >
       <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-lg">
-        {cover.startsWith('data:') || !cover ? (
+        {imgFailed || cover.startsWith('data:') || !cover ? (
           <div className="flex h-full w-full items-center justify-center bg-surface-3 text-sand-dim"><MusicIcon size={18} /></div>
         ) : (
-          <img src={cover} alt="" loading="lazy" className="h-full w-full object-cover" />
+          <img
+            src={cover}
+            alt=""
+            loading="lazy"
+            onError={() => setImgFailed(true)}
+            className="h-full w-full object-cover"
+          />
         )}
         <button
           onClick={play}
