@@ -157,7 +157,7 @@ def search():
     q = request.args.get("q", "").strip()
     if len(q) < 2:
         return jsonify({"tracks": []})
-    tracks = catalog_service.search_songs(q, limit=16)
+    tracks = catalog_service.search_songs(q, limit=30)
     suggestions = catalog_service.get_suggestions(q) if len(q) >= 2 else []
     return jsonify({"query": q, "tracks": tracks, "suggestions": suggestions})
 

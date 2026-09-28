@@ -7,7 +7,7 @@
 import { DEFAULT_CATEGORIES, DEFAULT_CATALOGS } from './data/defaultCatalog'
 import { clientAnalyzeMood, clientGenerateChat } from './data/sentimentAnalyzer'
 import CURATED_LYRICS from './data/curatedLyrics.json'
-import { smartSearchCatalog, FAMOUS_LYRICS_MAP, getSearchPredictions } from './data/searchEngine'
+import { smartSearchCatalog, FAMOUS_LYRICS_MAP, getSearchPredictions, POPULAR_SINGERS, ARTIST_DISCOGRAPHIES } from './data/searchEngine'
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
@@ -480,8 +480,52 @@ export const api = {
 
     return {
       query,
-      tracks: merged.slice(0, 25),
+      tracks: merged.slice(0, 35),
       matchedLyric: lyricMatch ? lyricMatch.snippet : null,
+    }
+  },
+
+  getArtistPlaylist: async (artistIdOrName) => {
+    const term = (artistIdOrName || '').toLowerCase().trim()
+    const artist = POPULAR_SINGERS.find(
+      (a) => a.id.toLowerCase() === term || a.name.toLowerCase() === term || a.name.toLowerCase().includes(term)
+    ) || {
+      id: term.replace(/[^a-z0-9]/g, '_'),
+      name: artistIdOrName,
+      role: 'Popular Artist',
+      avatar: 'https://c.saavncdn.com/artists/Arijit_Singh_002_20240321074712_500x500.jpg',
+      bio: `Signature collection and curated hits by ${artistIdOrName}.`,
+      monthlyListeners: '20M+',
+    }
+
+    const staticTracks = (artist && ARTIST_DISCOGRAPHIES[artist.id]) || []
+
+    let liveTracks = []
+    try {
+      const res = await request(`/search?q=${encodeURIComponent(artist.name + ' songs')}`, {}, 4000)
+      if (res && Array.isArray(res.tracks)) {
+        liveTracks = res.tracks
+      }
+    } catch {}
+
+    const seen = new Set()
+    const combined = []
+
+    for (const t of [...staticTracks, ...liveTracks]) {
+      const key = `${t.title}-${t.artist}`.toLowerCase()
+      if (!seen.has(key)) {
+        seen.add(key)
+        combined.push({
+          ...t,
+          artist_playlist: artist.name,
+        })
+      }
+    }
+
+    return {
+      artist,
+      tracks: combined.slice(0, 40),
+      total: combined.length,
     }
   },
 

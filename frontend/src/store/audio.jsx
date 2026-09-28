@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import { DEFAULT_CATALOGS } from '../data/defaultCatalog'
+import { ARTIST_DISCOGRAPHIES } from '../data/searchEngine'
 import { api } from '../api'
 
 // One <audio> element for the whole app — like a real player. The queue,
@@ -28,11 +29,20 @@ const ALL_FALLBACK_TRACKS = Object.values(DEFAULT_CATALOGS).flat()
 function findRelatedContinuation(currentTrack, existingQueue = []) {
   if (!currentTrack) return ALL_FALLBACK_TRACKS.slice(0, 6)
   const seenKeys = new Set((existingQueue || []).map((t) => trackKey(t).toLowerCase()))
-  const curArtist = (currentTrack.artist || '').toLowerCase()
+  const curArtist = (currentTrack.artist || currentTrack.artist_playlist || '').toLowerCase()
   const curCategory = currentTrack.category || ''
 
-  // 1. Same artist tracks
-  const artistMatches = ALL_FALLBACK_TRACKS.filter((t) => {
+  // 1. If currently in artist playlist mode, prioritize tracks from that artist discography
+  let artistHits = []
+  for (const [artKey, tracks] of Object.entries(ARTIST_DISCOGRAPHIES || {})) {
+    if (curArtist.includes(artKey.replace(/_/g, ' ')) || curArtist.includes(artKey.split('_')[0])) {
+      artistHits = tracks.filter((t) => !seenKeys.has(trackKey(t).toLowerCase()))
+      break
+    }
+  }
+
+  // Same artist tracks from fallback catalog
+  const catalogArtistMatches = ALL_FALLBACK_TRACKS.filter((t) => {
     if (seenKeys.has(trackKey(t).toLowerCase())) return false
     const tArtist = (t.artist || '').toLowerCase()
     return (
@@ -51,7 +61,7 @@ function findRelatedContinuation(currentTrack, existingQueue = []) {
   // 3. Popular evergreen pool
   const remaining = ALL_FALLBACK_TRACKS.filter((t) => !seenKeys.has(trackKey(t).toLowerCase()))
 
-  const pool = [...artistMatches, ...categoryMatches, ...remaining]
+  const pool = [...artistHits, ...catalogArtistMatches, ...categoryMatches, ...remaining]
   const picked = []
   for (const t of pool) {
     const k = trackKey(t).toLowerCase()
@@ -132,6 +142,21 @@ export function AudioProvider({ children }) {
         }
       })
       el.addEventListener('error', () => {
+        const st = stateRef.current
+        const cur = st.current
+        const q = cur?.queue || []
+        const nextIdx = (cur?.index ?? 0) + 1
+
+        if (nextIdx < q.length) {
+          const nextTrack = q[nextIdx]
+          if (nextTrack && nextTrack.stream_url) {
+            setCurrent({ track: nextTrack, queue: q, index: nextIdx })
+            el.src = nextTrack.stream_url
+            el.play().catch(() => {})
+            setError(`Auto-skipped “${cur?.track?.title || 'track'}” (stream unavailable). Playing next…`)
+            return
+          }
+        }
         setError('This track could not be streamed right now.')
         setPlaying(false)
       })
