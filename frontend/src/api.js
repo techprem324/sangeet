@@ -519,7 +519,7 @@ export const api = {
       id: term.replace(/[^a-z0-9]/g, '_'),
       name: artistIdOrName,
       role: 'Popular Artist',
-      avatar: 'https://c.saavncdn.com/artists/Arijit_Singh_002_20240321074712_500x500.jpg',
+      avatar: 'https://c.saavncdn.com/artists/Arijit_Singh_004_20241118063717_500x500.jpg',
       bio: `Signature collection and curated hits by ${artistIdOrName}.`,
       monthlyListeners: '20M+',
     }
@@ -607,11 +607,17 @@ export const api = {
         ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 6),
       ]
     } else if (genre.id === 'new_releases' || genre.id === 'chartbusters') {
+      let storedAuto = []
+      try {
+        const raw = safeGetItem(localStorage, 'sangeet_auto_releases')
+        if (raw) storedAuto = JSON.parse(raw)
+      } catch {}
       discHits = [
+        ...storedAuto,
         ...NEW_RELEASES_2025_2026,
-        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []).slice(0, 5),
-        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 5),
-        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 4),
+        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 5),
       ]
     } else if (genre.id === 'romantic') {
       discHits = [
@@ -715,7 +721,13 @@ export const api = {
         ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 4),
       ]
     } else if (pl.id === 'trending_top_50') {
+      let storedAuto = []
+      try {
+        const raw = safeGetItem(localStorage, 'sangeet_auto_releases')
+        if (raw) storedAuto = JSON.parse(raw)
+      } catch {}
       initialTracks = [
+        ...storedAuto,
         ...NEW_RELEASES_2025_2026,
         ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 5),
         ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 4),
@@ -868,6 +880,52 @@ export const api = {
       tracks: freshTracks.slice(0, 12),
       count: freshTracks.length,
     }
+  },
+
+  autoReleaseNewSongs: async () => {
+    let stored = []
+    try {
+      const raw = safeGetItem(localStorage, 'sangeet_auto_releases')
+      if (raw) stored = JSON.parse(raw)
+    } catch {}
+
+    const queries = ['latest bollywood 2026', 'latest hindi songs 2026', 'karan aujla 2026', 'trending punjabi 2026']
+    let freshFromBackend = []
+    for (const q of queries) {
+      try {
+        const res = await request(`/search?q=${encodeURIComponent(q)}`, {}, 3200)
+        if (res && Array.isArray(res.tracks)) {
+          for (const tr of res.tracks) {
+            if (tr && tr.stream_url) {
+              freshFromBackend.push({
+                ...tr,
+                badge: 'Auto Released 2026',
+                year: '2026',
+              })
+            }
+          }
+        }
+      } catch {}
+    }
+
+    const seen = new Set()
+    const merged = []
+    for (const t of [...freshFromBackend, ...stored, ...NEW_RELEASES_2025_2026]) {
+      if (!t || !t.stream_url) continue
+      const normTitle = (t.title || '').replace(/\(From.*?\)|\[.*?\]/gi, '').trim().toLowerCase()
+      const normArtist = (t.artist || '').split(/[,&]/)[0].trim().toLowerCase()
+      const key = `${normTitle}|${normArtist}`
+      if (!seen.has(key)) {
+        seen.add(key)
+        merged.push(t)
+      }
+    }
+
+    try {
+      safeSetItem(localStorage, 'sangeet_auto_releases', JSON.stringify(merged.slice(0, 50)))
+    } catch {}
+
+    return merged.slice(0, 30)
   },
 
   lyrics: async (track) => {

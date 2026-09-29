@@ -136,7 +136,7 @@ export const POPULAR_SINGERS = [
     id: 'sidhu_moose_wala',
     name: 'Sidhu Moose Wala',
     role: 'The Legend & Punjabi Hip-Hop Giant',
-    avatar: 'https://c.saavncdn.com/artists/Sidhu_Moose_Wala_500x500.jpg',
+    avatar: 'https://c.saavncdn.com/artists/Sidhu_Moose_Wala_004_20250617183705_500x500.jpg',
     gradient: 'from-red-600/30 to-rose-950/30',
     tags: ['High Bass', 'Hip-Hop', 'Legacy'],
     query: 'Sidhu Moose Wala',
@@ -147,8 +147,8 @@ export const POPULAR_SINGERS = [
     id: 'b_praak',
     name: 'B Praak',
     role: 'Powerhouse of Emotional Melodies',
-    avatar: 'https://c.saavncdn.com/artists/B_Praak_500x500.jpg',
-    gradient: 'from-emerald-700/30 to-amber-900/30',
+    avatar: 'https://c.saavncdn.com/artists/B_Praak_001_20191118112005_500x500.jpg',
+    gradient: 'from-amber-700/30 to-orange-950/30',
     tags: ['Heartfelt', 'Anthems', 'High Pitch'],
     query: 'B Praak',
     monthlyListeners: '19.4M',
@@ -275,7 +275,7 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Tauba Tauba (From \"Bad Newz\")",
     "artist": "Karan Aujla",
     "album": "Bad Newz",
-    "cover": "https://c.saavncdn.com/136/Tauba-Tauba-From-Bad-Newz-Hindi-2024-20240702111458-500x500.jpg",
+    "cover": "https://c.saavncdn.com/992/Bad-Newz-Hindi-2024-20250730113701-500x500.jpg",
     "stream_url": "https://aac.saavncdn.com/992/5d44da8bc1d78fb72d18b701d758fd1f_320.mp4",
     "duration": 207,
     "badge": "Chartbuster",
@@ -297,11 +297,55 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Softly",
     "artist": "Karan Aujla, Ikky",
     "album": "Making Memories",
-    "cover": "https://c.saavncdn.com/538/Making-Memories-Punjabi-2023-20230818063228-500x500.jpg",
+    "cover": "https://c.saavncdn.com/538/Making-Memories-English-2023-20230818075015-500x500.jpg",
     "stream_url": "https://aac.saavncdn.com/538/727114725cd7ec508b1df0a7e4515e5e_320.mp4",
     "duration": 155,
     "badge": "Chartbuster",
     "year": "2025"
+  },
+  {
+    "id": "nr_13",
+    "title": "Boyfriend",
+    "artist": "Karan Aujla, IKKY",
+    "album": "P-POP CULTURE",
+    "cover": "https://c.saavncdn.com/621/P-POP-CULTURE-Punjabi-2025-20250820043757-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/621/895e14c38bf774a0122eef2528b39272_320.mp4",
+    "duration": 160,
+    "badge": "Trending #1",
+    "year": "2026"
+  },
+  {
+    "id": "nr_14",
+    "title": "Wavy",
+    "artist": "Karan Aujla, Jay Trak",
+    "album": "Wavy",
+    "cover": "https://c.saavncdn.com/178/Wavy-Punjabi-2024-20250523044332-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/178/9af31095a56a0a124dee89ef89ffee5a_320.mp4",
+    "duration": 161,
+    "badge": "Chartbuster",
+    "year": "2025"
+  },
+  {
+    "id": "nr_15",
+    "title": "For A Reason",
+    "artist": "Karan Aujla, IKKY",
+    "album": "P-POP CULTURE",
+    "cover": "https://c.saavncdn.com/621/P-POP-CULTURE-Punjabi-2025-20250820043757-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/621/59d7b22aeaa69bd8158c1852e0b556d3_320.mp4",
+    "duration": 180,
+    "badge": "Chartbuster",
+    "year": "2025"
+  },
+  {
+    "id": "nr_16",
+    "title": "Low Fade",
+    "artist": "Karan Aujla, MXRCI",
+    "album": "AUJLA SZN",
+    "cover": "https://c.saavncdn.com/892/Low-Fade-Punjabi-2026-20260621183701-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/892/1beba31a15434dcae47bcb4085bb5827_320.mp4",
+    "duration": 175,
+    "badge": "Trending #1",
+    "year": "2026"
   }
 ]
 
@@ -325,7 +369,7 @@ export const ARTIST_DISCOGRAPHIES = {
       "title": "Tauba Tauba (From \"Bad Newz\")",
       "artist": "Karan Aujla",
       "album": "Bad Newz",
-      "cover": "https://c.saavncdn.com/136/Tauba-Tauba-From-Bad-Newz-Hindi-2024-20240702111458-500x500.jpg",
+      "cover": "https://c.saavncdn.com/992/Bad-Newz-Hindi-2024-20250730113701-500x500.jpg",
       "stream_url": "https://aac.saavncdn.com/992/5d44da8bc1d78fb72d18b701d758fd1f_320.mp4",
       "duration": 207,
       "badge": "Studio 320kbps"
@@ -345,7 +389,7 @@ export const ARTIST_DISCOGRAPHIES = {
       "title": "Softly",
       "artist": "Karan Aujla, Ikky",
       "album": "Making Memories",
-      "cover": "https://c.saavncdn.com/538/Making-Memories-Punjabi-2023-20230818063228-500x500.jpg",
+      "cover": "https://c.saavncdn.com/538/Making-Memories-English-2023-20230818075015-500x500.jpg",
       "stream_url": "https://aac.saavncdn.com/538/727114725cd7ec508b1df0a7e4515e5e_320.mp4",
       "duration": 155,
       "badge": "Studio 320kbps"
@@ -1748,7 +1792,7 @@ export const POPULAR_GENRES = [
   {
     id: 'punjabi',
     label: 'Punjabi',
-    bgColor: '#1E3264',
+    bgColor: '#4A1E17',
     cover: 'https://c.saavncdn.com/918/AUJLA-SZN-1-Punjabi-2026-20260925122119-500x500.jpg',
     subtags: ['Punjabi Workout >', 'Punjabi Love >', 'Desi Hip-Hop >', 'Trending Hits >'],
     artistIds: ['karan_aujla', 'diljit_dosanjh', 'ap_dhillon', 'sidhu_moose_wala', 'b_praak'],
@@ -1761,7 +1805,7 @@ export const POPULAR_GENRES = [
   {
     id: 'romantic',
     label: 'Bollywood Romance',
-    bgColor: '#E8115B',
+    bgColor: '#8B3A2B',
     cover: 'https://c.saavncdn.com/815/Bhediya-Hindi-2023-20230927155213-500x500.jpg',
     subtags: ['Acoustic Love >', 'Monsoon Romance >', 'Soul Duets >', 'Late Night Romance >'],
     artistIds: ['arijit_singh', 'shreya_ghoshal', 'atif_aslam', 'pritam'],
@@ -1774,7 +1818,7 @@ export const POPULAR_GENRES = [
   {
     id: 'new_releases',
     label: 'New Releases',
-    bgColor: '#477D95',
+    bgColor: '#B45309',
     cover: 'https://c.saavncdn.com/475/Dhurandhar-Hindi-2025-20260203083204-500x500.jpg',
     subtags: ['2025-2026 Chartbusters >', 'Viral Hits >', 'Bollywood 2026 >', 'Blockbusters >'],
     artistIds: ['karan_aujla', 'arijit_singh', 'diljit_dosanjh', 'anuv_jain'],
@@ -1787,7 +1831,7 @@ export const POPULAR_GENRES = [
   {
     id: 'lofi',
     label: 'Late Night Lo-Fi',
-    bgColor: '#8D67AB',
+    bgColor: '#4A2E35',
     cover: 'https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg',
     subtags: ['Midnight Acoustic >', 'Study Chill >', 'Gentle Poetry >', 'Lo-Fi Beats >'],
     artistIds: ['anuv_jain', 'ap_dhillon', 'mohit_chauhan'],
@@ -1800,7 +1844,7 @@ export const POPULAR_GENRES = [
   {
     id: 'party',
     label: 'Party & Dance',
-    bgColor: '#E13300',
+    bgColor: '#A84218',
     cover: 'https://c.saavncdn.com/881/War-Hindi-2019-20191001104931-500x500.jpg',
     subtags: ['Club Bangers >', 'Desi Party >', 'High Energy >', 'Dance Floor >'],
     artistIds: ['diljit_dosanjh', 'karan_aujla', 'pritam', 'b_praak'],
@@ -1813,7 +1857,7 @@ export const POPULAR_GENRES = [
   {
     id: 'sad',
     label: 'Sad & Heartbreak',
-    bgColor: '#183282',
+    bgColor: '#252836',
     cover: 'https://c.saavncdn.com/257/Ae-Dil-Hai-Mushkil-Hindi-2016-500x500.jpg',
     subtags: ['Broken Heart >', 'Cathartic Soul >', 'Dard-e-Dil >', 'Slow Burn >'],
     artistIds: ['b_praak', 'arijit_singh', 'kk', 'atif_aslam'],
@@ -1826,7 +1870,7 @@ export const POPULAR_GENRES = [
   {
     id: 'retro',
     label: '90s & Golden Retro',
-    bgColor: '#BA5D07',
+    bgColor: '#854D0E',
     cover: 'https://c.saavncdn.com/artists/Kishore_Kumar_500x500.jpg',
     subtags: ['Evergreen 70s >', 'Golden 90s >', 'Kishore Classics >', 'Vintage Gems >'],
     artistIds: ['kishore_kumar', 'sonu_nigam'],
@@ -1839,7 +1883,7 @@ export const POPULAR_GENRES = [
   {
     id: 'indie',
     label: 'Acoustic Indie',
-    bgColor: '#148A08',
+    bgColor: '#444B2B',
     cover: 'https://c.saavncdn.com/504/Arz-Kiya-Hai-Coke-Studio-Bharat-Hindi-2025-20250818054005-500x500.jpg',
     subtags: ['Indie Storytelling >', 'Raw Vocals >', 'Fingerpicking >', 'Coffee House >'],
     artistIds: ['anuv_jain', 'mohit_chauhan', 'kk'],
@@ -1852,8 +1896,8 @@ export const POPULAR_GENRES = [
   {
     id: 'sufi',
     label: 'Sufi & Qawwali',
-    bgColor: '#8C1932',
-    cover: 'https://c.saavncdn.com/351/Rockstar-Hindi-2011-20221212023508-500x500.jpg',
+    bgColor: '#5C1B24',
+    cover: 'https://c.saavncdn.com/408/Rockstar-Hindi-2011-20221212023139-500x500.jpg',
     subtags: ['Sufi Qawwali >', 'Soul Healing >', 'Spiritual Waves >', 'Meditative >'],
     artistIds: ['mohit_chauhan', 'atif_aslam', 'b_praak'],
     playlistIds: ['bollywood_romance_2025'],
@@ -1865,8 +1909,8 @@ export const POPULAR_GENRES = [
   {
     id: 'gym',
     label: 'Gym & Beast Mode',
-    bgColor: '#0D73EC',
-    cover: 'https://c.saavncdn.com/artists/Sidhu_Moose_Wala_500x500.jpg',
+    bgColor: '#291D18',
+    cover: 'https://c.saavncdn.com/artists/Sidhu_Moose_Wala_004_20250617183705_500x500.jpg',
     subtags: ['Beast Workout >', 'High Testosterone >', 'Heavy Bass >', 'Hype Drops >'],
     artistIds: ['sidhu_moose_wala', 'diljit_dosanjh', 'karan_aujla'],
     playlistIds: ['punjabi_wave_trap'],
@@ -1878,8 +1922,8 @@ export const POPULAR_GENRES = [
   {
     id: 'devotional',
     label: 'Devotional & Spiritual',
-    bgColor: '#AF2896',
-    cover: 'https://c.saavncdn.com/artists/Arijit_Singh_002_20240321074712_500x500.jpg',
+    bgColor: '#8C431B',
+    cover: 'https://c.saavncdn.com/artists/Arijit_Singh_004_20241118063717_500x500.jpg',
     subtags: ['Morning Prayers >', 'Peaceful Mantras >', 'Soul Peace >'],
     artistIds: ['arijit_singh', 'sonu_nigam', 'mohit_chauhan'],
     playlistIds: ['retro_golden_classics'],
@@ -1891,7 +1935,7 @@ export const POPULAR_GENRES = [
   {
     id: 'chartbusters',
     label: 'Trending Chartbusters',
-    bgColor: '#FF4632',
+    bgColor: '#B93815',
     cover: 'https://c.saavncdn.com/960/Best-of-2025-Hindi-2025-20251231141050-500x500.jpg',
     subtags: ['Top 50 India >', 'Viral Reels >', 'Global Heatwaves >'],
     artistIds: ['karan_aujla', 'arijit_singh', 'diljit_dosanjh', 'shreya_ghoshal'],
