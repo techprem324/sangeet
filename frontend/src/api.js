@@ -599,7 +599,21 @@ export const api = {
 
     // Handpicked discography matches for rich variety
     let discHits = []
-    if (genre.id === 'romantic') {
+    if (genre.id === 'punjabi') {
+      discHits = [
+        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 6),
+      ]
+    } else if (genre.id === 'new_releases' || genre.id === 'chartbusters') {
+      discHits = [
+        ...NEW_RELEASES_2025_2026,
+        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []).slice(0, 5),
+        ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 5),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 4),
+      ]
+    } else if (genre.id === 'romantic') {
       discHits = [
         ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 6),
         ...(ARTIST_DISCOGRAPHIES['shreya_ghoshal'] || []).slice(0, 5),
@@ -617,11 +631,11 @@ export const api = {
         ...(ARTIST_DISCOGRAPHIES['anuv_jain'] || []).slice(0, 9),
         ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 4),
       ]
-    } else if (genre.id === 'punjabi') {
+    } else if (genre.id === 'party') {
       discHits = [
-        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 8),
-        ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []).slice(0, 8),
-        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['b_praak'] || []).slice(0, 4),
       ]
     } else if (genre.id === 'retro') {
       discHits = [
@@ -631,6 +645,7 @@ export const api = {
     } else if (genre.id === 'gym') {
       discHits = [
         ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []).slice(0, 8),
+        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []).slice(0, 5),
         ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 5),
         ...(ARTIST_DISCOGRAPHIES['mohit_chauhan'] || []).filter((t) => t.title.includes('Saadda') || t.title.includes('Rockstar')),
       ]
@@ -639,7 +654,7 @@ export const api = {
         ...(ARTIST_DISCOGRAPHIES['anuv_jain'] || []).slice(0, 9),
         ...(ARTIST_DISCOGRAPHIES['mohit_chauhan'] || []).slice(0, 5),
       ]
-    } else if (genre.id === 'sufi') {
+    } else if (genre.id === 'sufi' || genre.id === 'devotional') {
       discHits = [
         ...(ARTIST_DISCOGRAPHIES['mohit_chauhan'] || []).slice(0, 8),
         ...(ARTIST_DISCOGRAPHIES['b_praak'] || []).slice(8, 11),
@@ -671,9 +686,19 @@ export const api = {
       }
     }
 
+    const genreArtists = (genre.artistIds || [])
+      .map((aid) => POPULAR_SINGERS.find((s) => s.id === aid))
+      .filter(Boolean)
+
+    const genrePlaylists = (genre.playlistIds || [])
+      .map((pid) => FEATURED_PLAYLISTS.find((pl) => pl.id === pid))
+      .filter(Boolean)
+
     return {
       genre,
-      tracks: combined.slice(0, 35),
+      artists: genreArtists,
+      playlists: genrePlaylists,
+      tracks: combined.slice(0, 45),
       total: combined.length,
     }
   },
@@ -682,7 +707,14 @@ export const api = {
     const pl = FEATURED_PLAYLISTS.find((p) => p.id === playlistId) || FEATURED_PLAYLISTS[0]
 
     let initialTracks = []
-    if (pl.id === 'trending_top_50') {
+    if (pl.id === 'ghaint_flow') {
+      initialTracks = [
+        ...(ARTIST_DISCOGRAPHIES['karan_aujla'] || []),
+        ...(ARTIST_DISCOGRAPHIES['diljit_dosanjh'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['sidhu_moose_wala'] || []).slice(0, 6),
+        ...(ARTIST_DISCOGRAPHIES['ap_dhillon'] || []).slice(0, 4),
+      ]
+    } else if (pl.id === 'trending_top_50') {
       initialTracks = [
         ...NEW_RELEASES_2025_2026,
         ...(ARTIST_DISCOGRAPHIES['arijit_singh'] || []).slice(0, 5),
