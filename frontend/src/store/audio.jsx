@@ -126,8 +126,8 @@ export function AudioProvider({ children }) {
   const [error, setError] = useState(null)
 
   // refs mirroring state for the event listeners
-  const stateRef = useRef({ current: null, repeat: 'off', shuffle: false, duration: 0 })
-  stateRef.current = { current, repeat, shuffle, duration }
+  const stateRef = useRef({ current: null, repeat: 'off', shuffle: false, duration: 0, playing: false })
+  stateRef.current = { current, repeat, shuffle, duration, playing }
 
   const ensureAudio = useCallback(() => {
     if (!audioRef.current) {
@@ -149,12 +149,17 @@ export function AudioProvider({ children }) {
           } catch {}
         }
 
-        // Proactive queue replenishment: if near end of track and near end of queue, append next tracks in advance!
+        // Proactive stream pre-resolution & queue replenishment
+        // Before track ends, ensure next track stream is pre-resolved so mobile background transition is 100% seamless
         const st = stateRef.current
         const cur = st.current
-        if (cur && cur.queue && el.duration > 15 && el.duration - el.currentTime < 12) {
-          if (cur.index >= cur.queue.length - 2) {
-            const more = findRelatedContinuation(cur.track, cur.queue)
+        if (cur && cur.queue && el.duration > 8) {
+          const nextIdx = cur.index + 1
+          if (nextIdx < cur.queue.length && cur.queue[nextIdx] && !cur.queue[nextIdx].stream_url) {
+            cur.queue[nextIdx] = resolveTrackStream(cur.queue[nextIdx])
+          }
+          if (el.duration - el.currentTime < 15 && cur.index >= cur.queue.length - 2) {
+            const more = findRelatedContinuation(cur.track, cur.queue).map(resolveTrackStream)
             if (more.length > 0) {
               cur.queue.push(...more)
             }
@@ -232,8 +237,9 @@ export function AudioProvider({ children }) {
         // 2. Try next track in current queue
         const nextIdx = curIndex + 1
         for (let i = nextIdx; i < q.length; i++) {
-          const cand = q[i]
+          const cand = resolveTrackStream(q[i])
           if (cand && cand.stream_url) {
+            q[i] = cand
             setCurrent({ track: cand, queue: q, index: i })
             el.src = cand.stream_url
             el.play().catch(() => {})
@@ -243,7 +249,7 @@ export function AudioProvider({ children }) {
         }
 
         // 3. If queue exhausted or no valid stream found, pick verified continuation track
-        const moreTracks = findRelatedContinuation(cur?.track, q)
+        const moreTracks = findRelatedContinuation(cur?.track, q).map(resolveTrackStream)
         const workingTrack = moreTracks.find((t) => t && t.stream_url)
         if (workingTrack) {
           const newQ = [...q, workingTrack]
@@ -258,7 +264,7 @@ export function AudioProvider({ children }) {
         setPlaying(false)
       })
 
-      // Continuous non-stop background audio progression
+      // Continuous non-stop background audio progression (optimized for mobile background & lock screen)
       el.addEventListener('ended', () => {
         const st = stateRef.current
         const cur = st.current
@@ -273,13 +279,13 @@ export function AudioProvider({ children }) {
         let q = cur.queue ? [...cur.queue] : []
         let nextIdx = cur.index + 1
 
-        // Infinite Autoplay: music NEVER stops!
+        // Sequential autoplay: loop or expand queue
         if (nextIdx >= q.length) {
           if (st.repeat === 'all' && q.length > 0) {
             nextIdx = 0
           } else {
-            // Fetch next related continuation tracks
-            const moreTracks = findRelatedContinuation(cur.track, q)
+            // Replenish continuation tracks
+            const moreTracks = findRelatedContinuation(cur.track, q).map(resolveTrackStream)
             if (moreTracks.length > 0) {
               q.push(...moreTracks)
             } else {
@@ -292,18 +298,65 @@ export function AudioProvider({ children }) {
           nextIdx = Math.floor(Math.random() * q.length)
         }
 
-        const nextTrack = q[nextIdx]
-        if (nextTrack) {
-          setCurrent({ track: nextTrack, queue: q, index: nextIdx })
-          if (nextTrack.stream_url) {
-            el.src = nextTrack.stream_url
-            // Immediate synchronous play to keep mobile background wakelock active
-            const p = el.play()
-            if (p && p.catch) {
-              p.catch((err) => {
-                console.warn('Autoplay continuation notice:', err)
-              })
+        // Sequential search-ahead for a valid playable track with stream_url
+        let nextTrack = null
+        while (nextIdx < q.length) {
+          let candidate = q[nextIdx]
+          if (candidate) {
+            candidate = resolveTrackStream(candidate)
+            q[nextIdx] = candidate
+            if (candidate && candidate.stream_url) {
+              nextTrack = candidate
+              break
             }
+          }
+          nextIdx++
+        }
+
+        // If end of queue was hit without finding a stream, pull from continuation pool
+        if (!nextTrack) {
+          const fresh = findRelatedContinuation(cur.track, q).map(resolveTrackStream)
+          for (const cand of fresh) {
+            if (cand && cand.stream_url) {
+              nextTrack = cand
+              q.push(cand)
+              nextIdx = q.length - 1
+              break
+            }
+          }
+        }
+
+        if (nextTrack && nextTrack.stream_url) {
+          setCurrent({ track: nextTrack, queue: q, index: nextIdx })
+          el.src = nextTrack.stream_url
+          el.currentTime = 0
+
+          // Synchronously sync native MediaSession metadata so mobile notification / lockscreen reflects next track immediately
+          if ('mediaSession' in navigator) {
+            try {
+              const art = nextTrack.cover || fallbackCover(nextTrack)
+              navigator.mediaSession.metadata = new window.MediaMetadata({
+                title: nextTrack.title || 'Sangeet Track',
+                artist: nextTrack.artist || 'Sangeet',
+                album: nextTrack.album || 'Sangeet Stream',
+                artwork: [
+                  { src: art, sizes: '96x96', type: 'image/jpeg' },
+                  { src: art, sizes: '128x128', type: 'image/jpeg' },
+                  { src: art, sizes: '192x192', type: 'image/jpeg' },
+                  { src: art, sizes: '256x256', type: 'image/jpeg' },
+                  { src: art, sizes: '512x512', type: 'image/jpeg' },
+                ],
+              })
+              navigator.mediaSession.playbackState = 'playing'
+            } catch {}
+          }
+
+          // Immediate synchronous play preserves the mobile background audio session & wakelock
+          const playPromise = el.play()
+          if (playPromise && playPromise.catch) {
+            playPromise.catch((err) => {
+              console.warn('Background playback continuation note:', err)
+            })
           }
         }
       })
@@ -323,7 +376,7 @@ export function AudioProvider({ children }) {
       
       // If queue is single track, automatically append related continuation tracks so it plays continuously!
       if (q.length <= 1) {
-        const autoQueue = findRelatedContinuation(track, q)
+        const autoQueue = findRelatedContinuation(track, q).map(resolveTrackStream)
         q = [...q, ...autoQueue]
       }
 
@@ -395,7 +448,7 @@ export function AudioProvider({ children }) {
       if (nextIdx < 0) nextIdx = q.length - 1
       if (nextIdx >= q.length) {
         // Queue expansion on manual skip next
-        const more = findRelatedContinuation(track, q)
+        const more = findRelatedContinuation(track, q).map(resolveTrackStream)
         if (more.length > 0) {
           q.push(...more)
         } else {
@@ -406,6 +459,23 @@ export function AudioProvider({ children }) {
     },
     [playTrack]
   )
+
+  // Mobile background resilience: auto-resume if mobile OS throttled audio during browser minimize/unlock
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        const el = audioRef.current
+        const st = stateRef.current
+        if (el && st.playing && el.paused && !el.ended && el.src) {
+          el.play().catch(() => {})
+        }
+      }
+    }
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+    }
+  }, [])
 
   const next = useCallback(() => {
     if (!current) return

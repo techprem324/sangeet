@@ -977,40 +977,44 @@ export default function SearchView({ onLyrics, resetTrigger }) {
           /* CASE 4: "BROWSE ALL" GRID */
           /* ============================================================= */
           <div className="space-y-8">
-            {/* Auto-Release Radar Banner */}
-            <div className="relative overflow-hidden rounded-2xl border border-ember/30 bg-gradient-to-r from-surface via-surface-2 to-surface-3 p-4 sm:p-5 shadow-soft flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-3.5">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-ember/15 border border-ember/30 text-ember text-xl shadow-sm">
+            {/* Auto-Release Radar Banner - Mobile Optimized & Compact */}
+            <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-ember/25 bg-gradient-to-r from-surface via-surface-2 to-surface-3 px-3 py-2 sm:px-4 sm:py-2.5 shadow-soft flex items-center justify-between gap-2.5">
+              <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+                <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-ember/15 border border-ember/30 text-ember text-sm sm:text-base shadow-sm">
                   ⚡
                 </div>
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full bg-ember/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ember">
-                      Auto Release Active
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="rounded-full bg-ember/20 px-1.5 py-0.2 text-[9px] font-bold uppercase tracking-wider text-ember">
+                      Auto Release
                     </span>
-                    <span className="text-xs text-sand-dim">2025–2026 Hits & New Drops</span>
+                    <span className="text-[10px] text-sand-dim hidden xs:inline sm:inline">
+                      2026 Drops
+                    </span>
                   </div>
-                  <h3 className="mt-0.5 font-display text-sm sm:text-base font-bold text-cream">
+                  <h3 className="mt-0.5 font-display text-xs sm:text-sm font-bold text-cream truncate">
                     Fresh Music Drops & Chartbusters
                   </h3>
-                  <p className="text-xs text-sand-dim">
-                    New tracks automatically detected and added to your playlists in 320 kbps.
+                  <p className="text-[11px] text-sand-dim hidden md:block truncate">
+                    New tracks auto-detected in ultra 320 kbps.
                   </p>
                 </div>
               </div>
               <button
                 onClick={handleAutoRelease}
                 disabled={autoReleasing}
-                className="inline-flex items-center gap-2 rounded-full border border-ember/50 bg-ember/15 hover:bg-ember text-ember hover:text-coal px-4 py-2 text-xs font-bold transition-all shadow-sm active:scale-95 disabled:opacity-50"
+                className="shrink-0 inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-ember/50 bg-ember/15 hover:bg-ember text-ember hover:text-coal px-2.5 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all shadow-sm active:scale-95 disabled:opacity-50"
               >
                 {autoReleasing ? (
                   <>
                     <span className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                    <span>Scanning Drops…</span>
+                    <span className="hidden sm:inline">Scanning…</span>
                   </>
                 ) : (
                   <>
-                    <span>🔄 Check New Drops</span>
+                    <span>🔄</span>
+                    <span className="hidden sm:inline">Check New Drops</span>
+                    <span className="sm:hidden">Check Drops</span>
                   </>
                 )}
               </button>
