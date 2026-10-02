@@ -11,6 +11,8 @@ import {
   smartSearchCatalog,
   FAMOUS_LYRICS_MAP,
   getSearchPredictions,
+  detectMoodOrGenre,
+  detectArtist,
   POPULAR_SINGERS,
   ARTIST_DISCOGRAPHIES,
   FEATURED_PLAYLISTS,
@@ -508,6 +510,8 @@ export const api = {
       query,
       tracks: merged.slice(0, 35),
       matchedLyric: lyricMatch ? lyricMatch.snippet : null,
+      matchedMood: detectMoodOrGenre(query),
+      matchedArtist: detectArtist(query),
     }
   },
 

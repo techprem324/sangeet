@@ -78,11 +78,20 @@ function QueuePanel({ queue, current, onClose }) {
   )
 }
 
-export default function MiniPlayer({ onLyrics, onLikedChange }) {
+export default function MiniPlayer({ onLyrics, onLikedChange, expanded: controlledExpanded, onExpandedChange }) {
   const audio = useAudio()
   const [showQueue, setShowQueue] = useState(false)
   const [hover, setHover] = useState(false)
-  const [expanded, setExpanded] = useState(false)
+  const [internalExpanded, setInternalExpanded] = useState(false)
+  const expanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded
+  const setExpanded = (val) => {
+    const nextVal = typeof val === 'function' ? val(expanded) : val
+    if (onExpandedChange) {
+      onExpandedChange(nextVal)
+    } else {
+      setInternalExpanded(nextVal)
+    }
+  }
   const [isLiked, setIsLiked] = useState(false)
 
   const { current, playing, progress, duration, volume, repeat, shuffle,
@@ -315,7 +324,7 @@ export default function MiniPlayer({ onLyrics, onLikedChange }) {
         {/* State B: Fullscreen Expanded Player (All controls vertically stacked) */}
         {expanded && (
           <div
-            className="fixed inset-0 z-50 flex flex-col bg-ink/95 backdrop-blur-2xl px-5 pb-8 pt-safe overflow-y-auto animate-fade-in text-cream select-none"
+            className="fixed inset-0 z-50 flex flex-col bg-ink/95 backdrop-blur-2xl px-5 pb-24 pt-safe overflow-y-auto animate-fade-in text-cream select-none"
             role="dialog"
             aria-modal="true"
             aria-label="Expanded Audio Player"

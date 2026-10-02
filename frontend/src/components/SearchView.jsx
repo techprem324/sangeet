@@ -11,6 +11,8 @@ import {
   ARTIST_DISCOGRAPHIES,
   NEW_RELEASES_2025_2026,
   getSearchPredictions,
+  detectMoodOrGenre,
+  detectArtist,
 } from '../data/searchEngine'
 
 /**
@@ -65,6 +67,7 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   const [results, setResults] = useState(null)
   const [matchedLyric, setMatchedLyric] = useState(null)
   const [searching, setSearching] = useState(false)
+  const [showSuggestions, setShowSuggestions] = useState(false)
 
   // Active collection hub: null | { type: 'artist' | 'genre' | 'playlist', data: obj, originGenre?: obj }
   const [activeHub, setActiveHub] = useState(null)
@@ -80,6 +83,22 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   const timer = useRef(null)
   const containerRef = useRef(null)
   const searchInputRef = useRef(null)
+  const searchBarWrapperRef = useRef(null)
+
+  // Close suggestions dropdown when user taps/clicks outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchBarWrapperRef.current && !searchBarWrapperRef.current.contains(e.target)) {
+        setShowSuggestions(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [])
 
   // When user clicks the "Search" navigation menu (in sidebar or mobile bottom nav),
   // directly reset any active playlist/artist/genre view, scroll smoothly to the top of the search bar, and focus input.
@@ -183,6 +202,10 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   }, [activeHub])
 
   const handleSelectQuery = (queryText) => {
+    setShowSuggestions(false)
+    if (searchInputRef.current) {
+      searchInputRef.current.blur()
+    }
     setActiveHub(null)
     setQ(queryText)
     if (containerRef.current) {
@@ -191,6 +214,10 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   }
 
   const handleSelectGenre = (genre) => {
+    setShowSuggestions(false)
+    if (searchInputRef.current) {
+      searchInputRef.current.blur()
+    }
     setActiveHub({ type: 'genre', data: genre })
     setQ('')
     setResults(null)
@@ -201,6 +228,10 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   }
 
   const handleSelectArtist = (artist, originGenre = null) => {
+    setShowSuggestions(false)
+    if (searchInputRef.current) {
+      searchInputRef.current.blur()
+    }
     const parentGenre = originGenre || (activeHub?.type === 'genre' ? activeHub.data : null)
     setActiveHub({ type: 'artist', data: artist, originGenre: parentGenre })
     setQ('')
@@ -212,6 +243,10 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   }
 
   const handleSelectPlaylist = (playlist, originGenre = null) => {
+    setShowSuggestions(false)
+    if (searchInputRef.current) {
+      searchInputRef.current.blur()
+    }
     const parentGenre = originGenre || (activeHub?.type === 'genre' ? activeHub.data : null)
     setActiveHub({ type: 'playlist', data: playlist, originGenre: parentGenre })
     setQ('')
@@ -226,6 +261,7 @@ export default function SearchView({ onLyrics, resetTrigger }) {
     setQ('')
     setResults(null)
     setMatchedLyric(null)
+    setShowSuggestions(false)
     if (searchInputRef.current) {
       searchInputRef.current.focus()
     }
@@ -360,14 +396,9 @@ export default function SearchView({ onLyrics, resetTrigger }) {
     (audio.current.track.id || audio.current.track.title) === (topTrack.id || topTrack.title) &&
     audio.playing
 
-  // Detect if current query matches an artist name for the banner
-  const matchedArtistFromQuery = useMemo(() => {
-    if (!q.trim()) return null
-    const lower = q.trim().toLowerCase()
-    return POPULAR_SINGERS.find(
-      (a) => a.name.toLowerCase().includes(lower) || lower.includes(a.name.toLowerCase())
-    )
-  }, [q])
+  // AI Mood & Artist Intent Recognition
+  const aiMoodMatch = useMemo(() => detectMoodOrGenre(q), [q])
+  const aiArtistMatch = useMemo(() => detectArtist(q), [q])
 
   return (
     <div ref={containerRef} className="h-full overflow-y-auto px-4 py-6 sm:px-8 pb-36 lg:pb-12">
@@ -383,17 +414,25 @@ export default function SearchView({ onLyrics, resetTrigger }) {
         {/* ============================================================= */}
         {/* Top Search Bar */}
         {/* ============================================================= */}
-        <div className="relative mb-6">
+        <div ref={searchBarWrapperRef} className="relative mb-6">
           <div className="flex items-center gap-3 rounded-full border border-edge/80 bg-surface-2 hover:bg-surface-3 px-4 py-3 sm:py-3.5 shadow-lg transition-all duration-200 focus-within:ring-2 focus-within:ring-ember/70 focus-within:bg-surface-2">
             <SearchIcon size={20} className="text-sand-dim shrink-0" />
             <input
               ref={searchInputRef}
               value={q}
+              onFocus={() => setShowSuggestions(true)}
               onChange={(e) => {
                 if (activeHub) setActiveHub(null)
                 setQ(e.target.value)
+                setShowSuggestions(true)
               }}
-              placeholder="What do you want to play?"
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  setShowSuggestions(false)
+                  searchInputRef.current?.blur()
+                }
+              }}
+              placeholder="What do you want to play? (e.g. sad songs, Arijit, romantic, lo-fi…)"
               className="w-full bg-transparent text-sm sm:text-base font-normal text-cream placeholder-sand-dim/70 focus:outline-none"
               autoFocus
             />
@@ -412,31 +451,52 @@ export default function SearchView({ onLyrics, resetTrigger }) {
           </div>
 
           {/* Autocomplete Predictions Dropdown */}
-          {predictions.length > 0 && !activeHub && (
+          {showSuggestions && predictions.length > 0 && !activeHub && (
             <div className="absolute left-0 right-0 top-full z-40 mt-1.5 max-h-72 overflow-y-auto rounded-2xl border border-edge bg-surface-2/95 p-2 shadow-2xl backdrop-blur-xl">
-              <div className="px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-sand-dim">
-                Suggestions ({predictions.length})
+              <div className="flex items-center justify-between px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-sand-dim border-b border-edge/40">
+                <span>AI Predictions ({predictions.length})</span>
+                <button
+                  onClick={() => setShowSuggestions(false)}
+                  className="text-xs text-sand-dim hover:text-white px-1"
+                >
+                  ✕
+                </button>
               </div>
               {predictions.map((p, idx) => (
                 <button
                   key={idx}
                   onClick={() => {
+                    setShowSuggestions(false)
+                    if (searchInputRef.current) {
+                      searchInputRef.current.blur()
+                    }
                     if (p.type === 'artist' && p.singerObj) {
                       handleSelectArtist(p.singerObj)
+                    } else if (p.type === 'artist_playlist' && p.singerObj) {
+                      handleSelectArtist(p.singerObj)
+                    } else if (p.type === 'genre' && p.genreObj) {
+                      handleSelectGenre(p.genreObj)
+                    } else if (p.type === 'playlist' && p.genreObj) {
+                      handleSelectGenre(p.genreObj)
                     } else {
-                      handleSelectQuery(p.text)
+                      handleSelectQuery(p.query || p.text)
                     }
                   }}
                   className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-xs text-sand hover:bg-surface-3 hover:text-white transition-colors"
                 >
                   {p.avatar ? (
-                    <ArtistAvatar src={p.avatar} name={p.text} size="h-5 w-5" textClass="text-[9px]" />
+                    <ArtistAvatar src={p.avatar} name={p.text} size="h-6 w-6" textClass="text-[9px]" />
                   ) : p.emoji ? (
-                    <span className="text-[12px]">{p.emoji}</span>
+                    <span className="text-[14px]">{p.emoji}</span>
                   ) : (
-                    <SearchIcon size={12} className="text-ember" />
+                    <SearchIcon size={13} className="text-ember shrink-0" />
                   )}
-                  <span className="font-medium flex-1 truncate">{p.text}</span>
+                  <div className="min-w-0 flex-1">
+                    <span className="font-medium text-cream block truncate">{p.text}</span>
+                    {p.subtitle && (
+                      <span className="text-[10px] text-sand-dim block truncate">{p.subtitle}</span>
+                    )}
+                  </div>
                   {p.badge && (
                     <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-semibold text-sand-dim shrink-0">
                       {p.badge}
@@ -844,32 +904,123 @@ export default function SearchView({ onLyrics, resetTrigger }) {
           /* CASE 3: ACTIVE SEARCH RESULTS (WHEN USER TYPES IN SEARCH BOX) */
           /* ============================================================= */
           <div className="space-y-6">
-            {/* Quick Matched Artist Header if query matches singer */}
-            {matchedArtistFromQuery && (
-              <div className="flex items-center justify-between rounded-2xl border border-edge/70 bg-surface-2 p-4">
-                <div className="flex items-center gap-3">
-                  <ArtistAvatar
-                    src={matchedArtistFromQuery.avatar}
-                    name={matchedArtistFromQuery.name}
-                    size="h-12 w-12"
-                    textClass="text-sm"
-                  />
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-ember">
-                      Artist Found
-                    </span>
-                    <h3 className="font-display text-base font-bold text-cream">
-                      {matchedArtistFromQuery.name}
-                    </h3>
+            {/* 1. AI Mood & Genre Match Banner (e.g., "sad songs", "romantic", "party", "lo-fi") */}
+            {aiMoodMatch && (
+              <div
+                className={`relative overflow-hidden rounded-2xl border border-white/15 bg-gradient-to-r ${
+                  aiMoodMatch.gradient || 'from-surface-2 via-surface-3 to-coal'
+                } p-4 sm:p-5 shadow-2xl animate-fade-in`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-start sm:items-center gap-3.5">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 border border-white/20 text-2xl shadow-md">
+                      {aiMoodMatch.genreObj?.emoji || '✨'}
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="rounded-full bg-ember/25 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ember">
+                          {aiMoodMatch.badge || 'AI Mood Match'}
+                        </span>
+                        <span className="text-xs text-white/70 hidden xs:inline">
+                          {aiMoodMatch.playlistTitle}
+                        </span>
+                      </div>
+                      <h3 className="mt-1 font-display text-lg sm:text-xl font-bold text-white tracking-tight">
+                        {aiMoodMatch.label}
+                      </h3>
+                      <p className="text-xs text-white/80 line-clamp-1 max-w-xl mt-0.5">
+                        {aiMoodMatch.description}
+                      </p>
+
+                      {/* Matching Top Artists for this Mood */}
+                      {aiMoodMatch.artists && aiMoodMatch.artists.length > 0 && (
+                        <div className="mt-2 flex flex-wrap items-center gap-1.5">
+                          <span className="text-[11px] text-white/60">Top Artists:</span>
+                          {aiMoodMatch.artists.map((art) => (
+                            <button
+                              key={art.id}
+                              onClick={() => handleSelectArtist(art)}
+                              className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/10 hover:bg-ember hover:text-coal hover:border-ember px-2 py-0.5 text-[11px] font-medium text-white transition-all active:scale-95"
+                            >
+                              <span>{art.name}</span>
+                              <span className="text-[9px] opacity-70">→</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 shrink-0 self-end sm:self-center">
+                    {results && results.length > 0 && (
+                      <button
+                        onClick={() => audio.playTrack(results[0], results)}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-ember hover:bg-ember-deep text-coal px-3.5 py-1.5 sm:px-4 sm:py-2 text-xs font-bold shadow-glow hover:scale-105 active:scale-95 transition-all"
+                      >
+                        <PlayIcon size={14} fill="currentColor" />
+                        <span>Play All ({results.length})</span>
+                      </button>
+                    )}
+                    {aiMoodMatch.genreObj && (
+                      <button
+                        onClick={() => handleSelectGenre(aiMoodMatch.genreObj)}
+                        className="inline-flex items-center gap-1 rounded-full border border-white/20 bg-white/10 hover:bg-white/20 px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-semibold text-white transition-all active:scale-95"
+                      >
+                        <span>Open Mood Hub</span>
+                        <span>→</span>
+                      </button>
+                    )}
                   </div>
                 </div>
-                <button
-                  onClick={() => handleSelectArtist(matchedArtistFromQuery)}
-                  className="flex items-center gap-1.5 rounded-full bg-ember hover:bg-ember-deep px-4 py-1.5 text-xs font-bold text-coal shadow-glow transition-all hover:scale-105 active:scale-95"
-                >
-                  <span>Open Artist Playlist</span>
-                  <span>→</span>
-                </button>
+              </div>
+            )}
+
+            {/* 2. AI Verified Artist & Full Discography Playlist Banner */}
+            {aiArtistMatch && (
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5 rounded-2xl border border-edge/80 bg-gradient-to-r from-surface-2 to-surface-3 p-4 shadow-lg animate-fade-in">
+                <div className="flex items-center gap-3.5">
+                  <ArtistAvatar
+                    src={aiArtistMatch.artist.avatar}
+                    name={aiArtistMatch.artist.name}
+                    size="h-14 w-14"
+                    textClass="text-base"
+                  />
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="rounded-full bg-ember/20 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ember">
+                        Artist Discography
+                      </span>
+                      <span className="text-[11px] text-sand-dim">
+                        {aiArtistMatch.tracks?.length || '30+'} Songs Available
+                      </span>
+                    </div>
+                    <h3 className="font-display text-lg font-bold text-cream mt-0.5">
+                      {aiArtistMatch.artist.name}
+                    </h3>
+                    <p className="text-xs text-sand-dim line-clamp-1">
+                      {aiArtistMatch.artist.role || aiArtistMatch.artist.bio}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 self-end sm:self-center shrink-0">
+                  {aiArtistMatch.tracks && aiArtistMatch.tracks.length > 0 && (
+                    <button
+                      onClick={() => audio.playTrack(aiArtistMatch.tracks[0], aiArtistMatch.tracks)}
+                      className="inline-flex items-center gap-1.5 rounded-full bg-ember hover:bg-ember-deep text-coal px-3.5 py-1.5 text-xs font-bold shadow-glow hover:scale-105 active:scale-95 transition-all"
+                    >
+                      <PlayIcon size={13} fill="currentColor" />
+                      <span>Play Artist ({aiArtistMatch.tracks.length})</span>
+                    </button>
+                  )}
+                  <button
+                    onClick={() => handleSelectArtist(aiArtistMatch.artist)}
+                    className="inline-flex items-center gap-1 rounded-full border border-edge bg-surface px-3.5 py-1.5 text-xs font-semibold text-cream hover:text-ember hover:border-ember/40 transition-all active:scale-95"
+                  >
+                    <span>Open Playlist</span>
+                    <span>→</span>
+                  </button>
+                </div>
               </div>
             )}
 

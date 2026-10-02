@@ -2184,8 +2184,305 @@ export const FAMOUS_LYRICS_MAP = [
   },
 ]
 
+// ============================================================================
+// AI SEMANTIC MOOD & GENRE TAXONOMY
+// Enables NLP / ML-style mood queries like "sad songs", "dard bhare gaane",
+// "romantic hits", "late night lofi", "party bangers", etc.
+// ============================================================================
+export const MOOD_GENRE_TAXONOMY = [
+  {
+    genreId: 'sad',
+    category: 'heartbreak',
+    label: 'Sad & Heartbreak',
+    keywords: [
+      'sad', 'dard', 'heartbreak', 'broken', 'breakup', 'alone', 'lonely', 'cry',
+      'crying', 'emotional', 'judai', 'bewafa', 'tears', 'udas', 'tanhai', 'gham',
+      'pain', 'depressed', 'gloomy', 'slow burn', 'cathartic', 'broken heart',
+      'sad songs', 'sad song', 'dard bhare'
+    ],
+    primaryArtistIds: ['arijit_singh', 'atif_aslam', 'kk', 'b_praak'],
+    topSongTitles: ['Channa Mereya', 'Ae Dil Hai Mushkil', 'Agar Tum Saath Ho', 'Tujhe Kitna Chahne Lage', 'Pachtaoge', 'Filhall', 'Aadat', 'Woh Lamhe', 'Yaaron', 'Alvida'],
+    badge: 'AI Mood: Sad & Soul',
+    description: 'Cathartic heartbreak songs, melancholic ballads, and deep emotional melodies for soul healing.',
+    playlistTitle: 'Sad Songs & Broken Hearts',
+    gradient: 'from-blue-900/60 via-slate-900/60 to-coal',
+  },
+  {
+    genreId: 'romantic',
+    category: 'romantic',
+    label: 'Bollywood Romance',
+    keywords: [
+      'romantic', 'romance', 'love', 'pyaar', 'ishq', 'mohabbat', 'dil', 'crush',
+      'couple', 'propose', 'sweet', 'valetine', 'ishqbaazi', 'sanware', 'chaahat',
+      'deewana', 'humsafar', 'lovers', 'romantic songs', 'romantic song', 'love songs'
+    ],
+    primaryArtistIds: ['arijit_singh', 'shreya_ghoshal', 'atif_aslam', 'pritam'],
+    topSongTitles: ['Kesariya', 'Chaleya', 'Satranga', 'Apna Bana Le', 'Tum Hi Ho', 'Hawayein', 'Gerua', 'Raabta', 'Zaalima', 'Pee Loon', 'Jeene Laga Hoon'],
+    badge: 'AI Mood: Bollywood Romance',
+    description: 'Timeless love anthems, sweet acoustic confessions, and breathtaking Bollywood duets.',
+    playlistTitle: 'Pure Bollywood Romance',
+    gradient: 'from-rose-900/60 via-pink-950/60 to-coal',
+  },
+  {
+    genreId: 'party',
+    category: 'party',
+    label: 'Party & Dance',
+    keywords: [
+      'party', 'dance', 'club', 'nach', 'bhangra', 'dj', 'energy', 'edm', 'hype',
+      'bass', 'celebration', 'wedding', 'shadi', 'dhol', 'beat', 'remix', 'masti',
+      'hungama', 'high energy', 'club bangers', 'party songs', 'dance songs'
+    ],
+    primaryArtistIds: ['diljit_dosanjh', 'karan_aujla', 'pritam', 'b_praak'],
+    topSongTitles: ['Tauba Tauba', 'Ashke', 'Winning Speech', 'Softly', 'Proper Patola', 'Lover', 'Kala Chashma', 'Kar Gayi Chull', 'Badtameez Dil', 'Ghungroo'],
+    badge: 'AI Mood: Party & Dance',
+    description: 'Floor-fillers, celebration bangers, and chart-topping dance anthems.',
+    playlistTitle: 'Dance Floor & Party Bangers',
+    gradient: 'from-amber-700/60 via-orange-950/60 to-coal',
+  },
+  {
+    genreId: 'punjabi',
+    category: 'party',
+    label: 'Punjabi Hits & Global Trap',
+    keywords: [
+      'punjabi', 'desi', 'jatt', 'sidhu', 'moosewala', 'aujla', 'dhillon',
+      'bhangra', 'shinda', 'karan', 'diljit', 'ghaint', 'swag', 'chandigarh',
+      'amritsar', 'punjabi songs', 'punjabi hits'
+    ],
+    primaryArtistIds: ['karan_aujla', 'diljit_dosanjh', 'ap_dhillon', 'sidhu_moose_wala', 'b_praak'],
+    topSongTitles: ['Tauba Tauba', 'Ashke', 'Winning Speech', 'Softly', 'Brown Munde', 'With You', 'Excuses', 'Lover', 'GOAT', 'Kinni Kinni', 'Hass Hass'],
+    badge: 'AI Genre: Punjabi Hits',
+    description: 'Global Punjabi heatwaves, heavyweight 808 basslines, and stadium-shaking flows.',
+    playlistTitle: 'Ghaint Punjabi Flow',
+    gradient: 'from-red-900/60 via-rose-950/60 to-coal',
+  },
+  {
+    genreId: 'lofi',
+    category: 'focus_lofi',
+    label: 'Late Night Lo-Fi',
+    keywords: [
+      'lofi', 'lo-fi', 'chill', 'relax', 'calm', 'peace', 'study', 'sleep', 'night',
+      'late night', 'midnight', 'sleepy', 'focus', 'soft', 'cozy', 'rain', 'barish',
+      'acoustic', 'slowed', 'reverb', 'lofi songs', 'chill songs'
+    ],
+    primaryArtistIds: ['anuv_jain', 'ap_dhillon', 'mohit_chauhan'],
+    topSongTitles: ['Baarishein', 'Husn', 'Alag Aasmaan', 'Mishri', 'Riha', 'Arz Kiya Hai', 'With You', 'Excuses', 'Tum Se Hi', 'Kun Faya Kun'],
+    badge: 'AI Mood: Late Night Chill',
+    description: 'Gentle acoustic strings, poetic storytelling, and warm tape saturation for calm vibes.',
+    playlistTitle: 'Late Night Lo-Fi & Chillout',
+    gradient: 'from-indigo-900/60 via-purple-950/60 to-coal',
+  },
+  {
+    genreId: 'retro',
+    category: 'nostalgic',
+    label: '90s & Golden Retro',
+    keywords: [
+      'retro', 'old', 'purane', 'vintage', 'classic', 'golden', '90s', '80s', '70s',
+      'kishore', 'rafi', 'lata', 'mukesh', 'rd burman', 'evergreen', 'purane gane',
+      'nostalgia', 'nostalgic', 'retro songs', 'old songs'
+    ],
+    primaryArtistIds: ['kishore_kumar', 'sonu_nigam'],
+    topSongTitles: ['Mere Sapno Ki Rani', 'Pal Pal Dil Ke Paas', 'O Mere Dil Ke Chain', 'Roop Tera Mastana', 'Yeh Shaam Mastani', 'Kal Ho Naa Ho', 'Sandese Aate Hai', 'Abhi Mujh Mein Kahin'],
+    badge: 'AI Genre: Golden Retro',
+    description: 'Gold-standard vintage classics and 90s Bollywood evergreen melodies that defined generations.',
+    playlistTitle: '90s & Golden Retro Classics',
+    gradient: 'from-yellow-900/60 via-amber-950/60 to-coal',
+  },
+  {
+    genreId: 'sufi',
+    category: 'sufi',
+    label: 'Sufi & Qawwali',
+    keywords: [
+      'sufi', 'qawwali', 'spiritual', 'healing', 'khwaja', 'ali', 'meditation',
+      'meditative', 'soul', 'nusrat', 'rahat', 'dargah', 'sufi songs'
+    ],
+    primaryArtistIds: ['mohit_chauhan', 'atif_aslam', 'b_praak'],
+    topSongTitles: ['Kun Faya Kun', 'Nadaan Parinde', 'Pee Loon', 'Teri Deewani', 'Saiyyan', 'Tum Mile', 'Tera Hone Laga Hoon'],
+    badge: 'AI Genre: Sufi & Qawwali',
+    description: 'Deep meditative sufi renditions, qawwalis, and spiritual soul-elevating compositions.',
+    playlistTitle: 'Sufi & Meditative Soul',
+    gradient: 'from-rose-950/60 via-red-950/60 to-coal',
+  },
+  {
+    genreId: 'gym',
+    category: 'gym_power',
+    label: 'Gym & Beast Mode',
+    keywords: [
+      'gym', 'workout', 'beast', 'motivation', 'motivational', 'fitness', 'running',
+      'pump', 'power', 'heavy', 'training', 'iron', 'gym songs', 'workout songs'
+    ],
+    primaryArtistIds: ['sidhu_moose_wala', 'diljit_dosanjh', 'karan_aujla'],
+    topSongTitles: ['Winning Speech', 'Ashke', 'Tauba Tauba', 'GOAT', '295', 'The Last Ride', 'Born to Shine'],
+    badge: 'AI Mood: Beast Mode Workout',
+    description: 'High-testosterone motivation tracks, driving basslines, and heavy-intensity pump anthems.',
+    playlistTitle: 'Gym & Beast Mode Bangers',
+    gradient: 'from-zinc-900/60 via-red-950/60 to-coal',
+  },
+  {
+    genreId: 'new_releases',
+    category: 'party',
+    label: 'New Releases 2025-2026',
+    keywords: [
+      'new', 'latest', 'fresh', 'recent', '2025', '2026', 'trending', 'viral',
+      'drops', 'chartbusters', 'top 50', 'hit', 'new drops', 'latest songs', 'fresh songs'
+    ],
+    primaryArtistIds: ['karan_aujla', 'arijit_singh', 'diljit_dosanjh', 'anuv_jain'],
+    topSongTitles: ['Apna Bana Le', 'Zaalima', 'Gehra Hua', 'Tainu Khabar Nahi', 'Arz Kiya Hai', 'Barbaad', 'Saiyaara', 'Ashke', 'Tauba Tauba'],
+    badge: 'AI Radar: Fresh Drops',
+    description: 'India’s latest streaming sensations, viral reels anthems, and blockbuster chartbusters in ultra 320 kbps.',
+    playlistTitle: '2025-2026 Chartbusters',
+    gradient: 'from-amber-600/50 via-rose-950/50 to-coal',
+  },
+]
+
+/**
+ * Fast Levenshtein distance for typo tolerance & fuzzy phonetic matching.
+ */
+function levenshteinDist(a, b) {
+  if (a === b) return 0
+  if (!a.length) return b.length
+  if (!b.length) return a.length
+  const row = []
+  for (let i = 0; i <= b.length; i++) row[i] = i
+  for (let i = 1; i <= a.length; i++) {
+    let prev = i
+    for (let j = 1; j <= b.length; j++) {
+      const val = b[j - 1] === a[i - 1] ? row[j - 1] : Math.min(row[j - 1], row[j], prev) + 1
+      row[j - 1] = prev
+      prev = val
+    }
+    row[b.length] = prev
+  }
+  return row[b.length]
+}
+
+/**
+ * Semantic Mood & Genre Detector (AI Mood Search).
+ * Detects if query expresses mood intent like "sad songs", "romantic hits", "party dance", etc.
+ */
+export function detectMoodOrGenre(query) {
+  if (!query) return null
+  const cleanQ = query.toLowerCase().replace(/[^a-z0-9\s]/g, ' ').trim()
+  if (!cleanQ) return null
+
+  const tokens = cleanQ.split(/\s+/).filter(Boolean)
+  let bestMatch = null
+  let highestScore = 0
+
+  for (const item of MOOD_GENRE_TAXONOMY) {
+    let score = 0
+    for (const kw of item.keywords) {
+      if (cleanQ === kw) {
+        score += 150
+      } else if (cleanQ.includes(kw)) {
+        score += kw.length >= 4 ? 80 : 50
+      }
+      for (const tok of tokens) {
+        if (tok === kw) {
+          score += 60
+        } else if (tok.length >= 4 && (kw.startsWith(tok) || tok.startsWith(kw))) {
+          score += 35
+        } else if (tok.length >= 4 && kw.length >= 4 && levenshteinDist(tok, kw) <= 1) {
+          score += 45
+        }
+      }
+    }
+
+    if (cleanQ.includes(item.label.toLowerCase())) {
+      score += 100
+    }
+
+    if (score > highestScore && score >= 45) {
+      highestScore = score
+      bestMatch = item
+    }
+  }
+
+  if (bestMatch) {
+    const genreObj = POPULAR_GENRES.find((g) => g.id === bestMatch.genreId) || POPULAR_GENRES[0]
+    const matchingArtists = bestMatch.primaryArtistIds
+      .map((id) => POPULAR_SINGERS.find((s) => s.id === id))
+      .filter(Boolean)
+    return {
+      ...bestMatch,
+      genreObj,
+      artists: matchingArtists,
+      score: highestScore,
+    }
+  }
+  return null
+}
+
+/**
+ * Typo-Tolerant Artist Detector.
+ * Identifies if query references an artist like "arijit", "arijit songs", "arijet", "atif", etc.
+ */
+export function detectArtist(query) {
+  if (!query) return null
+  const cleanQ = query
+    .toLowerCase()
+    .replace(/\b(songs|song|all songs|hits|hit|playlist|by|of|gaane|gana|best|top|new|track|tracks|music|mp3|audio)\b/g, ' ')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .trim()
+  if (!cleanQ || cleanQ.length < 2) return null
+
+  const qTokens = cleanQ.split(/\s+/).filter((t) => t.length > 1)
+  let bestSinger = null
+  let highestScore = 0
+
+  for (const s of POPULAR_SINGERS) {
+    const sNameLower = s.name.toLowerCase()
+    const sTokens = sNameLower.split(/\s+/).filter(Boolean)
+    let score = 0
+
+    if (sNameLower === cleanQ) {
+      score = 500
+    } else if (cleanQ.includes(sNameLower)) {
+      score = 400
+    } else if (sNameLower.includes(cleanQ)) {
+      score = 300
+    } else {
+      for (const qt of qTokens) {
+        for (const st of sTokens) {
+          if (qt === st) {
+            score += 160
+          } else if (st.startsWith(qt) && qt.length >= 3) {
+            score += 110
+          } else {
+            const dist = levenshteinDist(qt, st)
+            if (dist === 1 && Math.max(qt.length, st.length) >= 4) {
+              score += 95
+            } else if (dist === 2 && Math.max(qt.length, st.length) >= 6) {
+              score += 65
+            }
+          }
+        }
+      }
+    }
+
+    if (score > highestScore && score >= 90) {
+      highestScore = score
+      bestSinger = s
+    }
+  }
+
+  if (bestSinger) {
+    const discography = ARTIST_DISCOGRAPHIES[bestSinger.id] || []
+    return {
+      artist: bestSinger,
+      tracks: discography,
+      score: highestScore,
+    }
+  }
+  return null
+}
+
 /**
  * Generate 15+ intelligent autocomplete predictions as the user types.
+ * Supports:
+ * - AI Mood & Genre predictions ("sad songs" -> "Sad & Heartbreak Playlist", "Arijit Sad Songs")
+ * - Artist playlists & discographies ("arijit" -> "Arijit Singh Verified Artist", "Arijit Romantic Hits")
+ * - 2024-2026 new release hits
+ * - Famous lyrics matches
  */
 export function getSearchPredictions(query) {
   const q = (query || '').trim().toLowerCase()
@@ -2202,28 +2499,82 @@ export function getSearchPredictions(query) {
     }
   }
 
-  // 1. Check matching popular singers
+  // 1. AI Mood / Genre Detection
+  const moodMatch = detectMoodOrGenre(q)
+  if (moodMatch) {
+    add(moodMatch.label, 'genre', {
+      badge: 'AI Mood Hub',
+      emoji: moodMatch.genreObj?.emoji || '✨',
+      query: moodMatch.label,
+      genreObj: moodMatch.genreObj,
+    })
+    add(moodMatch.playlistTitle, 'playlist', {
+      badge: 'AI Playlist',
+      subtitle: `${moodMatch.label} · Curated Hits`,
+      query: `${moodMatch.label} Songs`,
+      genreObj: moodMatch.genreObj,
+    })
+    // Add top artists for this mood
+    for (const art of moodMatch.artists.slice(0, 3)) {
+      add(`${art.name} (${moodMatch.label} Special)`, 'artist', {
+        badge: 'Artist Playlist',
+        avatar: art.avatar,
+        query: `${art.name} ${moodMatch.label}`,
+        artistId: art.id,
+        singerObj: art,
+      })
+    }
+    // Add top songs for this mood
+    for (const sTitle of moodMatch.topSongTitles.slice(0, 6)) {
+      add(sTitle, 'song', {
+        badge: moodMatch.badge,
+        subtitle: `${moodMatch.label} Favorite`,
+        query: sTitle,
+      })
+    }
+  }
+
+  // 2. Artist Detection
+  const artistMatch = detectArtist(q)
+  if (artistMatch) {
+    const s = artistMatch.artist
+    add(s.name, 'artist', {
+      badge: 'Verified Artist Playlist',
+      avatar: s.avatar,
+      query: s.name,
+      artistId: s.id,
+      singerObj: s,
+    })
+    add(`${s.name} Complete Discography`, 'artist_playlist', {
+      badge: `${artistMatch.tracks.length || '30'}+ Songs`,
+      avatar: s.avatar,
+      query: s.name,
+      artistId: s.id,
+      singerObj: s,
+    })
+    add(`${s.name} Romantic Hits`, 'suggestion', { badge: 'Romantic', query: `${s.name} Romantic Songs` })
+    add(`${s.name} Sad Songs`, 'suggestion', { badge: 'Heartbreak', query: `${s.name} Sad Songs` })
+    add(`${s.name} Top Chartbusters`, 'suggestion', { badge: 'Top Hits', query: `${s.name} Best Songs` })
+
+    // Add first 5 songs of this artist
+    for (const t of (artistMatch.tracks || []).slice(0, 5)) {
+      add(t.title, 'song', {
+        badge: 'Artist Track',
+        subtitle: t.artist,
+        query: t.title,
+        trackObj: t,
+      })
+    }
+  }
+
+  // 3. Fallback popular singer check for broader queries
   for (const s of POPULAR_SINGERS) {
     if (s.name.toLowerCase().includes(q) || q.includes(s.name.toLowerCase().split(' ')[0])) {
-      add(s.name, 'artist', { badge: 'Artist Playlist', avatar: s.avatar, query: s.query, artistId: s.id })
-      add(`${s.name} Romantic Hits`, 'suggestion', { badge: 'Playlist', query: `${s.name} Romantic Songs` })
-      add(`${s.name} Top Hits`, 'suggestion', { badge: 'Top Hits', query: `${s.name} Best Songs` })
-      add(`${s.name} Sad Songs`, 'suggestion', { badge: 'Heartbreak', query: `${s.name} Sad Songs` })
+      add(s.name, 'artist', { badge: 'Artist Playlist', avatar: s.avatar, query: s.query, artistId: s.id, singerObj: s })
     }
   }
 
-  // 2. Check 2024-2026 new releases
-  for (const nr of NEW_RELEASES_2025_2026) {
-    if (
-      nr.title.toLowerCase().includes(q) ||
-      nr.artist.toLowerCase().includes(q) ||
-      nr.album.toLowerCase().includes(q)
-    ) {
-      add(nr.title, 'new_release', { badge: 'New 2024-2026', subtitle: nr.artist, query: nr.title })
-    }
-  }
-
-  // 3. Check famous lyrics snippets
+  // 4. Famous lyrics snippets
   for (const item of FAMOUS_LYRICS_MAP) {
     const matchedSnippet =
       item.snippet.toLowerCase().includes(q) ||
@@ -2245,10 +2596,21 @@ export function getSearchPredictions(query) {
     }
   }
 
-  // 4. Check matching genres
+  // 5. 2024-2026 new releases
+  for (const nr of NEW_RELEASES_2025_2026) {
+    if (
+      nr.title.toLowerCase().includes(q) ||
+      nr.artist.toLowerCase().includes(q) ||
+      nr.album.toLowerCase().includes(q)
+    ) {
+      add(nr.title, 'new_release', { badge: 'New 2024-2026', subtitle: nr.artist, query: nr.title })
+    }
+  }
+
+  // 6. Genres
   for (const g of POPULAR_GENRES) {
     if (g.label.toLowerCase().includes(q) || g.query.toLowerCase().includes(q)) {
-      add(g.label, 'genre', { badge: 'Genre', emoji: g.emoji, query: g.query })
+      add(g.label, 'genre', { badge: 'Genre', emoji: g.emoji, query: g.query, genreObj: g })
     }
   }
 
@@ -2257,13 +2619,16 @@ export function getSearchPredictions(query) {
 
 /**
  * Intelligent fuzzy tokenized search across catalog tracks & lyrics mappings.
- * Returns 25-30+ ranked tracks.
+ * Automatically incorporates AI Mood detection and Artist matching.
+ * Returns 30-35+ highly ranked tracks.
  */
 export function smartSearchCatalog(query, catalogTracks = []) {
   const q = (query || '').trim().toLowerCase()
   if (!q) return []
 
   const qTokens = q.split(/\s+/).filter(Boolean)
+  const mood = detectMoodOrGenre(q)
+  const artistData = detectArtist(q)
 
   // 1. Direct lyrics phrase match
   const lyricsHits = []
@@ -2284,7 +2649,7 @@ export function smartSearchCatalog(query, catalogTracks = []) {
       if (inCatalog) {
         lyricsHits.push({
           ...inCatalog,
-          _score: 1000,
+          _score: 1600,
           _matchReason: `Lyrics: "${item.snippet}"`,
         })
       } else {
@@ -2298,14 +2663,26 @@ export function smartSearchCatalog(query, catalogTracks = []) {
           duration: item.duration || 240,
           query: item.canonicalQuery,
           source: 'lyrics_match',
-          _score: 950,
+          _score: 1550,
           _matchReason: `Lyrics: "${item.snippet}"`,
         })
       }
     }
   }
 
-  // 2. Add matching new releases
+  // 2. If artist detected, include their discography with top priority
+  const artistHits = []
+  if (artistData && artistData.tracks && artistData.tracks.length > 0) {
+    for (const t of artistData.tracks) {
+      artistHits.push({
+        ...t,
+        _score: 1400,
+        _matchReason: `${artistData.artist.name} Discography`,
+      })
+    }
+  }
+
+  // 3. Add matching new releases
   const newReleaseHits = []
   for (const nr of NEW_RELEASES_2025_2026) {
     if (
@@ -2315,15 +2692,17 @@ export function smartSearchCatalog(query, catalogTracks = []) {
     ) {
       newReleaseHits.push({
         ...nr,
-        _score: 800,
+        _score: 1100,
         _matchReason: 'Trending 2024-2026',
       })
     }
   }
 
-  // 3. Score all catalog tracks
+  // 4. Score all catalog tracks
   const scored = []
-  const seenKeys = new Set([...lyricsHits, ...newReleaseHits].map((t) => `${t.title}-${t.artist}`.toLowerCase()))
+  const seenKeys = new Set(
+    [...lyricsHits, ...artistHits, ...newReleaseHits].map((t) => `${t.title}-${t.artist}`.toLowerCase())
+  )
 
   for (const t of catalogTracks) {
     const tKey = `${t.title}-${t.artist}`.toLowerCase()
@@ -2337,53 +2716,79 @@ export function smartSearchCatalog(query, catalogTracks = []) {
     let score = 0
     let matchReason = ''
 
+    // Exact or prefix title match
     if (titleLower === q) {
-      score += 500
+      score += 800
       matchReason = 'Exact Title Match'
     } else if (titleLower.startsWith(q)) {
-      score += 350
+      score += 550
       matchReason = 'Title Match'
     } else if (titleLower.includes(q)) {
-      score += 250
+      score += 400
       matchReason = 'Title Match'
     }
 
+    // Artist match
     if (artistLower === q) {
-      score += 400
+      score += 650
       matchReason = matchReason || 'Artist Match'
     } else if (artistLower.includes(q)) {
-      score += 200
+      score += 350
       matchReason = matchReason || 'Artist Match'
+    }
+
+    // AI Mood matching bonus
+    if (mood) {
+      if (categoryLower === mood.category || categoryLower === mood.genreId) {
+        score += 500
+        matchReason = matchReason || `${mood.label} Pick`
+      }
+      if (mood.primaryArtistIds.some((id) => artistLower.includes(id.replace(/_/g, ' ')))) {
+        score += 300
+        matchReason = matchReason || `${mood.label} Artist`
+      }
+      if (mood.topSongTitles.some((tit) => titleLower.includes(tit.toLowerCase()))) {
+        score += 450
+        matchReason = matchReason || `${mood.label} Essential`
+      }
     }
 
     if (albumLower.includes(q)) {
-      score += 120
+      score += 150
       matchReason = matchReason || 'Album Match'
     }
 
     if (categoryLower.includes(q)) {
-      score += 90
+      score += 120
       matchReason = matchReason || 'Genre Match'
     }
 
+    // Token-based matching & Levenshtein typo scoring
     let tokenMatches = 0
     for (const tok of qTokens) {
+      if (tok.length <= 1) continue
       if (titleLower.includes(tok)) {
-        score += 60
+        score += 80
         tokenMatches++
-      }
-      if (artistLower.includes(tok)) {
-        score += 50
+      } else if (artistLower.includes(tok)) {
+        score += 70
         tokenMatches++
-      }
-      if (albumLower.includes(tok)) {
-        score += 30
-        tokenMatches++
+      } else {
+        // Typo tolerance on word tokens
+        const titleTokens = titleLower.split(/\s+/)
+        for (const tt of titleTokens) {
+          if (tt.length >= 4 && tok.length >= 4 && levenshteinDist(tok, tt) <= 1) {
+            score += 50
+            tokenMatches++
+            matchReason = matchReason || 'Did you mean'
+            break
+          }
+        }
       }
     }
 
     if (tokenMatches === qTokens.length && qTokens.length > 1) {
-      score += 150
+      score += 200
       matchReason = matchReason || 'Keyword Match'
     }
 
@@ -2398,5 +2803,5 @@ export function smartSearchCatalog(query, catalogTracks = []) {
   }
 
   scored.sort((a, b) => b._score - a._score)
-  return [...lyricsHits, ...newReleaseHits, ...scored]
+  return [...lyricsHits, ...artistHits, ...newReleaseHits, ...scored]
 }

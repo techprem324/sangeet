@@ -26,14 +26,20 @@ export default function App() {
   const [user, setUserState] = useState(getUser())
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [searchResetTrigger, setSearchResetTrigger] = useState(0)
+  const [playerExpanded, setPlayerExpanded] = useState(false)
   const busyRef = useRef(false)
 
   const handleNavView = useCallback((nextView) => {
+    setPlayerExpanded(false)
     if (nextView === 'search') {
       setSearchResetTrigger((n) => n + 1)
     }
     setView(nextView)
   }, [])
+
+  useEffect(() => {
+    setPlayerExpanded(false)
+  }, [view])
 
   const sendChat = useCallback(async (text, moodHint = '') => {
     if (busyRef.current) return
@@ -90,7 +96,7 @@ export default function App() {
           <header className="border-b border-edge-soft bg-coal/85 backdrop-blur-md lg:hidden shrink-0">
             <div className="flex items-center justify-between px-3.5 py-2.5">
               <button
-                onClick={() => setView('home')}
+                onClick={() => handleNavView('home')}
                 className="flex items-center gap-2 text-left focus:outline-none"
               >
                 <LogoMark size={26} />
@@ -196,7 +202,12 @@ export default function App() {
       </div>
 
       {/* Global Audio Player (Desktop bottom dock + Mobile floating mini-player & expanded player) */}
-      <MiniPlayer onLyrics={openLyrics} onLikedChange={() => setLikedRefresh((n) => n + 1)} />
+      <MiniPlayer
+        expanded={playerExpanded}
+        onExpandedChange={setPlayerExpanded}
+        onLyrics={openLyrics}
+        onLikedChange={() => setLikedRefresh((n) => n + 1)}
+      />
 
       {/* Spotify-Style Fixed Bottom Navigation Bar (Mobile / Tablet Only) */}
       <BottomNav view={view} onView={handleNavView} />
