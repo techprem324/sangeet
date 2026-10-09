@@ -1,3 +1,9 @@
+import {
+  VERIFIED_ARTISTS,
+  VERIFIED_DISCOGRAPHIES,
+  MULTI_ARTIST_SONGS,
+} from './verifiedArtistCatalog'
+
 /**
  * searchEngine.js
  * Comprehensive Spotify-style search, prediction & artist playlist engine for Sangeet.
@@ -10,7 +16,7 @@
  * - Multi-token fuzzy scoring & ranking
  */
 
-export const POPULAR_SINGERS = [
+const BASE_POPULAR_SINGERS = [
   {
     id: 'arijit_singh',
     name: 'Arijit Singh',
@@ -165,6 +171,16 @@ export const POPULAR_SINGERS = [
     monthlyListeners: '17.6M',
     bio: 'The earthy, silk-textured voice behind Rockstar and countless road-trip melodies.',
   },
+]
+
+export const POPULAR_SINGERS = [
+  ...BASE_POPULAR_SINGERS,
+  ...VERIFIED_ARTISTS.filter(
+    (va) =>
+      !BASE_POPULAR_SINGERS.some(
+        (ps) => ps.id === va.id || ps.name.toLowerCase() === va.name.toLowerCase()
+      )
+  ),
 ]
 
 /**
@@ -352,7 +368,7 @@ export const NEW_RELEASES_2025_2026 = [
 /**
  * Dedicated Artist Playlists (Verified 320 kbps & Active CDNs)
  */
-export const ARTIST_DISCOGRAPHIES = {
+const BASE_ARTIST_DISCOGRAPHIES = {
   "karan_aujla": [
     {
       "id": "karan_aujla_AhkSYQEF",
@@ -1693,6 +1709,11 @@ export const ARTIST_DISCOGRAPHIES = {
   ]
 }
 
+export const ARTIST_DISCOGRAPHIES = {
+  ...VERIFIED_DISCOGRAPHIES,
+  ...BASE_ARTIST_DISCOGRAPHIES,
+}
+
 /**
  * Curated Featured Playlists (20-25+ verified songs each)
  * Shown in the "Featured Playlists & Trends" section
@@ -2567,14 +2588,60 @@ export function getSearchPredictions(query) {
     }
   }
 
-  // 3. Fallback popular singer check for broader queries
+  // 3. Fallback popular singer check for broader queries & prefix matching
   for (const s of POPULAR_SINGERS) {
-    if (s.name.toLowerCase().includes(q) || q.includes(s.name.toLowerCase().split(' ')[0])) {
-      add(s.name, 'artist', { badge: 'Artist Playlist', avatar: s.avatar, query: s.query, artistId: s.id, singerObj: s })
+    const sNameLower = s.name.toLowerCase()
+    const words = sNameLower.split(' ')
+    const matchesPrefix = words.some((w) => w.startsWith(q)) || sNameLower.startsWith(q)
+    if (sNameLower.includes(q) || matchesPrefix) {
+      add(s.name, 'artist', { badge: 'Verified Artist', avatar: s.avatar, query: s.query, artistId: s.id, singerObj: s })
     }
   }
 
-  // 4. Famous lyrics snippets
+  // 4. Auto-Correct Typo Tolerance (ML-style fuzzy prediction for misspelled artists)
+  if (q.length >= 3) {
+    for (const s of POPULAR_SINGERS) {
+      const sNameLower = s.name.toLowerCase()
+      if (sNameLower !== q && !sNameLower.includes(q)) {
+        const dist = levenshteinDist(q, sNameLower)
+        if (dist <= 2 && Math.abs(q.length - sNameLower.length) <= 3) {
+          add(`Did you mean: ${s.name}?`, 'artist', {
+            badge: 'Auto-Correct ✨',
+            avatar: s.avatar,
+            query: s.name,
+            artistId: s.id,
+            singerObj: s,
+          })
+          break
+        }
+      }
+    }
+  }
+
+  // 5. Multi-Artist song options (shows versions across different artists when available)
+  const cleanQ = q.replace(/[^a-z0-9\s]/g, ' ').trim()
+  if (cleanQ.length >= 3) {
+    for (const [normTitle, artistsList] of Object.entries(MULTI_ARTIST_SONGS || {})) {
+      if (normTitle.includes(cleanQ) || cleanQ.includes(normTitle)) {
+        const dispTitle = normTitle.split(' ').map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+        add(`${dispTitle} (${artistsList.length} Artists)`, 'suggestion', {
+          badge: 'Multiple Artists Available',
+          subtitle: `Recorded by: ${artistsList.slice(0, 3).join(', ')}${artistsList.length > 3 ? '...' : ''}`,
+          query: dispTitle,
+        })
+        for (const art of artistsList.slice(0, 3)) {
+          add(`${dispTitle} · ${art}`, 'song', {
+            badge: `Version by ${art}`,
+            subtitle: `${dispTitle} performed by ${art}`,
+            query: `${dispTitle} ${art}`,
+          })
+        }
+        break
+      }
+    }
+  }
+
+  // 6. Famous lyrics snippets
   for (const item of FAMOUS_LYRICS_MAP) {
     const matchedSnippet =
       item.snippet.toLowerCase().includes(q) ||
@@ -2596,7 +2663,7 @@ export function getSearchPredictions(query) {
     }
   }
 
-  // 5. 2024-2026 new releases
+  // 7. 2024-2026 new releases
   for (const nr of NEW_RELEASES_2025_2026) {
     if (
       nr.title.toLowerCase().includes(q) ||
@@ -2607,7 +2674,7 @@ export function getSearchPredictions(query) {
     }
   }
 
-  // 6. Genres
+  // 8. Genres
   for (const g of POPULAR_GENRES) {
     if (g.label.toLowerCase().includes(q) || g.query.toLowerCase().includes(q)) {
       add(g.label, 'genre', { badge: 'Genre', emoji: g.emoji, query: g.query, genreObj: g })

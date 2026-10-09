@@ -1,0 +1,38 @@
+# One artist per line. Add as many as you want.
+# Hindi / Bollywood
+Arijit Singh
+A. R. Rahman
+Lata Mangeshkar
+Kishore Kumar
+Mohammed Rafi
+Asha Bhosle
+Shreya Ghoshal
+Sonu Nigam
+Neha Kakkar
+Atif Aslam
+Kumar Sanu
+Udit Narayan
+Alka Yagnik
+Sunidhi Chauhan
+Jubin Nautiyal
+# Punjabi
+Diljit Dosanjh
+Sidhu Moose Wala
+AP Dhillon
+Guru Randhawa
+# English pop / rock
+The Beatles
+Queen
+Michael Jackson
+Ed Sheeran
+Taylor Swift
+Coldplay
+Adele
+Eminem
+Linkin Park
+Imagine Dragons
+The Weeknd
+Rihanna
+Bruno Mars
+Pink Floyd
+Led Zeppelin

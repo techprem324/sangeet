@@ -79,11 +79,29 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   const [generatingMore, setGeneratingMore] = useState(false)
   const [autoReleasing, setAutoReleasing] = useState(false)
   const [toastMessage, setToastMessage] = useState('')
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
 
   const timer = useRef(null)
   const containerRef = useRef(null)
   const searchInputRef = useRef(null)
   const searchBarWrapperRef = useRef(null)
+  const suggestionsContainerRef = useRef(null)
+
+  // Reset selected prediction index when query or visibility changes
+  useEffect(() => {
+    setSelectedSuggestionIndex(-1)
+  }, [q, showSuggestions])
+
+  // Scroll active keyboard prediction into view
+  useEffect(() => {
+    if (selectedSuggestionIndex >= 0 && suggestionsContainerRef.current) {
+      const items = suggestionsContainerRef.current.querySelectorAll('[data-suggestion-item]')
+      const activeItem = items[selectedSuggestionIndex]
+      if (activeItem && activeItem.scrollIntoView) {
+        activeItem.scrollIntoView({ block: 'nearest' })
+      }
+    }
+  }, [selectedSuggestionIndex])
 
   // Close suggestions dropdown when user taps/clicks outside
   useEffect(() => {
@@ -427,7 +445,52 @@ export default function SearchView({ onLyrics, resetTrigger }) {
                 setShowSuggestions(true)
               }}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (showSuggestions && predictions.length > 0) {
+                  if (e.key === 'ArrowDown') {
+                    e.preventDefault()
+                    setSelectedSuggestionIndex((prev) => (prev + 1) % predictions.length)
+                    return
+                  }
+                  if (e.key === 'ArrowUp') {
+                    e.preventDefault()
+                    setSelectedSuggestionIndex((prev) =>
+                      prev <= 0 ? predictions.length - 1 : prev - 1
+                    )
+                    return
+                  }
+                  if (e.key === 'Enter') {
+                    if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < predictions.length) {
+                      e.preventDefault()
+                      const p = predictions[selectedSuggestionIndex]
+                      setShowSuggestions(false)
+                      setSelectedSuggestionIndex(-1)
+                      if (searchInputRef.current) {
+                        searchInputRef.current.blur()
+                      }
+                      if (p.type === 'artist' && p.singerObj) {
+                        handleSelectArtist(p.singerObj)
+                      } else if (p.type === 'artist_playlist' && p.singerObj) {
+                        handleSelectArtist(p.singerObj)
+                      } else if (p.type === 'genre' && p.genreObj) {
+                        handleSelectGenre(p.genreObj)
+                      } else if (p.type === 'playlist' && p.genreObj) {
+                        handleSelectGenre(p.genreObj)
+                      } else {
+                        handleSelectQuery(p.query || p.text)
+                      }
+                      return
+                    }
+                    setShowSuggestions(false)
+                    searchInputRef.current?.blur()
+                    return
+                  }
+                  if (e.key === 'Escape') {
+                    e.preventDefault()
+                    setShowSuggestions(false)
+                    setSelectedSuggestionIndex(-1)
+                    return
+                  }
+                } else if (e.key === 'Enter') {
                   setShowSuggestions(false)
                   searchInputRef.current?.blur()
                 }
@@ -450,11 +513,16 @@ export default function SearchView({ onLyrics, resetTrigger }) {
             )}
           </div>
 
-          {/* Autocomplete Predictions Dropdown */}
+          {/* Autocomplete Predictions Dropdown with full Arrow Key Accessibility */}
           {showSuggestions && predictions.length > 0 && !activeHub && (
-            <div className="absolute left-0 right-0 top-full z-40 mt-1.5 max-h-72 overflow-y-auto rounded-2xl border border-edge bg-surface-2/95 p-2 shadow-2xl backdrop-blur-xl">
+            <div
+              ref={suggestionsContainerRef}
+              role="listbox"
+              aria-label="Search suggestions"
+              className="absolute left-0 right-0 top-full z-40 mt-1.5 max-h-72 overflow-y-auto rounded-2xl border border-edge bg-surface-2/95 p-2 shadow-2xl backdrop-blur-xl"
+            >
               <div className="flex items-center justify-between px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider text-sand-dim border-b border-edge/40">
-                <span>AI Predictions ({predictions.length})</span>
+                <span>AI Predictions ({predictions.length}) • Use ↑↓ to navigate</span>
                 <button
                   onClick={() => setShowSuggestions(false)}
                   className="text-xs text-sand-dim hover:text-white px-1"
@@ -462,48 +530,60 @@ export default function SearchView({ onLyrics, resetTrigger }) {
                   ✕
                 </button>
               </div>
-              {predictions.map((p, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => {
-                    setShowSuggestions(false)
-                    if (searchInputRef.current) {
-                      searchInputRef.current.blur()
-                    }
-                    if (p.type === 'artist' && p.singerObj) {
-                      handleSelectArtist(p.singerObj)
-                    } else if (p.type === 'artist_playlist' && p.singerObj) {
-                      handleSelectArtist(p.singerObj)
-                    } else if (p.type === 'genre' && p.genreObj) {
-                      handleSelectGenre(p.genreObj)
-                    } else if (p.type === 'playlist' && p.genreObj) {
-                      handleSelectGenre(p.genreObj)
-                    } else {
-                      handleSelectQuery(p.query || p.text)
-                    }
-                  }}
-                  className="flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-xs text-sand hover:bg-surface-3 hover:text-white transition-colors"
-                >
-                  {p.avatar ? (
-                    <ArtistAvatar src={p.avatar} name={p.text} size="h-6 w-6" textClass="text-[9px]" />
-                  ) : p.emoji ? (
-                    <span className="text-[14px]">{p.emoji}</span>
-                  ) : (
-                    <SearchIcon size={13} className="text-ember shrink-0" />
-                  )}
-                  <div className="min-w-0 flex-1">
-                    <span className="font-medium text-cream block truncate">{p.text}</span>
-                    {p.subtitle && (
-                      <span className="text-[10px] text-sand-dim block truncate">{p.subtitle}</span>
+              {predictions.map((p, idx) => {
+                const isSelected = idx === selectedSuggestionIndex
+                return (
+                  <button
+                    key={idx}
+                    role="option"
+                    aria-selected={isSelected}
+                    data-suggestion-item="true"
+                    onMouseEnter={() => setSelectedSuggestionIndex(idx)}
+                    onClick={() => {
+                      setShowSuggestions(false)
+                      setSelectedSuggestionIndex(-1)
+                      if (searchInputRef.current) {
+                        searchInputRef.current.blur()
+                      }
+                      if (p.type === 'artist' && p.singerObj) {
+                        handleSelectArtist(p.singerObj)
+                      } else if (p.type === 'artist_playlist' && p.singerObj) {
+                        handleSelectArtist(p.singerObj)
+                      } else if (p.type === 'genre' && p.genreObj) {
+                        handleSelectGenre(p.genreObj)
+                      } else if (p.type === 'playlist' && p.genreObj) {
+                        handleSelectGenre(p.genreObj)
+                      } else {
+                        handleSelectQuery(p.query || p.text)
+                      }
+                    }}
+                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-xs transition-all ${
+                      isSelected
+                        ? 'bg-ember/25 text-white ring-1 ring-ember/60 shadow-sm'
+                        : 'text-sand hover:bg-surface-3 hover:text-white'
+                    }`}
+                  >
+                    {p.avatar ? (
+                      <ArtistAvatar src={p.avatar} name={p.text} size="h-6 w-6" textClass="text-[9px]" />
+                    ) : p.emoji ? (
+                      <span className="text-[14px]">{p.emoji}</span>
+                    ) : (
+                      <SearchIcon size={13} className={`shrink-0 ${isSelected ? 'text-amber-400' : 'text-ember'}`} />
                     )}
-                  </div>
-                  {p.badge && (
-                    <span className="rounded bg-white/10 px-1.5 py-0.5 text-[9px] font-semibold text-sand-dim shrink-0">
-                      {p.badge}
-                    </span>
-                  )}
-                </button>
-              ))}
+                    <div className="min-w-0 flex-1">
+                      <span className={`font-medium block truncate ${isSelected ? 'text-white font-semibold' : 'text-cream'}`}>{p.text}</span>
+                      {p.subtitle && (
+                        <span className="text-[10px] text-sand-dim block truncate">{p.subtitle}</span>
+                      )}
+                    </div>
+                    {p.badge && (
+                      <span className={`rounded px-1.5 py-0.5 text-[9px] font-semibold shrink-0 ${isSelected ? 'bg-ember/40 text-amber-200' : 'bg-white/10 text-sand-dim'}`}>
+                        {p.badge}
+                      </span>
+                    )}
+                  </button>
+                )
+              })}
             </div>
           )}
         </div>

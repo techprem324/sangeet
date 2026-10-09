@@ -128,6 +128,27 @@ export function AudioProvider({ children }) {
   // Authoritative real-time player state ref so background native DOM listeners,
   // lock screen MediaSession, and phone lock screen continuation NEVER read stale React closures.
   const stateRef = useRef({ current: null, repeat: 'off', shuffle: false, duration: 0, playing: false })
+  const isTransitioningRef = useRef(false)
+  const audioCtxRef = useRef(null)
+
+  const enableAudioKeepAlive = useCallback(() => {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext
+      if (!audioCtxRef.current && AudioCtx) {
+        const ctx = new AudioCtx()
+        const osc = ctx.createOscillator()
+        const gain = ctx.createGain()
+        gain.gain.value = 0.00001
+        osc.connect(gain)
+        gain.connect(ctx.destination)
+        osc.start()
+        audioCtxRef.current = ctx
+      }
+      if (audioCtxRef.current && audioCtxRef.current.state === 'suspended') {
+        audioCtxRef.current.resume().catch(() => {})
+      }
+    } catch {}
+  }, [])
 
   useEffect(() => {
     stateRef.current.repeat = repeat
@@ -232,6 +253,7 @@ export function AudioProvider({ children }) {
         setDuration(d)
       })
       el.addEventListener('play', () => {
+        isTransitioningRef.current = false
         stateRef.current.playing = true
         setPlaying(true)
         if ('mediaSession' in navigator) {
@@ -239,6 +261,10 @@ export function AudioProvider({ children }) {
         }
       })
       el.addEventListener('pause', () => {
+        // Prevent end-of-track pause or track transition from falsely stopping background playback session on mobile
+        if (el.ended || isTransitioningRef.current) {
+          return
+        }
         stateRef.current.playing = false
         setPlaying(false)
         if ('mediaSession' in navigator) {
@@ -411,6 +437,7 @@ export function AudioProvider({ children }) {
         }
 
         if (nextTrack && nextTrack.stream_url) {
+          isTransitioningRef.current = true
           // CRITICAL FIX: Synchronously mutate stateRef.current.current BEFORE setting el.src and calling play().
           // On mobile devices with screen locked or app minimized, React background re-renders are suspended!
           // Updating stateRef.current.current synchronously guarantees that when THIS song ends, the NEXT song
@@ -421,6 +448,9 @@ export function AudioProvider({ children }) {
 
           el.src = nextTrack.stream_url
           el.currentTime = 0
+          try {
+            el.load()
+          } catch {}
 
           updateMediaSession(nextTrack, true)
 
@@ -430,9 +460,11 @@ export function AudioProvider({ children }) {
               console.warn('Background playback continuation note:', err)
               const onCanPlay = () => {
                 el.removeEventListener('canplay', onCanPlay)
-                el.play().catch(() => {})
+                el.removeEventListener('loadeddata', onCanPlay)
+                el.play().then(() => { isTransitioningRef.current = false }).catch(() => {})
               }
               el.addEventListener('canplay', onCanPlay, { once: true })
+              el.addEventListener('loadeddata', onCanPlay, { once: true })
             })
           }
 
@@ -458,6 +490,7 @@ export function AudioProvider({ children }) {
 
   const playTrack = useCallback(
     async (track, queue = null) => {
+      enableAudioKeepAlive()
       const cur = stateRef.current.current
       let q = queue
         ? [...queue]
@@ -532,10 +565,11 @@ export function AudioProvider({ children }) {
         setError('Stream URL unavailable right now.')
       }
     },
-    [ensureAudio, prefetchTrack, updateMediaSession]
+    [ensureAudio, enableAudioKeepAlive, prefetchTrack, updateMediaSession]
   )
 
   const toggle = useCallback(() => {
+    enableAudioKeepAlive()
     const el = ensureAudio()
     const cur = stateRef.current.current
     if (!cur) return
