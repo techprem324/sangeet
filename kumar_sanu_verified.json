@@ -1,0 +1,972 @@
+[
+  {
+    "id": "kumar_sanu_1",
+    "title": "Pehli Pehli Baar Mohabbat Ki Hai (From &quot;Sirf Tum&quot;)",
+    "artist": "Sameer, Super Cassettes Industries Private Limited, Kumar Sanu, Alka Yagnik",
+    "album": "Bollywood Classic Hits",
+    "duration": 458,
+    "cover": "https://c.saavncdn.com/066/Bollywood-Classic-Hits-Hindi-2026-20260423161003-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/066/5aab83a0bca6f3ab89e8eb915bc8380d_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_2",
+    "title": "Dheere Dheere Se Meri Zindagi Mein Aana (From &quot;Aashiqui&quot;)",
+    "artist": "Rani Malik, Super Cassettes Industries Private Limited, Anuradha Paudwal, Kumar Sanu",
+    "album": "Bollywood Classic Hits",
+    "duration": 326,
+    "cover": "https://c.saavncdn.com/066/Bollywood-Classic-Hits-Hindi-2026-20260423161003-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/066/ff705941bde60d164161e7f1c206ddcc_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_3",
+    "title": "Dil Ne Yeh Kaha Hain Dil Se (From &quot;Dhadkan&quot;)",
+    "artist": "Udit Narayan, Alka Yagnik, Kumar Sanu",
+    "album": "Director Special Dharmesh Darshan Hits",
+    "duration": 426,
+    "cover": "https://c.saavncdn.com/922/Director-Special-Dharmesh-Darshan-Hits-Hindi-2021-20260331205726-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/922/305d813638992d3767e508572954b4a9_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_4",
+    "title": "Kyun Ho Gaya Hai",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 233,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/de20a27bf4941e844fb9bc77ce5f0c7e_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_5",
+    "title": "Chand Se Parda (From \"Aao Pyar Karen\")",
+    "artist": "Kumar Sanu, Aadesh Shrivastava",
+    "album": "90's Hits Of Shilpa Shetty",
+    "duration": 381,
+    "cover": "https://c.saavncdn.com/232/90-s-Hits-Of-Shilpa-Shetty-Hindi-2016-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/232/4dfed1607c3925c2b75ca56a18e0be82_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_6",
+    "title": "Jab Se Hua Hai Mujhe",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 313,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/9bd8e063414b8902c0569cb77ec68270_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_7",
+    "title": "Mohabbat Na Karna",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 360,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/0307b06c459f35df36f3f6d30fdfa847_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_8",
+    "title": "Meri Duniya Mein Aana",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 318,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/6c896d031418ac857b87891ee4d708c8_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_9",
+    "title": "Mere Mehboob (Sad)",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 126,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/cd18afe6ecff62fba6cc48b4bf33adee_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_10",
+    "title": "Mere Mehboob Meri Jane",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 315,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/7b77daf27029e45e8a42b2ff609ec7ae_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_11",
+    "title": "Tera Hi Pyar Mere Is Dil",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Kumar Sanu Hits",
+    "duration": 334,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/0c7033d931fe08490d7874da737c4839_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_12",
+    "title": "Hothon Par Har Ghadi",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 234,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/9a3869db395a1fd717c13b6580723007_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_13",
+    "title": "O Jane",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 559,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/8c51666ba570f8f41b852f46d9cb7f1d_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_14",
+    "title": "Churi Bole",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 390,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/dc9ae12cab718ba744975fd7373fe8cd_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_15",
+    "title": "Hum Nashee",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 315,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/1d4a965a578ac38438cd45d1fb97a0e7_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_16",
+    "title": "Mein Kaun",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 452,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/c168239e871da22fb4437c15b34fc743_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_17",
+    "title": "Shayad Ye Dil Diwana",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 270,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/a73dc5eab188c4eaa0f4f1be6cd67e67_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_18",
+    "title": "Prema Eka Pakhi",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 317,
+    "cover": "https://c.saavncdn.com/440/Kumar-Sanu-Hits-Odia-2020-20200130183701-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/440/2f3d066886da1488ec879a7eccdb96ad_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_19",
+    "title": "Aaye Barati",
+    "artist": "Kumar Sanu, Sadhana Sargam",
+    "album": "Kumar Sanu Hits",
+    "duration": 465,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/0f79699b682ea06367b779d0b09e8fce_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_20",
+    "title": "Kou Gaan Jhia",
+    "artist": "Kumar Sanu",
+    "album": "Kumar Sanu Hits",
+    "duration": 290,
+    "cover": "https://c.saavncdn.com/440/Kumar-Sanu-Hits-Odia-2020-20200130183701-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/440/693884436a3cf120b2ee7d2984f2c406_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_21",
+    "title": "Tujhe Dekha To (From \"Dilwale Dulhania Le Jayenge\")",
+    "artist": "Lata Mangeshkar, Kumar Sanu",
+    "album": "Gawah Hai Chand Tare - Kumar Sanu Hits",
+    "duration": 302,
+    "cover": "https://c.saavncdn.com/402/Gawah-Hai-Chand-Tare-Kumar-Sanu-Hits-Hindi-2020-20201019104221-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/402/fcd9dcf8950a36dc08954d4b69d6cb4a_sar_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_22",
+    "title": "Reason-Season",
+    "artist": "Kumar Sanu, Asha Bhosle",
+    "album": "Kumar Sanu Hits",
+    "duration": 359,
+    "cover": "https://c.saavncdn.com/886/Kumar-Sanu-Hits-2012-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/886/bcdc01e5309f956cab52039392a4e149_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_23",
+    "title": "SRK Hits Mashup",
+    "artist": "A.R. Rahman, Nadeem-Shravan, Anu Malik, Sukhvinder Singh, Sapna Awasthi, Alka Yagnik, Vinod Rathod, Kumar Sanu, Asha Bhosle, Abhijeet, Shah Rukh Khan, Hema Sardesai",
+    "album": "Bollywood Mashup Songs",
+    "duration": 336,
+    "cover": "https://c.saavncdn.com/347/Bollywood-Mashup-Songs-2013-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/347/fedf9b4fe9ff9a9eb0e354368dc92957_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_24",
+    "title": "Mera Dil Bhi Kitna Pagal Hai (From &quot;Saajan&quot;)",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Mujhe Tum Se Mohabbat Hai - Bollywood Romantic Songs",
+    "duration": 324,
+    "cover": "https://c.saavncdn.com/115/Mujhe-Tum-Se-Mohabbat-Hai-Bollywood-Romantic-Songs-Hindi-2016-20260331205729-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/115/6d7a8f63f4b542fdc690f1ddd0641e43_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_25",
+    "title": "Tum Meri Mohabbat Ho (From &quot;Sangraam&quot;)",
+    "artist": "Kumar Sanu, Alka Yagnik, P. Sunanda",
+    "album": "21 Ishq List - Bollywood Romantic Songs",
+    "duration": 421,
+    "cover": "https://c.saavncdn.com/357/21-Ishq-List-Bollywood-Romantic-Songs-Hindi-2017-20260314070203-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/357/7bdc616f8bc2be2ef4519eafa94522f9_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_26",
+    "title": "Sochenge Tumhe Pyar (From &quot;Deewana&quot;)",
+    "artist": "Kumar Sanu",
+    "album": "Mujhe Tum Se Mohabbat Hai - Bollywood Romantic Songs",
+    "duration": 362,
+    "cover": "https://c.saavncdn.com/115/Mujhe-Tum-Se-Mohabbat-Hai-Bollywood-Romantic-Songs-Hindi-2016-20260331205729-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/115/15e2435779f7b6b282f700e923187621_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_27",
+    "title": "Paas Woh Aane Lage (From \"Main Khiladi Tu Anari\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "21 Ishq List - Bollywood Romantic Songs",
+    "duration": 372,
+    "cover": "https://c.saavncdn.com/357/21-Ishq-List-Bollywood-Romantic-Songs-Hindi-2017-20260314070203-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/357/1f452c1b2c05390211f7cb158882e8c1_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_28",
+    "title": "Teri Umeed Tera Intezar (From \"Deewana\")",
+    "artist": "Kumar Sanu, Sadhna Sargam",
+    "album": "Tere Bina Dil - Bollywood Romantic Songs",
+    "duration": 378,
+    "cover": "https://c.saavncdn.com/184/Tere-Bina-Dil-Bollywood-Romantic-Songs-Hindi-2016-20260331205732-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/184/e0b112566e06299fd15c8e7dbc018856_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_29",
+    "title": "Shahrukh Romantic Mashup",
+    "artist": "Anu Malik, Jatin-Lalit, Nadeem-Shravan, Rajesh Roshan, A.R. Rahman, Kumar Sanu, Alka Yagnik, Abhijeet, Udit Narayan, Sapna Awasthi, Vinod Rathod, Lata Mangeshkar, Nitin Mukesh",
+    "album": "Bollywood Mashup Songs",
+    "duration": 353,
+    "cover": "https://c.saavncdn.com/347/Bollywood-Mashup-Songs-2013-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/347/aa9368afc968407ebc60821a883e0cf8_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_30",
+    "title": "Kitna Haseen Chehra (From \"Dilwale\")",
+    "artist": "Kumar Sanu",
+    "album": "Tere Bina Dil - Bollywood Romantic Songs",
+    "duration": 354,
+    "cover": "https://c.saavncdn.com/184/Tere-Bina-Dil-Bollywood-Romantic-Songs-Hindi-2016-20260331205732-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/184/6c51c6ca249c07824ead85ca29dca088_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_31",
+    "title": "Bollywood Romantic Mashup",
+    "artist": "Nadeem-Shravan, Rajesh Roshan, Anand-Milind, Kumar Sanu, Alka Yagnik, Sadhana Sargam, S.P. Balasubrahmanyam",
+    "album": "Bollywood Mashup Songs",
+    "duration": 304,
+    "cover": "https://c.saavncdn.com/347/Bollywood-Mashup-Songs-2013-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/347/2d0ba3cc800fae09edcc074e84402658_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_32",
+    "title": "Aap Ke Karib - Jhankar Beats",
+    "artist": "Sadhana Sargam, Kumar Sanu",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 408,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/3890efaf5aa8dc55ab76299a85537c94_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_33",
+    "title": "Romantic Bollywood (Afro House Mix)",
+    "artist": "Swaraj Komejwar, Mohit Chauhan, Antara Mitra, Arijit Singh, Kavita Seth, Kumar Sanu, Alka Yagnik, Shreya Ghoshal, Tochi Raina, Kailash Kher, Shaan, KK, Sayeed Quadri",
+    "album": "Romantic Bollywood (Afro House Mix)",
+    "duration": 567,
+    "cover": "https://c.saavncdn.com/164/Romantic-Bollywood-Afro-House-Mix-Hindi-2025-20251215154433-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/164/a51fdf518eb978a9cd48bf83ede7c7d7_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_34",
+    "title": "Chori Chori Maine Bhi To - Jhankar Beats",
+    "artist": "Kavita Krishnamurthy, Kumar Sanu",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 389,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/5dd6b5078bf1a8ca6b36d3ca49decd5f_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_35",
+    "title": "Aise Mili Nigahen - Jhankar Beats",
+    "artist": "Alka Yagnik, Kumar Sanu",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 412,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/b3e4f1e5724c423681f94f75877f2e44_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_36",
+    "title": "Ek Nigah Mein - Jhankar Beats",
+    "artist": "Alisha Chinai, Kumar Sanu",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 407,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/e852ca07aafc8df3137a9d3a4bc4836a_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_37",
+    "title": "Dil Mein Mohabbat Hai - Jhankar Beats",
+    "artist": "Alka Yagnik, Kumar Sanu",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 307,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/a7866917cb62a40f94fd9c730ce60f5c_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_38",
+    "title": "Dil Ne Yeh Kaha Hain Dil Se - Jhankar Beats",
+    "artist": "Alka Yagnik, Kumar Sanu, Udit Narayan",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 415,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/60c4294feda57db1e7c2f24055259ac5_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_39",
+    "title": "Saare Rango Se Hai (From \"Dhartiputra\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Tere Bina Dil - Bollywood Romantic Songs",
+    "duration": 381,
+    "cover": "https://c.saavncdn.com/184/Tere-Bina-Dil-Bollywood-Romantic-Songs-Hindi-2016-20260331205732-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/184/8db60d2f07a83623c9d8131b070b8d2f_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_40",
+    "title": "Mujhe Tumse Mohabbat (From \"Qayamat\")",
+    "artist": "Kumar Sanu, Mahalaxmi",
+    "album": "Mujhe Tum Se Mohabbat Hai - Bollywood Romantic Songs",
+    "duration": 319,
+    "cover": "https://c.saavncdn.com/115/Mujhe-Tum-Se-Mohabbat-Hai-Bollywood-Romantic-Songs-Hindi-2016-20260331205729-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/115/ac840250aa7085b872f0368bfc09fa91_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_41",
+    "title": "Pehli Baar Dil Yun - Jhankar Beats",
+    "artist": "Alka Yagnik, Kumar Sanu",
+    "album": "90s Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 307,
+    "cover": "https://c.saavncdn.com/230/90s-Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20210525151442-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/230/bd5bc7352c79e1723ed299b2ce8c8f79_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_42",
+    "title": "Der Se Hua (From \"Hum Ho Gaye Aap Ke\", Male Version)",
+    "artist": "Kumar Sanu",
+    "album": "21 Ishq List - Bollywood Romantic Songs",
+    "duration": 280,
+    "cover": "https://c.saavncdn.com/357/21-Ishq-List-Bollywood-Romantic-Songs-Hindi-2017-20260314070203-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/357/31325d28ea89d56c31011ff5f4ca3bee_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_43",
+    "title": "Tumhe Chhede Hawa Chanchal (From \"Salaami\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Love U Forever n' Ever - Bollywood Romantic Songs",
+    "duration": 438,
+    "cover": "https://c.saavncdn.com/466/Love-U-Forever-n-Ever-Bollywood-Romantic-Songs-Hindi-2016-20260331205728-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/466/99a1c0fbc6e23ebfb662b038ee277c96_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_44",
+    "title": "Mera Dil Bhi Kitna Pagal Hai",
+    "artist": "Nadeem-Shravan, Kumar Sanu, Alka Yagnik",
+    "album": "Romantic Soft Instrumental",
+    "duration": 371,
+    "cover": "https://c.saavncdn.com/003/Romantic-Soft-Instrumental-Instrumental-2016-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/003/d3a1a7f089a0e389d469ae66e6fe7609_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_45",
+    "title": "Jeeta Tha Jiske Liye",
+    "artist": "Nadeem-Shravan, Kumar Sanu, Alka Yagnik",
+    "album": "Romantic Soft Instrumental",
+    "duration": 323,
+    "cover": "https://c.saavncdn.com/003/Romantic-Soft-Instrumental-Instrumental-2016-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/003/36ca97d365392727cfcb954b6f635c6f_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_46",
+    "title": "Tum Dil Ki Dhadkan Mein",
+    "artist": "Nadeem-Shravan, Kumar Sanu",
+    "album": "Romantic Soft Instrumental",
+    "duration": 398,
+    "cover": "https://c.saavncdn.com/003/Romantic-Soft-Instrumental-Instrumental-2016-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/003/10e5ea9f0333ff998a21509e4cdb9b75_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_47",
+    "title": "Aisi Mili Nigahen (From \"Daraar\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "21 Ishq List - Bollywood Romantic Songs",
+    "duration": 457,
+    "cover": "https://c.saavncdn.com/357/21-Ishq-List-Bollywood-Romantic-Songs-Hindi-2017-20260314070203-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/357/94f37f867525fe844346726462c19a5e_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_48",
+    "title": "Woh Ladki Bahut Yaad Aati - Duet - Jhankar Beats",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Evergreen Romantic Songs With Jhankar Beats",
+    "duration": 278,
+    "cover": "https://c.saavncdn.com/732/Evergreen-Romantic-Songs-With-Jhankar-Beats-Hindi-2017-20181120-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/732/0f2584ca8ab2b83f12ca6aaf6b63ea20_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_49",
+    "title": "Woh Ladki Bahut Yaad Aati-Duet (From &quot;Qayamat&quot;)",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Golden Melodies of Alka Yagnik and Kumar Sanu",
+    "duration": 405,
+    "cover": "https://c.saavncdn.com/412/Golden-Melodies-of-Alka-Yagnik-and-Kumar-Sanu-Hindi-2021-20260401031240-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/412/a607fc0769678724013331f19233fe75_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_50",
+    "title": "Pardesi Pardesi (Kumar Sanu &amp; Alka Yagnik Version)",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Raja Hindustani",
+    "duration": 500,
+    "cover": "https://c.saavncdn.com/629/Raja-Hindustani-Hindi-1996-20240408213804-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/629/64d528059deef05b8049c2caa928362e_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_51",
+    "title": "Tum Dil Ki Dhadkan Mein (From \"Dhadkan\")",
+    "artist": "Kumar Sanu",
+    "album": "Golden Melodies of Alka Yagnik and Kumar Sanu",
+    "duration": 314,
+    "cover": "https://c.saavncdn.com/412/Golden-Melodies-of-Alka-Yagnik-and-Kumar-Sanu-Hindi-2021-20260401031240-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/412/10e15344dfe8bb17794bf17dad3e0632_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_52",
+    "title": "Saaton Janam Main Tere (From \"Dilwale\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Golden Melodies of Alka Yagnik and Kumar Sanu",
+    "duration": 339,
+    "cover": "https://c.saavncdn.com/412/Golden-Melodies-of-Alka-Yagnik-and-Kumar-Sanu-Hindi-2021-20260401031240-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/412/e0de9a1998ea867577f961170d22bb18_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_53",
+    "title": "Payaliya (From \"Deewana-Hindi\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Golden Melodies of Alka Yagnik and Kumar Sanu",
+    "duration": 475,
+    "cover": "https://c.saavncdn.com/412/Golden-Melodies-of-Alka-Yagnik-and-Kumar-Sanu-Hindi-2021-20260401031240-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/412/4a913e8ae4d06f55f9741848a7f3f99a_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_54",
+    "title": "Dil Mein Mohabbat Hai (From \"Sangraam\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Golden Melodies of Alka Yagnik and Kumar Sanu",
+    "duration": 319,
+    "cover": "https://c.saavncdn.com/412/Golden-Melodies-of-Alka-Yagnik-and-Kumar-Sanu-Hindi-2021-20260401031240-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/412/ccb7ad0c649fea43cc47ecec3868a86a_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_55",
+    "title": "Chura Ke Dil Mera",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "East Aur West Anu Is the Best",
+    "duration": 474,
+    "cover": "https://c.saavncdn.com/066/East-Aur-West-Anu-Is-the-Best-Hindi-2021-20260331205730-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/066/e9106ec008675aa10954b9dd4e26ecbf_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_56",
+    "title": "Chura Ke Dil Mera (From \"Main Khiladi Tu Anari\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Bollywood Queens",
+    "duration": 475,
+    "cover": "https://c.saavncdn.com/367/Bollywood-Queens-Hindi-2016-20260331205729-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/367/887807906880a91aaa1b09432a6e0161_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_57",
+    "title": "Tumse Milne Ko Dil",
+    "artist": "Alka Yagnik, Kumar Sanu",
+    "album": "Phool Aur Kaante",
+    "duration": 300,
+    "cover": "https://c.saavncdn.com/882/Phool-Aur-Kaante-Hindi-1991-20240408213850-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/882/53f10ed42eda671b2f809925dcc27e58_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_58",
+    "title": "Dil Ne Yeh Kaha Hain Dil Se",
+    "artist": "Udit Narayan, Alka Yagnik, Kumar Sanu",
+    "album": "Dhadkan",
+    "duration": 450,
+    "cover": "https://c.saavncdn.com/454/Dhadkan-Hindi-2000-20210226131403-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/454/c27601522d4588a6ac94ce49460e7d70_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_59",
+    "title": "Dil Ne Yeh Kaha Hain Dil Se (From \"Dhadkan\")",
+    "artist": "Udit Narayan, Alka Yagnik, Kumar Sanu",
+    "album": "Director Special Dharmesh Darshan Hits",
+    "duration": 426,
+    "cover": "https://c.saavncdn.com/922/Director-Special-Dharmesh-Darshan-Hits-Hindi-2021-20260331205726-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/922/305d813638992d3767e508572954b4a9_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_60",
+    "title": "Agar Tum Nahi Milte",
+    "artist": "Kumar Sanu, Tripty Sinha",
+    "album": "Kumar Sanu & Alka Yagnik Love Songs",
+    "duration": 201,
+    "cover": "https://c.saavncdn.com/991/Kumar-Sanu-Alka-Yagnik-Love-Songs-Hindi-2026-20251227043626-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/991/73d6e24dbe72ba9628740a2e39a0ce1d_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_61",
+    "title": "Pehli Pehli Baar Mohabbat Ki Hai",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Sirf Tum",
+    "duration": 458,
+    "cover": "https://c.saavncdn.com/318/Sirf-Tum-Hindi-1999-20241226131027-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/318/ce90eb0ea34ddcdb70948c179f6bcba5_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_62",
+    "title": "Pehli Pehli Baar Mohabbat Ki Hai (From \"Sirf Tum\")",
+    "artist": "Sameer, Super Cassettes Industries Private Limited, Kumar Sanu, Alka Yagnik",
+    "album": "Bollywood Classic Hits",
+    "duration": 458,
+    "cover": "https://c.saavncdn.com/066/Bollywood-Classic-Hits-Hindi-2026-20260423161003-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/066/5aab83a0bca6f3ab89e8eb915bc8380d_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_63",
+    "title": "Shaam Bhi Khoob Hai",
+    "artist": "Kumar Sanu, Udit Narayan, Alka Yagnik",
+    "album": "Karz: The Burden Of Truth",
+    "duration": 305,
+    "cover": "https://c.saavncdn.com/995/Karz-The-Burden-Of-Truth-Hindi-2002-20221201073340-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/995/d6251244af34bf7134125903aad03b45_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_64",
+    "title": "Ye Mausam Bhi Gaya (From \"Balmaa\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Golden Melodies of Alka Yagnik and Kumar Sanu",
+    "duration": 408,
+    "cover": "https://c.saavncdn.com/412/Golden-Melodies-of-Alka-Yagnik-and-Kumar-Sanu-Hindi-2021-20260401031240-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/412/77a1fce581b58dcdd1f28ebfc78d7fb4_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_65",
+    "title": "Pehli Baar Dil Yun",
+    "artist": "Kumar Sanu, Alka Yagnik, Nadeem-Shravan",
+    "album": "Hum Ho Gaye Aap Ke",
+    "duration": 336,
+    "cover": "https://c.saavncdn.com/074/Hum-Ho-Gaye-Aap-Ke-Hindi-2001-20210407130950-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/393/ca22592f47d0dbafe0b900f59215ae77_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_66",
+    "title": "Dil Ka Rishta",
+    "artist": "Sameer Anjaan, Nadeem-Shravan, Alka Yagnik, Udit Narayan, Kumar Sanu",
+    "album": "Dil Ka Rishta",
+    "duration": 304,
+    "cover": "https://c.saavncdn.com/589/Dil-Ka-Rishta-Hindi-2003-20240408213944-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/589/d772a34986b56f2cd6fd7325513ff6ea_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_67",
+    "title": "Mera Dil Bhi Kitna Pagal Hai (From \"Saajan\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "90's Heart Warming Songs !!",
+    "duration": 324,
+    "cover": "https://c.saavncdn.com/005/90-s-Heart-Warming-Songs-Hindi-2018-20251112152951-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/005/189e4b56cbf0fb6f8a625155359b263e_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_68",
+    "title": "Tu Meri Zindagi Hai",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 283,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/9d450a9e3238660634cd29c145263d54_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_69",
+    "title": "Dheere Dheere Se Meri Zindagi Mein Aana",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 327,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/4f7393c087c15f563b88632dae29bb0c_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_70",
+    "title": "Main Duniya Bhula Doonga",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 316,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/57c96acad2cbd60674b854f8e68734d2_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_71",
+    "title": "Ek Sanam Chahiye Aashiqui Ke Liye",
+    "artist": "Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 370,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/94e09c13447b81be229a0235b3075fe4_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_72",
+    "title": "Jaan - E - Jigar Jaaneman",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 310,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/9d85698c399527698b782b1a88b80c72_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_73",
+    "title": "Nazar Ke Samne",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 333,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/772e592f069417448dc9fc5a4edbadd3_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_74",
+    "title": "Is Tarah Aashiqui Ka (Kumar Sanu Version)",
+    "artist": "Kumar Sanu",
+    "album": "Imtihan",
+    "duration": 443,
+    "cover": "https://c.saavncdn.com/458/Imtihan-Hindi-1994-20240408214016-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/458/c488424c5528d08ba50576843c95c404_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_75",
+    "title": "Dil Ka Aalam",
+    "artist": "Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 298,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/d9b099578099c5c9d0ebe144adeef911_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_76",
+    "title": "Is Tarah Aashiqui Ka (Jhankar) [Kumar Sanu Version]",
+    "artist": "Kumar Sanu",
+    "album": "Imtihan",
+    "duration": 440,
+    "cover": "https://c.saavncdn.com/610/Imtihan-Jhankar-Original-Motion-Picture-Soundtrack-Hindi-1994-20240408233145-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/610/f74ea22904c270336bf0f61902c158b8_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_77",
+    "title": "Ab Tere Bin",
+    "artist": "Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 345,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/5c33028094c152b8b28f3dcc26553fd1_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_78",
+    "title": "Jaan - E - Jigar Jaaneman -2",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui",
+    "duration": 234,
+    "cover": "https://c.saavncdn.com/088/Aashiqui-Hindi-1989-20241225141825-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/088/cbbea163517c307bd9a807593465b5a1_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_79",
+    "title": "Aashiqui",
+    "artist": "Kumar Sanu, Sureli Roy",
+    "album": "Aashiqui",
+    "duration": 348,
+    "cover": "https://c.saavncdn.com/540/Aashiqui-Hindi-2024-20241119120541-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/540/bd979de2536095805cf530871f65fd89_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_80",
+    "title": "Ab Tere Bin Ji Lenge Hum",
+    "artist": "Kumar Sanu",
+    "album": "Aashiqui: Super Jhankar Beat",
+    "duration": 343,
+    "cover": "https://c.saavncdn.com/341/Aashiqui-Super-Jhankar-Beat-Hindi-1993-20241225141133-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/341/4d88739d802d797702978630131c0156_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_81",
+    "title": "Jab Tumhein Aashiqui Maloom",
+    "artist": "Kumar Sanu",
+    "album": "Ajnabee",
+    "duration": 408,
+    "cover": "https://c.saavncdn.com/140/Ajnabee-Hindi-2001-20240408222405-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/140/e2bd0408b617548510dd4b43a6b77420_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_82",
+    "title": "Dheere Dheere Se Meri Zindagi Mein Aana (From \"Aashiqui\")",
+    "artist": "Kumar Sanu, Anuradha Paudwal, Rani Malik, Super Cassettes Industries Private Limited",
+    "album": "Dheere Dheere Se Meri Zindagi Mein Aana (From \"Aashiqui\")",
+    "duration": 289,
+    "cover": "https://c.saavncdn.com/379/Dheere-Dheere-Se-Meri-Zindagi-Mein-Aana-From-Aashiqui-Hindi-2025-20250418181018-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/379/f916a0c7c6cc18ff78140c9db7790aae_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_83",
+    "title": "Is Tarah Aashiqui Ka (Lofi Mix)",
+    "artist": "Kumar Sanu, Abhimanyu-Pragya",
+    "album": "Is Tarah Aashiqui Ka (Lofi Mix)",
+    "duration": 184,
+    "cover": "https://c.saavncdn.com/027/Is-Tarah-Aashiqui-Ka-Lofi-Mix-Hindi-2023-20240408232856-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/027/597e0d3b510d74fbea93046cdf02525b_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_84",
+    "title": "Dheere Dhheere Se Meri Zindagi Mein Aana",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui: Super Jhankar Beat",
+    "duration": 326,
+    "cover": "https://c.saavncdn.com/341/Aashiqui-Super-Jhankar-Beat-Hindi-1993-20241225141133-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/341/3be7917a2c3628e670beca831ed6700a_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_85",
+    "title": "Nazar Ke Samne Jigar Ke Paas",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "Aashiqui: Super Jhankar Beat",
+    "duration": 332,
+    "cover": "https://c.saavncdn.com/341/Aashiqui-Super-Jhankar-Beat-Hindi-1993-20241225141133-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/341/23a9f5e5dd1b06a789509f4e84da6bc2_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_86",
+    "title": "Tu Meri Zindagi Hai (From \"Aashiqui\")",
+    "artist": "Anuradha Paudwal, Kumar Sanu",
+    "album": "90'S Super Hit Love Songs",
+    "duration": 283,
+    "cover": "https://c.saavncdn.com/493/90-S-Super-Hit-Love-Songs-Hindi-2025-20250916161112-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/493/e40b2c30464329d90ffcc5dcbf2aee90_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_87",
+    "title": "Baazigar O Baazigar (From &quot;Baazigar&quot;)",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Bollywood Moments",
+    "duration": 459,
+    "cover": "https://c.saavncdn.com/765/Bollywood-Moments-Hindi-2026-20260812171457-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/765/996b5fc3048892d54d89f35a41773628_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_88",
+    "title": "Baazigar O Baazigar",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Baazigar",
+    "duration": 459,
+    "cover": "https://c.saavncdn.com/409/Baazigar-Hindi-1993-20210226141521-150x150.jpg",
+    "stream_url": "https://aac.saavncdn.com/409/b05d8a94d4347e8093228d9f1fca3f07_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_89",
+    "title": "Ye Kaali Kaali Aankhen",
+    "artist": "Kumar Sanu, Anu Malik",
+    "album": "Baazigar",
+    "duration": 473,
+    "cover": "https://c.saavncdn.com/409/Baazigar-Hindi-1993-20210226141521-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/409/06e0144d4bd89678129361c4dceb69bf_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_90",
+    "title": "Ye Kaali Kaali Aankhen (From \"Baazigar\")",
+    "artist": "Kumar Sanu, Anu Malik",
+    "album": "Bollywood Music - Kumar Sanu At His Best, Vol. 1",
+    "duration": 437,
+    "cover": "https://c.saavncdn.com/586/Bollywood-Music-Kumar-Sanu-At-His-Best-Vol-1-Hindi-2016-20251203122952-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/586/3833a30850d15844181ef83ebfb10def_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_91",
+    "title": "Ye Kaali Kaali Aankhen from \"Baazigar\"",
+    "artist": "Kumar Sanu, Anu Malik",
+    "album": "King Khan Forever",
+    "duration": 437,
+    "cover": "https://c.saavncdn.com/997/King-Khan-Forever-Hindi-2026-20260918145539-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/997/79d70de6365a10ba576df6c4dd6d3261_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_92",
+    "title": "Baazigar O Baazigar (Lo - Fi Remix)",
+    "artist": "Kumar Sanu, Alka Yagnik, Mann Taneja",
+    "album": "Baazigar O Baazigar (Lo - Fi Remix)",
+    "duration": 264,
+    "cover": "https://c.saavncdn.com/603/Baazigar-O-Baazigar-Lo-Fi-Remix-Hindi-2023-20230824094931-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/603/7c7d6a4d6ebddfe56eaa89d3175b8e5b_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_93",
+    "title": "Baazigar O Baazigar - JB",
+    "artist": "Anu Malik, Kumar Sanu, Alka Yagnik",
+    "album": "Baazigar - With Jhankar Beats",
+    "duration": 452,
+    "cover": "https://c.saavncdn.com/270/Baazigar-With-Jhankar-Beats-1993-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/270/002796c01442ad7200597c649875f709_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_94",
+    "title": "Baazigar O Baazigar - With Beats",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Top 20 Hits With Heart Beats",
+    "duration": 435,
+    "cover": "https://c.saavncdn.com/768/Top-20-Hits-With-Heart-Beats-Hindi-2017-20171113062921-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/768/07ba021b8d6abf63caada7b6b79a4061_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_95",
+    "title": "Baazigar O Baazigar (From \"Baazigar\")",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Legendary Hits of Kumar Sanu & Alka Yagnik",
+    "duration": 448,
+    "cover": "https://c.saavncdn.com/219/Legendary-Hits-of-Kumar-Sanu-Alka-Yagnik-Hindi-2016-20240125100303-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/219/03162906a34e7b2640b5b0e094fc416b_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_96",
+    "title": "Tere Chehre Pe",
+    "artist": "Kumar Sanu, Sonali Vajpayee",
+    "album": "Baazigar",
+    "duration": 451,
+    "cover": "https://c.saavncdn.com/409/Baazigar-Hindi-1993-20210226141521-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/409/38dab73b6c1dd76904b59903ae18d950_320.mp4",
+    "badge": "Studio 320kbps"
+  },
+  {
+    "id": "kumar_sanu_97",
+    "title": "Tum Meri Mohabbat Hi Nahi Mera Junoon Ho (From \"Baazigar\")",
+    "artist": "Shah Rukh Khan, Kumar Sanu, Sonali Vajpai",
+    "album": "Feel the Romantic Moments - Romantic Dialogues with songs",
+    "duration": 289,
+    "cover": "https://c.saavncdn.com/001/Feel-the-Romantic-Moments-Romantic-Dialogues-with-songs-Hindi-2016-20260903160840-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/001/b6e8a9ac276ba237167cc03a369420b2_320.mp4",
+    "badge": "Studio 320kbps"
+  }
+]

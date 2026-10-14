@@ -130,6 +130,8 @@ export function AudioProvider({ children }) {
   const stateRef = useRef({ current: null, repeat: 'off', shuffle: false, duration: 0, playing: false })
   const isTransitioningRef = useRef(false)
   const audioCtxRef = useRef(null)
+  const watchdogRef = useRef(null)  // mobile safety watchdog interval
+  const lastProgressRef = useRef(0) // detect truly stalled audio
 
   const enableAudioKeepAlive = useCallback(() => {
     try {
@@ -199,6 +201,51 @@ export function AudioProvider({ children }) {
     } catch {}
   }, [])
 
+  // ── Mobile Safety Watchdog ────────────────────────────────────────────────
+  // Fires every 3 s while music is supposed to play. Catches cases where:
+  // (a) the <audio> element silently stalled (mobile network hiccup)
+  // (b) the 'ended' event fired but the next play() was blocked
+  // (c) Android Chrome suspended playback when tab went to background
+  const startWatchdog = useCallback(() => {
+    if (watchdogRef.current) return
+    watchdogRef.current = setInterval(() => {
+      const el = audioRef.current
+      const cur = stateRef.current.current
+      if (!el || !cur || isTransitioningRef.current) return
+
+      // Case 1: Song ended but 'ended' event never fired (very rare on some mobile browsers)
+      if (el.ended && stateRef.current.playing) {
+        el.dispatchEvent(new Event('ended'))
+        return
+      }
+
+      // Case 2: We think we're playing but audio is paused (background suspend)
+      if (stateRef.current.playing && el.paused && !el.ended && el.src) {
+        el.play().catch(() => {})
+        return
+      }
+
+      // Case 3: Audio has been stuck at the exact same position for 6+ seconds
+      if (stateRef.current.playing && !el.paused && !el.ended) {
+        if (el.currentTime === lastProgressRef.current && el.currentTime > 0) {
+          // Stalled — try to unstick by reloading from current position
+          const savedTime = el.currentTime
+          try { el.load() } catch {}
+          el.currentTime = savedTime
+          el.play().catch(() => {})
+        }
+        lastProgressRef.current = el.currentTime
+      }
+    }, 3000)
+  }, [])
+
+  const stopWatchdog = useCallback(() => {
+    if (watchdogRef.current) {
+      clearInterval(watchdogRef.current)
+      watchdogRef.current = null
+    }
+  }, [])
+
   const ensureAudio = useCallback(() => {
     if (!audioRef.current) {
       const el = new Audio()
@@ -256,6 +303,8 @@ export function AudioProvider({ children }) {
         isTransitioningRef.current = false
         stateRef.current.playing = true
         setPlaying(true)
+        lastProgressRef.current = 0
+        startWatchdog()
         if ('mediaSession' in navigator) {
           navigator.mediaSession.playbackState = 'playing'
         }
@@ -267,8 +316,38 @@ export function AudioProvider({ children }) {
         }
         stateRef.current.playing = false
         setPlaying(false)
+        stopWatchdog()
         if ('mediaSession' in navigator) {
           navigator.mediaSession.playbackState = 'paused'
+        }
+      })
+      // Mobile network stall recovery — retry play after buffering
+      el.addEventListener('stalled', () => {
+        if (stateRef.current.playing && !isTransitioningRef.current) {
+          setTimeout(() => {
+            if (el.paused && stateRef.current.playing && !el.ended) {
+              el.play().catch(() => {})
+            }
+          }, 1500)
+        }
+      })
+      el.addEventListener('waiting', () => {
+        if (stateRef.current.playing && !isTransitioningRef.current) {
+          setTimeout(() => {
+            if (el.paused && stateRef.current.playing && !el.ended) {
+              el.play().catch(() => {})
+            }
+          }, 2000)
+        }
+      })
+      el.addEventListener('suspend', () => {
+        // Some mobile browsers (especially iOS) fire 'suspend' when they pause buffering
+        if (stateRef.current.playing && !el.ended && !isTransitioningRef.current) {
+          setTimeout(() => {
+            if (el.paused && stateRef.current.playing) {
+              el.play().catch(() => {})
+            }
+          }, 800)
         }
       })
       el.addEventListener('error', () => {
@@ -456,16 +535,35 @@ export function AudioProvider({ children }) {
 
           const playPromise = el.play()
           if (playPromise && playPromise.catch) {
-            playPromise.catch((err) => {
-              console.warn('Background playback continuation note:', err)
-              const onCanPlay = () => {
-                el.removeEventListener('canplay', onCanPlay)
-                el.removeEventListener('loadeddata', onCanPlay)
-                el.play().then(() => { isTransitioningRef.current = false }).catch(() => {})
-              }
-              el.addEventListener('canplay', onCanPlay, { once: true })
-              el.addEventListener('loadeddata', onCanPlay, { once: true })
-            })
+            playPromise
+              .then(() => {
+                isTransitioningRef.current = false
+                stateRef.current.playing = true
+                setPlaying(true)
+                startWatchdog()
+              })
+              .catch((err) => {
+                console.warn('Background playback continuation note:', err)
+                isTransitioningRef.current = false  // always reset so watchdog can rescue
+                const onCanPlay = () => {
+                  el.removeEventListener('canplay', onCanPlay)
+                  el.removeEventListener('loadeddata', onCanPlay)
+                  el.play()
+                    .then(() => {
+                      stateRef.current.playing = true
+                      setPlaying(true)
+                      startWatchdog()
+                    })
+                    .catch(() => {
+                      // Last resort: try after a short delay (handles iOS autoplay policy)
+                      setTimeout(() => {
+                        el.play().catch(() => {})
+                      }, 500)
+                    })
+                }
+                el.addEventListener('canplay', onCanPlay, { once: true })
+                el.addEventListener('loadeddata', onCanPlay, { once: true })
+              })
           }
 
           // Pre-cache the upcoming song after this one for zero-latency transition
@@ -482,7 +580,7 @@ export function AudioProvider({ children }) {
       audioRef.current = el
     }
     return audioRef.current
-  }, [prefetchTrack, updateMediaSession])
+  }, [prefetchTrack, updateMediaSession, startWatchdog, stopWatchdog])
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume

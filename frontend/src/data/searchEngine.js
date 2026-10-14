@@ -1,8 +1,9 @@
-import {
+﻿import {
   VERIFIED_ARTISTS,
   VERIFIED_DISCOGRAPHIES,
   MULTI_ARTIST_SONGS,
 } from './verifiedArtistCatalog'
+import { VERIFIED_ARTIST_STREAMS } from './verifiedArtistStreams'
 
 /**
  * searchEngine.js
@@ -362,6 +363,226 @@ export const NEW_RELEASES_2025_2026 = [
     "duration": 175,
     "badge": "Trending #1",
     "year": "2026"
+  },
+  {
+    "id": "nr_17",
+    "title": "Raataan Lambiyan",
+    "artist": "Jubin Nautiyal, Asees Kaur",
+    "album": "Shershaah",
+    "cover": "https://c.saavncdn.com/903/Shershaah-Hindi-2021-20211215142028-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/903/4b8b6c0bb0d3414df9fd4e7efae3baac_320.mp4",
+    "duration": 215,
+    "badge": "Chartbuster",
+    "year": "2025"
+  },
+  {
+    "id": "nr_18",
+    "title": "Channa Mereya",
+    "artist": "Pritam, Arijit Singh",
+    "album": "Ae Dil Hai Mushkil",
+    "cover": "https://c.saavncdn.com/257/Ae-Dil-Hai-Mushkil-Hindi-2016-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/257/a0a0c86e15e7f9f86b44e5f1b53f4e76_320.mp4",
+    "duration": 282,
+    "badge": "Evergreen Hit",
+    "year": "2025"
+  },
+  {
+    "id": "nr_19",
+    "title": "Kesariya",
+    "artist": "Pritam, Arijit Singh, Amitabh Bhattacharya",
+    "album": "Brahmastra",
+    "cover": "https://c.saavncdn.com/202/Brahmastra-Hindi-2022-20220919130316-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/202/8d0cb7e7a96a5f1dde0ee7a34c7e09c0_320.mp4",
+    "duration": 259,
+    "badge": "100M+ Streams",
+    "year": "2025"
+  },
+  {
+    "id": "nr_20",
+    "title": "Tum Ho (From \"Rockstar\")",
+    "artist": "A.R. Rahman, Mohit Chauhan",
+    "album": "Rockstar",
+    "cover": "https://c.saavncdn.com/150/Rockstar-Hindi-2011-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/150/a68d7a0e024d9bc8c86bc72d3edfcd37_320.mp4",
+    "duration": 288,
+    "badge": "Cult Classic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_21",
+    "title": "Ik Vaari Aa",
+    "artist": "A.R. Rahman, Arijit Singh",
+    "album": "Raabta",
+    "cover": "https://c.saavncdn.com/680/Raabta-Hindi-2017-20251215184026-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/680/dc55f15ef1d00adb5be81d7f1e9dc6e1_320.mp4",
+    "duration": 268,
+    "badge": "Chartbuster",
+    "year": "2025"
+  },
+  {
+    "id": "nr_22",
+    "title": "Tere Bin Nahi Lagda",
+    "artist": "Atif Aslam, Nusrat Fateh Ali Khan",
+    "album": "Ishqiya",
+    "cover": "https://c.saavncdn.com/891/Tere-Bin-Nahi-Lagda-Hindi-2025-20250117133258-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/891/25b64af78c4a4de8b1ece1fe8ee1dc93_320.mp4",
+    "duration": 238,
+    "badge": "Trending",
+    "year": "2025"
+  },
+  {
+    "id": "nr_23",
+    "title": "Saware",
+    "artist": "Arijit Singh, Amaal Mallik",
+    "album": "Phantom",
+    "cover": "https://c.saavncdn.com/044/Saware-Hindi-2025-20250122201426-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/044/10f9a413b08fcde2b1f08aaaeeb2b7d5_320.mp4",
+    "duration": 303,
+    "badge": "Chartbuster",
+    "year": "2025"
+  },
+  {
+    "id": "nr_24",
+    "title": "Mann Mera",
+    "artist": "Gajendra Verma",
+    "album": "Mann Mera",
+    "cover": "https://c.saavncdn.com/856/Mann-Mera-Hindi-2013-20251215120459-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/856/5de3f093f3e01a7a7da58b0f59ece4a1_320.mp4",
+    "duration": 246,
+    "badge": "Viral Hit",
+    "year": "2025"
+  },
+  {
+    "id": "nr_25",
+    "title": "Ve Haaniyaan",
+    "artist": "Shubh",
+    "album": "Ve Haaniyaan",
+    "cover": "https://c.saavncdn.com/735/Ve-Haaniyaan-Punjabi-2025-20250307124418-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/735/0af7db22aade25c49b0df93c8e3b5dfc_320.mp4",
+    "duration": 183,
+    "badge": "Trending 2025",
+    "year": "2025"
+  },
+  {
+    "id": "nr_26",
+    "title": "Pasoori",
+    "artist": "Ali Sethi, Shae Gill",
+    "album": "Coke Studio Season 14",
+    "cover": "https://c.saavncdn.com/390/Pasoori-Hindi-2022-20250530061808-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/390/c0e1b70a6e48c61be0e1d2d6a32d3e6e_320.mp4",
+    "duration": 280,
+    "badge": "Global Hit",
+    "year": "2025"
+  },
+  {
+    "id": "nr_27",
+    "title": "Aaj Ki Raat",
+    "artist": "Madhubanti Bagchi, Mika Singh",
+    "album": "Stree 2",
+    "cover": "https://c.saavncdn.com/870/Stree-2-Sarkate-Ka-Aatank-Hindi-2024-20240901062921-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/870/1c9f0023c96d3ac6cec01e6bc2b025f1_320.mp4",
+    "duration": 209,
+    "badge": "Trending 2024",
+    "year": "2024"
+  },
+  {
+    "id": "nr_28",
+    "title": "Naina (From \"Crew\")",
+    "artist": "Diljit Dosanjh, Badshah",
+    "album": "Crew",
+    "cover": "https://c.saavncdn.com/219/Crew-Hindi-2024-20240321111427-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/219/3d59d20d7c0d1b02d81acca17e764a7a_320.mp4",
+    "duration": 216,
+    "badge": "Party Hit 2024",
+    "year": "2024"
+  },
+  {
+    "id": "nr_29",
+    "title": "Mere Mehboob Mere Sanam",
+    "artist": "Kumar Sanu, Alka Yagnik",
+    "album": "Duplicate",
+    "cover": "https://c.saavncdn.com/196/Duplicate-Hindi-1998-20260310163543-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/196/af1ff48f62a09f0c4e3ecb76e0b08ae7_320.mp4",
+    "duration": 301,
+    "badge": "90s Classic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_30",
+    "title": "Teri Baaton Mein Aisa Uljha Jiya",
+    "artist": "Tanveer Evan, Shilpa Rao, Vishal Mishra",
+    "album": "Teri Baaton Mein Aisa Uljha Jiya",
+    "cover": "https://c.saavncdn.com/600/Teri-Baaton-Mein-Aisa-Uljha-Jiya-Hindi-2024-20240209040540-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/600/3b9bf3c2e2fe76a0e5c3748adbe68562_320.mp4",
+    "duration": 219,
+    "badge": "Trending 2024",
+    "year": "2024"
+  },
+  {
+    "id": "nr_31",
+    "title": "Dil Hai Tumhara",
+    "artist": "Kavita Krishnamurthy, Udit Narayan, Alka Yagnik",
+    "album": "Dil Hai Tumhara",
+    "cover": "https://c.saavncdn.com/042/Dil-Hai-Tumhara-Hindi-2002-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/042/c3c5e8c23ee61b3c93143c1d8c7cf7f3_320.mp4",
+    "duration": 336,
+    "badge": "Evergreen",
+    "year": "2025"
+  },
+  {
+    "id": "nr_32",
+    "title": "Noor Di Chader",
+    "artist": "Noor Chahal",
+    "album": "Noor Di Chader",
+    "cover": "https://c.saavncdn.com/611/Noor-Di-Chader-Punjabi-2025-20250703052803-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/611/5b5cd7ec6bff75af22ead0a4b3e4ace7_320.mp4",
+    "duration": 174,
+    "badge": "Trending 2025",
+    "year": "2025"
+  },
+  {
+    "id": "nr_33",
+    "title": "Leke Pehla Pehla Pyaar",
+    "artist": "Mohammed Rafi, Shamshad Begum",
+    "album": "CID",
+    "cover": "https://c.saavncdn.com/777/Leke-Pehla-Pehla-Pyaar-Hindi-2023-20230315100716-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/777/df1dbad0a50e01ecdd33e0fd10ab3d4b_320.mp4",
+    "duration": 197,
+    "badge": "Retro Classic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_34",
+    "title": "Dildaar",
+    "artist": "Karan Aujla, Ikky",
+    "album": "AUJLA SZN 1",
+    "cover": "https://c.saavncdn.com/918/AUJLA-SZN-1-Punjabi-2026-20260925122119-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/918/6bc6e89a08e55eb4b5cd0ffd03b03a8f_320.mp4",
+    "duration": 199,
+    "badge": "Trending 2026",
+    "year": "2026"
+  },
+  {
+    "id": "nr_35",
+    "title": "Heeriye",
+    "artist": "Jasleen Royal, Arijit Singh",
+    "album": "Mission Raniganj",
+    "cover": "https://c.saavncdn.com/891/Mission-Raniganj-Hindi-2023-20230929071244-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/891/63f43e5cd0bde4ded2e5fe4a2bc6c406_320.mp4",
+    "duration": 193,
+    "badge": "Chartbuster",
+    "year": "2025"
+  },
+  {
+    "id": "nr_36",
+    "title": "Sajni (From \"Laapataa Ladies\")",
+    "artist": "Ram Sampath",
+    "album": "Laapataa Ladies",
+    "cover": "https://c.saavncdn.com/040/Laapataa-Ladies-Hindi-2024-20240315104641-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/040/38de0e5e6ba28f8e6e4f3dff66f8cd0b_320.mp4",
+    "duration": 167,
+    "badge": "Oscar Film",
+    "year": "2025"
   }
 ]
 
@@ -1712,6 +1933,7 @@ const BASE_ARTIST_DISCOGRAPHIES = {
 export const ARTIST_DISCOGRAPHIES = {
   ...VERIFIED_DISCOGRAPHIES,
   ...BASE_ARTIST_DISCOGRAPHIES,
+  ...VERIFIED_ARTIST_STREAMS,
 }
 
 /**
@@ -2685,26 +2907,130 @@ export function getSearchPredictions(query) {
 }
 
 /**
+ * Common Romanized Hindi/Punjabi spelling aliases for improved typo-tolerance.
+ * Maps common alternate spellings → canonical form used in titles/artists.
+ */
+const TRANSLITERATION_ALIASES = {
+  // Vowel compression variants
+  'raatan': 'raataan',
+  'ratan': 'raataan',
+  'chana': 'channa',
+  'kesaria': 'kesariya',
+  'kesarya': 'kesariya',
+  'kesaria': 'kesariya',
+  'tumho': 'tum ho',
+  'ikvaari': 'ik vaari',
+  'channamereya': 'channa mereya',
+  'raatanlambian': 'raataan lambiyan',
+  'aajkiraat': 'aaj ki raat',
+  'pasoori': 'pasoori',
+  'manmera': 'mann mera',
+  'saware': 'saware',
+  'heeriye': 'heeriye',
+  'sajni': 'sajni',
+  'dildaar': 'dildaar',
+  // Artist name aliases
+  'arjit': 'arijit',
+  'arijit': 'arijit',
+  'atif': 'atif aslam',
+  'shreya': 'shreya ghoshal',
+  'sonu': 'sonu nigam',
+  'jubin': 'jubin nautiyal',
+  'kk': 'kk',
+  'kishore': 'kishore kumar',
+  'kishor': 'kishore kumar',
+  'mohit': 'mohit chauhan',
+  'ap': 'ap dhillon',
+  'diljit': 'diljit dosanjh',
+  'karan': 'karan aujla',
+  'sidhu': 'sidhu moose wala',
+  'b praak': 'b praak',
+  'pritam': 'pritam',
+  'anuv': 'anuv jain',
+  'shubh': 'shubh',
+  'ali': 'ali sethi',
+  'alka': 'alka yagnik',
+  'udit': 'udit narayan',
+  'kumar sanu': 'kumar sanu',
+  'rafi': 'mohammed rafi',
+  'ar rahman': 'a.r. rahman',
+  'rahman': 'a.r. rahman',
+}
+
+/**
+ * Normalize and expand query with phonetic aliases for better matching.
+ * Returns array of query variants (including original).
+ */
+function expandQuery(raw) {
+  const base = (raw || '').trim().toLowerCase().replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ').trim()
+  const variants = new Set([base])
+  // Check if any alias key is contained in or matches the base
+  for (const [alias, canonical] of Object.entries(TRANSLITERATION_ALIASES)) {
+    if (base.includes(alias)) {
+      variants.add(base.replace(alias, canonical))
+    }
+    if (alias.includes(base) || canonical.includes(base)) {
+      variants.add(canonical)
+    }
+  }
+  return [...variants].filter(Boolean)
+}
+
+/**
  * Intelligent fuzzy tokenized search across catalog tracks & lyrics mappings.
  * Automatically incorporates AI Mood detection and Artist matching.
  * Returns 30-35+ highly ranked tracks.
+ * 
+ * IMPROVEMENTS:
+ * - Phonetic/transliteration alias expansion for Bollywood queries
+ * - Word-start prefix matching per token (typing "kes" matches "kesariya")
+ * - Token matching against new releases and artist names
+ * - Smarter Levenshtein scope — checks both title AND artist words
+ * - Lower minimum score threshold for partial-word discovery
  */
 export function smartSearchCatalog(query, catalogTracks = []) {
   const q = (query || '').trim().toLowerCase()
   if (!q) return []
 
-  const qTokens = q.split(/\s+/).filter(Boolean)
+  // Normalize: remove punctuation, collapse whitespace
+  const qNorm = q.replace(/[^\w\s]/g, ' ').replace(/\s+/g, ' ').trim()
+  const qTokens = qNorm.split(/\s+/).filter(Boolean)
   const mood = detectMoodOrGenre(q)
   const artistData = detectArtist(q)
+
+  // Expand with phonetic aliases for better matching
+  const queryVariants = expandQuery(q)  // array of normalized variant strings
+
+  /** Returns highest substring/prefix match score for a field string against all query variants */
+  const fieldScore = (field) => {
+    const fl = (field || '').toLowerCase()
+    let best = 0
+    for (const qv of queryVariants) {
+      if (fl === qv) { best = Math.max(best, 900); break }
+      if (fl.startsWith(qv)) { best = Math.max(best, 600) }
+      else if (fl.includes(qv)) { best = Math.max(best, 420) }
+      else if (qv.length >= 3 && fl.split(/\s+/).some(w => w.startsWith(qv))) {
+        best = Math.max(best, 300)
+      }
+    }
+    return best
+  }
 
   // 1. Direct lyrics phrase match
   const lyricsHits = []
   for (const item of FAMOUS_LYRICS_MAP) {
-    const isLyricMatch =
-      item.snippet.toLowerCase().includes(q) ||
-      q.includes(item.snippet.toLowerCase()) ||
-      item.fullPhrase.toLowerCase().includes(q) ||
-      qTokens.some((tok) => tok.length > 2 && item.snippet.toLowerCase().includes(tok))
+    let isLyricMatch = false
+    for (const qv of queryVariants) {
+      if (
+        item.snippet.toLowerCase().includes(qv) ||
+        qv.includes(item.snippet.toLowerCase()) ||
+        item.fullPhrase.toLowerCase().includes(qv) ||
+        qTokens.some((tok) => tok.length > 2 && item.snippet.toLowerCase().includes(tok))
+      ) {
+        isLyricMatch = true
+        break
+      }
+    }
 
     if (isLyricMatch) {
       const inCatalog = catalogTracks.find(
@@ -2749,14 +3075,30 @@ export function smartSearchCatalog(query, catalogTracks = []) {
     }
   }
 
-  // 3. Add matching new releases
+  // 3. Add matching new releases — now with token-level prefix matching
   const newReleaseHits = []
   for (const nr of NEW_RELEASES_2025_2026) {
-    if (
-      nr.title.toLowerCase().includes(q) ||
-      nr.artist.toLowerCase().includes(q) ||
-      nr.album.toLowerCase().includes(q)
-    ) {
+    const titleL = nr.title.toLowerCase()
+    const artistL = nr.artist.toLowerCase()
+    const albumL = nr.album.toLowerCase()
+    let nrMatch = false
+    for (const qv of queryVariants) {
+      if (titleL.includes(qv) || artistL.includes(qv) || albumL.includes(qv)) {
+        nrMatch = true; break
+      }
+    }
+    // Also check token-level prefix matching against words in title/artist
+    if (!nrMatch) {
+      const titleWords = titleL.split(/\s+/)
+      const artistWords = artistL.split(/\s+/)
+      nrMatch = qTokens.some(tok =>
+        tok.length >= 3 && (
+          titleWords.some(w => w.startsWith(tok)) ||
+          artistWords.some(w => w.startsWith(tok))
+        )
+      )
+    }
+    if (nrMatch) {
       newReleaseHits.push({
         ...nr,
         _score: 1100,
@@ -2783,24 +3125,17 @@ export function smartSearchCatalog(query, catalogTracks = []) {
     let score = 0
     let matchReason = ''
 
-    // Exact or prefix title match
-    if (titleLower === q) {
-      score += 800
-      matchReason = 'Exact Title Match'
-    } else if (titleLower.startsWith(q)) {
-      score += 550
-      matchReason = 'Title Match'
-    } else if (titleLower.includes(q)) {
-      score += 400
-      matchReason = 'Title Match'
+    // Title match using variant expansion + field scoring
+    const titleFieldScore = fieldScore(titleLower)
+    if (titleFieldScore > 0) {
+      score += titleFieldScore
+      matchReason = titleFieldScore >= 900 ? 'Exact Title Match' : 'Title Match'
     }
 
-    // Artist match
-    if (artistLower === q) {
-      score += 650
-      matchReason = matchReason || 'Artist Match'
-    } else if (artistLower.includes(q)) {
-      score += 350
+    // Artist match using variant expansion
+    const artistFieldScore = fieldScore(artistLower)
+    if (artistFieldScore > 0) {
+      score += Math.round(artistFieldScore * 0.75) // artist match weighted slightly less
       matchReason = matchReason || 'Artist Match'
     }
 
@@ -2820,35 +3155,66 @@ export function smartSearchCatalog(query, catalogTracks = []) {
       }
     }
 
-    if (albumLower.includes(q)) {
+    if (albumLower.includes(qNorm)) {
       score += 150
       matchReason = matchReason || 'Album Match'
     }
 
-    if (categoryLower.includes(q)) {
+    if (categoryLower.includes(qNorm)) {
       score += 120
       matchReason = matchReason || 'Genre Match'
     }
 
-    // Token-based matching & Levenshtein typo scoring
+    // Token-based matching & Levenshtein typo scoring (enhanced)
+    const titleWords = titleLower.split(/\s+/)
+    const artistWords = artistLower.split(/\s+/)
     let tokenMatches = 0
+
     for (const tok of qTokens) {
       if (tok.length <= 1) continue
+      let matched = false
+
+      // (a) Substring match in title
       if (titleLower.includes(tok)) {
-        score += 80
-        tokenMatches++
-      } else if (artistLower.includes(tok)) {
-        score += 70
-        tokenMatches++
-      } else {
-        // Typo tolerance on word tokens
-        const titleTokens = titleLower.split(/\s+/)
-        for (const tt of titleTokens) {
-          if (tt.length >= 4 && tok.length >= 4 && levenshteinDist(tok, tt) <= 1) {
-            score += 50
-            tokenMatches++
+        score += 80; tokenMatches++; matched = true
+      }
+      // (b) Word-start prefix match in title (e.g. "kes" → "kesariya")
+      else if (tok.length >= 3 && titleWords.some(w => w.startsWith(tok))) {
+        score += 65; tokenMatches++; matched = true
+      }
+
+      if (!matched) {
+        // (c) Substring/prefix match in artist
+        if (artistLower.includes(tok)) {
+          const isGenericToken = ['kumar', 'singh', 'sharma', 'khan', 'ali', 'roy'].includes(tok)
+          if (!artistData || !isGenericToken || artistLower.includes((artistData.artist.name || '').toLowerCase())) {
+            score += 70; tokenMatches++; matched = true
+          }
+        }
+        // (d) Word-start prefix in artist
+        else if (tok.length >= 3 && artistWords.some(w => w.startsWith(tok))) {
+          score += 55; tokenMatches++; matched = true
+        }
+      }
+
+      if (!matched) {
+        // (e) Typo tolerance on word tokens — check BOTH title and artist words
+        const allWords = [...titleWords, ...artistWords]
+        for (const ww of allWords) {
+          if (ww.length >= 4 && tok.length >= 4 && levenshteinDist(tok, ww) <= 1) {
+            score += 50; tokenMatches++
             matchReason = matchReason || 'Did you mean'
             break
+          }
+        }
+        // (f) Levenshtein distance 2 for longer words
+        if (!matched) {
+          for (const ww of allWords) {
+            if (ww.length >= 6 && tok.length >= 6 && levenshteinDist(tok, ww) <= 2) {
+              score += 35; tokenMatches++
+              matchReason = matchReason || 'Close Match'
+              break
+            }
           }
         }
       }
@@ -2859,7 +3225,8 @@ export function smartSearchCatalog(query, catalogTracks = []) {
       matchReason = matchReason || 'Keyword Match'
     }
 
-    if (score > 0) {
+    // Lower threshold so partial typing (single token ≥ 3 chars) surfaces results
+    if (score >= 30) {
       seenKeys.add(tKey)
       scored.push({
         ...t,
