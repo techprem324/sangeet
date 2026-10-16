@@ -128,6 +128,84 @@ ARTIST_METADATA = {
         "tags": ["Dance Pop", "Party Hits", "Bhangra Beat"],
         "bio": "Broke international YouTube records with crossover bangers like Lahore, High Rated Gabru, and Suit Suit."
     },
+    "Yo Yo Honey Singh": {
+        "role": "Desi Hip-Hop Pioneer & Party King",
+        "avatar": "https://c.saavncdn.com/artists/Yo_Yo_Honey_Singh_500x500.jpg",
+        "tags": ["Desi Hip-Hop", "Party Banger", "Millionaire"],
+        "bio": "The pioneer who introduced modern hip-hop to Indian mainstream cinema with colossal party anthems."
+    },
+    "Badshah": {
+        "role": "Global Desi Rapper & Hitmaker",
+        "avatar": "https://c.saavncdn.com/artists/Badshah_500x500.jpg",
+        "tags": ["Club Banger", "Desi Hip-Hop", "Soulmate"],
+        "bio": "Billion-streaming powerhouse celebrated for unforgettable hooks, high-fashion visuals, and record-setting stadium anthems."
+    },
+    "Talwiinder": {
+        "role": "Dark Melodic Trap & Indie Sensation",
+        "avatar": "https://c.saavncdn.com/artists/Talwiinder_500x500.jpg",
+        "tags": ["Melodic Trap", "Alternative Desi", "Haseen"],
+        "bio": "Enigmatic singer and songwriter blending atmospheric ambient synth textures with haunting Punjabi vocal runs."
+    },
+    "Seedhe Maut": {
+        "role": "DHH Trailblazers & Underground Kings",
+        "avatar": "https://c.saavncdn.com/artists/Seedhe_Maut_500x500.jpg",
+        "tags": ["Desi Hip-Hop", "Raw Lyricism", "Delhi Sound"],
+        "bio": "Calm and Encore ABJ: New Delhi's revolutionary duo defining the golden age of authentic Indian hip-hop."
+    },
+    "Darshan Raval": {
+        "role": "Romantic Heartthrob & Soul Singer",
+        "avatar": "https://c.saavncdn.com/artists/Darshan_Raval_500x500.jpg",
+        "tags": ["Monsoon Hits", "Romantic Ballads", "Melody"],
+        "bio": "The beloved voice of heartfelt romance and seasonal monsoon melodies that dominate streaming charts."
+    },
+    "Vishal Mishra": {
+        "role": "Soul-Stirring Playback Maestro",
+        "avatar": "https://c.saavncdn.com/artists/Vishal_Mishra_500x500.jpg",
+        "tags": ["Soulful", "Acoustic", "Animal Hits"],
+        "bio": "Versatile composer-singer behind modern classics like Pehle Bhi Main and Kaise Hua, celebrated for raw emotional grit."
+    },
+    "Jasleen Royal": {
+        "role": "Indie Queen & Melodic Storyteller",
+        "avatar": "https://c.saavncdn.com/artists/Jasleen_Royal_500x500.jpg",
+        "tags": ["Indie Pop", "Acoustic", "Heeriye"],
+        "bio": "Multi-instrumentalist singer-songwriter behind chart-topping anthems like Heeriye, Din Shagna Da, and Ranjha."
+    },
+    "Prateek Kuhad": {
+        "role": "Acoustic Indie & Intimate Balladeer",
+        "avatar": "https://c.saavncdn.com/artists/Prateek_Kuhad_500x500.jpg",
+        "tags": ["Indie Folk", "Acoustic", "cold/mess"],
+        "bio": "Global indie phenomenon celebrated for vulnerable acoustic songwriting and internationally acclaimed tracks."
+    },
+    "King": {
+        "role": "New-Age Pop Icon & King of Melodies",
+        "avatar": "https://c.saavncdn.com/artists/King_500x500.jpg",
+        "tags": ["Pop Rap", "Maan Meri Jaan", "Romantic Trap"],
+        "bio": "Record-shattering superstar whose emotive voice and genre-bending pop-rap produced global mega-hits like Maan Meri Jaan."
+    },
+    "Anuv Jain": {
+        "role": "Acoustic Indie & Gentle Poetry",
+        "avatar": "https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg",
+        "tags": ["Indie Acoustic", "Poetry", "Late Night"],
+        "bio": "Intimate acoustic storyteller whose gentle guitar fingerpicking and poetic lyrics touch millions of hearts."
+    },
+    "Jagjit Singh": {
+        "role": "The Ghazal King & Timeless Maestro",
+        "avatar": "https://c.saavncdn.com/artists/Jagjit_Singh_500x500.jpg",
+        "tags": ["Ghazal", "Soulful", "Evergreen"],
+        "bio": "The legendary voice that brought ghazals into every Indian home with unforgettable warmth and deep resonance."
+    },
+    "Lucky Ali": {
+        "role": "Free-Spirited Pop-Folk Legend",
+        "avatar": "https://c.saavncdn.com/artists/Lucky_Ali_500x500.jpg",
+        "tags": ["Indipop", "Travel Vibes", "O Sanam"],
+        "bio": "Pioneer of 90s Indipop whose husky voice and breezy wanderlust melodies remain timeless anthems."
+    },
+    "Billie Eilish": {
+        "role": "Avant-Garde Pop Icon & Oscar Winner",
+        "avatar": "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500&auto=format&fit=crop&q=80",
+        "tags": ["Alt Pop", "Dark Pop", "Birds of a Feather"],
+        "bio": "Nine-time Grammy and two-time Oscar winner redefining global alternative pop with intimate whispered vocals and groundbreaking production."
+    },
     "The Beatles": {
         "role": "The Greatest Rock Band in History",
         "avatar": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500&auto=format&fit=crop&q=80",

@@ -307,8 +307,9 @@ export function isTrackByArtist(track, artist) {
     return true
   }
 
-  // 2. Exact match of full artist name
-  if (trackArtist.includes(targetName)) {
+  // 2. Exact match of full artist name or clean target ID
+  const cleanTargetId = targetId.replace(/_/g, ' ')
+  if (trackArtist.includes(targetName) || (cleanTargetId.length > 3 && trackArtist.includes(cleanTargetId))) {
     // Prevent false positives for Kumar Sanu (e.g. Kishore Kumar, Divya Kumar)
     if (targetId === 'kumar_sanu' || targetName.includes('kumar sanu')) {
       if (!trackArtist.includes('sanu')) return false

@@ -15,11 +15,25 @@ Udit Narayan
 Alka Yagnik
 Sunidhi Chauhan
 Jubin Nautiyal
+Darshan Raval
+Vishal Mishra
+Jasleen Royal
+Jagjit Singh
+Lucky Ali
+# Hip-Hop / Indie / Desi Pop
+Yo Yo Honey Singh
+Badshah
+Talwiinder
+Seedhe Maut
+King
+Anuv Jain
+Prateek Kuhad
 # Punjabi
 Diljit Dosanjh
 Sidhu Moose Wala
 AP Dhillon
 Guru Randhawa
+Karan Aujla
 # English pop / rock
 The Beatles
 Queen
@@ -36,3 +50,4 @@ Rihanna
 Bruno Mars
 Pink Floyd
 Led Zeppelin
+Billie Eilish
