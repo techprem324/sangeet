@@ -6,7 +6,7 @@ import MoodRadar from './MoodRadar'
 import Footer from './Footer'
 import { SendIcon } from './icons'
 
-export default function HomeView({ onView, onSend, onPill, onOpenAuth, user }) {
+export default function HomeView({ onView, onSend, onPill, onOpenAuth, onOpenFreshDrops, user }) {
   const [draft, setDraft] = useState('')
   const [liveMood, setLiveMood] = useState(null)
   const [showLive, setShowLive] = useState(false)
@@ -120,6 +120,24 @@ export default function HomeView({ onView, onSend, onPill, onOpenAuth, user }) {
             </button>
           ))}
         </div>
+
+        {/* Dynamic Auto Fresh Songs Quick Action Button */}
+        {onOpenFreshDrops && (
+          <div className="mt-5 sm:mt-6">
+            <button
+              onClick={onOpenFreshDrops}
+              className="group inline-flex items-center gap-2.5 rounded-full border border-ember/60 bg-gradient-to-r from-ember/20 via-surface-2 to-ember/20 hover:from-ember/30 hover:to-ember/30 px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold text-cream shadow-glow hover:scale-105 active:scale-95 transition-all"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-ember text-coal font-black text-xs shadow-sm group-hover:scale-110 transition-transform">
+                ⚡
+              </span>
+              <span>Auto Fresh Songs & Latest 2026 Drops</span>
+              <span className="rounded-full bg-ember/30 border border-ember/50 px-2 py-0.5 text-[10px] font-extrabold text-amber-200 uppercase tracking-wider">
+                70+ Hits
+              </span>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Customized Sangeet Footer (Down below while scrolling) */}

@@ -990,10 +990,10 @@ export const api = {
     }
 
     try {
-      safeSetItem(localStorage, 'sangeet_auto_releases', JSON.stringify(merged.slice(0, 50)))
+      safeSetItem(localStorage, 'sangeet_auto_releases', JSON.stringify(merged.slice(0, 100)))
     } catch {}
 
-    return merged.slice(0, 30)
+    return merged
   },
 
   lyrics: async (track) => {

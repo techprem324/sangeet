@@ -61,7 +61,7 @@ function formatTime(seconds) {
   return `${m}:${s < 10 ? '0' : ''}${s}`
 }
 
-export default function SearchView({ onLyrics, resetTrigger }) {
+export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }) {
   const audio = useAudio()
   const [q, setQ] = useState('')
   const [results, setResults] = useState(null)
@@ -69,7 +69,7 @@ export default function SearchView({ onLyrics, resetTrigger }) {
   const [searching, setSearching] = useState(false)
   const [showSuggestions, setShowSuggestions] = useState(false)
 
-  // Active collection hub: null | { type: 'artist' | 'genre' | 'playlist', data: obj, originGenre?: obj }
+  // Active collection hub: null | { type: 'artist' | 'genre' | 'playlist' | 'fresh_drops', data: obj, originGenre?: obj }
   const [activeHub, setActiveHub] = useState(null)
   const [hubTracks, setHubTracks] = useState([])
   const [genreArtists, setGenreArtists] = useState([])
@@ -137,6 +137,13 @@ export default function SearchView({ onLyrics, resetTrigger }) {
     }
   }, [resetTrigger])
 
+  // When freshDropsTrigger fires (e.g. from Home page quick action)
+  useEffect(() => {
+    if (freshDropsTrigger > 0) {
+      handleAutoRelease()
+    }
+  }, [freshDropsTrigger])
+
   // 15+ instant predictions while typing
   const predictions = useMemo(() => {
     return q.trim().length >= 1 ? getSearchPredictions(q) : []
@@ -180,7 +187,24 @@ export default function SearchView({ onLyrics, resetTrigger }) {
     setLoadingHub(true)
     setHubFilter('all')
 
-    if (activeHub.type === 'artist') {
+    if (activeHub.type === 'fresh_drops') {
+      if (activeHub.data.tracks && activeHub.data.tracks.length > 0) {
+        setHubTracks(activeHub.data.tracks)
+        setLoadingHub(false)
+      } else {
+        api
+          .autoReleaseNewSongs()
+          .then((fresh) => {
+            const list = Array.isArray(fresh) ? fresh : (fresh.tracks || [])
+            setHubTracks(list)
+            setLoadingHub(false)
+          })
+          .catch(() => {
+            setHubTracks(NEW_RELEASES_2025_2026 || [])
+            setLoadingHub(false)
+          })
+      }
+    } else if (activeHub.type === 'artist') {
       api
         .getArtistPlaylist(activeHub.data.id || activeHub.data.name)
         .then((data) => {
@@ -398,13 +422,37 @@ export default function SearchView({ onLyrics, resetTrigger }) {
     setAutoReleasing(true)
     try {
       const fresh = await api.autoReleaseNewSongs()
-      setToastMessage(`⚡ Auto-released ${fresh.length || 'new'} fresh songs to your library!`)
+      const tracks = Array.isArray(fresh) ? fresh : (fresh.tracks || [])
+      setToastMessage(`⚡ Auto-loaded ${tracks.length || 70}+ fresh releases!`)
+      setActiveHub({
+        type: 'fresh_drops',
+        data: {
+          id: 'fresh_drops_2026',
+          name: 'Fresh Music Radar & Latest Hits',
+          title: 'Fresh Music Radar & Latest Hits (2025–2026)',
+          subtitle: `${tracks.length} Auto-Refreshed Tracks • High-Fidelity 320 kbps`,
+          description: 'Latest 2025–2026 chartbusters, viral Bollywood, Punjabi, and pop hits dynamically verified and loaded.',
+          bio: 'Latest 2025–2026 chartbusters, viral Bollywood, Punjabi, and pop hits dynamically verified and loaded with verified 320 kbps streams.',
+          avatar: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+          cover: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=600&auto=format&fit=crop&q=80',
+          badge: 'Latest 2026',
+          tracks: tracks,
+        },
+      })
+      setHubTracks(tracks)
+      setQ('')
+      setResults(null)
+      setMatchedLyric(null)
+      if (containerRef.current) {
+        containerRef.current.scrollTo({ top: 0, behavior: 'smooth' })
+      }
       setTimeout(() => setToastMessage(''), 3500)
     } catch {
       setToastMessage('Auto-release radar up to date!')
       setTimeout(() => setToastMessage(''), 2500)
+    } finally {
+      setAutoReleasing(false)
     }
-    setAutoReleasing(false)
   }
 
   const topTrack = results && results.length > 0 ? results[0] : null
@@ -533,12 +581,26 @@ export default function SearchView({ onLyrics, resetTrigger }) {
               {predictions.map((p, idx) => {
                 const isSelected = idx === selectedSuggestionIndex
                 return (
-                  <button
+                  <div
                     key={idx}
                     role="option"
                     aria-selected={isSelected}
                     data-suggestion-item="true"
+                    tabIndex={0}
                     onMouseEnter={() => setSelectedSuggestionIndex(idx)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') {
+                        e.preventDefault()
+                        setShowSuggestions(false)
+                        setSelectedSuggestionIndex(-1)
+                        if (searchInputRef.current) searchInputRef.current.blur()
+                        if (p.type === 'artist' && p.singerObj) handleSelectArtist(p.singerObj)
+                        else if (p.type === 'artist_playlist' && p.singerObj) handleSelectArtist(p.singerObj)
+                        else if (p.type === 'genre' && p.genreObj) handleSelectGenre(p.genreObj)
+                        else if (p.type === 'playlist' && p.genreObj) handleSelectGenre(p.genreObj)
+                        else handleSelectQuery(p.query || p.text)
+                      }
+                    }}
                     onClick={() => {
                       setShowSuggestions(false)
                       setSelectedSuggestionIndex(-1)
@@ -557,31 +619,49 @@ export default function SearchView({ onLyrics, resetTrigger }) {
                         handleSelectQuery(p.query || p.text)
                       }
                     }}
-                    className={`flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-xs transition-all ${
+                    className={`group/item flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2 text-left text-xs transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-ember/25 text-white ring-1 ring-ember/60 shadow-sm'
                         : 'text-sand hover:bg-surface-3 hover:text-white'
                     }`}
                   >
-                    {p.avatar ? (
-                      <ArtistAvatar src={p.avatar} name={p.text} size="h-6 w-6" textClass="text-[9px]" />
-                    ) : p.emoji ? (
-                      <span className="text-[14px]">{p.emoji}</span>
-                    ) : (
-                      <SearchIcon size={13} className={`shrink-0 ${isSelected ? 'text-amber-400' : 'text-ember'}`} />
-                    )}
-                    <div className="min-w-0 flex-1">
-                      <span className={`font-medium block truncate ${isSelected ? 'text-white font-semibold' : 'text-cream'}`}>{p.text}</span>
-                      {p.subtitle && (
-                        <span className="text-[10px] text-sand-dim block truncate">{p.subtitle}</span>
+                    <div className="flex items-center gap-3 min-w-0 flex-1">
+                      {p.avatar ? (
+                        <ArtistAvatar src={p.avatar} name={p.text} size="h-6 w-6" textClass="text-[9px]" />
+                      ) : p.emoji ? (
+                        <span className="text-[14px]">{p.emoji}</span>
+                      ) : (
+                        <SearchIcon size={13} className={`shrink-0 ${isSelected ? 'text-amber-400' : 'text-ember'}`} />
+                      )}
+                      <div className="min-w-0 flex-1">
+                        <span className={`font-medium block truncate ${isSelected ? 'text-white font-semibold' : 'text-cream'}`}>{p.text}</span>
+                        {p.subtitle && (
+                          <span className="text-[10px] text-sand-dim block truncate">{p.subtitle}</span>
+                        )}
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-1.5 shrink-0">
+                      {p.badge && (
+                        <span className={`rounded px-1.5 py-0.5 text-[9px] font-semibold shrink-0 ${isSelected ? 'bg-ember/40 text-amber-200' : 'bg-white/10 text-sand-dim'}`}>
+                          {p.badge}
+                        </span>
+                      )}
+                      {p.trackObj && (
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            setShowSuggestions(false)
+                            audio.playTrack(p.trackObj, [p.trackObj])
+                          }}
+                          className="flex h-6 w-6 items-center justify-center rounded-full bg-ember/90 hover:bg-ember text-coal shadow-sm hover:scale-110 active:scale-95 transition-all"
+                          title={`Play "${p.trackObj.title}"`}
+                        >
+                          <PlayIcon size={11} fill="currentColor" className="translate-x-0.5" />
+                        </button>
                       )}
                     </div>
-                    {p.badge && (
-                      <span className={`rounded px-1.5 py-0.5 text-[9px] font-semibold shrink-0 ${isSelected ? 'bg-ember/40 text-amber-200' : 'bg-white/10 text-sand-dim'}`}>
-                        {p.badge}
-                      </span>
-                    )}
-                  </button>
+                  </div>
                 )
               })}
             </div>
@@ -766,9 +846,9 @@ export default function SearchView({ onLyrics, resetTrigger }) {
               )}
             </section>
           </div>
-        ) : activeHub && (activeHub.type === 'artist' || activeHub.type === 'playlist') ? (
+        ) : activeHub && (activeHub.type === 'artist' || activeHub.type === 'playlist' || activeHub.type === 'fresh_drops') ? (
           /* ============================================================= */
-          /* CASE 2: ARTIST / PLAYLIST VIEW (SCREENSHOT 3) */
+          /* CASE 2: ARTIST / PLAYLIST / FRESH DROPS VIEW */
           /* ============================================================= */
           <div className="space-y-6">
             {/* Top Navigation & Back Button */}
@@ -787,7 +867,11 @@ export default function SearchView({ onLyrics, resetTrigger }) {
               </button>
 
               <span className="text-xs text-sand-dim hidden sm:inline">
-                {activeHub.type === 'artist' ? 'Verified Artist' : 'Public Playlist'}
+                {activeHub.type === 'artist'
+                  ? 'Verified Artist'
+                  : activeHub.type === 'fresh_drops'
+                  ? '🔥 2026 Fresh Releases'
+                  : 'Public Playlist'}
               </span>
             </div>
 
@@ -813,7 +897,11 @@ export default function SearchView({ onLyrics, resetTrigger }) {
                       ✓
                     </span>
                     <span className="text-xs font-bold uppercase tracking-wider text-sand-dim">
-                      {activeHub.type === 'artist' ? 'Verified Artist' : 'Public Playlist'}
+                      {activeHub.type === 'artist'
+                        ? 'Verified Artist'
+                        : activeHub.type === 'fresh_drops'
+                        ? 'Auto Fresh Radar'
+                        : 'Public Playlist'}
                     </span>
                   </div>
 
@@ -832,6 +920,8 @@ export default function SearchView({ onLyrics, resetTrigger }) {
                     <span className="font-bold text-cream">
                       {activeHub.data.monthlyListeners
                         ? `${activeHub.data.monthlyListeners} monthly listeners`
+                        : activeHub.type === 'fresh_drops'
+                        ? 'Auto Fresh 2026 Hits'
                         : 'Sangeet Curated'}
                     </span>
                     <span>•</span>
@@ -845,7 +935,7 @@ export default function SearchView({ onLyrics, resetTrigger }) {
               </div>
             </div>
 
-            {/* Action Bar (Big Warm Ember Play, Shuffle, Generate More) */}
+            {/* Action Bar (Big Warm Ember Play, Shuffle, Generate More / Re-Sync) */}
             <div className="flex items-center justify-between gap-4 py-2 border-b border-edge/60 pb-4">
               <div className="flex items-center gap-4">
                 <button
@@ -864,23 +954,43 @@ export default function SearchView({ onLyrics, resetTrigger }) {
                   <ShuffleIcon size={18} />
                 </button>
 
-                <button
-                  onClick={handleGenerateMore}
-                  disabled={generatingMore}
-                  className="flex items-center gap-2 rounded-full border border-ember/50 bg-ember/10 px-4 py-2 text-xs font-bold text-ember hover:bg-ember/20 transition-all disabled:opacity-50"
-                  title="Add more songs"
-                >
-                  {generatingMore ? (
-                    <>
-                      <span className="h-3 w-3 animate-spin rounded-full border-2 border-ember border-t-transparent" />
-                      <span>Adding songs…</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>✨ Generate More Songs</span>
-                    </>
-                  )}
-                </button>
+                {activeHub.type === 'fresh_drops' ? (
+                  <button
+                    onClick={handleAutoRelease}
+                    disabled={autoReleasing}
+                    className="flex items-center gap-2 rounded-full border border-ember/50 bg-ember/15 px-4 py-2 text-xs font-bold text-ember hover:bg-ember/25 transition-all disabled:opacity-50 shadow-sm active:scale-95"
+                    title="Re-scan and auto-refresh latest drops"
+                  >
+                    {autoReleasing ? (
+                      <>
+                        <span className="h-3 w-3 animate-spin rounded-full border-2 border-ember border-t-transparent" />
+                        <span>Scanning drops…</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>⚡ Re-Sync Latest Drops</span>
+                      </>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleGenerateMore}
+                    disabled={generatingMore}
+                    className="flex items-center gap-2 rounded-full border border-ember/50 bg-ember/10 px-4 py-2 text-xs font-bold text-ember hover:bg-ember/20 transition-all disabled:opacity-50"
+                    title="Add more songs"
+                  >
+                    {generatingMore ? (
+                      <>
+                        <span className="h-3 w-3 animate-spin rounded-full border-2 border-ember border-t-transparent" />
+                        <span>Adding songs…</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>✨ Generate More Songs</span>
+                      </>
+                    )}
+                  </button>
+                )}
               </div>
 
               <span className="text-xs text-sand-dim hidden sm:inline">
@@ -1208,44 +1318,49 @@ export default function SearchView({ onLyrics, resetTrigger }) {
           /* CASE 4: "BROWSE ALL" GRID */
           /* ============================================================= */
           <div className="space-y-8">
-            {/* Auto-Release Radar Banner - Mobile Optimized & Compact */}
-            <div className="relative overflow-hidden rounded-xl sm:rounded-2xl border border-ember/25 bg-gradient-to-r from-surface via-surface-2 to-surface-3 px-3 py-2 sm:px-4 sm:py-2.5 shadow-soft flex items-center justify-between gap-2.5">
-              <div className="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-                <div className="flex h-7 w-7 sm:h-8 sm:w-8 shrink-0 items-center justify-center rounded-lg bg-ember/15 border border-ember/30 text-ember text-sm sm:text-base shadow-sm">
+            {/* Auto-Release Radar Banner - Interactive Auto-Add Fresh Songs */}
+            <div
+              onClick={handleAutoRelease}
+              className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-ember/40 bg-gradient-to-r from-surface via-surface-2 to-surface-3 px-3.5 py-3 sm:px-5 sm:py-3.5 shadow-soft flex items-center justify-between gap-3 cursor-pointer hover:border-ember/70 hover:shadow-glow transition-all"
+            >
+              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-ember/20 border border-ember/40 text-ember text-base sm:text-lg shadow-sm group-hover:scale-110 group-hover:bg-ember group-hover:text-coal transition-all">
                   ⚡
                 </div>
                 <div className="min-w-0">
-                  <div className="flex items-center gap-1.5">
-                    <span className="rounded-full bg-ember/20 px-1.5 py-0.2 text-[9px] font-bold uppercase tracking-wider text-ember">
-                      Auto Release
+                  <div className="flex items-center gap-2">
+                    <span className="rounded-full bg-ember/25 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-ember">
+                      Auto Fresh Songs
                     </span>
-                    <span className="text-[10px] text-sand-dim hidden xs:inline sm:inline">
-                      2026 Drops
+                    <span className="text-[10px] text-amber-200/90 font-medium hidden xs:inline sm:inline">
+                      🔥 70+ Latest 2026 Releases Ready
                     </span>
                   </div>
-                  <h3 className="mt-0.5 font-display text-xs sm:text-sm font-bold text-cream truncate">
-                    Fresh Music Drops & Chartbusters
+                  <h3 className="mt-0.5 font-display text-xs sm:text-base font-bold text-cream truncate group-hover:text-ember transition-colors">
+                    Click to Auto-Load Fresh Music Drops & Chartbusters
                   </h3>
                   <p className="text-[11px] text-sand-dim hidden md:block truncate">
-                    New tracks auto-detected in ultra 320 kbps.
+                    Tap anywhere to dynamically sync & display all 2025–2026 hits with ultra 320 kbps audio.
                   </p>
                 </div>
               </div>
               <button
-                onClick={handleAutoRelease}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  handleAutoRelease()
+                }}
                 disabled={autoReleasing}
-                className="shrink-0 inline-flex items-center gap-1 sm:gap-1.5 rounded-full border border-ember/50 bg-ember/15 hover:bg-ember text-ember hover:text-coal px-2.5 py-1 sm:px-3.5 sm:py-1.5 text-[11px] sm:text-xs font-semibold whitespace-nowrap transition-all shadow-sm active:scale-95 disabled:opacity-50"
+                className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-ember bg-ember text-coal hover:bg-ember-deep px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold whitespace-nowrap transition-all shadow-glow active:scale-95 disabled:opacity-50"
               >
                 {autoReleasing ? (
                   <>
-                    <span className="h-3 w-3 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                    <span className="hidden sm:inline">Scanning…</span>
+                    <span className="h-3 w-3 animate-spin rounded-full border-2 border-coal border-t-transparent" />
+                    <span>Loading Drops…</span>
                   </>
                 ) : (
                   <>
-                    <span>🔄</span>
-                    <span className="hidden sm:inline">Check New Drops</span>
-                    <span className="sm:hidden">Check Drops</span>
+                    <span>⚡</span>
+                    <span>Auto Load ({NEW_RELEASES_2025_2026.length}+)</span>
                   </>
                 )}
               </button>

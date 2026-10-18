@@ -754,9 +754,10 @@ export const DEFAULT_CATALOGS = {
       "language": "hindi",
       "year": "",
       "id": "",
-      "cover": "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=300&auto=format&fit=crop&q=80",
-      "stream_url": "",
-      "source": "jiosaavn"
+      "cover": "https://c.saavncdn.com/760/Tum-Prem-Ho-English-2022-20251015020604-500x500.jpg",
+      "stream_url": "https://aac.saavncdn.com/760/36066b1079bddcc6815a17c0bb045ee0_320.mp4",
+      "source": "jiosaavn",
+      "duration": 102
     },
     {
       "title": "Samay Samjhayega (Lofi)",

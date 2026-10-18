@@ -611,9 +611,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Raataan Lambiyan",
     "artist": "Jubin Nautiyal, Asees Kaur",
     "album": "Shershaah",
-    "cover": "https://c.saavncdn.com/903/Shershaah-Hindi-2021-20211215142028-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/903/4b8b6c0bb0d3414df9fd4e7efae3baac_320.mp4",
-    "duration": 215,
+    "cover": "https://c.saavncdn.com/238/Shershaah-Original-Motion-Picture-Soundtrack--Hindi-2021-20210815181610-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/238/35726d4394604604e961bf5b846870d0_320.mp4",
+    "duration": 230,
     "badge": "Chartbuster",
     "year": "2025"
   },
@@ -623,8 +623,8 @@ export const NEW_RELEASES_2025_2026 = [
     "artist": "Pritam, Arijit Singh",
     "album": "Ae Dil Hai Mushkil",
     "cover": "https://c.saavncdn.com/257/Ae-Dil-Hai-Mushkil-Hindi-2016-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/257/a0a0c86e15e7f9f86b44e5f1b53f4e76_320.mp4",
-    "duration": 282,
+    "stream_url": "https://aac.saavncdn.com/597/6da0627cfcc4b937160f664841e4572d_320.mp4",
+    "duration": 289,
     "badge": "Evergreen Hit",
     "year": "2025"
   },
@@ -633,9 +633,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Kesariya",
     "artist": "Pritam, Arijit Singh, Amitabh Bhattacharya",
     "album": "Brahmastra",
-    "cover": "https://c.saavncdn.com/202/Brahmastra-Hindi-2022-20220919130316-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/202/8d0cb7e7a96a5f1dde0ee7a34c7e09c0_320.mp4",
-    "duration": 259,
+    "cover": "https://c.saavncdn.com/423/Arijit-Singh-All-Time-Best-Hindi-Hit-Love-Songs-Collection-Hindi-2026-20261008160834-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/423/852ad6cc81d7733c5e9bfc46d7b063e2_320.mp4",
+    "duration": 268,
     "badge": "100M+ Streams",
     "year": "2025"
   },
@@ -644,9 +644,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Tum Ho (From \"Rockstar\")",
     "artist": "A.R. Rahman, Mohit Chauhan",
     "album": "Rockstar",
-    "cover": "https://c.saavncdn.com/150/Rockstar-Hindi-2011-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/150/a68d7a0e024d9bc8c86bc72d3edfcd37_320.mp4",
-    "duration": 288,
+    "cover": "https://c.saavncdn.com/333/A-R-Rahman-Special-Hindi-2025-20250429141118-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/333/5f98eb2435f7b20a4547010c9e31d428_320.mp4",
+    "duration": 316,
     "badge": "Cult Classic",
     "year": "2025"
   },
@@ -655,9 +655,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Ik Vaari Aa",
     "artist": "A.R. Rahman, Arijit Singh",
     "album": "Raabta",
-    "cover": "https://c.saavncdn.com/680/Raabta-Hindi-2017-20251215184026-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/680/dc55f15ef1d00adb5be81d7f1e9dc6e1_320.mp4",
-    "duration": 268,
+    "cover": "https://c.saavncdn.com/023/Raabta-Hindi-2017-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/023/b423a2e1770dbeddd12a8c4c51ed1dae_320.mp4",
+    "duration": 275,
     "badge": "Chartbuster",
     "year": "2025"
   },
@@ -666,9 +666,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Tere Bin Nahi Lagda",
     "artist": "Atif Aslam, Nusrat Fateh Ali Khan",
     "album": "Ishqiya",
-    "cover": "https://c.saavncdn.com/891/Tere-Bin-Nahi-Lagda-Hindi-2025-20250117133258-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/891/25b64af78c4a4de8b1ece1fe8ee1dc93_320.mp4",
-    "duration": 238,
+    "cover": "https://c.saavncdn.com/718/Nusrat-Fateh-Ali-Khan-Trending-Hits-Punjabi-2026-20261008053854-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/718/cdadcdd3c58ab82845369cc5ecd13794_320.mp4",
+    "duration": 343,
     "badge": "Trending",
     "year": "2025"
   },
@@ -677,9 +677,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Saware",
     "artist": "Arijit Singh, Amaal Mallik",
     "album": "Phantom",
-    "cover": "https://c.saavncdn.com/044/Saware-Hindi-2025-20250122201426-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/044/10f9a413b08fcde2b1f08aaaeeb2b7d5_320.mp4",
-    "duration": 303,
+    "cover": "https://c.saavncdn.com/451/Airlift-Hindi-2015-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/026/335ea6a63ec7a32bd0403ae809a1ab36_320.mp4",
+    "duration": 287,
     "badge": "Chartbuster",
     "year": "2025"
   },
@@ -688,9 +688,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Mann Mera",
     "artist": "Gajendra Verma",
     "album": "Mann Mera",
-    "cover": "https://c.saavncdn.com/856/Mann-Mera-Hindi-2013-20251215120459-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/856/5de3f093f3e01a7a7da58b0f59ece4a1_320.mp4",
-    "duration": 246,
+    "cover": "https://c.saavncdn.com/196/Table-No-21-Hindi-2025-20250930143941-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/196/d2c7bbfceb81b066e0f72e6f78d45c3a_320.mp4",
+    "duration": 198,
     "badge": "Viral Hit",
     "year": "2025"
   },
@@ -699,9 +699,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Ve Haaniyaan",
     "artist": "Shubh",
     "album": "Ve Haaniyaan",
-    "cover": "https://c.saavncdn.com/735/Ve-Haaniyaan-Punjabi-2025-20250307124418-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/735/0af7db22aade25c49b0df93c8e3b5dfc_320.mp4",
-    "duration": 183,
+    "cover": "https://c.saavncdn.com/367/Ve-Haaniyaan-Punjabi-2024-20240212220137-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/367/44761b584176afb1388c760828f81490_320.mp4",
+    "duration": 240,
     "badge": "Trending 2025",
     "year": "2025"
   },
@@ -710,9 +710,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Pasoori",
     "artist": "Ali Sethi, Shae Gill",
     "album": "Coke Studio Season 14",
-    "cover": "https://c.saavncdn.com/390/Pasoori-Hindi-2022-20250530061808-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/390/c0e1b70a6e48c61be0e1d2d6a32d3e6e_320.mp4",
-    "duration": 280,
+    "cover": "https://c.saavncdn.com/591/Pristine-Karaoke-Vol-66-Unknown-2022-20220503065453-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/591/7f92de29b81b95ff78f2ae7f3022b5de_320.mp4",
+    "duration": 218,
     "badge": "Global Hit",
     "year": "2025"
   },
@@ -721,9 +721,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Aaj Ki Raat",
     "artist": "Madhubanti Bagchi, Mika Singh",
     "album": "Stree 2",
-    "cover": "https://c.saavncdn.com/870/Stree-2-Sarkate-Ka-Aatank-Hindi-2024-20240901062921-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/870/1c9f0023c96d3ac6cec01e6bc2b025f1_320.mp4",
-    "duration": 209,
+    "cover": "https://c.saavncdn.com/373/Stree-2-Hindi-2024-20240828083834-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/373/36b1b3637cdeedfaa9a9012453948aa6_320.mp4",
+    "duration": 228,
     "badge": "Trending 2024",
     "year": "2024"
   },
@@ -732,9 +732,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Naina (From \"Crew\")",
     "artist": "Diljit Dosanjh, Badshah",
     "album": "Crew",
-    "cover": "https://c.saavncdn.com/219/Crew-Hindi-2024-20240321111427-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/219/3d59d20d7c0d1b02d81acca17e764a7a_320.mp4",
-    "duration": 216,
+    "cover": "https://c.saavncdn.com/689/Crew-Hindi-2024-20260404103117-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/689/8d3652ec569abd891db7782f2c7164fd_320.mp4",
+    "duration": 180,
     "badge": "Party Hit 2024",
     "year": "2024"
   },
@@ -743,9 +743,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Mere Mehboob Mere Sanam",
     "artist": "Kumar Sanu, Alka Yagnik",
     "album": "Duplicate",
-    "cover": "https://c.saavncdn.com/196/Duplicate-Hindi-1998-20260310163543-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/196/af1ff48f62a09f0c4e3ecb76e0b08ae7_320.mp4",
-    "duration": 301,
+    "cover": "https://c.saavncdn.com/681/Duplicate-Hindi-1998-20200905113947-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/681/13f55ed04f7b3c4b38a1090df00d3058_sar_320.mp4",
+    "duration": 419,
     "badge": "90s Classic",
     "year": "2025"
   },
@@ -754,9 +754,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Teri Baaton Mein Aisa Uljha Jiya",
     "artist": "Tanveer Evan, Shilpa Rao, Vishal Mishra",
     "album": "Teri Baaton Mein Aisa Uljha Jiya",
-    "cover": "https://c.saavncdn.com/600/Teri-Baaton-Mein-Aisa-Uljha-Jiya-Hindi-2024-20240209040540-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/600/3b9bf3c2e2fe76a0e5c3748adbe68562_320.mp4",
-    "duration": 219,
+    "cover": "https://c.saavncdn.com/214/Teri-Baaton-Mein-Aisa-Uljha-Jiya-Hindi-2024-20240205151011-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/214/83fc76a7e243d7e93dfe699e5fb9fbbe_320.mp4",
+    "duration": 171,
     "badge": "Trending 2024",
     "year": "2024"
   },
@@ -765,9 +765,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Dil Hai Tumhara",
     "artist": "Kavita Krishnamurthy, Udit Narayan, Alka Yagnik",
     "album": "Dil Hai Tumhara",
-    "cover": "https://c.saavncdn.com/042/Dil-Hai-Tumhara-Hindi-2002-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/042/c3c5e8c23ee61b3c93143c1d8c7cf7f3_320.mp4",
-    "duration": 336,
+    "cover": "https://c.saavncdn.com/541/Dil-Hai-Tumhaara-Hindi-2002-20240408213901-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/541/783ef6045ae152dfc3195afc5854a92d_320.mp4",
+    "duration": 292,
     "badge": "Evergreen",
     "year": "2025"
   },
@@ -776,9 +776,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Noor Di Chader",
     "artist": "Noor Chahal",
     "album": "Noor Di Chader",
-    "cover": "https://c.saavncdn.com/611/Noor-Di-Chader-Punjabi-2025-20250703052803-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/611/5b5cd7ec6bff75af22ead0a4b3e4ace7_320.mp4",
-    "duration": 174,
+    "cover": "https://c.saavncdn.com/012/Hajipir-Ka-Noorani-Gharana-Hindi-2012-20190401155958-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/012/bcf2b6cbbefaac1436b35a8bb913233f_320.mp4",
+    "duration": 445,
     "badge": "Trending 2025",
     "year": "2025"
   },
@@ -787,9 +787,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Leke Pehla Pehla Pyaar",
     "artist": "Mohammed Rafi, Shamshad Begum",
     "album": "CID",
-    "cover": "https://c.saavncdn.com/777/Leke-Pehla-Pehla-Pyaar-Hindi-2023-20230315100716-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/777/df1dbad0a50e01ecdd33e0fd10ab3d4b_320.mp4",
-    "duration": 197,
+    "cover": "https://c.saavncdn.com/484/Hindi-New-Year-Party-Hits-Hindi-2022-20221223094256-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/484/37a7532208d9675118d944d9b68083fa_320.mp4",
+    "duration": 139,
     "badge": "Retro Classic",
     "year": "2025"
   },
@@ -798,9 +798,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Dildaar",
     "artist": "Karan Aujla, Ikky",
     "album": "AUJLA SZN 1",
-    "cover": "https://c.saavncdn.com/918/AUJLA-SZN-1-Punjabi-2026-20260925122119-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/918/6bc6e89a08e55eb4b5cd0ffd03b03a8f_320.mp4",
-    "duration": 199,
+    "cover": "https://c.saavncdn.com/299/Dildar-Punjabi-2025-20251210152054-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/299/eb9346b8b653571865d506bf5acf2af3_320.mp4",
+    "duration": 156,
     "badge": "Trending 2026",
     "year": "2026"
   },
@@ -809,9 +809,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Heeriye",
     "artist": "Jasleen Royal, Arijit Singh",
     "album": "Mission Raniganj",
-    "cover": "https://c.saavncdn.com/891/Mission-Raniganj-Hindi-2023-20230929071244-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/891/63f43e5cd0bde4ded2e5fe4a2bc6c406_320.mp4",
-    "duration": 193,
+    "cover": "https://c.saavncdn.com/022/Heeriye-feat-Arijit-Singh-Hindi-2023-20230928050405-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/022/a192e8d320ea5630db314d04fedf0aa5_320.mp4",
+    "duration": 194,
     "badge": "Chartbuster",
     "year": "2025"
   },
@@ -820,9 +820,9 @@ export const NEW_RELEASES_2025_2026 = [
     "title": "Sajni (From \"Laapataa Ladies\")",
     "artist": "Ram Sampath",
     "album": "Laapataa Ladies",
-    "cover": "https://c.saavncdn.com/040/Laapataa-Ladies-Hindi-2024-20240315104641-500x500.jpg",
-    "stream_url": "https://aac.saavncdn.com/040/38de0e5e6ba28f8e6e4f3dff66f8cd0b_320.mp4",
-    "duration": 167,
+    "cover": "https://c.saavncdn.com/179/World-Music-Day-Best-Of-Bollywood-Hits-Hindi-2026-20260622111029-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/179/dbbf3ed3c678c23ceb4d4e149ff61213_320.mp4",
+    "duration": 170,
     "badge": "Oscar Film",
     "year": "2025"
   },
@@ -1012,6 +1012,204 @@ export const NEW_RELEASES_2025_2026 = [
     "duration": 329,
     "badge": "Cult Romance",
     "year": "2025"
+  },
+  {
+    "id": "nr_54",
+    "title": "Tauba Tauba",
+    "artist": "Karan Aujla",
+    "album": "Bad Newz",
+    "cover": "https://c.saavncdn.com/992/Bad-Newz-Hindi-2024-20250730113701-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/992/5d44da8bc1d78fb72d18b701d758fd1f_320.mp4",
+    "duration": 207,
+    "badge": "Trending #1",
+    "year": "2026"
+  },
+  {
+    "id": "nr_55",
+    "title": "Aayi Nai",
+    "artist": "Amitabh Bhattacharya, Sachin-Jigar, Pawan Singh, Simran Choudhary, Divya Kumar",
+    "album": "Stree 2",
+    "cover": "https://c.saavncdn.com/373/Stree-2-Hindi-2024-20240828083834-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/373/9a3ad2173b2e80bc6f9655d1da7c8f27_320.mp4",
+    "duration": 178,
+    "badge": "Chartbuster",
+    "year": "2026"
+  },
+  {
+    "id": "nr_56",
+    "title": "Taras Song",
+    "artist": "Brown Beach",
+    "album": "Debbie&#039;s Song",
+    "cover": "https://c.saavncdn.com/372/Debbie-s-Song-English-2011-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/372/b58af1c09f04b7470c300c63ce321b88_320.mp4",
+    "duration": 150,
+    "badge": "Dance Anthem",
+    "year": "2026"
+  },
+  {
+    "id": "nr_57",
+    "title": "Illuminati",
+    "artist": "Vinayak Sasikumar, Sushin Shyam, Dabzee",
+    "album": "Aavesham (Original Motion Picture Soundtrack)",
+    "cover": "https://c.saavncdn.com/202/Aavesham-Original-Motion-Picture-Soundtrack-Malayalam-2024-20250910150630-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/202/ba6006006a2f40e6b20b5ced32cc2885_320.mp4",
+    "duration": 212,
+    "badge": "Global Sensation",
+    "year": "2026"
+  },
+  {
+    "id": "nr_58",
+    "title": "Big Dawgs",
+    "artist": "Hanumankind, Kalmi",
+    "album": "Big Dawgs",
+    "cover": "https://c.saavncdn.com/883/Big-Dawgs-English-2024-20240707053259-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/883/c0a119218206e3e43e2496dc0f2d8d7e_320.mp4",
+    "duration": 191,
+    "badge": "Global Rap",
+    "year": "2026"
+  },
+  {
+    "id": "nr_59",
+    "title": "nadaaniyan",
+    "artist": "Akshath",
+    "album": "nadaaniyan",
+    "cover": "https://c.saavncdn.com/722/nadaaniyan-Hindi-2024-20240517212238-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/722/6a159a825ba525d448f6cd564c20d79b_320.mp4",
+    "duration": 171,
+    "badge": "Viral Acoustic",
+    "year": "2026"
+  },
+  {
+    "id": "nr_60",
+    "title": "AUR TU HAI KAHAN (Slowed + Reverb)",
+    "artist": "Naeemraeen",
+    "album": "AUR TU HAI KAHAN (Slowed + Reverb)",
+    "cover": "https://c.saavncdn.com/178/AUR-TU-HAI-KAHAN-Slowed-Reverb-Hindi-2023-20231122224214-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/178/5f9db24c1d2843e67886e3297217a4b6_320.mp4",
+    "duration": 305,
+    "badge": "Indie Soul",
+    "year": "2026"
+  },
+  {
+    "id": "nr_61",
+    "title": "Husn",
+    "artist": "Anuv Jain",
+    "album": "Husn",
+    "cover": "https://c.saavncdn.com/436/Husn-Hindi-2023-20231129054140-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/436/13795b7aa2e87393366162b9e6a6fe88_320.mp4",
+    "duration": 217,
+    "badge": "Indie Gold",
+    "year": "2026"
+  },
+  {
+    "id": "nr_62",
+    "title": "Jo Tum Mere Ho",
+    "artist": "Anuv Jain",
+    "album": "Jo Tum Mere Ho",
+    "cover": "https://c.saavncdn.com/401/Jo-Tum-Mere-Ho-Hindi-2024-20240731053953-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/401/1e4444c13f76ac543c19b01d7ea0423a_320.mp4",
+    "duration": 252,
+    "badge": "Acoustic Poetry",
+    "year": "2026"
+  },
+  {
+    "id": "nr_63",
+    "title": "Choo Lo",
+    "artist": "The Local Train",
+    "album": "Aalas Ka Pedh",
+    "cover": "https://c.saavncdn.com/111/Aalas-Ka-Pedh-Hindi-2015-20231005005130-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/111/09c5dba8ec03665a9a679e19338917a6_320.mp4",
+    "duration": 233,
+    "badge": "Indie Cult",
+    "year": "2026"
+  },
+  {
+    "id": "nr_64",
+    "title": "Faasle",
+    "artist": "Aditya Rikhari",
+    "album": "Faasle",
+    "cover": "https://c.saavncdn.com/133/Faasle-Hindi-2021-20210801214117-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/133/9fbc531ae25229c425162db475f5e62d_320.mp4",
+    "duration": 221,
+    "badge": "Heartbreak Indie",
+    "year": "2026"
+  },
+  {
+    "id": "nr_65",
+    "title": "With You",
+    "artist": "AP Dhillon",
+    "album": "First of a Kind (From the Amazon Original Series)",
+    "cover": "https://c.saavncdn.com/671/First-of-a-Kind-From-the-Amazon-Original-Series-Punjabi-2023-20230904091351-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/671/50b256cc8e60dc8b0243f5e0767e8467_320.mp4",
+    "duration": 154,
+    "badge": "Punjabi Lo-Fi",
+    "year": "2026"
+  },
+  {
+    "id": "nr_66",
+    "title": "Excuses",
+    "artist": "AP Dhillon, Gurinder Gill, Intense",
+    "album": "Excuses",
+    "cover": "https://c.saavncdn.com/890/Excuses-English-2021-20210930112054-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/890/a18aabc4681dc6c334d5d29b67e84a0f_320.mp4",
+    "duration": 177,
+    "badge": "Billion Streams",
+    "year": "2026"
+  },
+  {
+    "id": "nr_67",
+    "title": "Brown Munde",
+    "artist": "AP Dhillon, Gminxr, Gurinder Gill, Shinda Kahlon",
+    "album": "Brown Munde",
+    "cover": "https://c.saavncdn.com/973/Brown-Munde-English-2020-20260520131422-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/973/76216adb3df5ef476f948891b40efb7a_320.mp4",
+    "duration": 254,
+    "badge": "Global Iconic",
+    "year": "2026"
+  },
+  {
+    "id": "nr_68",
+    "title": "Maan Meri Jaan",
+    "artist": "King",
+    "album": "Champagne Talk",
+    "cover": "https://c.saavncdn.com/734/Champagne-Talk-Hindi-2022-20221008011951-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/734/31a101fae38e184208e5f95e3e6c756d_320.mp4",
+    "duration": 194,
+    "badge": "Pop Legend",
+    "year": "2026"
+  },
+  {
+    "id": "nr_69",
+    "title": "Tu Aake Dekhle",
+    "artist": "King",
+    "album": "The Carnival",
+    "cover": "https://c.saavncdn.com/275/The-Carnival-Hindi-2020-20230718172154-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/275/cb7c6e55ffa7a4a0dfb5835ffe7a74c5_320.mp4",
+    "duration": 270,
+    "badge": "Evergreen Hit",
+    "year": "2026"
+  },
+  {
+    "id": "nr_70",
+    "title": "Millionaire",
+    "artist": "Yo Yo Honey Singh",
+    "album": "GLORY",
+    "cover": "https://c.saavncdn.com/173/GLORY-Hindi-2024-20250117161048-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/173/af61d1cf779677cd767692c0a7f3301f_320.mp4",
+    "duration": 199,
+    "badge": "Party King",
+    "year": "2026"
+  },
+  {
+    "id": "nr_71",
+    "title": "Soulmate",
+    "artist": "Badshah, Arijit Singh",
+    "album": "Arijit Singh X Badshah The Biggest Songs 2024",
+    "cover": "https://c.saavncdn.com/638/Arijit-Singh-X-Badshah-The-Biggest-Songs-2024-Hindi-2024-20240410215733-500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/638/08cb70c425edf660ceb4b372f29578f4_320.mp4",
+    "duration": 214,
+    "badge": "Romantic Trap",
+    "year": "2026"
   }
 ]
 
@@ -3485,23 +3683,34 @@ export function getSearchPredictions(query) {
         badge: 'Lyrics Match',
         subtitle: `"${item.snippet}" · ${item.artist}`,
         query: item.canonicalQuery,
+        trackObj: item.stream_url ? item : null,
       })
       add(item.snippet, 'lyrics', {
         badge: 'Lyric Line',
         subtitle: `From "${item.title}"`,
         query: item.canonicalQuery,
+        trackObj: item.stream_url ? item : null,
       })
     }
   }
 
   // 7. 2024-2026 new releases
   for (const nr of NEW_RELEASES_2025_2026) {
-    if (
-      nr.title.toLowerCase().includes(q) ||
-      nr.artist.toLowerCase().includes(q) ||
-      nr.album.toLowerCase().includes(q)
-    ) {
-      add(nr.title, 'new_release', { badge: 'New 2024-2026', subtitle: nr.artist, query: nr.title })
+    const nrTitle = (nr.title || '').toLowerCase()
+    const nrArtist = (nr.artist || '').toLowerCase()
+    const nrAlbum = (nr.album || '').toLowerCase()
+    const matches =
+      nrTitle.includes(q) ||
+      nrArtist.includes(q) ||
+      nrAlbum.includes(q) ||
+      (q.length >= 2 && (nrTitle.startsWith(q) || nrTitle.split(' ').some((w) => w.startsWith(q))))
+    if (matches) {
+      add(nr.title, 'new_release', {
+        badge: nr.badge || 'Fresh 2026',
+        subtitle: nr.artist,
+        query: nr.title,
+        trackObj: nr,
+      })
     }
   }
 

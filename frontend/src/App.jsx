@@ -26,6 +26,7 @@ export default function App() {
   const [user, setUserState] = useState(getUser())
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [searchResetTrigger, setSearchResetTrigger] = useState(0)
+  const [freshDropsTrigger, setFreshDropsTrigger] = useState(0)
   const [playerExpanded, setPlayerExpanded] = useState(false)
   const busyRef = useRef(false)
 
@@ -35,6 +36,12 @@ export default function App() {
       setSearchResetTrigger((n) => n + 1)
     }
     setView(nextView)
+  }, [])
+
+  const handleOpenFreshDrops = useCallback(() => {
+    setPlayerExpanded(false)
+    setView('search')
+    setFreshDropsTrigger((n) => n + 1)
   }, [])
 
   useEffect(() => {
@@ -127,6 +134,7 @@ export default function App() {
                 onPill={handlePill}
                 user={user}
                 onOpenAuth={() => setShowAuthModal(true)}
+                onOpenFreshDrops={handleOpenFreshDrops}
               />
             )}
             {view === 'chat' && (
@@ -146,7 +154,13 @@ export default function App() {
                 onLyrics={openLyrics}
               />
             )}
-            {view === 'search' && <SearchView onLyrics={openLyrics} resetTrigger={searchResetTrigger} />}
+            {view === 'search' && (
+              <SearchView
+                onLyrics={openLyrics}
+                resetTrigger={searchResetTrigger}
+                freshDropsTrigger={freshDropsTrigger}
+              />
+            )}
 
             {/* Desktop & Mobile Library Views */}
             {view === 'playlists' && (
