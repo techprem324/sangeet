@@ -59,9 +59,10 @@ export default function LyricsModal({ track, onClose }) {
   }, [activeIdx, synced])
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
-      <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={onClose} />
-      <div className="panel relative flex max-h-[80vh] w-full max-w-lg flex-col overflow-hidden !bg-coal">
+    <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4" role="dialog" aria-modal="true">
+      <div className="absolute inset-0 bg-black/75 backdrop-blur-sm" onClick={onClose} />
+      <div className="panel relative flex h-[85vh] sm:h-auto sm:max-h-[80vh] w-full max-w-lg flex-col overflow-hidden !bg-coal rounded-t-3xl sm:rounded-2xl pb-safe">
+        <div className="mx-auto mt-2.5 h-1 w-12 rounded-full bg-sand-dim/40 sm:hidden" />
         <div className="flex items-center justify-between border-b border-edge-soft px-5 py-3.5">
           <div className="min-w-0">
             <div className="truncate font-display text-lg font-medium text-cream">{track?.title}</div>

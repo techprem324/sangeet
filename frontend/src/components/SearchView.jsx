@@ -544,7 +544,7 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
                 }
               }}
               placeholder="What do you want to play? (e.g. sad songs, Arijit, romantic, lo-fi…)"
-              className="w-full bg-transparent text-sm sm:text-base font-normal text-cream placeholder-sand-dim/70 focus:outline-none"
+              className="w-full bg-transparent text-base font-normal text-cream placeholder-sand-dim/70 focus:outline-none"
               autoFocus
             />
             {searching && (
@@ -553,10 +553,10 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
             {q && !searching && (
               <button
                 onClick={handleClear}
-                className="icon-btn h-6 w-6 text-sand-dim hover:text-white shrink-0 transition-colors"
+                className="flex h-7 w-7 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-white/10 text-sand-dim hover:text-white shrink-0 transition-colors"
                 title="Clear search"
               >
-                <XIcon size={16} />
+                <XIcon size={15} />
               </button>
             )}
           </div>
@@ -654,10 +654,10 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
                             setShowSuggestions(false)
                             audio.playTrack(p.trackObj, [p.trackObj])
                           }}
-                          className="flex h-6 w-6 items-center justify-center rounded-full bg-ember/90 hover:bg-ember text-coal shadow-sm hover:scale-110 active:scale-95 transition-all"
+                          className="flex h-7 w-7 sm:h-6 sm:w-6 items-center justify-center rounded-full bg-ember hover:bg-ember-deep text-coal shadow-sm hover:scale-110 active:scale-95 transition-all"
                           title={`Play "${p.trackObj.title}"`}
                         >
-                          <PlayIcon size={11} fill="currentColor" className="translate-x-0.5" />
+                          <PlayIcon size={12} fill="currentColor" className="translate-x-0.5" />
                         </button>
                       )}
                     </div>

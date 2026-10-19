@@ -99,7 +99,7 @@ export default function HomeView({ onView, onSend, onPill, onOpenAuth, onOpenFre
                 }
               }}
               placeholder="Describe your mood — e.g. “heartbroken and it’s raining at 2am”…"
-              className="input-plain max-h-28 min-h-[24px] resize-none text-sm sm:text-[15px] leading-relaxed"
+              className="input-plain max-h-28 min-h-[24px] resize-none text-base sm:text-[15px] leading-relaxed"
             />
           </div>
           <button

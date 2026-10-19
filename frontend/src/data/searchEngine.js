@@ -1210,6 +1210,171 @@ export const NEW_RELEASES_2025_2026 = [
     "duration": 214,
     "badge": "Romantic Trap",
     "year": "2026"
+  },
+  {
+    "id": "nr_72",
+    "title": "Pehle Bhi Main",
+    "artist": "Vishal Mishra, Raj Shekhar",
+    "album": "ANIMAL",
+    "cover": "https://c.saavncdn.com/179/5c031343ce852da479ced85d573d396b_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/179/5c031343ce852da479ced85d573d396b_320.mp4",
+    "duration": 250,
+    "badge": "Viral Hit",
+    "year": "2025"
+  },
+  {
+    "id": "nr_73",
+    "title": "Alag Aasmaan",
+    "artist": "Anuv Jain",
+    "album": "Alag Aasmaan",
+    "cover": "https://c.saavncdn.com/879/72ded7665bbd5f8947f014de81e5fc1d_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/879/72ded7665bbd5f8947f014de81e5fc1d_320.mp4",
+    "duration": 212,
+    "badge": "Acoustic Gem",
+    "year": "2025"
+  },
+  {
+    "id": "nr_74",
+    "title": "Sahiba",
+    "artist": "Jasleen Royal, Stebin Ben, Vijay Deverakonda",
+    "album": "Sahiba",
+    "cover": "https://c.saavncdn.com/485/a3e7d1cc2adfe133f40bbe70d7820224_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/485/a3e7d1cc2adfe133f40bbe70d7820224_320.mp4",
+    "duration": 196,
+    "badge": "Trending Top #1",
+    "year": "2025"
+  },
+  {
+    "id": "nr_75",
+    "title": "Haseen",
+    "artist": "Talwiinder, NDS",
+    "album": "Haseen",
+    "cover": "https://c.saavncdn.com/065/d9f897b9f568eb20dac579bb917af064_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/065/d9f897b9f568eb20dac579bb917af064_320.mp4",
+    "duration": 182,
+    "badge": "Sensational",
+    "year": "2025"
+  },
+  {
+    "id": "nr_76",
+    "title": "Khayaal",
+    "artist": "Talwiinder, Sanjoy",
+    "album": "Khayaal",
+    "cover": "https://c.saavncdn.com/482/c9b917787fdd221283bcb11884f4184d_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/482/c9b917787fdd221283bcb11884f4184d_320.mp4",
+    "duration": 195,
+    "badge": "Electro Melodic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_77",
+    "title": "Hola Amigo",
+    "artist": "Umair, KR$NA, Seedhe Maut",
+    "album": "ROCKSTAR WITHOUT A GUITAR",
+    "cover": "https://c.saavncdn.com/273/bc5965c3d415bd41570d6755596e63a7_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/273/bc5965c3d415bd41570d6755596e63a7_320.mp4",
+    "duration": 204,
+    "badge": "DHH Banger",
+    "year": "2025"
+  },
+  {
+    "id": "nr_78",
+    "title": "Raat Ki Rani",
+    "artist": "Seedhe Maut",
+    "album": "Lunch Break",
+    "cover": "https://c.saavncdn.com/531/669c2b240f3edfc2a92905b0dfaf8437_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/531/669c2b240f3edfc2a92905b0dfaf8437_320.mp4",
+    "duration": 178,
+    "badge": "Cult HipHop",
+    "year": "2025"
+  },
+  {
+    "id": "nr_79",
+    "title": "Dhundhala",
+    "artist": "Talwiinder, Yashraj, Dropped Out",
+    "album": "Dhundhala",
+    "cover": "https://c.saavncdn.com/965/212f0dd59e13c060347033940b6fc552_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/965/212f0dd59e13c060347033940b6fc552_320.mp4",
+    "duration": 169,
+    "badge": "Viral Mood",
+    "year": "2025"
+  },
+  {
+    "id": "nr_80",
+    "title": "Tera Zikr",
+    "artist": "Darshan Raval",
+    "album": "Tera Zikr",
+    "cover": "https://c.saavncdn.com/820/3d732a9092272f172cd6a25cab3244d6_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/820/3d732a9092272f172cd6a25cab3244d6_320.mp4",
+    "duration": 223,
+    "badge": "Darshan Classic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_81",
+    "title": "Hawa Banke",
+    "artist": "Darshan Raval",
+    "album": "Hawa Banke",
+    "cover": "https://c.saavncdn.com/751/6e65c4023e28b1f8c723916816526881_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/751/6e65c4023e28b1f8c723916816526881_320.mp4",
+    "duration": 172,
+    "badge": "Romantic Breeze",
+    "year": "2025"
+  },
+  {
+    "id": "nr_82",
+    "title": "Chogada",
+    "artist": "Darshan Raval, Asees Kaur",
+    "album": "Loveyatri",
+    "cover": "https://c.saavncdn.com/401/6dee5bf724016e494f2b08bc868824ad_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/401/6dee5bf724016e494f2b08bc868824ad_320.mp4",
+    "duration": 249,
+    "badge": "Festive Groove",
+    "year": "2025"
+  },
+  {
+    "id": "nr_83",
+    "title": "Ranjha",
+    "artist": "Jasleen Royal, B Praak, Romy",
+    "album": "Shershaah",
+    "cover": "https://c.saavncdn.com/238/f19fcf72286d3daf013431d6838364f6_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/238/f19fcf72286d3daf013431d6838364f6_320.mp4",
+    "duration": 228,
+    "badge": "Heartfelt Classic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_84",
+    "title": "Sang Rahiyo",
+    "artist": "Jasleen Royal, Ujjwal Kashyap",
+    "album": "Sang Rahiyo",
+    "cover": "https://c.saavncdn.com/636/000eb9c0bbdc0d835fce9d9297bbf94c_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/636/000eb9c0bbdc0d835fce9d9297bbf94c_320.mp4",
+    "duration": 218,
+    "badge": "Sweet Acoustic",
+    "year": "2025"
+  },
+  {
+    "id": "nr_85",
+    "title": "Dil Tod Ke",
+    "artist": "B Praak, Rochak Kohli, Manoj Muntashir",
+    "album": "Dil Tod Ke",
+    "cover": "https://c.saavncdn.com/997/3cddb2052a60e07f92bea839c394d0f3_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/997/3cddb2052a60e07f92bea839c394d0f3_320.mp4",
+    "duration": 286,
+    "badge": "Soul Pain",
+    "year": "2025"
+  },
+  {
+    "id": "nr_86",
+    "title": "Soni Soni (From \"Ishq Vishk Rebound\")",
+    "artist": "Darshan Raval, Jonita Gandhi, Rochak Kohli",
+    "album": "Ishq Vishk Rebound",
+    "cover": "https://c.saavncdn.com/658/3d36e35d56b7d41af96c51244621c756_500x500.jpg",
+    "stream_url": "https://aac.saavncdn.com/658/3d36e35d56b7d41af96c51244621c756_320.mp4",
+    "duration": 189,
+    "badge": "2025 Viral",
+    "year": "2025"
   }
 ]
 

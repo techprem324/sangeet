@@ -238,7 +238,7 @@ export default function MiniPlayer({ onLyrics, onLikedChange, expanded: controll
         {/* State A: Compact Floating Mini-Player (Tappable to expand) */}
         {!expanded && (
           <div
-            className="fixed left-2 right-2 bottom-[60px] z-40 rounded-xl border border-edge/80 bg-coal/95 shadow-2xl backdrop-blur-md overflow-hidden transition-all duration-200"
+            className="fixed left-2 right-2 bottom-[calc(56px+max(0.35rem,env(safe-area-inset-bottom,0px)))] z-40 rounded-xl border border-edge/80 bg-coal/95 shadow-2xl backdrop-blur-md overflow-hidden transition-all duration-200"
             role="region"
             aria-label="Mini Audio Player"
           >
@@ -324,7 +324,7 @@ export default function MiniPlayer({ onLyrics, onLikedChange, expanded: controll
         {/* State B: Fullscreen Expanded Player (All controls vertically stacked) */}
         {expanded && (
           <div
-            className="fixed inset-0 z-50 flex flex-col bg-ink/95 backdrop-blur-2xl px-5 pb-24 pt-safe overflow-y-auto animate-fade-in text-cream select-none"
+            className="fixed inset-0 z-50 flex flex-col bg-ink/95 backdrop-blur-2xl px-5 pt-[max(1rem,env(safe-area-inset-top,1rem))] pb-[max(2rem,calc(env(safe-area-inset-bottom,0px)+1.5rem))] overflow-y-auto animate-fade-in text-cream select-none"
             role="dialog"
             aria-modal="true"
             aria-label="Expanded Audio Player"

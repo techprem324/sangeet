@@ -48,7 +48,7 @@ export default function BottomNav({ view, onView }) {
             <button
               key={tab.key}
               onClick={() => onView(tab.key)}
-              className={`flex flex-col items-center justify-center py-1 transition-all select-none ${
+              className={`flex flex-col items-center justify-center min-h-[48px] py-1 transition-all select-none ${
                 active
                   ? 'text-ember font-semibold scale-105'
                   : 'text-sand-dim hover:text-cream active:scale-95'
@@ -56,7 +56,7 @@ export default function BottomNav({ view, onView }) {
             >
               <div
                 className={`flex h-7 w-7 items-center justify-center rounded-full transition-colors ${
-                  active ? 'bg-ember/15 text-ember' : 'text-current'
+                  active ? 'bg-ember/20 text-ember shadow-sm' : 'text-current'
                 }`}
               >
                 <Icon size={19} />
