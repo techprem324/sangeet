@@ -666,6 +666,28 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
               })}
             </div>
           )}
+
+          {/* Dedicated Auto Fresh Songs Pill Button - Placed right near the search bar */}
+          <div className="mt-3 flex items-center justify-start">
+            <button
+              type="button"
+              onClick={handleAutoRelease}
+              disabled={autoReleasing}
+              className="group inline-flex items-center gap-2 sm:gap-2.5 rounded-full border border-ember/60 bg-gradient-to-r from-ember/20 via-surface-2 to-ember/20 hover:from-ember/30 hover:to-ember/30 px-3.5 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-bold text-cream shadow-glow hover:scale-105 active:scale-95 transition-all disabled:opacity-50"
+            >
+              <span className="flex h-5 w-5 items-center justify-center rounded-full bg-ember text-coal font-black text-xs shadow-sm group-hover:scale-110 transition-transform">
+                {autoReleasing ? (
+                  <span className="h-3 w-3 animate-spin rounded-full border-2 border-coal border-t-transparent" />
+                ) : (
+                  '⚡'
+                )}
+              </span>
+              <span>Auto Fresh Songs &amp; Latest 2026 Drops</span>
+              <span className="rounded-full bg-ember/30 border border-ember/50 px-2 py-0.5 text-[10px] font-extrabold text-amber-200 uppercase tracking-wider">
+                {NEW_RELEASES_2025_2026.length}+ HITS
+              </span>
+            </button>
+          </div>
         </div>
 
         {/* ============================================================= */}
@@ -1317,55 +1339,7 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
           /* ============================================================= */
           /* CASE 4: "BROWSE ALL" GRID */
           /* ============================================================= */
-          <div className="space-y-8">
-            {/* Auto-Release Radar Banner - Interactive Auto-Add Fresh Songs */}
-            <div
-              onClick={handleAutoRelease}
-              className="group relative overflow-hidden rounded-xl sm:rounded-2xl border border-ember/40 bg-gradient-to-r from-surface via-surface-2 to-surface-3 px-3.5 py-3 sm:px-5 sm:py-3.5 shadow-soft flex items-center justify-between gap-3 cursor-pointer hover:border-ember/70 hover:shadow-glow transition-all"
-            >
-              <div className="flex items-center gap-3 sm:gap-4 min-w-0">
-                <div className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl bg-ember/20 border border-ember/40 text-ember text-base sm:text-lg shadow-sm group-hover:scale-110 group-hover:bg-ember group-hover:text-coal transition-all">
-                  ⚡
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <span className="rounded-full bg-ember/25 px-2 py-0.5 text-[9px] font-extrabold uppercase tracking-wider text-ember">
-                      Auto Fresh Songs
-                    </span>
-                    <span className="text-[10px] text-amber-200/90 font-medium hidden xs:inline sm:inline">
-                      🔥 70+ Latest 2026 Releases Ready
-                    </span>
-                  </div>
-                  <h3 className="mt-0.5 font-display text-xs sm:text-base font-bold text-cream truncate group-hover:text-ember transition-colors">
-                    Click to Auto-Load Fresh Music Drops & Chartbusters
-                  </h3>
-                  <p className="text-[11px] text-sand-dim hidden md:block truncate">
-                    Tap anywhere to dynamically sync & display all 2025–2026 hits with ultra 320 kbps audio.
-                  </p>
-                </div>
-              </div>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  handleAutoRelease()
-                }}
-                disabled={autoReleasing}
-                className="shrink-0 inline-flex items-center gap-1.5 rounded-full border border-ember bg-ember text-coal hover:bg-ember-deep px-3 py-1.5 sm:px-4 sm:py-2 text-xs font-bold whitespace-nowrap transition-all shadow-glow active:scale-95 disabled:opacity-50"
-              >
-                {autoReleasing ? (
-                  <>
-                    <span className="h-3 w-3 animate-spin rounded-full border-2 border-coal border-t-transparent" />
-                    <span>Loading Drops…</span>
-                  </>
-                ) : (
-                  <>
-                    <span>⚡</span>
-                    <span>Auto Load ({NEW_RELEASES_2025_2026.length}+)</span>
-                  </>
-                )}
-              </button>
-            </div>
-
+          <div className="space-y-6">
             <section>
               <h1 className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight text-white mb-4 sm:mb-6">
                 Browse all

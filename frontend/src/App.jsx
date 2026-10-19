@@ -99,7 +99,7 @@ export default function App() {
         />
 
         <main className="flex min-w-0 flex-1 flex-col bg-ink/40">
-          {/* Mobile top header: Logo on left, Fresh Drops in middle, Profile avatar on right */}
+          {/* Mobile top header: Logo on left, Profile avatar on right */}
           <header className="border-b border-edge-soft bg-coal/85 backdrop-blur-md lg:hidden shrink-0">
             <div className="flex items-center justify-between px-3 py-2">
               <button
@@ -108,16 +108,6 @@ export default function App() {
               >
                 <LogoMark size={24} />
                 <span className="font-display text-base font-semibold tracking-tight text-cream">Sangeet</span>
-              </button>
-
-              <button
-                onClick={handleOpenFreshDrops}
-                className="flex items-center gap-1.5 rounded-full border border-ember/60 bg-gradient-to-r from-ember/25 via-surface-2 to-ember/25 hover:from-ember/35 hover:to-ember/35 px-2.5 py-1 text-[11px] font-bold text-amber-200 shadow-sm active:scale-95 transition-all"
-                title="Auto Fresh Songs & Latest 2026 Drops"
-              >
-                <span className="text-ember font-black animate-pulse">⚡</span>
-                <span>Fresh Drops</span>
-                <span className="rounded-full bg-ember/30 px-1 py-0.2 text-[9px] font-black text-white">86+</span>
               </button>
 
               <button
@@ -143,7 +133,6 @@ export default function App() {
                 onPill={handlePill}
                 user={user}
                 onOpenAuth={() => setShowAuthModal(true)}
-                onOpenFreshDrops={handleOpenFreshDrops}
               />
             )}
             {view === 'chat' && (
