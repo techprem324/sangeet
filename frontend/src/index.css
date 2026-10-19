@@ -132,3 +132,18 @@ input[type='range'].warm-range::-moz-range-thumb {
 .eq-bar {
   @apply w-[3px] rounded-full bg-ember;
 }
+
+/* Hide Netlify injected badge / drawer / feedback iframe */
+iframe[src*="netlify"],
+iframe[id*="netlify"],
+div[id*="netlify"],
+div[class*="netlify"],
+[data-netlify-deploy-preview],
+[data-netlify-drawer],
+#netlify-badge,
+.netlify-badge {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
