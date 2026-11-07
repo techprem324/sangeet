@@ -3,11 +3,9 @@
   base = "frontend"
   publish = "dist"
   command = "npm run build"
-  SECRETS_SCAN_ENABLED = false
 
 [build.environment]
-  SECRETS_SCAN_ENABLED = "false"
-  SECRETS_SCAN_OMIT_KEYS = "VITE_API_URL"
+  SECRETS_SCAN_ENABLED = "true"
 
 # Proxy LRCLIB directly via Netlify CDN (guaranteed same-origin, zero CORS issues anywhere)
 [[redirects]]
