@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 24" width="1000" height="24">
+  <defs>
+    <linearGradient id="d" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ff5500" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffb347"/>
+      <stop offset="1" stop-color="#ff5500" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path d="M0 12 H1000" stroke="url(#d)" stroke-width="2" opacity="0.5"/>
+  <path fill="none" stroke="#ff8a2a" stroke-width="2.5" stroke-linecap="round">
+    <animate attributeName="d"
+      values="M300 12 Q 325 0 350 12 T 400 12 T 450 12 T 500 12 T 550 12 T 600 12 T 650 12 T 700 12;
+              M300 12 Q 325 24 350 12 T 400 12 T 450 12 T 500 12 T 550 12 T 600 12 T 650 12 T 700 12;
+              M300 12 Q 325 0 350 12 T 400 12 T 450 12 T 500 12 T 550 12 T 600 12 T 650 12 T 700 12"
+      dur="2s" repeatCount="indefinite"/>
+  </path>
+</svg>
