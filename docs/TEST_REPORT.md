@@ -8,6 +8,8 @@
 - **Backend tests:** `venv\Scripts\python.exe backend\tests\test_pipeline.py` — **PASS, 13 tests**. This uses the repository’s existing virtual environment and includes a live JioSaavn search test.
 - `python -m pytest backend\tests -q` could not run because the default system Python has no `pytest`; the project virtual environment’s documented direct test runner succeeded.
 - **Browser smoke test:** opened the production Vite preview, navigated to Search, entered `Arijit Singh`, observed non-empty Songs results, cleared the query, and verified the recent query appeared. The backend was not running, so the API proxy returned 500 and the test exercised the local catalog fallback only.
+- **Screenshots:** captured genuine 706 × 650 browser screenshots from the local production preview: Home, Search, expanded Player, Library, Playlists, and Playlist detail. They are in `docs/screenshots/` and embedded in the README. The playlist shown is a temporary guest-session example. The browser could not load the external stream during capture, so the player image documents the UI only; it is not evidence that audio played.
+- **GIF:** no demo recording was captured.
 - **Live deployment:** the provided Netlify URL could not be loaded in the browser environment (`ERR_FAILED`); no deployment was changed or claimed verified.
 - **Debug metrics:** to enable `tap_to_first_audio_ms` and `track_gap_ms`, set `localStorage.setItem('sangeet.debug', 'true')` in the browser console and reload. These metrics have not been collected during this test run.
 
@@ -23,7 +25,8 @@
 | Call or app switch; pause/resume behavior | **Not run** | Requires a real audio-focus environment; Media Session support alone is not proof. |
 | Kill from recents and restore queue/position | **Not run** | There is no native app lifecycle/service or persisted player queue in this project. |
 | Throttled network; search visible within 1 s | **Not measured** | The local catalog fallback rendered results, but this was not a controlled normal-network timing measurement. |
-| Real Home, Player, Search, Playlists, Library screenshots and demo GIF | **Not captured** | The README has explicit capture TODOs; no real screenshots or recordings were committed. |
+| Real Home, Player, Search, Playlists, Library screenshots | **Captured** | Local production preview, 706 × 650 browser viewport; files in `docs/screenshots/`. No device screenshots. |
+| Demo GIF | **Not captured** | No recording was made. |
 
 ## Manual device checklist
 
