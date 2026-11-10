@@ -83,6 +83,13 @@ export default function MiniPlayer({ onLyrics, onLikedChange, expanded: controll
   const [showQueue, setShowQueue] = useState(false)
   const [hover, setHover] = useState(false)
   const [internalExpanded, setInternalExpanded] = useState(false)
+  const [debugEnabled] = useState(() => {
+    try {
+      return localStorage.getItem('sangeet.debug') === 'true'
+    } catch {
+      return false
+    }
+  })
   const expanded = controlledExpanded !== undefined ? controlledExpanded : internalExpanded
   const setExpanded = (val) => {
     const nextVal = typeof val === 'function' ? val(expanded) : val
@@ -95,7 +102,7 @@ export default function MiniPlayer({ onLyrics, onLikedChange, expanded: controll
   const [isLiked, setIsLiked] = useState(false)
 
   const { current, playing, progress, duration, volume, repeat, shuffle,
-          toggle, next, prev, seek, setVol, cycleRepeat, toggleShuffle, error } = audio
+          toggle, next, prev, seek, setVol, cycleRepeat, toggleShuffle, error, debugMetrics } = audio
   const track = current?.track
   const pct = duration ? Math.min(100, (progress / duration) * 100) : 0
   const onSeek = (e) => seek(Number(e.target.value))
@@ -148,6 +155,21 @@ export default function MiniPlayer({ onLyrics, onLikedChange, expanded: controll
 
   return (
     <>
+      {debugEnabled && (
+        <details className="fixed right-3 top-3 z-[100] w-56 rounded-xl border border-ember/40 bg-coal/95 p-3 text-xs text-cream shadow-xl">
+          <summary className="cursor-pointer font-semibold text-ember">Playback diagnostics</summary>
+          <div className="mt-2 space-y-1">
+            <div className="flex justify-between gap-2">
+              <span>Tap → audio</span>
+              <span>{debugMetrics.tap_to_first_audio_ms ?? '—'} ms</span>
+            </div>
+            <div className="flex justify-between gap-2">
+              <span>Track gap</span>
+              <span>{debugMetrics.track_gap_ms ?? '—'} ms</span>
+            </div>
+          </div>
+        </details>
+      )}
       {/* ========================================================================= */}
       {/* 1. DESKTOP PLAYER (100% UNTOUCHED ORIGINAL LAYOUT ON LG SCREENS)           */}
       {/* ========================================================================= */}
