@@ -4119,7 +4119,13 @@ function expandQuery(raw) {
  * - Lower minimum score threshold for partial-word discovery
  */
 export function smartSearchCatalog(query, catalogTracks = []) {
-  const q = (query || '').trim().toLowerCase()
+  const normalizeSearchText = (value) =>
+    (value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .trim()
+      .toLowerCase()
+  const q = normalizeSearchText(query)
   if (!q) return []
 
   // Normalize: remove punctuation, collapse whitespace
@@ -4133,7 +4139,7 @@ export function smartSearchCatalog(query, catalogTracks = []) {
 
   /** Returns highest substring/prefix match score for a field string against all query variants */
   const fieldScore = (field) => {
-    const fl = (field || '').toLowerCase()
+    const fl = normalizeSearchText(field)
     let best = 0
     for (const qv of queryVariants) {
       if (fl === qv) { best = Math.max(best, 900); break }
