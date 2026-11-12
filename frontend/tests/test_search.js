@@ -11,7 +11,7 @@ import {
   POPULAR_SINGERS,
   ARTIST_DISCOGRAPHIES,
   NEW_RELEASES_2025_2026,
-} from './frontend/src/data/searchEngine.js'
+} from '../src/data/searchEngine.js'
 
 // Construct catalog
 const ALL_TRACKS = [

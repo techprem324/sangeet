@@ -1,191 +1,180 @@
 <div align="center">
 
-<img src="frontend/public/favicon.svg" width="82" alt="Sangeet mark">
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=120&section=header&animation=fadeIn" width="100%" alt="" />
 
-# SANGEET
-### Find the feeling. Press play.
+<img src="docs/assets/banner.svg" width="100%" alt="Sangeet - Dil Se Zuba Tak" />
 
-**A music-discovery experience tuned to your mood, your memories, and the song stuck in your head.**
-
-[![Live web app](https://img.shields.io/badge/TRY%20SANGEET-Live%20web%20app-e69a4d?style=for-the-badge)](https://sangeett.netlify.app/)
-[![React](https://img.shields.io/badge/React-18-202020?style=flat-square&logo=react)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-5-202020?style=flat-square&logo=vite)](https://vite.dev/)
-[![Flask](https://img.shields.io/badge/API-Flask-202020?style=flat-square&logo=flask)](https://flask.palletsprojects.com/)
-
-<br>
-
-<a href="docs/screenshots/player.png">
-  <img src="docs/screenshots/player.png" width="58%" alt="Sangeet expanded music player showing Apna Bana Le">
+<a href="https://sangeett.netlify.app/">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=FF8A2A&center=true&vCenter=true&width=700&lines=Tell+me+how+you+feel.;Sangeet+will+find+the+song.;320+kbps.+No+premium.+No+login.;Where+your+emotions+become+soundwaves." alt="Typing animation" />
 </a>
 
-<br>
+<br/>
 
-**One player. A whole mood.**
-
-[Listen live](https://sangeett.netlify.app/) &nbsp;·&nbsp;
-[Playback audit](docs/PLAYBACK_AUDIT.md) &nbsp;·&nbsp;
-[Test report](docs/TEST_REPORT.md)
+[![Live Demo](https://img.shields.io/badge/▶_LIVE_DEMO-sangeett.netlify.app-FF5500?style=for-the-badge&logo=netlify&logoColor=white)](https://sangeett.netlify.app/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![Flask](https://img.shields.io/badge/Flask-API-000000?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![Audio](https://img.shields.io/badge/Audio-320_kbps-00F5D4?style=for-the-badge&logo=soundcharts&logoColor=black)](https://sangeett.netlify.app/)
 
 </div>
 
----
-
-## A little more Sangeet
-
-Real screens, captured from the running production web build. No mockups.
+<br/>
 
 <div align="center">
-  <a href="docs/screenshots/home.png"><img src="docs/screenshots/home.png" width="32%" alt="Sangeet home screen"></a>
-  &nbsp;
-  <a href="docs/screenshots/search.png"><img src="docs/screenshots/search.png" width="32%" alt="Sangeet search results for Arijit Singh"></a>
-  &nbsp;
-  <a href="docs/screenshots/player.png"><img src="docs/screenshots/player.png" width="32%" alt="Sangeet expanded player"></a>
+
+## 🎬 Feel → Vector → Song
+
+<img src="docs/assets/flow.svg" width="100%" alt="Mood to song flow" />
+
 </div>
+
+<br/>
 
 <div align="center">
-  <sub>01 — Meet your mood</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <sub>02 — Find your sound</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <sub>03 — Stay in the moment</sub>
+
+## 📸 See It
+
+<img src="docs/screenshots/home.png" width="94%" alt="Sangeet home" />
+
+<br/><br/>
+
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="docs/screenshots/search.png" alt="Search" /><br/><sub><b>🔎 Search</b></sub></td>
+    <td align="center" width="50%"><img src="docs/screenshots/player.png" alt="Music player" /><br/><sub><b>🎵 Music Player</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/screenshots/library.png" alt="Music library" /><br/><sub><b>📚 Library</b></sub></td>
+    <td align="center" width="50%"><img src="docs/screenshots/playlists.png" alt="Playlists" /><br/><sub><b>🎧 Playlists</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="docs/screenshots/playlist-detail.png" alt="Playlist details" /><br/><sub><b>🎼 Playlist Details</b></sub></td>
+    <td align="center" width="50%"></td>
+  </tr>
+</table>
+
 </div>
 
-<br>
+<br/>
 
 <div align="center">
-  <a href="docs/screenshots/library.png"><img src="docs/screenshots/library.png" width="32%" alt="Sangeet library with playlists and liked songs"></a>
-  &nbsp;
-  <a href="docs/screenshots/playlists.png"><img src="docs/screenshots/playlists.png" width="32%" alt="Sangeet library with an After Hours playlist"></a>
-  &nbsp;
-  <a href="docs/screenshots/playlist-detail.png"><img src="docs/screenshots/playlist-detail.png" width="32%" alt="Sangeet After Hours playlist detail"></a>
+
+## 🌌 Mood Rooms
+
+<img src="docs/assets/rooms.svg" width="100%" alt="Mood rooms strip" />
+
 </div>
+
+<br/>
 
 <div align="center">
-  <sub>04 — Your collection</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <sub>05 — Make a mix</sub>
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <sub>06 — Set the scene</sub>
+
+## 🧠 Live Mood Radar &nbsp;·&nbsp; 🎤 Synced Lyrics
+
+<table>
+  <tr>
+    <td><img src="docs/assets/radar.svg" width="100%" alt="Mood radar" /></td>
+    <td><img src="docs/assets/player.svg" width="100%" alt="Player with synced lyrics" /></td>
+  </tr>
+</table>
+
 </div>
 
-<sub><i>Captured in a 706 × 650 browser viewport from the local production build. The guest playlist is temporary demo data; the player image shows the UI, not verified audio output.</i></sub>
+<br/>
 
-## The good stuff
+<div align="center">
 
-| 🎭 Find your mood | 🔎 Find that song |
-|---|---|
-| Describe the moment or explore a mood room. | Search songs, artists, lyrics, and curated collections. |
+## ⚡ Why It Hits Different
 
-| 🎧 Keep listening | 💿 Make it yours |
-|---|---|
-| A shared browser player, queue, repeat, shuffle, and browser media controls where supported. | Create playlists, choose a sort, shuffle a mix, and save songs. |
+|  | Others | 🎵 Sangeet |
+| :-- | :--: | :--: |
+| Audio | 128 kbps free | **320 kbps free** |
+| Ads | 😩 | **None** |
+| Search | genre tags | **your feelings** |
+| Login | required | **guest mode** |
+| Lyrics | paywalled | **synced, built in** |
 
-### Feature check
+</div>
 
-| Feature | Status |
-|---|---|
-| Web playback, queue, repeat, and shuffle | Implemented; see the [playback audit](docs/PLAYBACK_AUDIT.md) |
-| Next-track URL pre-resolution | Implemented on a best-effort basis |
-| Search debounce, recent searches, and stale-request cancellation | Implemented |
-| Playlist creation, deletion, sorting, play-all, and shuffle | Implemented; drag-reorder/rename/duplicate are not |
-| Native Android app or APK | Not part of this repository |
+<br/>
 
-## Under the hood
+<div align="center">
+
+## 🧩 Stack
+
+<img src="https://skillicons.dev/icons?i=react,vite,tailwind,js,python,flask,mongodb,netlify,git,github&theme=dark" alt="Tech stack" />
+
+</div>
+
+<details>
+<summary><b>📁 Project layout</b></summary>
+
+```text
+frontend/                 React + Vite application and search tests
+backend/                  Flask API, services, data, and scripts
+backend/data/datasets/    Song source and cleaned datasets
+docs/assets/              README illustrations
+docs/screenshots/         Application screenshots
+```
+
+</details>
+
+<details>
+<summary><b>🏗️ Architecture</b></summary>
 
 ```mermaid
 flowchart LR
-  UI[React screens] --> Player[Shared audio player]
-  Player --> Resolver[Catalog and stream resolver]
-  Resolver --> API[Flask API]
-  API --> Source[JioSaavn stream metadata]
-  Player --> Audio[HTML audio element] --> CDN[Audio CDN]
-  Search[Search] --> API
-  Library[Playlists and liked songs] --> Store[Browser storage or backend]
+    You(["You: 'rainy 2am'"]) --> UI["React UI"]
+    UI --> NLP["Emotion engine"]
+    NLP --> V["valence · energy · dance · acoustic"]
+    V --> API["Flask API"]
+    API --> Cipher["DES-ECB decrypt"] --> CDN["320 kbps CDN"]
+    CDN --> Player["Web Audio player"]
+    Player <--> Lyrics["LRCLIB lyrics via Netlify proxy"]
+    UI -.-> Store[("MongoDB / JSON store")]
 ```
 
-```mermaid
-stateDiagram-v2
-  [*] --> idle
-  idle --> resolving: needs a stream URL
-  idle --> buffering: URL already available
-  resolving --> buffering: URL resolved
-  resolving --> error: resolution fails
-  buffering --> playing: audio starts
-  playing --> paused: pause
-  paused --> buffering: resume
-  playing --> advancing: track ends
-  advancing --> buffering: next track ready
-  advancing --> ended: queue exhausted
-  error --> advancing: skip unavailable track
-```
+</details>
 
-The state diagram describes the intended lifecycle; it is not a native Android player or a separately enforced state-machine implementation.
-
-## Run it yourself
-
-**You’ll need:** Node.js 18+ and Python 3.10+.
+<details>
+<summary><b>💻 Run it locally</b></summary>
 
 ```bash
 git clone https://github.com/techprem324/sangeet.git
 cd sangeet
-```
-
-### 2. Install frontend dependencies
-
-```bash
 npm --prefix frontend install
-```
-
-### 3. Install backend dependencies
-
-Create and activate a virtual environment (recommended), then install the requirements.
-
-**Windows PowerShell**
-```powershell
-py -m venv venv
-.\venv\Scripts\Activate.ps1
 pip install -r backend/requirements.txt
-```
-
-**macOS / Linux**
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r backend/requirements.txt
-```
-
-### 4. Start the application
-
-From the repository root:
-
-```bash
 npm start
 ```
 
-Open the web app at `http://localhost:5173`. The Flask API runs at `http://localhost:5000`.
+Windows: run `start.bat` or `.\start.ps1`. App at `localhost:5173`, API at `localhost:5000/api`.
 
-Build the production web app:
+</details>
 
-```powershell
-npm --prefix frontend run build
-```
+<details>
+<summary><b>📡 API endpoints</b></summary>
 
-The output is `frontend/dist/`. This repository has no Android/Capacitor project, so it cannot produce an APK.
+| Method | Route | What it does |
+| :-- | :-- | :-- |
+| `POST` | `/api/chat` | Mood prompt → vectors + tracks |
+| `POST` | `/api/mood` | Valence, energy, genre affinities |
+| `GET` | `/api/lyrics` | Synced lyric lines |
+| `GET` | `/api/catalog` | Mood room collections |
+| `POST` | `/api/explore` | Expand a room to 500+ songs |
+| `GET` | `/api/search` | Instant search |
+| `GET` `POST` | `/api/playlists` | Playlists |
+| `GET` `POST` | `/api/liked` | Liked songs |
+| `POST` | `/api/auth/login` · `/register` | Accounts |
 
-## Playback: the honest version
+</details>
 
-The production frontend build and 13 backend service tests pass. Real screenshots are above; device playback timings and screen-off behavior have **not** been measured. Browser background playback depends on the device and browser, and is not a substitute for an Android foreground service.
-
-See the detailed [playback audit](docs/PLAYBACK_AUDIT.md) and [test report](docs/TEST_REPORT.md) for what changed, test evidence, and remaining gaps.
-
-## Credits
-
-Echo Music was an architectural reference for separating playback from UI. **No Echo Music code was copied.**
-
-Made by [Prem Srivastava](https://github.com/techprem324). Put on a song at [sangeett.netlify.app](https://sangeett.netlify.app/).
+<br/>
 
 <div align="center">
 
-### Dil se zuba tak. 🎵
+### Made with ❤️ by **[Prem Srivastava](https://github.com/techprem324)**
+
+**[⚡ Open the app → sangeett.netlify.app](https://sangeett.netlify.app/)** &nbsp;·&nbsp; ⭐ Star if it hit the right chord
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=12,20,24&height=100&section=footer" width="100%" alt="" />
 
 </div>

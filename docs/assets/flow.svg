@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 320" width="1000" height="320" role="img" aria-label="You type a mood, Sangeet maps it to music features, a song plays">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#140e0b"/><stop offset="1" stop-color="#25140a"/></linearGradient>
+    <linearGradient id="fill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5500"/><stop offset="1" stop-color="#ffb347"/></linearGradient>
+    <clipPath id="type"><rect x="46" y="100" width="0" height="40">
+      <animate attributeName="width" values="0;0;250;250;0;0" keyTimes="0;0.04;0.28;0.93;0.97;1" dur="8s" repeatCount="indefinite"/>
+    </rect></clipPath>
+  </defs>
+  <rect width="1000" height="320" rx="24" fill="url(#bg)"/>
+
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="3" fill="#ff8a2a">
+    <text x="30" y="44">01 · YOU SAY IT</text>
+    <text x="365" y="44">02 · SANGEET READS IT</text>
+    <text x="700" y="44">03 · IT PLAYS</text>
+  </g>
+
+  <!-- 1: chat bubble -->
+  <rect x="30" y="76" width="290" height="110" rx="20" fill="#2a1a10" stroke="#ff8a2a" stroke-opacity="0.6"/>
+  <g clip-path="url(#type)">
+    <text x="46" y="126" font-family="'Fira Code', Consolas, monospace" font-size="15" fill="#fbeedd">heartbroken, raining at 2am</text>
+  </g>
+  <rect x="46" y="110" width="2" height="22" fill="#ff8a2a">
+    <animate attributeName="x" values="46;46;296;296;46;46" keyTimes="0;0.04;0.28;0.93;0.97;1" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite"/>
+  </rect>
+  <text x="46" y="168" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="11" fill="#8a7566">no genre. no keywords. just a feeling.</text>
+
+  <!-- arrows -->
+  <g stroke="#ff8a2a" stroke-width="2.5" stroke-linecap="round" fill="none">
+    <path d="M334 130 H352" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" values="20;0" dur="0.8s" repeatCount="indefinite"/></path>
+    <path d="M346 122 L354 130 L346 138"/>
+    <path d="M664 130 H682" stroke-dasharray="4 6"><animate attributeName="stroke-dashoffset" values="20;0" dur="0.8s" repeatCount="indefinite"/></path>
+    <path d="M676 122 L684 130 L676 138"/>
+  </g>
+
+  <!-- 2: feature bars -->
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#fbeedd">
+    <text x="365" y="92">Valence</text>
+    <rect x="450" y="82" width="170" height="10" rx="5" fill="#2a1a10"/>
+    <rect x="450" y="82" width="0" height="10" rx="5" fill="url(#fill)"><animate attributeName="width" values="0;0;31;31;0;0" keyTimes="0;0.3;0.42;0.93;0.97;1" dur="8s" repeatCount="indefinite"/></rect>
+
+    <text x="365" y="126">Energy</text>
+    <rect x="450" y="116" width="170" height="10" rx="5" fill="#2a1a10"/>
+    <rect x="450" y="116" width="0" height="10" rx="5" fill="url(#fill)"><animate attributeName="width" values="0;0;54;54;0;0" keyTimes="0;0.33;0.45;0.93;0.97;1" dur="8s" repeatCount="indefinite"/></rect>
+
+    <text x="365" y="160">Danceability</text>
+    <rect x="450" y="150" width="170" height="10" rx="5" fill="#2a1a10"/>
+    <rect x="450" y="150" width="0" height="10" rx="5" fill="url(#fill)"><animate attributeName="width" values="0;0;68;68;0;0" keyTimes="0;0.36;0.48;0.93;0.97;1" dur="8s" repeatCount="indefinite"/></rect>
+
+    <text x="365" y="194">Acoustic</text>
+    <rect x="450" y="184" width="170" height="10" rx="5" fill="#2a1a10"/>
+    <rect x="450" y="184" width="0" height="10" rx="5" fill="url(#fill)"><animate attributeName="width" values="0;0;138;138;0;0" keyTimes="0;0.39;0.51;0.93;0.97;1" dur="8s" repeatCount="indefinite"/></rect>
+  </g>
+  <text x="365" y="226" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="11" fill="#8a7566">illustrative values</text>
+
+  <!-- 3: song card -->
+  <g opacity="0">
+    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.5;0.58;0.93;0.97;1" dur="8s" repeatCount="indefinite"/>
+    <rect x="700" y="76" width="270" height="150" rx="20" fill="#2a1a10" stroke="#ff8a2a" stroke-opacity="0.6"/>
+    <g transform="translate(750 126)">
+      <g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="4s" repeatCount="indefinite"/>
+        <circle r="30" fill="#0d0907" stroke="#ff8a2a" stroke-opacity="0.6"/>
+        <circle r="20" fill="none" stroke="#2c1d14" stroke-width="2"/>
+        <circle r="10" fill="#ff7a1a"/><circle r="2" fill="#140e0b"/>
+        <path d="M-26 0 A26 26 0 0 1 0 -26" stroke="#fff" stroke-opacity="0.15" stroke-width="3" fill="none"/>
+      </g>
+    </g>
+    <g font-family="Inter, 'Segoe UI', Arial, sans-serif">
+      <text x="792" y="116" font-size="15" font-weight="700" fill="#fbeedd">Kabhi Jo Baadal Barse</text>
+      <text x="792" y="136" font-size="12" fill="#a58f7e">Arijit Singh</text>
+      <rect x="792" y="152" width="58" height="18" rx="9" fill="#ff8a2a" fill-opacity="0.18" stroke="#ff8a2a"/>
+      <text x="821" y="165" font-size="10" font-weight="700" fill="#ffb347" text-anchor="middle">320 kbps</text>
+    </g>
+    <rect x="722" y="196" width="226" height="5" rx="2.5" fill="#3a2518"/>
+    <rect x="722" y="196" width="0" height="5" rx="2.5" fill="url(#fill)"><animate attributeName="width" values="0;226" dur="4s" begin="0s" repeatCount="indefinite"/></rect>
+  </g>
+
+  <!-- equalizer footer -->
+  <g fill="url(#fill)" opacity="0.85">
+    <rect x="30" y="296" width="6" height="8" rx="3"><animate attributeName="height" values="6;30;10;24;6" dur="1.2s" repeatCount="indefinite"/><animate attributeName="y" values="300;276;296;282;300" dur="1.2s" repeatCount="indefinite"/></rect>
+    <rect x="44" y="296" width="6" height="8" rx="3"><animate attributeName="height" values="20;8;30;12;20" dur="1.0s" repeatCount="indefinite"/><animate attributeName="y" values="286;298;276;294;286" dur="1.0s" repeatCount="indefinite"/></rect>
+    <rect x="58" y="296" width="6" height="8" rx="3"><animate attributeName="height" values="10;28;6;22;10" dur="1.4s" repeatCount="indefinite"/><animate attributeName="y" values="296;278;300;284;296" dur="1.4s" repeatCount="indefinite"/></rect>
+    <rect x="72" y="296" width="6" height="8" rx="3"><animate attributeName="height" values="26;10;24;8;26" dur="0.9s" repeatCount="indefinite"/><animate attributeName="y" values="280;296;282;298;280" dur="0.9s" repeatCount="indefinite"/></rect>
+  </g>
+  <text x="970" y="302" text-anchor="end" font-family="Georgia, serif" font-style="italic" font-size="14" fill="#ff8a2a">dil se zuba tak</text>
+</svg>
