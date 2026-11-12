@@ -9,11 +9,9 @@ import {
 } from '../data/searchEngine'
 import { api } from '../api'
 
-// One <audio> element for the whole app — like a real player. The queue,
-// repeat modes, shuffle and infinite autoplay live here so any view can start
-// playback, mobile background keeps playing uninterrupted, and the mini-player
-// always reflects it. Internal state is mirrored into refs so listeners never
-// read stale closures.
+// One <audio> element for the app. Queue and playback state live here; browser
+// background behavior still depends on the platform. State refs keep media
+// event listeners synchronized with the latest React state.
 
 const AudioContext = createContext(null)
 
@@ -25,6 +23,14 @@ const fallbackCover = (track) =>
     )
 
 const trackKey = (t) => t?.id || `${t?.title || ''}|${t?.artist || ''}`
+const STREAM_URL_CACHE_TTL = 25 * 60 * 1000
+const playbackDebugEnabled = () => {
+  try {
+    return localStorage.getItem('sangeet.debug') === 'true'
+  } catch {
+    return false
+  }
+}
 
 const ALL_FALLBACK_TRACKS = [
   ...Object.values(DEFAULT_CATALOGS).flat(),
@@ -109,7 +115,7 @@ function findRelatedContinuation(currentTrack, existingQueue = []) {
 
   // If pool was completely exhausted, recycle fresh tracks from catalog
   if (picked.length === 0) {
-    return ALL_FALLBACK_TRACKS.slice(0, 8)
+    return []
   }
   return picked
 }
@@ -124,11 +130,20 @@ export function AudioProvider({ children }) {
   const [repeat, setRepeat] = useState('off') // off | all | one
   const [shuffle, setShuffle] = useState(false)
   const [error, setError] = useState(null)
+  const [debugMetrics, setDebugMetrics] = useState({})
 
   // Authoritative real-time player state ref so background native DOM listeners,
   // lock screen MediaSession, and phone lock screen continuation NEVER read stale React closures.
   const stateRef = useRef({ current: null, repeat: 'off', shuffle: false, duration: 0, playing: false })
   const isTransitioningRef = useRef(false)
+  const playRequestRef = useRef(0)
+  const resolveControllerRef = useRef(null)
+  const preloadControllerRef = useRef(null)
+  const preloadedNextRef = useRef('')
+  const prefetchCacheRef = useRef(new Set())
+  const streamCacheRef = useRef(new Map())
+  const tapStartedAtRef = useRef(null)
+  const trackEndedAtRef = useRef(null)
   const audioCtxRef = useRef(null)
   const watchdogRef = useRef(null)  // mobile safety watchdog interval
   const lastProgressRef = useRef(0) // detect truly stalled audio
@@ -192,14 +207,80 @@ export function AudioProvider({ children }) {
     }
   }, [])
 
-  // Proactive background pre-fetch: warms up HTTP cache, DNS, and TLS handshake
-  // so track transitions have 0 latency and mobile OS audio hardware never suspends.
+  // Best-effort warm-up; whether the response is reused depends on the browser and CDN.
   const prefetchTrack = useCallback((url) => {
-    if (!url || typeof window === 'undefined') return
+    if (!url || typeof window === 'undefined' || prefetchCacheRef.current.has(url)) return
+    prefetchCacheRef.current.add(url)
+    if (prefetchCacheRef.current.size > 100) {
+      prefetchCacheRef.current.delete(prefetchCacheRef.current.values().next().value)
+    }
     try {
       fetch(url, { mode: 'no-cors' }).catch(() => {})
     } catch {}
   }, [])
+
+  const resolvePlayableTrack = useCallback(async (track, signal) => {
+    const resolved = resolveTrackStream(track)
+    if (resolved?.stream_url) return resolved
+
+    const cacheKey = trackKey(track)
+    const cached = streamCacheRef.current.get(cacheKey)
+    if (cached && cached.expiresAt > Date.now()) {
+      return { ...resolved, stream_url: cached.streamUrl }
+    }
+
+    const searchRes = await api.search(`${track.title} ${track.artist || ''}`, { signal })
+    const candidate = searchRes?.tracks?.find((item) => item?.stream_url)
+    if (!candidate) return resolved
+
+    const playable = {
+      ...resolved,
+      stream_url: candidate.stream_url,
+      cover: resolved.cover || candidate.cover,
+    }
+    streamCacheRef.current.set(cacheKey, {
+      streamUrl: candidate.stream_url,
+      expiresAt: Date.now() + STREAM_URL_CACHE_TTL,
+    })
+    return playable
+  }, [])
+
+  const preloadNextTrack = useCallback((cur) => {
+    const nextIndex = cur.index + 1
+    const nextTrack = cur.queue?.[nextIndex]
+    if (!nextTrack) return
+
+    const preloadKey = `${trackKey(cur.track)}:${trackKey(nextTrack)}`
+    if (preloadedNextRef.current === preloadKey) return
+    preloadedNextRef.current = preloadKey
+    preloadControllerRef.current?.abort()
+    const controller = new AbortController()
+    preloadControllerRef.current = controller
+
+    resolvePlayableTrack(nextTrack, controller.signal)
+      .then((playable) => {
+        const latest = stateRef.current.current
+        if (
+          controller.signal.aborted ||
+          !playable?.stream_url ||
+          !latest ||
+          latest.queue !== cur.queue ||
+          latest.index !== cur.index ||
+          trackKey(latest.track) !== trackKey(cur.track)
+        ) {
+          return
+        }
+        latest.queue[nextIndex] = playable
+        stateRef.current.current = latest
+        prefetchTrack(playable.stream_url)
+      })
+      .catch((error) => {
+        if (!controller.signal.aborted) {
+          preloadedNextRef.current = ''
+          console.warn('Next-track pre-resolution failed:', error)
+        }
+      })
+  }, [prefetchTrack, resolvePlayableTrack])
 
   // ── Mobile Safety Watchdog ────────────────────────────────────────────────
   // Fires every 3 s while music is supposed to play. Catches cases where:
@@ -271,6 +352,9 @@ export function AudioProvider({ children }) {
         const cur = stateRef.current.current
         if (cur && cur.queue && el.duration > 5) {
           const nextIdx = cur.index + 1
+          if (el.currentTime >= el.duration * 0.5 || el.duration - el.currentTime <= 20) {
+            preloadNextTrack(cur)
+          }
           if (nextIdx < cur.queue.length && cur.queue[nextIdx]) {
             if (!cur.queue[nextIdx].stream_url) {
               cur.queue[nextIdx] = resolveTrackStream(cur.queue[nextIdx])
@@ -308,6 +392,22 @@ export function AudioProvider({ children }) {
         if ('mediaSession' in navigator) {
           navigator.mediaSession.playbackState = 'playing'
         }
+      })
+      el.addEventListener('playing', () => {
+        const now = performance.now()
+        const metrics = {}
+        if (tapStartedAtRef.current !== null) {
+          metrics.tap_to_first_audio_ms = Math.round(now - tapStartedAtRef.current)
+        }
+        if (trackEndedAtRef.current !== null) {
+          metrics.track_gap_ms = Math.round(now - trackEndedAtRef.current)
+        }
+        if (playbackDebugEnabled() && Object.keys(metrics).length > 0) {
+          setDebugMetrics((previous) => ({ ...previous, ...metrics }))
+          console.debug('[sangeet:playback]', metrics)
+        }
+        tapStartedAtRef.current = null
+        trackEndedAtRef.current = null
       })
       el.addEventListener('pause', () => {
         // Prevent end-of-track pause or track transition from falsely stopping background playback session on mobile
@@ -358,6 +458,8 @@ export function AudioProvider({ children }) {
         if (!el.src || el.networkState === 0) {
           return
         }
+        const active = stateRef.current.current
+        if (active?.track?.stream_url && el.src !== active.track.stream_url) return
 
         // Automatic Bitrate Resiliency: if 320kbps fails on CDN, degrade to 160kbps, then 96kbps
         if (/_320\.(mp4|m4a|mp3)/i.test(el.src)) {
@@ -442,10 +544,12 @@ export function AudioProvider({ children }) {
         setPlaying(false)
       })
 
-      // Continuous non-stop background audio progression (100% resilient for mobile background & lock screen)
+      // Advance synchronously from the media completion event.
       el.addEventListener('ended', () => {
+        if (isTransitioningRef.current) return
         const cur = stateRef.current.current
         if (!cur) return
+        trackEndedAtRef.current = performance.now()
 
         if (stateRef.current.repeat === 'one') {
           el.currentTime = 0
@@ -466,7 +570,11 @@ export function AudioProvider({ children }) {
             if (moreTracks.length > 0) {
               q.push(...moreTracks)
             } else {
-              nextIdx = 0
+              stateRef.current.playing = false
+              setPlaying(false)
+              setError('Queue finished.')
+              updateMediaSession(cur.track, false)
+              return
             }
           }
         }
@@ -508,19 +616,9 @@ export function AudioProvider({ children }) {
           }
         }
 
-        // Ultimate safety fallback to guarantee continuous playback never stops
-        if (!nextTrack && ALL_FALLBACK_TRACKS.length > 0) {
-          nextTrack = ALL_FALLBACK_TRACKS[0]
-          q.push(nextTrack)
-          nextIdx = q.length - 1
-        }
-
         if (nextTrack && nextTrack.stream_url) {
           isTransitioningRef.current = true
-          // CRITICAL FIX: Synchronously mutate stateRef.current.current BEFORE setting el.src and calling play().
-          // On mobile devices with screen locked or app minimized, React background re-renders are suspended!
-          // Updating stateRef.current.current synchronously guarantees that when THIS song ends, the NEXT song
-          // will increment from this exact index, continuing track 3, 4, 5... sequentially forever without stopping!
+          // Update the ref before swapping the source so a later completion sees the new queue position.
           const nextState = { track: nextTrack, queue: q, index: nextIdx }
           stateRef.current.current = nextState
           setCurrent(nextState)
@@ -574,13 +672,18 @@ export function AudioProvider({ children }) {
               prefetchTrack(fut.stream_url)
             }
           }
+        } else {
+          stateRef.current.playing = false
+          setPlaying(false)
+          setError('Queue finished.')
+          updateMediaSession(cur.track, false)
         }
       })
 
       audioRef.current = el
     }
     return audioRef.current
-  }, [prefetchTrack, updateMediaSession, startWatchdog, stopWatchdog])
+  }, [preloadNextTrack, prefetchTrack, updateMediaSession, startWatchdog, stopWatchdog])
 
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume
@@ -588,6 +691,13 @@ export function AudioProvider({ children }) {
 
   const playTrack = useCallback(
     async (track, queue = null) => {
+      const requestId = ++playRequestRef.current
+      tapStartedAtRef.current = performance.now()
+      resolveControllerRef.current?.abort()
+      preloadControllerRef.current?.abort()
+      preloadedNextRef.current = ''
+      const controller = new AbortController()
+      resolveControllerRef.current = controller
       enableAudioKeepAlive()
       const cur = stateRef.current.current
       let q = queue
@@ -603,34 +713,37 @@ export function AudioProvider({ children }) {
       }
 
       const index = q.findIndex((t) => trackKey(t) === trackKey(track))
-      const el = ensureAudio()
       setError(null)
 
-      let activeTrack = resolveTrackStream(track)
-      if (!activeTrack.stream_url) {
-        try {
-          const searchRes = await api.search(`${activeTrack.title} ${activeTrack.artist || ''}`)
-          const candidate = searchRes?.tracks?.find((t) => t && t.stream_url)
-          if (candidate && candidate.stream_url) {
-            activeTrack = {
-              ...activeTrack,
-              stream_url: candidate.stream_url,
-              cover: activeTrack.cover || candidate.cover,
-            }
-          }
-        } catch { /* ignore */ }
+      let activeTrack
+      try {
+        activeTrack = await resolvePlayableTrack(track, controller.signal)
+      } catch (error) {
+        if (controller.signal.aborted || requestId !== playRequestRef.current) return
+        setError(`Could not resolve “${track.title || 'this track'}”: ${error.message}`)
+        return
       }
+      if (controller.signal.aborted || requestId !== playRequestRef.current) return
 
       const activeIndex = index >= 0 ? index : 0
       q[activeIndex] = activeTrack
 
+      const el = ensureAudio()
       // CRITICAL: Synchronously update stateRef.current.current
       const nextState = { track: activeTrack, queue: q, index: activeIndex }
       stateRef.current.current = nextState
       setCurrent(nextState)
 
-      if (activeTrack.stream_url && el.src !== activeTrack.stream_url) {
+      if (!activeTrack.stream_url) {
+        setError(`No playable stream was found for “${track.title || 'this track'}”.`)
+        stateRef.current.playing = false
+        setPlaying(false)
+        return
+      }
+
+      if (el.src !== activeTrack.stream_url) {
         el.src = activeTrack.stream_url
+        el.load()
       }
 
       updateMediaSession(activeTrack, true)
@@ -638,16 +751,18 @@ export function AudioProvider({ children }) {
       if (activeTrack.stream_url) {
         el.play()
           .then(() => {
+            if (requestId !== playRequestRef.current) return
             stateRef.current.playing = true
             setPlaying(true)
           })
           .catch((err) => {
+            if (requestId !== playRequestRef.current) return
             if (err.name === 'NotAllowedError') {
               setError('Playback paused by browser — tap play button.')
             } else if (err.name === 'AbortError') {
               // Benign: interrupted by another play/pause action
             } else {
-              setError(null)
+              setError(`Could not start “${activeTrack.title || 'this track'}”: ${err.message}`)
             }
           })
 
@@ -659,14 +774,15 @@ export function AudioProvider({ children }) {
             prefetchTrack(fut.stream_url)
           }
         }
-      } else {
-        setError('Stream URL unavailable right now.')
       }
     },
-    [ensureAudio, enableAudioKeepAlive, prefetchTrack, updateMediaSession]
+    [ensureAudio, enableAudioKeepAlive, prefetchTrack, resolvePlayableTrack, updateMediaSession]
   )
 
   const toggle = useCallback(() => {
+    playRequestRef.current += 1
+    resolveControllerRef.current?.abort()
+    preloadControllerRef.current?.abort()
     enableAudioKeepAlive()
     const el = ensureAudio()
     const cur = stateRef.current.current
@@ -829,6 +945,7 @@ export function AudioProvider({ children }) {
       repeat,
       shuffle,
       error,
+      debugMetrics,
       setError,
       playTrack,
       toggle,
@@ -849,6 +966,7 @@ export function AudioProvider({ children }) {
       repeat,
       shuffle,
       error,
+      debugMetrics,
       playTrack,
       toggle,
       next,

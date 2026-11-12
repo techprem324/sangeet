@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 380" width="460" height="380" role="img" aria-label="Live mood radar">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#140e0b"/><stop offset="1" stop-color="#25140a"/></linearGradient>
+    <radialGradient id="g" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#ff8a2a" stop-opacity="0.55"/><stop offset="1" stop-color="#ff5500" stop-opacity="0.12"/></radialGradient>
+  </defs>
+  <rect width="460" height="380" rx="22" fill="url(#bg)"/>
+  <text x="26" y="38" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="3" fill="#ff8a2a">LIVE MOOD RADAR</text>
+
+  <g transform="translate(0 10)" fill="none" stroke="#3a2518" stroke-width="1.5">
+    <polygon points="230,60 350,180 230,300 110,180"/>
+    <polygon points="230,100 310,180 230,260 150,180"/>
+    <polygon points="230,140 270,180 230,220 190,180"/>
+    <path d="M230 60 V300 M110 180 H350"/>
+
+    <polygon fill="url(#g)" stroke="#ffb347" stroke-width="2.5" stroke-linejoin="round" points="230,156 266,180 230,222 134,180">
+      <animate attributeName="points" dur="12s" repeatCount="indefinite" calcMode="spline"
+        keyTimes="0;0.2;0.33;0.53;0.66;0.86;1"
+        keySplines=".4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1;.4 0 .2 1"
+        values="230,156 266,180 230,222 134,180;
+                230,156 266,180 230,222 134,180;
+                230,72 332,180 230,276 206,180;
+                230,72 332,180 230,276 206,180;
+                230,108 344,180 230,264 218,180;
+                230,108 344,180 230,264 218,180;
+                230,156 266,180 230,222 134,180"/>
+    </polygon>
+  </g>
+
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" fill="#fbeedd" text-anchor="middle">
+    <text x="230" y="66">Valence</text>
+    <text x="398" y="195" text-anchor="end">Energy</text>
+    <text x="230" y="326">Danceability</text>
+    <text x="62" y="195" text-anchor="start">Acoustic</text>
+  </g>
+
+  <!-- caption cycles with the shape -->
+  <g font-family="Georgia, serif" font-style="italic" font-size="19" fill="#ffb347" text-anchor="middle">
+    <text x="230" y="358" opacity="1">“heartbroken, raining at 2am”
+      <animate attributeName="opacity" values="1;1;0;0;0;0;1" keyTimes="0;0.25;0.3;0.7;0.9;0.95;1" dur="12s" repeatCount="indefinite"/></text>
+    <text x="230" y="358" opacity="0">“best day ever, windows down”
+      <animate attributeName="opacity" values="0;0;1;1;0;0;0" keyTimes="0;0.28;0.35;0.5;0.56;0.9;1" dur="12s" repeatCount="indefinite"/></text>
+    <text x="230" y="358" opacity="0">“gym, last set, no mercy”
+      <animate attributeName="opacity" values="0;0;0;1;1;0;0" keyTimes="0;0.6;0.68;0.7;0.83;0.9;1" dur="12s" repeatCount="indefinite"/></text>
+  </g>
+</svg>

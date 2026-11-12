@@ -232,6 +232,21 @@ function setLocalPlaylists(items) {
   safeSetItem(storage, key, JSON.stringify(normalized))
 }
 
+export function getRecentSearches() {
+  const { storage, key } = getUserStorageKey('search_recent')
+  try {
+    const saved = JSON.parse(safeGetItem(storage, key) || '[]')
+    return Array.isArray(saved) ? saved.filter((item) => typeof item === 'string').slice(0, 10) : []
+  } catch {
+    return []
+  }
+}
+
+export function setRecentSearches(items) {
+  const { storage, key } = getUserStorageKey('search_recent')
+  safeSetItem(storage, key, JSON.stringify((Array.isArray(items) ? items : []).slice(0, 10)))
+}
+
 function getLocalHistory() {
   const { storage, key } = getUserStorageKey('history')
   try {
@@ -260,6 +275,7 @@ const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 async function request(path, options = {}, timeoutMs = 4000) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
+  const abortFromCaller = () => controller.abort(options.signal?.reason)
 
   const headers = {
     'Content-Type': 'application/json',
@@ -271,16 +287,20 @@ async function request(path, options = {}, timeoutMs = 4000) {
   const url = API_BASE ? `${API_BASE}/api${path}` : `/api${path}`
 
   try {
+    if (options.signal?.aborted) {
+      abortFromCaller()
+    } else {
+      options.signal?.addEventListener('abort', abortFromCaller, { once: true })
+    }
     const res = await fetch(url, { ...options, headers, signal: controller.signal })
-    clearTimeout(timer)
     if (!res.ok) {
       const body = await res.json().catch(() => ({}))
       throw new Error(body.error || `Request failed (${res.status})`)
     }
     return await res.json()
-  } catch (err) {
+  } finally {
     clearTimeout(timer)
-    throw err
+    options.signal?.removeEventListener('abort', abortFromCaller)
   }
 }
 
@@ -293,6 +313,8 @@ const ALL_CATALOG_TRACKS = [
   ...POPULAR_GENRES.flatMap((g) => g.tracks || []),
   ...FAMOUS_LYRICS_MAP.filter((m) => m.stream_url),
 ]
+const SEARCH_RESULT_CACHE = new Map()
+const SEARCH_RESULT_TTL = 30 * 1000
 
 export function isTrackByArtist(track, artist) {
   if (!track || !artist) return false
@@ -475,9 +497,16 @@ export const api = {
     return getSearchPredictions(q)
   },
 
-  search: async (q) => {
+  search: async (q, { signal } = {}) => {
     const query = (q || '').trim()
     if (!query) return { query, tracks: [] }
+    if (signal?.aborted) throw signal.reason || new DOMException('Search aborted', 'AbortError')
+    const cacheKey = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase()
+    const cached = SEARCH_RESULT_CACHE.get(cacheKey)
+    if (cached?.expiresAt > Date.now()) {
+      return { ...cached.result, tracks: [...cached.result.tracks] }
+    }
+    if (cached) SEARCH_RESULT_CACHE.delete(cacheKey)
 
     const queryLower = query.toLowerCase()
     // Check if query matches a famous lyrics phrase
@@ -491,17 +520,20 @@ export const api = {
 
     let backendTracks = []
     try {
-      const res = await request(`/search?q=${encodeURIComponent(effectiveQuery)}`, {}, 3500)
+      const res = await request(`/search?q=${encodeURIComponent(effectiveQuery)}`, { signal }, 3500)
       if (res && Array.isArray(res.tracks) && res.tracks.length > 0) {
         backendTracks = res.tracks
       } else if (lyricMatch && effectiveQuery !== query) {
         // Fallback to original query on backend
-        const fallbackRes = await request(`/search?q=${encodeURIComponent(query)}`, {}, 3000)
+        const fallbackRes = await request(`/search?q=${encodeURIComponent(query)}`, { signal }, 3000)
         if (fallbackRes && Array.isArray(fallbackRes.tracks)) {
           backendTracks = fallbackRes.tracks
         }
       }
-    } catch {}
+    } catch (error) {
+      if (signal?.aborted) throw error
+    }
+    if (signal?.aborted) throw signal.reason || new DOMException('Search aborted', 'AbortError')
 
     // Run client-side fuzzy, keyword & lyrics scoring engine
     const catalogMatches = smartSearchCatalog(query, ALL_CATALOG_TRACKS)
@@ -572,13 +604,18 @@ export const api = {
       }
     }
 
-    return {
+    const result = {
       query,
       tracks: merged.slice(0, 45),
       matchedLyric: lyricMatch ? lyricMatch.snippet : null,
       matchedMood: detectMoodOrGenre(query),
       matchedArtist: detectedArtist,
     }
+    SEARCH_RESULT_CACHE.set(cacheKey, { result, expiresAt: Date.now() + SEARCH_RESULT_TTL })
+    if (SEARCH_RESULT_CACHE.size > 50) {
+      SEARCH_RESULT_CACHE.delete(SEARCH_RESULT_CACHE.keys().next().value)
+    }
+    return result
   },
 
   getArtistPlaylist: async (artistIdOrName) => {
@@ -1220,10 +1257,14 @@ export const api = {
 
   addPlaylistTrack: async (id, track) => {
     if (!id || !track) return { status: 'error' }
+    const trackWithAddedAt = {
+      ...track,
+      added_at: track.added_at || new Date().toISOString(),
+    }
     try {
       await request(`/playlists/${id}/tracks`, {
         method: 'POST',
-        body: JSON.stringify({ user_id: getUserId(), track }),
+        body: JSON.stringify({ user_id: getUserId(), track: trackWithAddedAt }),
       }, 2500)
     } catch {}
 
@@ -1234,7 +1275,7 @@ export const api = {
       const tid = track.id || track.track_id || track.title
       const key = track._key || tid || `${track.title || ''}|${track.artist || ''}`
       const trackPayload = {
-        ...track,
+        ...trackWithAddedAt,
         id: tid,
         track_id: tid,
         _key: key,

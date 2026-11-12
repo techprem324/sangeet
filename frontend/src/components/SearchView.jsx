@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { api } from '../api'
+import { api, getRecentSearches, setRecentSearches as saveRecentSearches } from '../api'
 import { useAudio } from '../store/audio'
 import TrackCard from './TrackCard'
 import { SearchIcon, MusicIcon, XIcon, PlayIcon, PauseIcon, LyricsIcon, ShuffleIcon } from './icons'
@@ -61,12 +61,23 @@ function formatTime(seconds) {
   return `${m}:${s < 10 ? '0' : ''}${s}`
 }
 
+const normalizeQuery = (value) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLocaleLowerCase()
+
 export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }) {
   const audio = useAudio()
   const [q, setQ] = useState('')
   const [results, setResults] = useState(null)
   const [matchedLyric, setMatchedLyric] = useState(null)
   const [searching, setSearching] = useState(false)
+  const [searchError, setSearchError] = useState(false)
+  const [retrySearch, setRetrySearch] = useState(0)
+  const [recentSearches, setRecentSearches] = useState(getRecentSearches)
   const [showSuggestions, setShowSuggestions] = useState(false)
 
   // Active collection hub: null | { type: 'artist' | 'genre' | 'playlist' | 'fresh_drops', data: obj, originGenre?: obj }
@@ -82,6 +93,7 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1)
 
   const timer = useRef(null)
+  const searchController = useRef(null)
   const containerRef = useRef(null)
   const searchInputRef = useRef(null)
   const searchBarWrapperRef = useRef(null)
@@ -155,25 +167,44 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
     if (text.length < 2) {
       setResults(null)
       setMatchedLyric(null)
+      setSearchError(false)
       setSearching(false)
       return
     }
 
     clearTimeout(timer.current)
+    searchController.current?.abort()
+    const controller = new AbortController()
+    searchController.current = controller
+    setResults([])
+    setSearchError(false)
     setSearching(true)
     timer.current = setTimeout(async () => {
       try {
-        const d = await api.search(text)
+        const d = await api.search(text, { signal: controller.signal })
+        if (controller.signal.aborted) return
         setResults(d.tracks || [])
         setMatchedLyric(d.matchedLyric || null)
-      } catch {
+        setRecentSearches((previous) => {
+          const normalized = normalizeQuery(text)
+          const next = [text, ...previous.filter((item) => normalizeQuery(item) !== normalized)].slice(0, 10)
+          saveRecentSearches(next)
+          return next
+        })
+      } catch (error) {
+        if (controller.signal.aborted || error?.name === 'AbortError') return
         setResults([])
+        setSearchError(true)
+      } finally {
+        if (!controller.signal.aborted) setSearching(false)
       }
-      setSearching(false)
-    }, 320)
+    }, 300)
 
-    return () => clearTimeout(timer.current)
-  }, [q])
+    return () => {
+      clearTimeout(timer.current)
+      controller.abort()
+    }
+  }, [q, retrySearch])
 
   // Load dedicated collection when activeHub changes
   useEffect(() => {
@@ -303,6 +334,7 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
     setQ('')
     setResults(null)
     setMatchedLyric(null)
+    setSearchError(false)
     setShowSuggestions(false)
     if (searchInputRef.current) {
       searchInputRef.current.focus()
@@ -560,6 +592,30 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
               </button>
             )}
           </div>
+
+          {!q.trim() && recentSearches.length > 0 && (
+            <div className="mt-3 flex flex-wrap items-center gap-2" aria-label="Recent searches">
+              <span className="text-[11px] font-semibold uppercase tracking-wide text-sand-dim">Recent</span>
+              {recentSearches.map((recent) => (
+                <button
+                  key={normalizeQuery(recent)}
+                  onClick={() => handleSelectQuery(recent)}
+                  className="rounded-full border border-edge bg-surface px-3 py-1 text-xs text-sand transition-colors hover:border-ember/50 hover:text-cream"
+                >
+                  {recent}
+                </button>
+              ))}
+              <button
+                onClick={() => {
+                  setRecentSearches([])
+                  saveRecentSearches([])
+                }}
+                className="px-2 py-1 text-xs text-sand-dim transition-colors hover:text-cream"
+              >
+                Clear
+              </button>
+            </div>
+          )}
 
           {/* Autocomplete Predictions Dropdown with full Arrow Key Accessibility */}
           {showSuggestions && predictions.length > 0 && !activeHub && (
@@ -1116,6 +1172,30 @@ export default function SearchView({ onLyrics, resetTrigger, freshDropsTrigger }
           /* CASE 3: ACTIVE SEARCH RESULTS (WHEN USER TYPES IN SEARCH BOX) */
           /* ============================================================= */
           <div className="space-y-6">
+            {searchError && (
+              <div role="alert" className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-rose/30 bg-rose/10 px-4 py-3 text-sm text-cream">
+                <span>Search couldn’t be completed. Check your connection and try again.</span>
+                <button
+                  onClick={() => setRetrySearch((value) => value + 1)}
+                  className="rounded-full border border-rose/40 px-3 py-1 text-xs font-semibold hover:bg-rose/10"
+                >
+                  Retry
+                </button>
+              </div>
+            )}
+            {searching && (
+              <div role="status" aria-label="Searching" className="space-y-2">
+                <div className="h-4 w-40 animate-pulse rounded bg-surface-3" />
+                <div className="h-14 animate-pulse rounded-xl bg-surface-2" />
+                <div className="h-14 animate-pulse rounded-xl bg-surface-2" />
+              </div>
+            )}
+            {!searching && !searchError && results.length === 0 && (
+              <div className="rounded-xl border border-edge-soft bg-surface px-4 py-8 text-center">
+                <p className="font-medium text-cream">No playable songs found for “{q.trim()}”.</p>
+                <p className="mt-1 text-sm text-sand-dim">Try a song title, artist, lyric, or a shorter query.</p>
+              </div>
+            )}
             {/* 1. AI Mood & Genre Match Banner (e.g., "sad songs", "romantic", "party", "lo-fi") */}
             {aiMoodMatch && (
               <div

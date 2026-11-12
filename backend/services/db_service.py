@@ -267,7 +267,8 @@ def get_playlist(playlist_id: str, user_id: str) -> Optional[Dict]:
 
 
 def add_track_to_playlist(playlist_id: str, user_id: str, track: Dict) -> Optional[Dict]:
-    track = {k: track.get(k, "") for k in ("id", "title", "artist", "album", "cover", "stream_url", "duration")}
+    fields = ("id", "title", "artist", "album", "cover", "stream_url", "duration", "added_at")
+    track = {key: track.get(key, "") for key in fields}
     key = _playlist_track_key(track)
     with _lock:
         if _mongo():

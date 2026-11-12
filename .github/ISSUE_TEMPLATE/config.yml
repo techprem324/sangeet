@@ -4,5 +4,5 @@ contact_links:
     url: https://github.com/techprem324/sangeet/security/advisories/new
     about: Report security issues privately. Do not publish exploit details in a public issue.
   - name: Contribution guide
-    url: https://github.com/techprem324/sangeet/blob/main/CONTRIBUTING.md
-    about: Read how to set up the project and submit a pull request.
+    url: https://github.com/techprem324/sangeet#readme
+    about: Read the project overview and setup instructions.
