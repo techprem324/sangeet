@@ -22,6 +22,7 @@ import {
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
+let memoryGuestId = ''
 
 function safeGetItem(storage, key) {
   try {
@@ -43,6 +44,16 @@ function safeRemoveItem(storage, key) {
   } catch {}
 }
 
+function createSecureId(prefix) {
+  const cryptoApi = globalThis.crypto
+  if (!cryptoApi || typeof cryptoApi.getRandomValues !== 'function') {
+    throw new Error('Secure ID generation is unavailable in this browser')
+  }
+  const bytes = cryptoApi.getRandomValues(new Uint8Array(16))
+  const id = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('')
+  return `${prefix}${id}`
+}
+
 export function getUser() {
   try {
     const raw = safeGetItem(localStorage, USER_KEY)
@@ -57,17 +68,15 @@ export function getUserId() {
   
   // Guest ID: scoped strictly to sessionStorage so guest visits
   // never pollute permanent user data and disappear on session end.
-  let guestId = ''
+  let storage
   try {
-    guestId = safeGetItem(sessionStorage, 'sangeet_guest_id')
-    if (!guestId) {
-      guestId = 'usr_guest_' + Math.random().toString(36).slice(2, 10)
-      safeSetItem(sessionStorage, 'sangeet_guest_id', guestId)
-    }
-  } catch {
-    guestId = 'usr_guest_temp'
-  }
-  return guestId
+    storage = sessionStorage
+  } catch {}
+  const guestId = safeGetItem(storage, 'sangeet_guest_id')
+  if (guestId) return guestId
+  if (!memoryGuestId) memoryGuestId = createSecureId('usr_guest_')
+  safeSetItem(storage, 'sangeet_guest_id', memoryGuestId)
+  return memoryGuestId
 }
 
 /**
@@ -172,7 +181,7 @@ function setLocalLiked(items) {
 
 function normalizePlaylist(p) {
   if (!p || typeof p !== 'object') return null
-  const id = p._id || p.id || ('pl_' + Math.random().toString(36).slice(2, 9))
+  const id = p._id || p.id || createSecureId('pl_')
   const tracks = (Array.isArray(p.tracks) ? p.tracks : []).map((t, idx) => {
     const tid = t.id || t.track_id || t.title
     const key = t._key || tid || `track_${idx}`
@@ -369,7 +378,7 @@ export const api = {
     } catch {
       // Local offline fallback
       const user = {
-        user_id: 'usr_' + Math.random().toString(36).slice(2, 10),
+        user_id: createSecureId('usr_'),
         username,
         email,
         name: name || username,
@@ -394,7 +403,7 @@ export const api = {
     // Local / Netlify fallback
     const isPrem = (username || '').trim().toLowerCase() === 'prem'
     const user = {
-      user_id: isPrem ? 'usr_b8afdd6116' : ('usr_' + Math.random().toString(36).slice(2, 10)),
+      user_id: isPrem ? 'usr_b8afdd6116' : createSecureId('usr_'),
       username: username || 'listener',
       name: isPrem ? 'Prem Srivastava' : (username || 'listener'),
     }
