@@ -15,14 +15,19 @@ Cleans and standardizes the song dataset according to the verification rules:
 import argparse
 import json
 import re
+from pathlib import Path
 import pandas as pd
+
+DATASET_DIR = Path(__file__).resolve().parents[1] / "data" / "datasets"
 
 BAD_TITLE_PATTERN = re.compile(
     r"\b(live|remix|karaoke|instrumental|demo|cover|tribute|slowed|reverb|sped up)\b",
     re.IGNORECASE
 )
 
-def clean_dataset(input_file="songs.csv", threshold=10000):
+def clean_dataset(input_file=None, threshold=10000):
+    if input_file is None:
+        input_file = DATASET_DIR / "songs.csv"
     print(f"Loading raw dataset from {input_file}...")
     df = pd.read_csv(input_file, dtype=str).fillna("")
     initial_count = len(df)
@@ -95,13 +100,14 @@ def clean_dataset(input_file="songs.csv", threshold=10000):
 
     # Save outputs
     print("\nSaving clean outputs...")
-    df.to_csv("songs_clean.csv", index=False, encoding="utf-8")
+    DATASET_DIR.mkdir(parents=True, exist_ok=True)
+    df.to_csv(DATASET_DIR / "songs_clean.csv", index=False, encoding="utf-8")
     print(" -> Saved songs_clean.csv")
 
-    df.to_json("songs_clean.json", orient="records", indent=2, force_ascii=False)
+    df.to_json(DATASET_DIR / "songs_clean.json", orient="records", indent=2, force_ascii=False)
     print(" -> Saved songs_clean.json")
 
-    df.to_parquet("songs_clean.parquet", index=False, engine="pyarrow")
+    df.to_parquet(DATASET_DIR / "songs_clean.parquet", index=False, engine="pyarrow")
     print(" -> Saved songs_clean.parquet")
 
     # Top 10 artists by song count
@@ -114,7 +120,7 @@ def clean_dataset(input_file="songs.csv", threshold=10000):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input", default="songs.csv", help="Input raw CSV path")
+    parser.add_argument("--input", default=DATASET_DIR / "songs.csv", help="Input raw CSV path")
     parser.add_argument("--threshold", type=int, default=10000, help="Popularity listener threshold")
     args = parser.parse_args()
     clean_dataset(args.input, args.threshold)

@@ -22,6 +22,7 @@ import {
 
 const USER_ID_KEY = 'sargam.user_id'
 const USER_KEY = 'sangeet_user'
+let memoryGuestId = ''
 
 function safeGetItem(storage, key) {
   try {
@@ -43,6 +44,16 @@ function safeRemoveItem(storage, key) {
   } catch {}
 }
 
+function createSecureId(prefix) {
+  const cryptoApi = globalThis.crypto
+  if (!cryptoApi || typeof cryptoApi.getRandomValues !== 'function') {
+    throw new Error('Secure ID generation is unavailable in this browser')
+  }
+  const bytes = cryptoApi.getRandomValues(new Uint8Array(16))
+  const id = Array.from(bytes, (byte) => byte.toString(16).padStart(2, '0')).join('')
+  return `${prefix}${id}`
+}
+
 export function getUser() {
   try {
     const raw = safeGetItem(localStorage, USER_KEY)
@@ -57,17 +68,15 @@ export function getUserId() {
   
   // Guest ID: scoped strictly to sessionStorage so guest visits
   // never pollute permanent user data and disappear on session end.
-  let guestId = ''
+  let storage
   try {
-    guestId = safeGetItem(sessionStorage, 'sangeet_guest_id')
-    if (!guestId) {
-      guestId = 'usr_guest_' + Math.random().toString(36).slice(2, 10)
-      safeSetItem(sessionStorage, 'sangeet_guest_id', guestId)
-    }
-  } catch {
-    guestId = 'usr_guest_temp'
-  }
-  return guestId
+    storage = sessionStorage
+  } catch {}
+  const guestId = safeGetItem(storage, 'sangeet_guest_id')
+  if (guestId) return guestId
+  if (!memoryGuestId) memoryGuestId = createSecureId('usr_guest_')
+  safeSetItem(storage, 'sangeet_guest_id', memoryGuestId)
+  return memoryGuestId
 }
 
 /**
@@ -172,7 +181,7 @@ function setLocalLiked(items) {
 
 function normalizePlaylist(p) {
   if (!p || typeof p !== 'object') return null
-  const id = p._id || p.id || ('pl_' + Math.random().toString(36).slice(2, 9))
+  const id = p._id || p.id || createSecureId('pl_')
   const tracks = (Array.isArray(p.tracks) ? p.tracks : []).map((t, idx) => {
     const tid = t.id || t.track_id || t.title
     const key = t._key || tid || `track_${idx}`
@@ -232,6 +241,21 @@ function setLocalPlaylists(items) {
   safeSetItem(storage, key, JSON.stringify(normalized))
 }
 
+export function getRecentSearches() {
+  const { storage, key } = getUserStorageKey('search_recent')
+  try {
+    const saved = JSON.parse(safeGetItem(storage, key) || '[]')
+    return Array.isArray(saved) ? saved.filter((item) => typeof item === 'string').slice(0, 10) : []
+  } catch {
+    return []
+  }
+}
+
+export function setRecentSearches(items) {
+  const { storage, key } = getUserStorageKey('search_recent')
+  safeSetItem(storage, key, JSON.stringify((Array.isArray(items) ? items : []).slice(0, 10)))
+}
+
 function getLocalHistory() {
   const { storage, key } = getUserStorageKey('history')
   try {
@@ -260,6 +284,7 @@ const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '')
 async function request(path, options = {}, timeoutMs = 4000) {
   const controller = new AbortController()
   const timer = setTimeout(() => controller.abort(), timeoutMs)
+  const abortFromCaller = () => controller.abort(options.signal?.reason)
 
   const headers = {
     'Content-Type': 'application/json',
@@ -271,16 +296,20 @@ async function request(path, options = {}, timeoutMs = 4000) {
   const url = API_BASE ? `${API_BASE}/api${path}` : `/api${path}`
 
   try {
+    if (options.signal?.aborted) {
+      abortFromCaller()
+    } else {
+      options.signal?.addEventListener('abort', abortFromCaller, { once: true })
+    }
     const res = await fetch(url, { ...options, headers, signal: controller.signal })
-    clearTimeout(timer)
     if (!res.ok) {
       const body = await res.json().catch(() => ({}))
       throw new Error(body.error || `Request failed (${res.status})`)
     }
     return await res.json()
-  } catch (err) {
+  } finally {
     clearTimeout(timer)
-    throw err
+    options.signal?.removeEventListener('abort', abortFromCaller)
   }
 }
 
@@ -293,6 +322,8 @@ const ALL_CATALOG_TRACKS = [
   ...POPULAR_GENRES.flatMap((g) => g.tracks || []),
   ...FAMOUS_LYRICS_MAP.filter((m) => m.stream_url),
 ]
+const SEARCH_RESULT_CACHE = new Map()
+const SEARCH_RESULT_TTL = 30 * 1000
 
 export function isTrackByArtist(track, artist) {
   if (!track || !artist) return false
@@ -347,7 +378,7 @@ export const api = {
     } catch {
       // Local offline fallback
       const user = {
-        user_id: 'usr_' + Math.random().toString(36).slice(2, 10),
+        user_id: createSecureId('usr_'),
         username,
         email,
         name: name || username,
@@ -372,7 +403,7 @@ export const api = {
     // Local / Netlify fallback
     const isPrem = (username || '').trim().toLowerCase() === 'prem'
     const user = {
-      user_id: isPrem ? 'usr_b8afdd6116' : ('usr_' + Math.random().toString(36).slice(2, 10)),
+      user_id: isPrem ? 'usr_b8afdd6116' : createSecureId('usr_'),
       username: username || 'listener',
       name: isPrem ? 'Prem Srivastava' : (username || 'listener'),
     }
@@ -475,9 +506,16 @@ export const api = {
     return getSearchPredictions(q)
   },
 
-  search: async (q) => {
+  search: async (q, { signal } = {}) => {
     const query = (q || '').trim()
     if (!query) return { query, tracks: [] }
+    if (signal?.aborted) throw signal.reason || new DOMException('Search aborted', 'AbortError')
+    const cacheKey = query.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase()
+    const cached = SEARCH_RESULT_CACHE.get(cacheKey)
+    if (cached?.expiresAt > Date.now()) {
+      return { ...cached.result, tracks: [...cached.result.tracks] }
+    }
+    if (cached) SEARCH_RESULT_CACHE.delete(cacheKey)
 
     const queryLower = query.toLowerCase()
     // Check if query matches a famous lyrics phrase
@@ -491,17 +529,20 @@ export const api = {
 
     let backendTracks = []
     try {
-      const res = await request(`/search?q=${encodeURIComponent(effectiveQuery)}`, {}, 3500)
+      const res = await request(`/search?q=${encodeURIComponent(effectiveQuery)}`, { signal }, 3500)
       if (res && Array.isArray(res.tracks) && res.tracks.length > 0) {
         backendTracks = res.tracks
       } else if (lyricMatch && effectiveQuery !== query) {
         // Fallback to original query on backend
-        const fallbackRes = await request(`/search?q=${encodeURIComponent(query)}`, {}, 3000)
+        const fallbackRes = await request(`/search?q=${encodeURIComponent(query)}`, { signal }, 3000)
         if (fallbackRes && Array.isArray(fallbackRes.tracks)) {
           backendTracks = fallbackRes.tracks
         }
       }
-    } catch {}
+    } catch (error) {
+      if (signal?.aborted) throw error
+    }
+    if (signal?.aborted) throw signal.reason || new DOMException('Search aborted', 'AbortError')
 
     // Run client-side fuzzy, keyword & lyrics scoring engine
     const catalogMatches = smartSearchCatalog(query, ALL_CATALOG_TRACKS)
@@ -572,13 +613,18 @@ export const api = {
       }
     }
 
-    return {
+    const result = {
       query,
       tracks: merged.slice(0, 45),
       matchedLyric: lyricMatch ? lyricMatch.snippet : null,
       matchedMood: detectMoodOrGenre(query),
       matchedArtist: detectedArtist,
     }
+    SEARCH_RESULT_CACHE.set(cacheKey, { result, expiresAt: Date.now() + SEARCH_RESULT_TTL })
+    if (SEARCH_RESULT_CACHE.size > 50) {
+      SEARCH_RESULT_CACHE.delete(SEARCH_RESULT_CACHE.keys().next().value)
+    }
+    return result
   },
 
   getArtistPlaylist: async (artistIdOrName) => {
@@ -1220,10 +1266,14 @@ export const api = {
 
   addPlaylistTrack: async (id, track) => {
     if (!id || !track) return { status: 'error' }
+    const trackWithAddedAt = {
+      ...track,
+      added_at: track.added_at || new Date().toISOString(),
+    }
     try {
       await request(`/playlists/${id}/tracks`, {
         method: 'POST',
-        body: JSON.stringify({ user_id: getUserId(), track }),
+        body: JSON.stringify({ user_id: getUserId(), track: trackWithAddedAt }),
       }, 2500)
     } catch {}
 
@@ -1234,7 +1284,7 @@ export const api = {
       const tid = track.id || track.track_id || track.title
       const key = track._key || tid || `${track.title || ''}|${track.artist || ''}`
       const trackPayload = {
-        ...track,
+        ...trackWithAddedAt,
         id: tid,
         track_id: tid,
         _key: key,

@@ -3,7 +3,7 @@ import { api, getUserId } from '../api'
 import { useAudio } from '../store/audio'
 import TrackCard from './TrackCard'
 import {
-  PlaylistIcon, PlusIcon, TrashIcon, PlayIcon, ChevronIcon, MusicIcon, XIcon,
+  PlaylistIcon, PlusIcon, TrashIcon, PlayIcon, ChevronIcon, MusicIcon, XIcon, ShuffleIcon,
 } from './icons'
 
 const EMOJIS = ['🎵', '🌙', '🔥', '💔', '❤️', '🌧️', '☕', '🚗', '🏋️', '🎉', '🌿', '🧘', '🪩', '📖']
@@ -71,7 +71,35 @@ function CreateModal({ onClose, onCreated }) {
 function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
   const audio = useAudio()
   const [busy, setBusy] = useState(false)
+  const playlistId = playlist._id || playlist.id
+  const sortStorageKey = `sangeet.playlist.sort.${getUserId()}.${playlistId}`
+  const [sort, setSort] = useState(() => {
+    try {
+      return localStorage.getItem(sortStorageKey) || 'custom'
+    } catch {
+      return 'custom'
+    }
+  })
   const tracks = playlist.tracks || []
+  const sortedTracks = [...tracks].sort((a, b) => {
+    const text = (value) => (value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase()
+    if (sort === 'title') return text(a.title).localeCompare(text(b.title))
+    if (sort === 'artist') return text(a.artist).localeCompare(text(b.artist))
+    if (sort === 'duration') return (Number(a.duration) || 0) - (Number(b.duration) || 0)
+    if (sort === 'newest') {
+      return new Date(b.added_at || b.addedAt || b.created_at || 0) - new Date(a.added_at || a.addedAt || a.created_at || 0)
+    }
+    if (sort === 'oldest') {
+      return new Date(a.added_at || a.addedAt || a.created_at || 0) - new Date(b.added_at || b.addedAt || b.created_at || 0)
+    }
+    return 0
+  })
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(sortStorageKey, sort)
+    } catch {}
+  }, [sort, sortStorageKey])
 
   const removeTrack = async (t) => {
     const plId = playlist._id || playlist.id
@@ -90,8 +118,22 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
   }
 
   const playAll = () => {
-    if (tracks.length) audio.playTrack(tracks[0], tracks)
+    if (sortedTracks.length) audio.playTrack(sortedTracks[0], sortedTracks)
   }
+
+  const shuffleAll = () => {
+    const shuffled = [...sortedTracks]
+    for (let index = shuffled.length - 1; index > 0; index--) {
+      const swapIndex = Math.floor(Math.random() * (index + 1))
+      const currentTrack = shuffled[index]
+      shuffled[index] = shuffled[swapIndex]
+      shuffled[swapIndex] = currentTrack
+    }
+    if (shuffled.length) audio.playTrack(shuffled[0], shuffled)
+  }
+
+  const totalDuration = tracks.reduce((sum, track) => sum + (Number(track.duration) || 0), 0)
+  const durationLabel = `${Math.floor(totalDuration / 60)} min`
 
   return (
     <div className="msg-in">
@@ -105,12 +147,17 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
         </div>
         <div className="min-w-0 flex-1">
           <h2 className="truncate font-display text-xl sm:text-2xl font-medium text-cream">{playlist.name}</h2>
-          <p className="mt-0.5 text-xs text-sand-dim">{tracks.length} songs · plays in this exact order</p>
+          <p className="mt-0.5 text-xs text-sand-dim">{tracks.length} songs · {durationLabel}</p>
         </div>
         <div className="flex items-center gap-2">
           {tracks.length > 0 && (
             <button onClick={playAll} className="flex items-center gap-1.5 rounded-full bg-ember px-3.5 py-2 text-xs font-semibold text-ink transition-transform hover:scale-105">
               <PlayIcon size={13} /> Play all
+            </button>
+          )}
+          {tracks.length > 1 && (
+            <button onClick={shuffleAll} title="Shuffle playlist" aria-label="Shuffle playlist" className="icon-btn h-9 w-9 text-sand-dim hover:text-ember">
+              <ShuffleIcon size={15} />
             </button>
           )}
           <button onClick={del} disabled={busy} title="Delete playlist" className="icon-btn h-9 w-9 text-sand-dim hover:text-rose">
@@ -125,19 +172,36 @@ function PlaylistDetail({ playlist, onBack, onLyrics, onChanged }) {
           <p className="mt-3 text-sm text-sand-dim">Empty for now — tap the ➕ on any song and pick this playlist.</p>
         </div>
       ) : (
-        <div className="space-y-2">
-          {tracks.map((t, i) => (
+        <>
+          <label className="mb-3 flex items-center justify-end gap-2 text-xs text-sand-dim">
+            Sort tracks
+            <select
+              value={sort}
+              onChange={(event) => setSort(event.target.value)}
+              className="rounded-lg border border-edge bg-surface px-2.5 py-1.5 text-cream outline-none focus:border-ember/50"
+            >
+              <option value="custom">Custom order</option>
+              <option value="title">Title A–Z</option>
+              <option value="artist">Artist</option>
+              <option value="newest">Date added · newest</option>
+              <option value="oldest">Date added · oldest</option>
+              <option value="duration">Duration · shortest</option>
+            </select>
+          </label>
+          <div className="space-y-2">
+          {sortedTracks.map((t, i) => (
             <div key={t._key || i} className="relative">
               <span className="absolute -left-6 top-1/2 z-10 hidden -translate-y-1/2 text-xs tabular-nums text-sand-dim sm:block">{i + 1}</span>
               <TrackCard
                 track={t}
                 onLyrics={onLyrics}
-                queue={tracks}
+                queue={sortedTracks}
                 onRemove={() => removeTrack(t)}
               />
             </div>
           ))}
-        </div>
+          </div>
+        </>
       )}
     </div>
   )
@@ -148,6 +212,7 @@ export default function PlaylistsView({ user, onLyrics, refreshKey: parentRefres
   const [open, setOpen] = useState(null)
   const [creating, setCreating] = useState(false)
   const [refreshKey, setRefreshKey] = useState(0)
+  const sortedPlaylists = (playlists || []).slice().sort((a, b) => (a.name || '').localeCompare(b.name || ''))
 
   const load = () => api.playlists().then((d) => setPlaylists(d.playlists)).catch(() => setPlaylists([]))
 
@@ -228,7 +293,7 @@ export default function PlaylistsView({ user, onLyrics, refreshKey: parentRefres
           </div>
         ) : (
           <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-            {playlists.map((p) => {
+            {sortedPlaylists.map((p) => {
               const plId = p._id || p.id
               const count = p.count ?? p.tracks?.length ?? 0
               return (

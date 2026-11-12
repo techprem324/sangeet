@@ -28,10 +28,13 @@ large artist lists take time. Re-run is safe; finished artists are skipped.
 import argparse
 import csv
 import os
+from pathlib import Path
 import re
 import time
 
 import requests
+
+DATASET_DIR = Path(__file__).resolve().parents[1] / "data" / "datasets"
 
 MB = "https://musicbrainz.org/ws/2"
 LFM = "https://ws.audioscrobbler.com/2.0/"
@@ -128,11 +131,15 @@ def done_artists(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--artists", required=True, help="text file, one artist per line")
-    ap.add_argument("--out", default="songs.csv")
+    ap.add_argument("--out", default=str(DATASET_DIR / "songs.csv"))
     ap.add_argument("--contact", required=True, help="your email (MusicBrainz requires it)")
     ap.add_argument("--lastfm-key", default=None)
     ap.add_argument("--top", type=int, default=50, help="tracks per artist in Last.fm mode")
     a = ap.parse_args()
+
+    output_path = Path(a.out)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    a.out = str(output_path)
 
     http = Http(a.contact)
     artists = [l.strip() for l in open(a.artists, encoding="utf-8") if l.strip() and not l.startswith("#")]

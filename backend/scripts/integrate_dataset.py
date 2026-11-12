@@ -12,6 +12,10 @@ import os
 import re
 from collections import defaultdict
 
+DATASET_PATH = os.path.join(
+    os.path.dirname(__file__), "..", "data", "datasets", "songs_clean.json"
+)
+
 # High quality portraits for artists in artists.txt
 ARTIST_METADATA = {
     "Arijit Singh": {
@@ -303,11 +307,11 @@ def artist_to_id(name):
     return clean
 
 def main():
-    if not os.path.exists("songs_clean.json"):
+    if not os.path.exists(DATASET_PATH):
         print("Error: songs_clean.json not found. Run clean_songs.py first.")
         return
 
-    with open("songs_clean.json", "r", encoding="utf-8") as f:
+    with open(DATASET_PATH, "r", encoding="utf-8") as f:
         songs = json.load(f)
 
     print(f"Loaded {len(songs)} clean songs.")

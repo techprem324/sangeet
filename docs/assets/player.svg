@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 380" width="460" height="380" role="img" aria-label="Animated player with karaoke lyric lines">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#140e0b"/><stop offset="1" stop-color="#25140a"/></linearGradient>
+    <linearGradient id="fill" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#ff5500"/><stop offset="1" stop-color="#ffb347"/></linearGradient>
+  </defs>
+  <rect width="460" height="380" rx="22" fill="url(#bg)"/>
+  <text x="26" y="38" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="3" fill="#ff8a2a">NOW PLAYING</text>
+
+  <!-- vinyl -->
+  <g transform="translate(86 118)">
+    <g><animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="5s" repeatCount="indefinite"/>
+      <circle r="44" fill="#0d0907" stroke="#ff8a2a" stroke-opacity="0.6" stroke-width="1.5"/>
+      <circle r="34" fill="none" stroke="#2c1d14" stroke-width="2"/>
+      <circle r="26" fill="none" stroke="#2c1d14" stroke-width="2"/>
+      <circle r="14" fill="#ff7a1a"/><circle r="3" fill="#140e0b"/>
+      <path d="M-38 0 A38 38 0 0 1 0 -38" stroke="#fff" stroke-opacity="0.15" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </g>
+  </g>
+  <g font-family="Inter, 'Segoe UI', Arial, sans-serif">
+    <text x="150" y="108" font-size="18" font-weight="700" fill="#fbeedd">Kabhi Jo Baadal Barse</text>
+    <text x="150" y="130" font-size="13" fill="#a58f7e">Arijit Singh</text>
+    <rect x="150" y="142" width="62" height="18" rx="9" fill="#ff8a2a" fill-opacity="0.18" stroke="#ff8a2a"/>
+    <text x="181" y="155" font-size="10" font-weight="700" fill="#ffb347" text-anchor="middle">320 kbps</text>
+  </g>
+
+  <!-- karaoke lines (placeholder bars) -->
+  <g>
+    <rect x="40" y="200" width="300" height="12" rx="6" fill="#3a2518">
+      <animate attributeName="fill" values="#3a2518;#3a2518;#ffb347;#ffb347;#3a2518;#3a2518" keyTimes="0;0.02;0.06;0.3;0.34;1" dur="12s" repeatCount="indefinite"/></rect>
+    <rect x="40" y="226" width="360" height="12" rx="6" fill="#3a2518">
+      <animate attributeName="fill" values="#3a2518;#3a2518;#ffb347;#ffb347;#3a2518;#3a2518" keyTimes="0;0.3;0.34;0.55;0.59;1" dur="12s" repeatCount="indefinite"/></rect>
+    <rect x="40" y="252" width="250" height="12" rx="6" fill="#3a2518">
+      <animate attributeName="fill" values="#3a2518;#3a2518;#ffb347;#ffb347;#3a2518;#3a2518" keyTimes="0;0.55;0.59;0.78;0.82;1" dur="12s" repeatCount="indefinite"/></rect>
+    <rect x="40" y="278" width="330" height="12" rx="6" fill="#3a2518">
+      <animate attributeName="fill" values="#3a2518;#3a2518;#ffb347;#ffb347;#3a2518" keyTimes="0;0.78;0.82;0.97;1" dur="12s" repeatCount="indefinite"/></rect>
+  </g>
+  <text x="40" y="186" text-anchor="start" font-family="Inter, 'Segoe UI', Arial, sans-serif" font-size="10" fill="#8a7566" letter-spacing="2">SYNCED LYRICS</text>
+
+  <!-- progress -->
+  <rect x="40" y="320" width="380" height="5" rx="2.5" fill="#3a2518"/>
+  <rect x="40" y="320" width="0" height="5" rx="2.5" fill="url(#fill)"><animate attributeName="width" values="0;380" dur="12s" repeatCount="indefinite"/></rect>
+  <circle cx="40" cy="322.5" r="6" fill="#fbeedd"><animate attributeName="cx" values="40;420" dur="12s" repeatCount="indefinite"/></circle>
+
+  <!-- controls -->
+  <g transform="translate(230 352)">
+    <circle r="14" fill="#ff8a2a"/>
+    <path d="M-4 -7 L8 0 L-4 7 Z" fill="#140e0b"/>
+    <path d="M-40 -6 V6 M-40 0 L-30 -6 V6 Z" stroke="#fbeedd" stroke-width="2" fill="#fbeedd" stroke-linejoin="round"/>
+    <path d="M40 -6 V6 M40 0 L30 -6 V6 Z" stroke="#fbeedd" stroke-width="2" fill="#fbeedd" stroke-linejoin="round" transform="scale(-1 1) translate(-80 0)"/>
+  </g>
+</svg>
