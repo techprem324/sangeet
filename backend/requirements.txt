@@ -4,7 +4,7 @@
 Flask==3.1.3
 flask-cors==4.0.1
 requests==2.32.3
-pycryptodome==3.20.0      # DES-ECB decryption of JioSaavn stream URLs
+pycryptodome==4.3.0      # DES-ECB decryption of JioSaavn stream URLs
 python-dotenv==1.0.1
 
 # --- Optional (uncomment when you have credentials / MongoDB) ---
